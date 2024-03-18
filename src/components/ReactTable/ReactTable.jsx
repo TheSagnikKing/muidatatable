@@ -165,7 +165,7 @@ const ReactTable = () => {
         const pageCount = table.getPageCount();
         const pageRanges = [];
         let startIndex = 0;
-    
+
         for (let i = 0; i < pageCount; i++) {
             const endIndex = Math.min(startIndex + pageSize, data.length);
             pageRanges.push({
@@ -174,10 +174,10 @@ const ReactTable = () => {
             });
             startIndex = endIndex;
         }
-    
+
         return pageRanges;
     }
-    
+
 
     const getPaginationInfo = () => {
         const { pageIndex, pageSize } = pagination
@@ -256,19 +256,19 @@ const ReactTable = () => {
                 <button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()}>Next Page</button>
                 <button disabled={!table.getCanNextPage()} onClick={() => table.setPageIndex(table.getPageCount() - 1)}>Last Page</button>
 
-                
+
                 <p>Showing <select
-    value={pagination.pageIndex}
-    onChange={(e) => handlePageChange(Number(e.target.value))}
->
-    {getPageRanges().map((range) => (
-        <option key={range.pageIndex} value={range.pageIndex}>
-            {range.pageIndex === table.getPageCount() - 1
-                ? `${range.label.split('-')[0]} - ${data.length}` // Adjust label for last page
-                : range.label}
-        </option>
-    ))}
-</select> of {table.getPageCount()}</p>
+                    value={pagination.pageIndex}
+                    onChange={(e) => handlePageChange(Number(e.target.value))}
+                >
+                    {getPageRanges().map((range) => (
+                        <option key={range.pageIndex} value={range.pageIndex}>
+                            {range.pageIndex === table.getPageCount() - 1
+                                ? `${range.label.split('-')[0]} - ${data.length}` // Adjust label for last page
+                                : range.label}
+                        </option>
+                    ))}
+                </select> of {table.getPageCount()}</p>
             </div>
         </div>
     )

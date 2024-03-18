@@ -18,13 +18,13 @@
 }
 
 .react2_container_table_head>div {
-    width: 1770px;
+    width: 1800px;
     height: 40px;
     display: grid;
     align-items: center;
     /* grid-template-columns: 120px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px; */
     /* grid-template-columns: 1fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr; */
-    grid-template-columns: repeat(20,1.2fr);
+    grid-template-columns: repeat(20,1.4fr);
     padding-inline: 10px;
     /* display: flex;
     align-items: center;
@@ -78,13 +78,13 @@
 }
 
 .react2_container_table_body>div {
-    width: 1770px;
+    width: 1800px;
     height: 40px;
     display: grid;
     align-items: center;
     /* grid-template-columns: 120px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px; */
     /* padding-inline: 10px; */
-    grid-template-columns: repeat(20,1.2fr);
+    grid-template-columns: repeat(20,1.4fr);
     padding-inline: 10px;
     /* background-color: red !important; */
 }
@@ -171,4 +171,28 @@
     border-radius: 5px;
     border: 1px solid #cfcfcf;
     overflow: auto;
+}
+
+.pagination_container{
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+    width: 93%;
+    height: 40px;
+    margin: auto;
+    margin-top: -280px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-inline: 10px;
+}
+
+.pagination_container>button{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+    border: none;
+    background-color: rgba(0, 0, 255, 0.268);
+    font-weight: 500;
+    font-size: 18px;
 }
