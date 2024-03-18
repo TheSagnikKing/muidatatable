@@ -643,6 +643,8 @@ const ReactTable2 = () => {
 
     const [opendrop, setOpenDrop] = useState(false)
 
+    // const colors = ['#ff00002b', '#00ff002b', '#0000ff2b', '#ffff002b'];
+
     return (<>
         <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
             <input
@@ -700,7 +702,7 @@ const ReactTable2 = () => {
 
                 <div className='react2_container_table_body'>
 
-                    {table.getRowModel().rows.map((row) => (
+                    {/* {table.getRowModel().rows.map((row) => (
                         <div key={row.id}>
                             {
                                 row.getVisibleCells().map((cell) => (
@@ -708,11 +710,41 @@ const ReactTable2 = () => {
                                     cell.column.columnDef.header.startsWith('d') ? <div className='react2_container_table_body_day' key={cell.id}>
                                         <div />
                                         <div>{flexRender(cell.column.columnDef.cell, cell.getContext())} days</div>
-                                    </div> : <div key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
+                                    </div> : <div key={cell.id} style={{background:"#ff00002b"}}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
                                 ))
                             }
                         </div>
-                    ))}
+                    ))} */}
+
+{table.getRowModel().rows.map((row) => (
+    <div key={row.id}>
+        {
+            row.getVisibleCells().map((cell, index) => {
+                // Define an array of seven different colors
+                const colors = ['#ff00002b', '#00ff002b', '#0000ff2b', '#ff00ff2b', '#ffff002b', '#00ffff2b', '#ff80002b'];
+                
+                // Determine which color to use based on the index
+                const colorIndex = index % colors.length;
+                const backgroundColor = colors[colorIndex];
+
+                return (
+                    cell.column.columnDef.header.startsWith('d') ? 
+                    <div className='react2_container_table_body_day' key={cell.id}>
+                        <div />
+                        <div>
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())} days
+                        </div>
+                    </div> 
+                    : 
+                    <div key={cell.id} style={{ background: backgroundColor }}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </div>
+                );
+            })
+        }
+    </div>
+))}
+
 
 
 
