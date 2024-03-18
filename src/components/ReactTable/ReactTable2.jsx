@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import './ReactTable2.css'
 import { useReactTable, getCoreRowModel, flexRender, getPaginationRowModel, getSortedRowModel, getFilteredRowModel } from '@tanstack/react-table'
+import { useState } from 'react'
 
 const ReactTable2 = () => {
 
@@ -53,7 +54,7 @@ const ReactTable2 = () => {
         },
         {
             _id: 3,
-            LotNo: "00001",
+            LotNo: "00003",
             DieReceipt: "22-05-24",
             day1: 5,
             BumpIn: "23-05-24",
@@ -163,135 +164,96 @@ const ReactTable2 = () => {
         },
     ]
 
+    const [sorting, setSorting] = useState([])
+    const [filtering, setFiltering] = useState('')
+
     const table = useReactTable({
         data,
         columns,
-
+        getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        state: {
+            sorting: sorting,
+            globalFilter: filtering,
+        },
+        onSortingChange: setSorting,
     })
 
-    return (
+    const [opendrop, setOpenDrop] = useState(false)
+
+    return (<>
+        <div style={{display:"flex",alignItems:"center",gap:"2rem"}}>
+            <input
+                type="text"
+                value={filtering}
+                onChange={(e) => setFiltering(e.target.value)}
+                className='filter-box'
+                placeholder='Search'
+            />
+
+            <div className='column_hiding'>
+                <div>Show/Hide Column</div>
+                <div onClick={() => setOpenDrop((prev) => !prev)}>v</div>
+            </div>
+
+            {
+                opendrop && <div className='column_open'>{table.getAllLeafColumns().map(column => {
+                    return (
+                        <div key={column.id} className="px-1">
+                            <label>
+                                <input
+                                    {...{
+                                        type: 'checkbox',
+                                        checked: column.getIsVisible(),
+                                        onChange: column.getToggleVisibilityHandler(),
+                                    }}
+                                />{' '}
+                                {column.id}
+                            </label>
+                        </div>
+                    )
+                })}</div>
+            }
+        </div>
         <main className='react2_container'>
             <div className='react2_container_table'>
                 <div className='react2_container_table_head'>
-                    {/* {table.getHeaderGroups().map(headerGroup => (
-                        <div key={headerGroup.id}>
-                            {console.log(headerGroup)}
-                            <div>Lot No.</div>
-                            <div>DieReceipt</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>BumpIn</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>BumpOut</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>ProbeIn</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>ProbeOut</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>AssemblyIn</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>AssemblyOut</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>TestIn</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>TestOut</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>ShipOut</div>
-                        </div>
-                    ))} */}
-
+            
                     {table.getHeaderGroups().map(headerGroup => (
                         <div key={headerGroup.id}>
-                            {/* {headerGroup.headers.map((h) => <div className={`${h.column.columnDef.header.startsWith('d') && "react2_container_table_head_day"}`}>
-                                {flexRender(h.column.columnDef.header.startsWith('d') ? <>
-                                    <div />
-                                    <div>v</div></> : h.column.columnDef.header, h.getContext())}
-                            </div>)} */}
-
-                            {headerGroup.headers.map((h) => h.column.columnDef.header.startsWith('d') ? <div className='react2_container_table_head_day'>
+                            {headerGroup.headers.map((h) => h.column.columnDef.header.startsWith('d') ? <div key={h.id} className='react2_container_table_head_day'>
                                 <div />
-                                <div>v</div>
-                            </div> : <div>{flexRender(h.column.columnDef.header, h.getContext())}</div>)}
-
-                            {/* <div>Lot No.</div>
-                            <div>DieReceipt</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>BumpIn</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>BumpOut</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>ProbeIn</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>ProbeOut</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>AssemblyIn</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>AssemblyOut</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>TestIn</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>TestOut</div>
-                            <div className='react2_container_table_head_day'>
-                                <div />
-                                <div>v</div>
-                            </div>
-                            <div>ShipOut</div> */}
+                                <div onClick={h.column.getToggleSortingHandler()}>{
+                                    { asc: <p>A</p>, desc: <p>D</p> }[h.column.getIsSorted() ?? null]
+                                }</div>
+                            </div> : <div key={h.id} onClick={h.column.getToggleSortingHandler()}>{flexRender(h.column.columnDef.header, h.getContext())}
+                                {
+                                    { asc: <p>A</p>, desc: <p>D</p> }[h.column.getIsSorted() ?? null]
+                                }
+                            </div>)}
                         </div>
                     ))}
 
                 </div>
 
                 <div className='react2_container_table_body'>
+
+                    {table.getRowModel().rows.map((row) => (
+                        <div key={row.id}>
+                            {
+                                row.getVisibleCells().map((cell) => (
+                                    // console.log(cell.column.columnDef.header.startsWith('d'))
+                                    cell.column.columnDef.header.startsWith('d') ? <div className='react2_container_table_body_day' key={cell.id}>
+                                        <div />
+                                        <div>{flexRender(cell.column.columnDef.cell, cell.getContext())} days</div>
+                                    </div> : <div key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
+                                ))
+                            }
+                        </div>
+                    ))}
+
+
 
                     {/* <div>
                         <div>Lot No</div>
@@ -345,6 +307,7 @@ const ReactTable2 = () => {
                 </div>
             </div>
         </main>
+    </>
     )
 }
 
