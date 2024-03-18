@@ -154,13 +154,30 @@ const ReactTable = () => {
     console.log(table.getCanNextPage())
 
 
-    const getPaginationInfo = () => {
-        const { pageIndex, pageSize } = pagination
-        const startIndex = pageIndex * pageSize + 1
-        const endIndex = Math.min((pageIndex + 1) * pageSize, data.length)
-        return `${startIndex} - ${endIndex}`
+    const handlePageChange = (pageIndex) => {
+        setPagination({ ...pagination, pageIndex })
     }
 
+    const getPageRanges = () => {
+        const { pageSize } = pagination
+        const pageCount = table.getPageCount()
+        const pageRanges = []
+        for (let i = 0; i < pageCount; i += pageSize) {
+            const startIndex = i + 1
+            const endIndex = Math.min(i + pageSize, data.length)
+            pageRanges.push({
+                label: `${startIndex} - ${endIndex}`,
+                pageIndex: i,
+            })
+        }
+        return pageRanges
+    }
+
+    const getPaginationInfo = () => {
+        const { pageIndex, pageSize } = pagination
+        const currentRange = getPageRanges()[pageIndex]
+        return currentRange ? currentRange.label : '1 - 1'
+    }
 
     return (
         <div>
@@ -232,7 +249,18 @@ const ReactTable = () => {
                 <button disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()}>Previous Page</button>
                 <button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()}>Next Page</button>
                 <button disabled={!table.getCanNextPage()} onClick={() => table.setPageIndex(table.getPageCount() - 1)}>Last Page</button>
-                <p>Showing {getPaginationInfo()} of {table.getPageCount()}</p>
+
+                
+                <p>Showing <select
+                    value={pagination.pageIndex}
+                    onChange={(e) => handlePageChange(Number(e.target.value))}
+                >
+                    {getPageRanges().map((range) => (
+                        <option key={range.pageIndex} value={range.pageIndex}>
+                            {range.label}
+                        </option>
+                    ))}
+                </select> of {table.getPageCount()}</p>
             </div>
         </div>
     )
