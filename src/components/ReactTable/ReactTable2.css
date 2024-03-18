@@ -8,7 +8,7 @@
 
 .react2_container_table {
     width: 93%;
-    height: 80vh;
+    height: 60vh;
     background-color: #fff;
     overflow: auto;
     margin-top: 30px;
@@ -22,8 +22,14 @@
     height: 40px;
     display: grid;
     align-items: center;
-    grid-template-columns: 120px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px;
-    /* padding-inline: 10px; */
+    /* grid-template-columns: 120px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px; */
+    /* grid-template-columns: 1fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr; */
+    grid-template-columns: repeat(20,1.2fr);
+    padding-inline: 10px;
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    /* background-color: green; */
 }
 
 .react2_container_table_head>div>div {
@@ -31,6 +37,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .react2_container_table_head>div>div:nth-child(1) {
@@ -38,13 +48,13 @@
 }
 
 .react2_container_table_head_day {
-    width: 50px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     position: relative;
-    /* background-color: blue; */
+    /* background-color: green !important; */
 }
 
 .react2_container_table_head_day>div:nth-child(1) {
@@ -72,12 +82,16 @@
     height: 40px;
     display: grid;
     align-items: center;
-    grid-template-columns: 120px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px;
+    /* grid-template-columns: 120px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px 50px 120px; */
     /* padding-inline: 10px; */
+    grid-template-columns: repeat(20,1.2fr);
+    padding-inline: 10px;
+    /* background-color: red !important; */
 }
 
 .react2_container_table_body>div>div {
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,6 +110,7 @@
     align-items: center;
     height: 100%;
     position: relative;
+    /* background-color: blue; */
 }
 
 .react2_container_table_body_day>div:nth-child(1) {
@@ -109,10 +124,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     width: 50px;
     height: 20px;
     background-color: gray;
-    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
