@@ -29,3 +29,22 @@ tbody>tr{
     height: 30px;
     background-color: rgba(0, 0, 255, 0.256);
 }
+
+.table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+/* Apply styles to the table */
+.w3-table {
+    width: 100%; /* Make table fill the container */
+}
+
+/* Apply media query for screen size 430px or smaller */
+@media screen and (max-width: 430px) {
+    /* Adjust table styles for smaller screens */
+    .w3-table {
+        /* Set a fixed height and enable vertical scrolling */
+        max-height: 300px; /* Adjust as needed */
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+}
