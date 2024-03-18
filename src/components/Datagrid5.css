@@ -1,0 +1,47 @@
+:root{
+    font-size: 95.5%;
+}
+
+.css-1ex1afd-MuiTableCell-root{
+    padding: 0px !important;
+    text-align: center !important;
+    border-bottom: none !important;
+    height: 60px !important;
+    background-color: red !important;
+}
+
+.css-1w1rijm-MuiButtonBase-root-MuiButton-root {
+    background-color: rgb(67, 112, 203) !important;
+    padding: 0px !important;
+    width: 130px !important;
+    border-radius: 0px !important;
+    height: 60px !important;
+}
+
+.css-1ygcj2i-MuiTableCell-root{
+    padding: 0px !important;
+    border-bottom: none !important;
+    border-radius: 0px !important;
+    background-color: rgb(240, 208, 208) !important; 
+}
+
+.grid5_div_col_body{
+    background-color: rgb(240, 208, 208);
+    border-right: 2px solid black;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+}
+
+.grid5_div_col_body>p{
+    
+}
+
+@media((min-width:0px) and (max-width:900px)){
+    .tss-1vd39vz-MUIDataTableBodyCell-stackedCommon:nth-last-of-type(2) {
+        border-bottom: none;
+        display: none !important;
+    }
+}

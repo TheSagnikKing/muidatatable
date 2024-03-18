@@ -1,6 +1,8 @@
 import React from 'react'
 import MUIDataTable from "mui-datatables";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { IconButton } from '@mui/material';
+import { GridCloseIcon } from '@mui/x-data-grid';
 
 const Datagrid3 = () => {
 
@@ -266,24 +268,58 @@ const Datagrid3 = () => {
         ["00009", "27-05-05", 7, "27-05-05", 7, "-", 7, "27-05-05", 7, "27-05-05"],
     ];
 
+    
+const CustomSearchComponent = ({ searchText, onSearch, onHide, options }) => (
+    <div className='he'>
+      {/* Render the search input inside the hello div */}
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchText}
+        onChange={(e) => onSearch(e.target.value)}
+      />
+      {/* Render the hide icon */}
+      <IconButton onClick={onHide}>
+        <GridCloseIcon />
+      </IconButton>
+    </div>
+  );
+  
+
+  const CustomShowHideColumnDropdown = ({ onChange }) => {
+    const [selectedColumns, setSelectedColumns] = React.useState([]);
+  
+    const handleDropdownChange = (event) => {
+      const { value } = event.target;
+      setSelectedColumns(value);
+      onChange(value);
+    };
+}
     const options = {
         selectableRows: false,
         elevation: 10,
         rowsPerPage: 6,
         rowsPerPageOptions: [6, 12, 18, 24],
         filter: false,
-        // customSearchRender: (searchText, handleSearch, hideSearch, options) => {
-        //     // Implement your custom search render component here
-        //     return (
-        //         // <CustomSearchComponent
-        //         //     searchText={searchText}
-        //         //     onSearch={handleSearch}
-        //         //     onHide={hideSearch}
-        //         //     options={options}
-        //         // />
-        //         <h1>Hello Search</h1>
-        //     );
-        // },
+        customSearchRender: (searchText, handleSearch, hideSearch, options) => {
+            // Use your custom search component here
+            return (
+              <CustomSearchComponent
+                searchText={searchText}
+                onSearch={handleSearch}
+                // onHide={hideSearch}
+                options={options}
+              />
+            );
+          },
+          customToolbar: () => {
+            const handleCustomDropdownChange = (selectedColumns) => {
+              // Implement your logic for handling show/hide columns
+              setTableAction('columns', { visible: selectedColumns });
+            };
+      
+            return <CustomShowHideColumnDropdown onChange={handleCustomDropdownChange} />;
+          },
     };
 
     const getMuiTheme = () => createTheme({
