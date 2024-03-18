@@ -130,7 +130,7 @@ const ReactTable = () => {
     const [columnVisibility, setColumnVisibility] = React.useState({})
     const [pagination, setPagination] = useState({
         pageIndex: 0, //initial page index
-        pageSize: 5, //default page size
+        pageSize: 10, //default page size
     });
 
     const table = useReactTable({
@@ -149,7 +149,8 @@ const ReactTable = () => {
         onSortingChange: setSorting,
         onGlobalFilterChange: setFiltering,
         onColumnVisibilityChange: setColumnVisibility,
-        onPaginationChange: setPagination,
+        onPaginationChange: (newPagination) => setPagination(newPagination),
+
     })
 
     console.log(table.getCanNextPage())
@@ -160,19 +161,23 @@ const ReactTable = () => {
     }
 
     const getPageRanges = () => {
-        const { pageSize } = pagination
-        const pageCount = table.getPageCount()
-        const pageRanges = []
-        for (let i = 0; i < pageCount; i += pageSize) {
-            const startIndex = i + 1
-            const endIndex = Math.min(i + pageSize, data.length)
+        const { pageSize } = pagination;
+        const pageCount = table.getPageCount();
+        const pageRanges = [];
+        let startIndex = 0;
+
+        for (let i = 0; i < pageCount; i++) {
+            const endIndex = Math.min(startIndex + pageSize, data.length);
             pageRanges.push({
-                label: `${startIndex} - ${endIndex}`,
+                label: `${startIndex + 1} - ${endIndex}`,
                 pageIndex: i,
-            })
+            });
+            startIndex = endIndex;
         }
-        return pageRanges
+
+        return pageRanges;
     }
+
 
     const getPaginationInfo = () => {
         const { pageIndex, pageSize } = pagination
@@ -251,14 +256,16 @@ const ReactTable = () => {
                 <button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()}>Next Page</button>
                 <button disabled={!table.getCanNextPage()} onClick={() => table.setPageIndex(table.getPageCount() - 1)}>Last Page</button>
 
-                
+
                 <p>Showing <select
                     value={pagination.pageIndex}
                     onChange={(e) => handlePageChange(Number(e.target.value))}
                 >
                     {getPageRanges().map((range) => (
                         <option key={range.pageIndex} value={range.pageIndex}>
-                            {range.label}
+                            {range.pageIndex === table.getPageCount() - 1
+                                ? `${range.label.split('-')[0]} - ${data.length}` // Adjust label for last page
+                                : range.label}
                         </option>
                     ))}
                 </select> of {table.getPageCount()}</p>
