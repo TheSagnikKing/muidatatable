@@ -100,8 +100,8 @@ const ReactTable2 = () => {
             "TestOut": "2023-11-29",
             "day9": 6,
             "ShipOut": "2023-11-30"
-          },
-          {
+        },
+        {
             "_id": 2,
             "LotNo": "D4E5F6",
             "DieReceipt": "2024-02-14",
@@ -123,8 +123,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-02-22",
             "day9": 6,
             "ShipOut": "2024-02-23"
-          },
-          {
+        },
+        {
             "_id": 3,
             "LotNo": "UNIQUE",
             "DieReceipt": "2023-12-05",
@@ -146,8 +146,8 @@ const ReactTable2 = () => {
             "TestOut": "2023-12-13",
             "day9": 9,
             "ShipOut": "2023-12-14"
-          },
-          {
+        },
+        {
             "_id": 4,
             "LotNo": "J1K2L3",
             "DieReceipt": "2024-01-01",
@@ -169,8 +169,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-01-09",
             "day9": 9,
             "ShipOut": "2024-01-10"
-          },
-          {
+        },
+        {
             "_id": 5,
             "LotNo": "M4N5O6",
             "DieReceipt": "2024-03-10",
@@ -192,8 +192,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-03-18",
             "day9": 9,
             "ShipOut": "2024-03-19"
-          },
-          {
+        },
+        {
             "_id": 6,
             "LotNo": "P7Q8R9",
             "DieReceipt": "2024-02-20",
@@ -215,14 +215,14 @@ const ReactTable2 = () => {
             "TestOut": "2024-02-28",
             "day9": 6,
             "ShipOut": "2024-02-29"
-          },
+        },
 
 
 
 
 
 
-          {
+        {
             "_id": 7,
             "LotNo": "A1B2C3",
             "DieReceipt": "2023-11-21",
@@ -244,8 +244,8 @@ const ReactTable2 = () => {
             "TestOut": "2023-11-29",
             "day9": 6,
             "ShipOut": "2023-11-30"
-          },
-          {
+        },
+        {
             "_id": 8,
             "LotNo": "D4E5F6",
             "DieReceipt": "2024-02-14",
@@ -267,8 +267,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-02-22",
             "day9": 6,
             "ShipOut": "2024-02-23"
-          },
-          {
+        },
+        {
             "_id": 9,
             "LotNo": "G7H8I9",
             "DieReceipt": "2023-12-05",
@@ -290,8 +290,8 @@ const ReactTable2 = () => {
             "TestOut": "2023-12-13",
             "day9": 9,
             "ShipOut": "2023-12-14"
-          },
-          {
+        },
+        {
             "_id": 10,
             "LotNo": "J1K2L3",
             "DieReceipt": "2024-01-01",
@@ -313,8 +313,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-01-09",
             "day9": 9,
             "ShipOut": "2024-01-10"
-          },
-          {
+        },
+        {
             "_id": 11,
             "LotNo": "M4N5O6",
             "DieReceipt": "2024-03-10",
@@ -336,8 +336,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-03-18",
             "day9": 9,
             "ShipOut": "2024-03-19"
-          },
-          {
+        },
+        {
             "_id": 12,
             "LotNo": "P7Q8R9",
             "DieReceipt": "2024-02-20",
@@ -359,13 +359,13 @@ const ReactTable2 = () => {
             "TestOut": "2024-02-28",
             "day9": 6,
             "ShipOut": "2024-02-29"
-          },
+        },
 
 
 
 
 
-          {
+        {
             "_id": 13,
             "LotNo": "A1B2C3",
             "DieReceipt": "2023-11-21",
@@ -387,8 +387,8 @@ const ReactTable2 = () => {
             "TestOut": "2023-11-29",
             "day9": 6,
             "ShipOut": "2023-11-30"
-          },
-          {
+        },
+        {
             "_id": 14,
             "LotNo": "D4E5F6",
             "DieReceipt": "2024-02-14",
@@ -410,8 +410,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-02-22",
             "day9": 6,
             "ShipOut": "2024-02-23"
-          },
-          {
+        },
+        {
             "_id": 15,
             "LotNo": "G7H8I9",
             "DieReceipt": "2023-12-05",
@@ -433,8 +433,8 @@ const ReactTable2 = () => {
             "TestOut": "2023-12-13",
             "day9": 9,
             "ShipOut": "2023-12-14"
-          },
-          {
+        },
+        {
             "_id": 16,
             "LotNo": "J1K2L3",
             "DieReceipt": "2024-01-01",
@@ -456,8 +456,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-01-09",
             "day9": 9,
             "ShipOut": "2024-01-10"
-          },
-          {
+        },
+        {
             "_id": 17,
             "LotNo": "M4N5O6",
             "DieReceipt": "2024-03-10",
@@ -479,8 +479,8 @@ const ReactTable2 = () => {
             "TestOut": "2024-03-18",
             "day9": 9,
             "ShipOut": "2024-03-19"
-          },
-          {
+        },
+        {
             "_id": 18,
             "LotNo": "P7Q8R9",
             "DieReceipt": "2024-02-20",
@@ -502,7 +502,7 @@ const ReactTable2 = () => {
             "TestOut": "2024-02-28",
             "day9": 6,
             "ShipOut": "2024-02-29"
-          },
+        },
     ], [])
 
     const columns = [
@@ -688,11 +688,11 @@ const ReactTable2 = () => {
                             {headerGroup.headers.map((h) => h.column.columnDef.header.startsWith('d') ? <div key={h.id} className='react2_container_table_head_day'>
                                 <div />
                                 <div onClick={h.column.getToggleSortingHandler()}>{
-                                    { asc: <p style={{color:"red",marginLeft:"5px"}}>A</p>, desc: <p style={{color:"red",marginLeft:"5px"}}>D</p> }[h.column.getIsSorted() ?? null]
+                                    { asc: <p style={{ color: "red", marginLeft: "5px" }}>A</p>, desc: <p style={{ color: "red", marginLeft: "5px" }}>D</p> }[h.column.getIsSorted() ?? null]
                                 }</div>
                             </div> : <div key={h.id} onClick={h.column.getToggleSortingHandler()}>{flexRender(h.column.columnDef.header, h.getContext())}
                                 {
-                                    { asc: <p style={{color:"red",marginLeft:"5px"}}>A</p>, desc: <p style={{color:"red",marginLeft:"5px"}}>D</p> }[h.column.getIsSorted() ?? null]
+                                    { asc: <p style={{ color: "red", marginLeft: "5px" }}>A</p>, desc: <p style={{ color: "red", marginLeft: "5px" }}>D</p> }[h.column.getIsSorted() ?? null]
                                 }
                             </div>)}
                         </div>
@@ -716,34 +716,36 @@ const ReactTable2 = () => {
                         </div>
                     ))} */}
 
-{table.getRowModel().rows.map((row) => (
-    <div key={row.id}>
-        {
-            row.getVisibleCells().map((cell, index) => {
-                // Define an array of seven different colors
-                const colors = ['#ff00002b', '#00ff002b', '#0000ff2b', '#ff00ff2b', '#ffff002b', '#00ffff2b', '#ff80002b'];
-                
-                // Determine which color to use based on the index
-                const colorIndex = index % colors.length;
-                const backgroundColor = colors[colorIndex];
+                    {table.getRowModel().rows.map((row) => (
+                        <div key={row.id}>
+                            {
+                                row.getVisibleCells().map((cell, index) => {
+                                    // Define an array of seven different colors
+                                    const colors = ['#ff00002b', '#00ff002b', '#0000ff2b', '#ff00ff2b', '#ffff002b', '#00ffff2b', '#ff80002b'];
 
-                return (
-                    cell.column.columnDef.header.startsWith('d') ? 
-                    <div className='react2_container_table_body_day' key={cell.id}>
-                        <div />
-                        <div>
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())} days
+                                    // Determine which color to use based on the index
+                                    const colorIndex = index % colors.length;
+                                    const backgroundColor = colors[colorIndex];
+
+                                    return (
+                                        cell.column.columnDef.header.startsWith('d') ?
+                                            <div className='react2_container_table_body_day' key={cell.id}
+                                            // style={{background}}
+                                            >
+                                                <div />
+                                                <div>
+                                                    {flexRender(cell.column.columnDef.cell, cell.getContext())} days
+                                                </div>
+                                            </div>
+                                            :
+                                            <div key={cell.id} style={{ background: backgroundColor }}>
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </div>
+                                    );
+                                })
+                            }
                         </div>
-                    </div> 
-                    : 
-                    <div key={cell.id} style={{ background: backgroundColor }}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </div>
-                );
-            })
-        }
-    </div>
-))}
+                    ))}
 
 
 
