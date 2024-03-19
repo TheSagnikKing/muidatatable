@@ -492,22 +492,60 @@ const Datagrid6 = () => {
     // Get data for the current page
     const currentPageData = sortedData.slice(startIndex, endIndex);
 
-   
+
     // CSV PART
+
+    const escapeCSVValue = (value) => {
+        // If the value is a date, convert it to a string format
+        if (value instanceof Date) {
+            return `"${value.toISOString().split('T')[0]}"`; // Convert date to string format yyyy-mm-dd
+        }
+    
+        // If the value contains double quotes, escape them by doubling them
+        const escapedValue = String(value).replace(/"/g, '""');
+        // If the value contains commas or line breaks, enclose it in double quotes
+        return /[,\"\n]/.test(escapedValue) ? `"${escapedValue}"` : escapedValue;
+    };
+    
+
     const currentpagecsvdataHandler = () => {
-        console.log("CurrentPageCsvData ", currentPageData)
+        // const csvData = currentPageData.map(item => {
+        //     // Map each property value to a properly escaped CSV value
+        //     return Object.values(item).map(escapeCSVValue).join(',');
+        // }).join('\n');
+
+        // downloadCSV(csvData, 'current_page_data.csv');
+
+        console.log("currentPageData ",currentPageData)
     }
 
     const entirepagecsvdataHandler = () => {
         console.log("EntireCSVData ", data)
     }
 
-     //FILTERING DONE HERE
 
-     const [filterBy, setFilterBy] = useState('');
-     const [filterBydate, setFilterBydate] = useState("")
+    // Function to initiate download of CSV data
+    const downloadCSV = (csvData, fileName) => {
+        const blob = new Blob([csvData], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
 
-     const applyFilter = (dataArray, filterValue) => {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+
+        // Cleanup
+        URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+    };
+
+    //FILTERING DONE HERE
+
+    const [filterBy, setFilterBy] = useState('');
+    const [filterBydate, setFilterBydate] = useState("")
+
+    const applyFilter = (dataArray, filterValue) => {
         return dataArray.filter((item) => {
             return (
                 item.LotNo.toLowerCase().includes(filterValue.toLowerCase())
@@ -533,11 +571,16 @@ const Datagrid6 = () => {
         }
         );
     };
-    
-    const filteredData = filterBy && filterBy !== "" ? applyFilter(data,filterBy) : applyFilterByDate(data,filterBydate);
+
+    const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDate(data, filterBydate);
 
 
     console.log(filteredData)
+
+    const removeFilter = () => {
+        setFilterBy("")
+        setFilterBydate("")
+    }
 
     // search for 2021-02-20 in calender
 
@@ -554,12 +597,14 @@ const Datagrid6 = () => {
                 </div>
 
                 <div className='data6_top_selectdatebx'>
-                    <input 
-                    type="date" 
-                    value={filterBydate}
-                    onChange={(e) => setFilterBydate(e.target.value)}
+                    <input
+                        type="date"
+                        value={filterBydate}
+                        onChange={(e) => setFilterBydate(e.target.value)}
                     />
                 </div>
+
+                <button onClick={removeFilter} className='remove-filter-input'>remove filter</button>
 
                 <div className='data6_top_showhide_bx'>
                     <button onClick={() => setShowColumn((prev) => !prev)}>Filter Columns</button>
