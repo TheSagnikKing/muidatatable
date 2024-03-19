@@ -121,25 +121,25 @@ const data = [
     {
         "_id": 6,
         "LotNo": "P7Q8R9",
-        "DieReceipt": "2024-02-20",
+        "DieReceipt": "2021-02-20",
         "day1": 5,
-        "BumpIn": "2024-02-21",
+        "BumpIn": "2023-02-21",
         "day2": 8,
-        "BumpOut": "2024-02-22",
+        "BumpOut": "2025-02-22",
         "day3": 2,
-        "ProbeIn": "2024-02-23",
+        "ProbeIn": "2026-02-23",
         "day4": 7,
-        "ProbeOut": "2024-02-24",
+        "ProbeOut": "2021-02-24",
         "day5": 1,
-        "AssemblyIn": "2024-02-25",
+        "AssemblyIn": "2021-02-25",
         "day6": 4,
-        "AssemblyOut": "2024-02-26",
+        "AssemblyOut": "2021-02-26",
         "day7": 9,
-        "TestIn": "2024-02-27",
+        "TestIn": "2021-02-27",
         "day8": 3,
-        "TestOut": "2024-02-28",
+        "TestOut": "2021-02-28",
         "day9": 6,
-        "ShipOut": "2024-02-29"
+        "ShipOut": "2021-02-29"
     },
 
 
@@ -447,15 +447,6 @@ const Datagrid6 = () => {
         setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
     };
 
-    const [filterBy, setFilterBy] = useState('');
-
-    const applyFilter = (dataArray, filterValue) => {
-        return dataArray.filter((item) =>
-            item.LotNo.toLowerCase().includes(filterValue.toLowerCase())
-        );
-    };
-
-    const filteredData = applyFilter(data, filterBy);
 
     const sortData = (dataArray, columnName, sortOrder) => {
         if (columnName === '') {
@@ -500,6 +491,59 @@ const Datagrid6 = () => {
 
     // Get data for the current page
     const currentPageData = sortedData.slice(startIndex, endIndex);
+
+    //FILTERING DONE HERE
+
+    const [filterBy, setFilterBy] = useState('');
+
+    // {
+    //     "_id": 3,
+    //     "LotNo": "UNIQUE",
+    //     "DieReceipt": "2023-12-05",
+    //     "day1": 5,
+    //     "BumpIn": "2023-12-06",
+    //     "day2": 3,
+    //     "BumpOut": "2023-12-07",
+    //     "day3": 6,
+    //     "ProbeIn": "2023-12-08",
+    //     "day4": 2,
+    //     "ProbeOut": "2023-12-09",
+    //     "day5": 4,
+    //     "AssemblyIn": "2023-12-10",
+    //     "day6": 7,
+    //     "AssemblyOut": "2023-12-11",
+    //     "day7": 1,
+    //     "TestIn": "2023-12-12",
+    //     "day8": 8,
+    //     "TestOut": "2023-12-13",
+    //     "day9": 9,
+    //     "ShipOut": "2023-12-14"
+    // },
+
+    const applyFilter = (dataArray, filterValue) => {
+        return dataArray.filter((item) => {
+            return (
+                item.LotNo.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.DieReceipt.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.BumpIn.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.BumpOut.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.ProbeIn.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.ProbeOut.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.AssemblyIn.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.AssemblyOut.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.TestIn.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.TestOut.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.ShipOut.toLowerCase().includes(filterValue.toLowerCase()) 
+            )
+        }
+        );
+    };
+
+    const filteredData = applyFilter(data, filterBy);
+
+
+
+    // CSV PART
 
     const currentpagecsvdataHandler = () => {
         console.log("CurrentPageCsvData ", currentPageData)
@@ -688,20 +732,20 @@ const Datagrid6 = () => {
                                         <p>{t.LotNo}</p>
                                     </div>
                                 </div>}
-    
+
                                 {showdiereceipt && <div className='data6_content_body_same'>
                                     <div>
                                         <p>{t.DieReceipt}</p>
                                     </div>
                                 </div>}
-    
+
                                 {showday1 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day1} days</div>
                                     </div>
                                 </div>}
-    
+
                                 <div className='data6_content_body_same'>
                                     <div>
                                         <p>{t.BumpIn}</p>
@@ -751,7 +795,7 @@ const Datagrid6 = () => {
                                         <p>{t.AssemblyIn}</p>
                                     </div>
                                 </div>
-    
+
                                 <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
@@ -774,7 +818,7 @@ const Datagrid6 = () => {
                                         <p>{t.TestIn}</p>
                                     </div>
                                 </div>
-    
+
                                 <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
@@ -807,20 +851,20 @@ const Datagrid6 = () => {
                                         <p>{t.LotNo}</p>
                                     </div>
                                 </div>}
-    
+
                                 {showdiereceipt && <div className='data6_content_body_same'>
                                     <div>
                                         <p>{t.DieReceipt}</p>
                                     </div>
                                 </div>}
-    
+
                                 {showday1 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day1} days</div>
                                     </div>
                                 </div>}
-    
+
                                 <div className='data6_content_body_same'>
                                     <div>
                                         <p>{t.BumpIn}</p>
@@ -870,7 +914,7 @@ const Datagrid6 = () => {
                                         <p>{t.AssemblyIn}</p>
                                     </div>
                                 </div>
-    
+
                                 <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
@@ -893,7 +937,7 @@ const Datagrid6 = () => {
                                         <p>{t.TestIn}</p>
                                     </div>
                                 </div>
-    
+
                                 <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
