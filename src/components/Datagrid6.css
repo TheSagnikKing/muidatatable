@@ -188,6 +188,17 @@
     align-items: center;
 }
 
+.data6_pagination>div:nth-child(1){
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+select{
+    outline: none;
+    cursor: pointer;
+}
+
 .data6_pagination>div:nth-child(2){
     display: flex;
     align-items: center;

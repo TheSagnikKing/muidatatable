@@ -513,26 +513,6 @@ const Datagrid6 = () => {
     // Get data for the current page
     const currentPageData = sortedData.slice(startIndex, endIndex);
 
-
-    const generateOptions = () => {
-        const options = [];
-        for (let i = 1; i <= totalPages; i += dataPerPage) {
-            const start = i;
-            const end = Math.min(i + dataPerPage - 1, totalPages);
-            options.push(`${start}-${end}`);
-        }
-        return options;
-    };
-
-    // Handle change in the select dropdown
-    const handleSelectChange = (e) => {
-        const selectedRange = e.target.value.split('-');
-        const selectedStart = parseInt(selectedRange[0]);
-        handleNextPage(selectedStart);
-    };
-
-
-
     const currentpagecsvdataHandler = () => {
         console.log("CurrentPageCsvData ", currentPageData)
     }
@@ -541,6 +521,10 @@ const Datagrid6 = () => {
         console.log("EntireCSVData ", data)
     }
 
+
+    console.log(currentPageData)
+    console.log(startIndex)
+    console.log(endIndex)
     return (
         <main className='data6_container'>
             <div className='data6_top_bx'>
@@ -829,10 +813,17 @@ const Datagrid6 = () => {
             <div className="data6_pagination">
                 <div>
                     <p>Showing of </p>
-                    <select value={`${currentPage}-${Math.min(currentPage + dataPerPage - 1, totalPages)}`} onChange={handleSelectChange}>
-                        {generateOptions().map((option, index) => (
-                            <option key={index} value={option}>{option}</option>
-                        ))}
+                    <select
+                        value={`${startIndex + 1} - ${endIndex}`}
+                        onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
+                    >
+                        {
+                            Array.from({ length: totalPages }, (_, index) => (
+                                <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, sortedData.length)}`}>
+                                    {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, sortedData.length)}
+                                </option>
+                            ))
+                        }
                     </select>
                 </div>
                 <div>
