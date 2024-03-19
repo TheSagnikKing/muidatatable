@@ -7,6 +7,13 @@
   font-family: "Poppins", sans-serif;
 }
 
+:root{
+  --bg-color-1: #ff02025e;
+  --bg-color-2: #ffb7025e;
+  --bg-color-3: #41ff025e;
+  --bg-color-4: #5f02ff5e;
+}
+
 .idColumn{
   background-color: red !important;
 }

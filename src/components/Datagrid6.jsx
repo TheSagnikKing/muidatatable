@@ -434,9 +434,55 @@ const Datagrid6 = () => {
 
     const [showColumn, setShowColumn] = useState(false)
 
+    const [showtoggleall, setShowtoggleall] = useState(true)
     const [showlotno, setShowlotno] = useState(true)
     const [showdiereceipt, setShowdiereceipt] = useState(true)
     const [showday1, setShowday1] = useState(true)
+    const [showBumpIn, setShowBumpIn] = useState(true)
+    const [showday2, setShowday2] = useState(true)
+    const [showBumpOut, setShowBumpOut] = useState(true)
+    const [showday3, setShowday3] = useState(true)
+    const [showProbeIn, setShowProbeIn] = useState(true)
+    const [showday4, setShowday4] = useState(true)
+    const [showProbeOut, setShowProbeOut] = useState(true)
+    const [showday5, setShowday5] = useState(true)
+    const [showAssemblyIn, setShowAssemblyIn] = useState(true)
+    const [showday6, setShowday6] = useState(true)
+    const [showAssemblyOut, setShowAssemblyOut] = useState(true)
+    const [showday7, setShowday7] = useState(true)
+    const [showTestIn, setShowTestIn] = useState(true)
+    const [showday8, setShowday8] = useState(true)
+    const [showTestOut, setShowTestOut] = useState(true)
+    const [showday9, setShowday9] = useState(true)
+    const [showShipOut, setShowShipOut] = useState(true)
+    
+    const toggleHandle = () => {
+        setShowtoggleall((prev) => !prev)
+        
+        setShowlotno((prev) => !prev)
+        setShowdiereceipt((prev) => !prev)
+        setShowday1((prev) => !prev)
+        setShowBumpIn((prev) => !prev)
+        setShowday2((prev) => !prev)
+        setShowBumpOut((prev) => !prev)
+
+        setShowday3((prev) => !prev)
+        setShowProbeIn((prev) => !prev)
+        setShowday4((prev) => !prev)
+        setShowProbeOut((prev) => !prev)
+        setShowday5((prev) => !prev)
+
+        setShowAssemblyIn((prev) => !prev)
+        setShowday6((prev) => !prev)
+        setShowAssemblyOut((prev) => !prev)
+        setShowday7((prev) => !prev)
+        setShowTestIn((prev) => !prev)
+
+        setShowday8((prev) => !prev)
+        setShowTestOut((prev) => !prev)
+        setShowday9((prev) => !prev)
+        setShowShipOut((prev) => !prev)
+    }
 
 
     const [sortOrder, setSortOrder] = useState('asc');
@@ -494,53 +540,6 @@ const Datagrid6 = () => {
 
 
     // CSV PART
-
-
-    //     const currentpagecsvdataHandler = () => {
-    //     // Format dates before converting to CSV
-    //     const formattedData = sortedData
-    //         .slice(startIndex, endIndex)
-    //         .map(row => ({
-    //             ...row,
-    //             DieReceipt: formatDate(row.DieReceipt),
-    //             BumpIn: formatDate(row.BumpIn),
-    //             BumpOut: formatDate(row.BumpOut),
-    //             ProbeIn: formatDate(row.ProbeIn),
-    //             ProbeOut: formatDate(row.ProbeOut),
-    //             AssemblyIn: formatDate(row.AssemblyIn),
-    //             AssemblyOut: formatDate(row.AssemblyOut),
-    //             TestIn: formatDate(row.TestIn),
-    //             TestOut: formatDate(row.TestOut),
-    //             ShipOut: formatDate(row.ShipOut)
-    //         }));
-
-    //     // Convert formatted data to CSV format
-    //     const csvContent = "data:text/csv;charset=utf-8," +
-    //         formattedData
-    //             .map(row => Object.values(row).join(","))
-    //             .join("\n");
-
-    //     // Create a virtual link element to trigger the download
-    //     const encodedUri = encodeURI(csvContent);
-    //     const link = document.createElement("a");
-    //     link.setAttribute("href", encodedUri);
-    //     link.setAttribute("download", "current_page_data.csv");
-    //     document.body.appendChild(link);
-
-    //     // Trigger the download
-    //     link.click();
-    // };
-
-    // // Function to format date strings (assuming input format is "YYYY-MM-DD")
-    // const formatDate = (dateString) => {
-    //     const date = new Date(dateString);
-    //     return date.toLocaleDateString(); // Adjust date formatting as needed
-    // };
-
-    // const currentpagecsvdataHandler = () => {
-    //     console.log("currentPageData ", currentPageData)
-    // }
-
 
     const currentpagecsvdataHandler = () => {
         // Convert dates to a consistent format ("YYYY-MM-DD")
@@ -689,6 +688,11 @@ const Datagrid6 = () => {
 
                     {showColumn && <div className='data6_top_showhide_bx_content'>
                         <div>
+                            <input type="checkbox" onClick={toggleHandle} checked={showtoggleall} />
+                            <p>Toggle All</p>
+                        </div>
+
+                        <div>
                             <input type="checkbox" onClick={() => setShowlotno((prev) => !prev)} checked={showlotno} />
                             <p>Lot No.</p>
                         </div>
@@ -701,6 +705,91 @@ const Datagrid6 = () => {
                         <div>
                             <input type="checkbox" onClick={() => setShowday1((prev) => !prev)} checked={showday1} />
                             <p>Day 1</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowBumpIn((prev) => !prev)} checked={showBumpIn} />
+                            <p>BumpIn</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday2((prev) => !prev)} checked={showday2} />
+                            <p>Day 2</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowBumpOut((prev) => !prev)} checked={showBumpOut} />
+                            <p>BumpOut</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday3((prev) => !prev)} checked={showday3} />
+                            <p>Day 3</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowProbeIn((prev) => !prev)} checked={showProbeIn} />
+                            <p>ProbeIn</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday4((prev) => !prev)} checked={showday4} />
+                            <p>Day 4</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowProbeOut((prev) => !prev)} checked={showProbeOut} />
+                            <p>ProbeOut</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday5((prev) => !prev)} checked={showday5} />
+                            <p>Day 5</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowAssemblyIn((prev) => !prev)} checked={showAssemblyIn} />
+                            <p>AssemblyIn</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday6((prev) => !prev)} checked={showday6} />
+                            <p>Day 6</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowAssemblyOut((prev) => !prev)} checked={showAssemblyOut} />
+                            <p>AssemblyOut</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday7((prev) => !prev)} checked={showday7} />
+                            <p>Day 7</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowTestIn((prev) => !prev)} checked={showTestIn} />
+                            <p>TestIn</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday8((prev) => !prev)} checked={showday8} />
+                            <p>Day 8</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowTestOut((prev) => !prev)} checked={showTestOut} />
+                            <p>TestOut</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday9((prev) => !prev)} checked={showday9} />
+                            <p>Day 9</p>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" onClick={() => setShowShipOut((prev) => !prev)} checked={showShipOut} />
+                            <p>ShipOut</p>
                         </div>
 
                     </div>}
@@ -730,110 +819,125 @@ const Datagrid6 = () => {
                         </div>
                     </div>}
 
-                    <div className='data6_content_head_same'>
+                    {showBumpIn && <div className='data6_content_head_same' onClick={() => toggleSortOrder('BumpIn')}>
                         <div>
                             <p>BumpIn</p>
-                            <div>Sr</div>
+                            {sortBy === 'BumpIn' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_diff'>
+                    </div>}
+
+                    {showday2 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day2')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day2' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_same'>
+                    </div>}
+
+                    {showBumpOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('BumpOut')}>
                         <div>
                             <p>BumpOut</p>
-                            <div>Sr</div>
+                            {sortBy === 'BumpOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_diff'>
+                    </div>}
+
+                    {showday3 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day3')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day3' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_same'>
+                    </div>}
+
+                    {showProbeIn && <div className='data6_content_head_same' onClick={() => toggleSortOrder('ProbeIn')}>
                         <div>
                             <p>ProbeIn</p>
-                            <div>Sr</div>
+                            {sortBy === 'ProbeIn' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_diff'>
+                    </div>}
+
+                    {showday4 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day4')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day4' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_same'>
+                    </div>}
+
+                    {showProbeOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('ProbeOut')}>
                         <div>
                             <p>ProbeOut</p>
-                            <div>Sr</div>
+                            {sortBy === 'ProbeOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_diff'>
+                    </div>}
+
+                    {showday5 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day5')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day5' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_same'>
+                    </div>}
+
+                    {showAssemblyIn && <div className='data6_content_head_same' onClick={() => toggleSortOrder('AssemblyIn')}>
                         <div>
                             <p>AssemblyIn</p>
-                            <div>Sr</div>
+                            {sortBy === 'AssemblyIn' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
+                    </div>}
 
-                    <div className='data6_content_head_diff'>
+
+                    {showday6 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day6')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day6' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_same'>
+                    </div>}
+
+                    {showAssemblyOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('AssemblyOut')}>
                         <div>
                             <p>AssemblyOut</p>
-                            <div>Sr</div>
+                            {sortBy === 'AssemblyOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_diff'>
+                    </div>}
+
+                    {showday7 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day7')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day7' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_same'>
+                    </div>}
+
+                    {showTestIn && <div className='data6_content_head_same' onClick={() => toggleSortOrder('TestIn')}>
                         <div>
                             <p>TestIn</p>
-                            <div>Sr</div>
+                            {sortBy === 'TestIn' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
+                    </div>}
 
-                    <div className='data6_content_head_diff'>
+                    {showday8 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day8')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day8' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_same'>
+                    </div>}
+
+                    {showTestOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('TestOut')}>
                         <div>
                             <p>TestOut</p>
-                            <div>Sr</div>
+                            {sortBy === 'TestOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_diff'>
+                    </div>}
+
+                    {showday9 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day9')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day9' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
-                    </div>
-                    <div className='data6_content_head_same'>
+                    </div>}
+
+                    {showShipOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('ShipOut')}>
                         <div>
                             <p>ShipOut</p>
-                            <div>Sr</div>
+                            {sortBy === 'ShipOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
-                    </div>
+                    </div>}
                 </div>
 
 
@@ -842,13 +946,13 @@ const Datagrid6 = () => {
                         filteredData.map((t) => (
                             <div className='data6_content_body' key={t._id}>
                                 {showlotno && <div className='data6_content_body_same'>
-                                    <div style={{ borderRight: "1px solid black" }}>
+                                    <div style={{ borderRight: "1px solid black", background: "var(--bg-color-1)" }}>
                                         <p>{t.LotNo}</p>
                                     </div>
                                 </div>}
 
                                 {showdiereceipt && <div className='data6_content_body_same'>
-                                    <div>
+                                    <div style={{ background: "var(--bg-color-4)" }}>
                                         <p>{t.DieReceipt}</p>
                                     </div>
                                 </div>}
@@ -860,114 +964,127 @@ const Datagrid6 = () => {
                                     </div>
                                 </div>}
 
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                {showBumpIn && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-4)" }}>
                                         <p>{t.BumpIn}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div>}
+
+                                {  showday2 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day2} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div> }
+
+                                { showBumpOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-3)" }}>
                                         <p>{t.BumpOut}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div> }
+
+                                { showday3 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day3} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div> }
+
+                                { showProbeIn && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-3)" }}>
                                         <p>{t.ProbeIn}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div> }
+
+                               { showday4 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day4} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div> }
+
+                                { showProbeOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-1)" }}>
                                         <p>{t.ProbeOut}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div> }
+
+                                { showday5 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day5} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div> }
+                                { showAssemblyIn && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-2)" }}>
                                         <p>{t.AssemblyIn}</p>
                                     </div>
-                                </div>
+                                </div> }
 
-                                <div className='data6_content_body_diff'>
+                                { showday6 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day6} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div> }
+                                
+                                { showAssemblyOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-2)" }}>
                                         <p>{t.AssemblyOut}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div> }
+                                
+                                { showday7 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day7} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div> }
+
+                                { showTestIn && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-3)" }}>
                                         <p>{t.TestIn}</p>
                                     </div>
-                                </div>
+                                </div> }
 
-                                <div className='data6_content_body_diff'>
+                                {  showday8 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day8} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div> }
+
+                                { showTestOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-4)" }}>
                                         <p>{t.TestOut}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div> }
+
+                                { showday9 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day9}</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div> }
+
+                                { showShipOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-4)" }}>
                                         <p>{t.ShipOut}</p>
                                     </div>
-                                </div>
+                                </div> }
                             </div>
                         ))
                     ) : (
                         currentPageData.map((t) => (
                             <div className='data6_content_body' key={t._id}>
                                 {showlotno && <div className='data6_content_body_same'>
-                                    <div style={{ borderRight: "1px solid black" }}>
+                                    <div style={{ borderRight: "1px solid black", background: "var(--bg-color-1)" }}>
                                         <p>{t.LotNo}</p>
                                     </div>
                                 </div>}
 
                                 {showdiereceipt && <div className='data6_content_body_same'>
-                                    <div>
+                                    <div style={{ background: "var(--bg-color-4)" }}>
                                         <p>{t.DieReceipt}</p>
                                     </div>
                                 </div>}
@@ -979,101 +1096,114 @@ const Datagrid6 = () => {
                                     </div>
                                 </div>}
 
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                {showBumpIn && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-4)" }}>
                                         <p>{t.BumpIn}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div>}
+
+                                {showday2 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day2} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div>}
+
+                                {showBumpOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-3)" }}>
                                         <p>{t.BumpOut}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div>}
+
+                                {showday3 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day3} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div>}
+
+                                {showProbeIn && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-3)" }}>
                                         <p>{t.ProbeIn}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div>}
+
+                                {showday4 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day4} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div>}
+
+                                {showProbeOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-1)" }}>
                                         <p>{t.ProbeOut}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div>}
+
+                                {showday5 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day5} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div>}
+                                {showAssemblyIn && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-2)" }}>
                                         <p>{t.AssemblyIn}</p>
                                     </div>
-                                </div>
+                                </div>}
 
-                                <div className='data6_content_body_diff'>
+                                {showday6 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day6} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div>}
+
+                                {showAssemblyOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-2)" }}>
                                         <p>{t.AssemblyOut}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div>}
+
+                                {showday7 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day7} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div>}
+
+                                {showTestIn && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-3)" }}>
                                         <p>{t.TestIn}</p>
                                     </div>
-                                </div>
+                                </div>}
 
-                                <div className='data6_content_body_diff'>
+                                {showday8 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day8} days</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div>}
+
+                                {showTestOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-4)" }}>
                                         <p>{t.TestOut}</p>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_diff'>
+                                </div>}
+
+                                {showday9 && <div className='data6_content_body_diff'>
                                     <div>
                                         <div />
                                         <div>{t.day9}</div>
                                     </div>
-                                </div>
-                                <div className='data6_content_body_same'>
-                                    <div>
+                                </div>}
+
+                                {showShipOut && <div className='data6_content_body_same'>
+                                    <div style={{ background: "var(--bg-color-4)" }}>
                                         <p>{t.ShipOut}</p>
                                     </div>
-                                </div>
+                                </div>}
                             </div>
                         ))
                     )
