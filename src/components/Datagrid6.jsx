@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Datagrid6.css'
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
@@ -28,7 +28,7 @@ const data = [
     },
     {
         "_id": 2,
-        "LotNo": "D4E5F6",
+        "LotNo": "D4E5F7",
         "DieReceipt": "2024-02-14",
         "day1": 1,
         "BumpIn": "2024-02-15",
@@ -447,6 +447,16 @@ const Datagrid6 = () => {
         setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
     };
 
+    const [filterBy, setFilterBy] = useState('');
+
+    const applyFilter = (dataArray, filterValue) => {
+        return dataArray.filter((item) =>
+            item.LotNo.toLowerCase().includes(filterValue.toLowerCase())
+        );
+    };
+
+    const filteredData = applyFilter(data, filterBy);
+
     const sortData = (dataArray, columnName, sortOrder) => {
         if (columnName === '') {
             return dataArray
@@ -468,28 +478,6 @@ const Datagrid6 = () => {
     };
 
     const sortedData = sortData(data, sortBy, sortOrder);
-
-    // "_id": 1,
-    //     "LotNo": "A1B2C3",
-    //     "DieReceipt": "2023-11-21",
-    //     "day1": 3,
-    //     "BumpIn": "2023-11-22",
-    //     "day2": 8,
-    //     "BumpOut": "2023-11-23",
-    //     "day3": 5,
-    //     "ProbeIn": "2023-11-24",
-    //     "day4": 7,
-    //     "ProbeOut": "2023-11-25",
-    //     "day5": 2,
-    //     "AssemblyIn": "2023-11-26",
-    //     "day6": 1,
-    //     "AssemblyOut": "2023-11-27",
-    //     "day7": 9,
-    //     "TestIn": "2023-11-28",
-    //     "day8": 4,
-    //     "TestOut": "2023-11-29",
-    //     "day9": 6,
-    //     "ShipOut": "2023-11-30"
 
     const dataPerPage = 5;
 
@@ -522,14 +510,16 @@ const Datagrid6 = () => {
     }
 
 
-    console.log(currentPageData)
-    console.log(startIndex)
-    console.log(endIndex)
     return (
         <main className='data6_container'>
             <div className='data6_top_bx'>
                 <div className='data6_top_searchbox'>
-                    Search
+                    <input
+                        type="text"
+                        placeholder='Filter By LotNo.'
+                        value={filterBy}
+                        onChange={(e) => setFilterBy(e.target.value)}
+                    />
                 </div>
 
                 <div className='data6_top_selectdatebx'>
@@ -688,125 +678,247 @@ const Datagrid6 = () => {
                     </div>
                 </div>
 
+
                 {
-                    currentPageData.map((t) => (
-                        <div className='data6_content_body' key={t._id}>
-                            {showlotno && <div className='data6_content_body_same'>
-                                <div style={{ borderRight: "1px solid black" }}>
-                                    <p>{t.LotNo}</p>
+                    filterBy && filterBy !== '' ? (
+                        filteredData.map((t) => (
+                            <div className='data6_content_body' key={t._id}>
+                                {showlotno && <div className='data6_content_body_same'>
+                                    <div style={{ borderRight: "1px solid black" }}>
+                                        <p>{t.LotNo}</p>
+                                    </div>
+                                </div>}
+    
+                                {showdiereceipt && <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.DieReceipt}</p>
+                                    </div>
+                                </div>}
+    
+                                {showday1 && <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day1} days</div>
+                                    </div>
+                                </div>}
+    
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.BumpIn}</p>
+                                    </div>
                                 </div>
-                            </div>}
-
-                            {showdiereceipt && <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.DieReceipt}</p>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day2} days</div>
+                                    </div>
                                 </div>
-                            </div>}
-
-                            {showday1 && <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day1} days</div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.BumpOut}</p>
+                                    </div>
                                 </div>
-                            </div>}
-
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.BumpIn}</p>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day3} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.ProbeIn}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day4} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.ProbeOut}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day5} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.AssemblyIn}</p>
+                                    </div>
+                                </div>
+    
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day6} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.AssemblyOut}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day7} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.TestIn}</p>
+                                    </div>
+                                </div>
+    
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day8} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.TestOut}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day9}</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.ShipOut}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day2} days</div>
+                        ))
+                    ) : (
+                        currentPageData.map((t) => (
+                            <div className='data6_content_body' key={t._id}>
+                                {showlotno && <div className='data6_content_body_same'>
+                                    <div style={{ borderRight: "1px solid black" }}>
+                                        <p>{t.LotNo}</p>
+                                    </div>
+                                </div>}
+    
+                                {showdiereceipt && <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.DieReceipt}</p>
+                                    </div>
+                                </div>}
+    
+                                {showday1 && <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day1} days</div>
+                                    </div>
+                                </div>}
+    
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.BumpIn}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day2} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.BumpOut}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day3} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.ProbeIn}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day4} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.ProbeOut}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day5} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.AssemblyIn}</p>
+                                    </div>
+                                </div>
+    
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day6} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.AssemblyOut}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day7} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.TestIn}</p>
+                                    </div>
+                                </div>
+    
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day8} days</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.TestOut}</p>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_diff'>
+                                    <div>
+                                        <div />
+                                        <div>{t.day9}</div>
+                                    </div>
+                                </div>
+                                <div className='data6_content_body_same'>
+                                    <div>
+                                        <p>{t.ShipOut}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.BumpOut}</p>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day3} days</div>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.ProbeIn}</p>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day4} days</div>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.ProbeOut}</p>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day5} days</div>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.AssemblyIn}</p>
-                                </div>
-                            </div>
-
-                            <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day6} days</div>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.AssemblyOut}</p>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day7} days</div>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.TestIn}</p>
-                                </div>
-                            </div>
-
-                            <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day8} days</div>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.TestOut}</p>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_diff'>
-                                <div>
-                                    <div />
-                                    <div>{t.day9}</div>
-                                </div>
-                            </div>
-                            <div className='data6_content_body_same'>
-                                <div>
-                                    <p>{t.ShipOut}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))
+                        ))
+                    )
                 }
 
             </div>
