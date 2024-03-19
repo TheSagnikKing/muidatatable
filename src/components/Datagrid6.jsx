@@ -496,30 +496,6 @@ const Datagrid6 = () => {
 
     const [filterBy, setFilterBy] = useState('');
 
-    // {
-    //     "_id": 3,
-    //     "LotNo": "UNIQUE",
-    //     "DieReceipt": "2023-12-05",
-    //     "day1": 5,
-    //     "BumpIn": "2023-12-06",
-    //     "day2": 3,
-    //     "BumpOut": "2023-12-07",
-    //     "day3": 6,
-    //     "ProbeIn": "2023-12-08",
-    //     "day4": 2,
-    //     "ProbeOut": "2023-12-09",
-    //     "day5": 4,
-    //     "AssemblyIn": "2023-12-10",
-    //     "day6": 7,
-    //     "AssemblyOut": "2023-12-11",
-    //     "day7": 1,
-    //     "TestIn": "2023-12-12",
-    //     "day8": 8,
-    //     "TestOut": "2023-12-13",
-    //     "day9": 9,
-    //     "ShipOut": "2023-12-14"
-    // },
-
     const applyFilter = (dataArray, filterValue) => {
         return dataArray.filter((item) => {
             return (
@@ -533,14 +509,22 @@ const Datagrid6 = () => {
                 item.AssemblyOut.toLowerCase().includes(filterValue.toLowerCase()) ||
                 item.TestIn.toLowerCase().includes(filterValue.toLowerCase()) ||
                 item.TestOut.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.ShipOut.toLowerCase().includes(filterValue.toLowerCase()) 
+                item.ShipOut.toLowerCase().includes(filterValue.toLowerCase())
             )
         }
         );
     };
 
     const filteredData = applyFilter(data, filterBy);
+    console.log(filteredData)
 
+    const filtertotalPages = Math.ceil(filteredData.length / dataPerPage);
+
+    console.log(filtertotalPages)
+
+    const currentFilterData = filteredData.slice(startIndex, endIndex);
+
+    console.log(currentFilterData)
 
 
     // CSV PART
@@ -560,7 +544,7 @@ const Datagrid6 = () => {
                 <div className='data6_top_searchbox'>
                     <input
                         type="text"
-                        placeholder='Filter By LotNo.'
+                        placeholder='Search By LotNo.'
                         value={filterBy}
                         onChange={(e) => setFilterBy(e.target.value)}
                     />
@@ -725,7 +709,7 @@ const Datagrid6 = () => {
 
                 {
                     filterBy && filterBy !== '' ? (
-                        filteredData.map((t) => (
+                        currentFilterData.map((t) => (
                             <div className='data6_content_body' key={t._id}>
                                 {showlotno && <div className='data6_content_body_same'>
                                     <div style={{ borderRight: "1px solid black" }}>
@@ -974,12 +958,27 @@ const Datagrid6 = () => {
                         onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
                     >
                         {
+                            filterBy && filterBy !== '' ? (
+                                Array.from({ length: filtertotalPages }, (_, index) => (
+                                    <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, currentFilterData.length)}`}>
+                                        {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, currentFilterData.length)}
+                                    </option>
+                                ))
+                            ) : (
+                                Array.from({ length: totalPages }, (_, index) => (
+                                    <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, sortedData.length)}`}>
+                                        {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, sortedData.length)}
+                                    </option>
+                                ))
+                            )
+                        }
+                        {/* {
                             Array.from({ length: totalPages }, (_, index) => (
                                 <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, sortedData.length)}`}>
                                     {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, sortedData.length)}
                                 </option>
                             ))
-                        }
+                        } */}
                     </select>
                 </div>
                 <div>

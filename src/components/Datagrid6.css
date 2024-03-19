@@ -234,3 +234,23 @@ select{
     padding: 5px 15px;
     margin-right: 10px;
 }
+
+.data6_top_searchbox{
+    height: 30px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+    border-radius: 5px;
+}
+
+.data6_top_searchbox>input{
+    border: none;
+    border-radius: 5px;
+    padding-inline: 10px;
+    font-size: 14px;
+    height: 100%;
+    width: 100%;
+}
+
+.data6_top_searchbox>input:focus{
+    outline: none;
+}
