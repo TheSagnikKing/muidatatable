@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './Datagrid6.css'
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const data = [
     {
@@ -439,29 +440,31 @@ const Datagrid6 = () => {
 
 
     const [sortOrder, setSortOrder] = useState('asc');
-    const [sortBy, setSortBy] = useState('LotNo');
+    const [sortBy, setSortBy] = useState('');
 
     const toggleSortOrder = (columnName) => {
         setSortBy(columnName);
         setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
     };
 
-    console.log(sortBy)
-
     const sortData = (dataArray, columnName, sortOrder) => {
-        return dataArray.sort((a, b) => {
-            const valueA = a[columnName];
-            const valueB = b[columnName];
-    
-            // Check if both values are numbers
-            if (typeof valueA === 'number' && typeof valueB === 'number') {
-                // Compare numbers directly
-                return sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
-            } else {
-                // Use localeCompare for strings
-                return sortOrder === 'asc' ? String(valueA).localeCompare(String(valueB)) : String(valueB).localeCompare(String(valueA));
-            }
-        });
+        if (columnName === '') {
+            return dataArray
+        } else {
+            return dataArray.sort((a, b) => {
+                const valueA = a[columnName];
+                const valueB = b[columnName];
+
+                // Check if both values are numbers
+                if (typeof valueA === 'number' && typeof valueB === 'number') {
+                    // Compare numbers directly
+                    return sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
+                } else {
+                    // Use localeCompare for strings
+                    return sortOrder === 'asc' ? String(valueA).localeCompare(String(valueB)) : String(valueB).localeCompare(String(valueA));
+                }
+            });
+        }
     };
 
     const sortedData = sortData(data, sortBy, sortOrder);
@@ -487,6 +490,56 @@ const Datagrid6 = () => {
     //     "TestOut": "2023-11-29",
     //     "day9": 6,
     //     "ShipOut": "2023-11-30"
+
+    const dataPerPage = 5;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handleNextPage = () => {
+        setCurrentPage(prevPage => prevPage + 1);
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage(prevPage => prevPage - 1);
+    };
+
+    // Calculate total number of pages
+    const totalPages = Math.ceil(sortedData.length / dataPerPage);
+
+    // Calculate starting and ending indexes for the current page
+    const startIndex = (currentPage - 1) * dataPerPage;
+    const endIndex = Math.min(startIndex + dataPerPage, data.length);
+
+    // Get data for the current page
+    const currentPageData = sortedData.slice(startIndex, endIndex);
+
+
+    const generateOptions = () => {
+        const options = [];
+        for (let i = 1; i <= totalPages; i += dataPerPage) {
+            const start = i;
+            const end = Math.min(i + dataPerPage - 1, totalPages);
+            options.push(`${start}-${end}`);
+        }
+        return options;
+    };
+
+    // Handle change in the select dropdown
+    const handleSelectChange = (e) => {
+        const selectedRange = e.target.value.split('-');
+        const selectedStart = parseInt(selectedRange[0]);
+        handleNextPage(selectedStart);
+    };
+
+
+
+    const currentpagecsvdataHandler = () => {
+        console.log("CurrentPageCsvData ", currentPageData)
+    }
+
+    const entirepagecsvdataHandler = () => {
+        console.log("EntireCSVData ", data)
+    }
 
     return (
         <main className='data6_container'>
@@ -541,7 +594,7 @@ const Datagrid6 = () => {
                     {showday1 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day1')}>
                         <div>
                             <div />
-                            {sortBy === 'day1' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>): <div><span>&#9660;</span></div>}
+                            {sortBy === 'day1' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
                         </div>
                     </div>}
 
@@ -652,7 +705,7 @@ const Datagrid6 = () => {
                 </div>
 
                 {
-                    sortedData.map((t) => (
+                    currentPageData.map((t) => (
                         <div className='data6_content_body' key={t._id}>
                             {showlotno && <div className='data6_content_body_same'>
                                 <div style={{ borderRight: "1px solid black" }}>
@@ -772,6 +825,26 @@ const Datagrid6 = () => {
                     ))
                 }
 
+            </div>
+            <div className="data6_pagination">
+                <div>
+                    <p>Showing of </p>
+                    <select value={`${currentPage}-${Math.min(currentPage + dataPerPage - 1, totalPages)}`} onChange={handleSelectChange}>
+                        {generateOptions().map((option, index) => (
+                            <option key={index} value={option}>{option}</option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <button onClick={handlePrevPage} disabled={currentPage === 1}><FaChevronLeft /></button>
+                    <span>{currentPage} of {totalPages}</span>
+                    <button onClick={handleNextPage} disabled={currentPage === totalPages}><FaChevronRight /></button>
+                </div>
+            </div>
+
+            <div className='data6_csv'>
+                <button onClick={currentpagecsvdataHandler}>Current Page CSV Data</button>
+                <button onClick={entirepagecsvdataHandler}>Entire CSV Data</button>
             </div>
         </main>
     )
