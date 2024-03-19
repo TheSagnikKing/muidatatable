@@ -487,48 +487,13 @@ const Datagrid6 = () => {
 
     // Calculate starting and ending indexes for the current page
     const startIndex = (currentPage - 1) * dataPerPage;
-    const endIndex = Math.min(startIndex + dataPerPage, data.length);
+    const endIndex = Math.min(startIndex + dataPerPage, sortedData.length);
 
     // Get data for the current page
     const currentPageData = sortedData.slice(startIndex, endIndex);
 
-    //FILTERING DONE HERE
-
-    const [filterBy, setFilterBy] = useState('');
-
-    const applyFilter = (dataArray, filterValue) => {
-        return dataArray.filter((item) => {
-            return (
-                item.LotNo.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.DieReceipt.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.BumpIn.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.BumpOut.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.ProbeIn.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.ProbeOut.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.AssemblyIn.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.AssemblyOut.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.TestIn.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.TestOut.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.ShipOut.toLowerCase().includes(filterValue.toLowerCase())
-            )
-        }
-        );
-    };
-
-    const filteredData = applyFilter(data, filterBy);
-    console.log(filteredData)
-
-    const filtertotalPages = Math.ceil(filteredData.length / dataPerPage);
-
-    console.log(filtertotalPages)
-
-    const currentFilterData = filteredData.slice(startIndex, endIndex);
-
-    console.log(currentFilterData)
-
-
+   
     // CSV PART
-
     const currentpagecsvdataHandler = () => {
         console.log("CurrentPageCsvData ", currentPageData)
     }
@@ -537,6 +502,44 @@ const Datagrid6 = () => {
         console.log("EntireCSVData ", data)
     }
 
+     //FILTERING DONE HERE
+
+     const [filterBy, setFilterBy] = useState('');
+     const [filterBydate, setFilterBydate] = useState("")
+
+     const applyFilter = (dataArray, filterValue) => {
+        return dataArray.filter((item) => {
+            return (
+                item.LotNo.toLowerCase().includes(filterValue.toLowerCase())
+            )
+        }
+        );
+    };
+
+    const applyFilterByDate = (dataArray, filterDateValue) => {
+        return dataArray.filter((item) => {
+            return (
+                item.DieReceipt.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.BumpIn.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.BumpOut.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.ProbeIn.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.ProbeOut.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.AssemblyIn.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.AssemblyOut.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.TestIn.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.TestOut.toLowerCase().includes(filterDateValue.toLowerCase()) ||
+                item.ShipOut.toLowerCase().includes(filterDateValue.toLowerCase())
+            )
+        }
+        );
+    };
+    
+    const filteredData = filterBy && filterBy !== "" ? applyFilter(data,filterBy) : applyFilterByDate(data,filterBydate);
+
+
+    console.log(filteredData)
+
+    // search for 2021-02-20 in calender
 
     return (
         <main className='data6_container'>
@@ -551,7 +554,11 @@ const Datagrid6 = () => {
                 </div>
 
                 <div className='data6_top_selectdatebx'>
-                    Select Date
+                    <input 
+                    type="date" 
+                    value={filterBydate}
+                    onChange={(e) => setFilterBydate(e.target.value)}
+                    />
                 </div>
 
                 <div className='data6_top_showhide_bx'>
@@ -708,8 +715,8 @@ const Datagrid6 = () => {
 
 
                 {
-                    filterBy && filterBy !== '' ? (
-                        currentFilterData.map((t) => (
+                    filterBy && filterBy !== '' || filterBydate && filterBydate !== '' ? (
+                        filteredData.map((t) => (
                             <div className='data6_content_body' key={t._id}>
                                 {showlotno && <div className='data6_content_body_same'>
                                     <div style={{ borderRight: "1px solid black" }}>
@@ -958,27 +965,12 @@ const Datagrid6 = () => {
                         onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
                     >
                         {
-                            filterBy && filterBy !== '' ? (
-                                Array.from({ length: filtertotalPages }, (_, index) => (
-                                    <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, currentFilterData.length)}`}>
-                                        {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, currentFilterData.length)}
-                                    </option>
-                                ))
-                            ) : (
-                                Array.from({ length: totalPages }, (_, index) => (
-                                    <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, sortedData.length)}`}>
-                                        {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, sortedData.length)}
-                                    </option>
-                                ))
-                            )
-                        }
-                        {/* {
                             Array.from({ length: totalPages }, (_, index) => (
                                 <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, sortedData.length)}`}>
                                     {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, sortedData.length)}
                                 </option>
                             ))
-                        } */}
+                        }
                     </select>
                 </div>
                 <div>
