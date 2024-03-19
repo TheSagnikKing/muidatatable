@@ -439,21 +439,54 @@ const Datagrid6 = () => {
 
 
     const [sortOrder, setSortOrder] = useState('asc');
+    const [sortBy, setSortBy] = useState('LotNo');
 
-    const toggleSortOrder = () => {
-        setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-      };
-    
-      // Function to sort data based on LotNo
-      const sortData = (dataArray, sortOrder) => {
+    const toggleSortOrder = (columnName) => {
+        setSortBy(columnName);
+        setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
+    };
+
+    console.log(sortBy)
+
+    const sortData = (dataArray, columnName, sortOrder) => {
         return dataArray.sort((a, b) => {
-          return sortOrder === 'asc' ? a.LotNo.localeCompare(b.LotNo) : b.LotNo.localeCompare(a.LotNo);
-        });
-      };
+            const valueA = a[columnName];
+            const valueB = b[columnName];
     
-      // Apply sorting to the data
-      const sortedData = sortData(data, sortOrder);
+            // Check if both values are numbers
+            if (typeof valueA === 'number' && typeof valueB === 'number') {
+                // Compare numbers directly
+                return sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
+            } else {
+                // Use localeCompare for strings
+                return sortOrder === 'asc' ? String(valueA).localeCompare(String(valueB)) : String(valueB).localeCompare(String(valueA));
+            }
+        });
+    };
 
+    const sortedData = sortData(data, sortBy, sortOrder);
+
+    // "_id": 1,
+    //     "LotNo": "A1B2C3",
+    //     "DieReceipt": "2023-11-21",
+    //     "day1": 3,
+    //     "BumpIn": "2023-11-22",
+    //     "day2": 8,
+    //     "BumpOut": "2023-11-23",
+    //     "day3": 5,
+    //     "ProbeIn": "2023-11-24",
+    //     "day4": 7,
+    //     "ProbeOut": "2023-11-25",
+    //     "day5": 2,
+    //     "AssemblyIn": "2023-11-26",
+    //     "day6": 1,
+    //     "AssemblyOut": "2023-11-27",
+    //     "day7": 9,
+    //     "TestIn": "2023-11-28",
+    //     "day8": 4,
+    //     "TestOut": "2023-11-29",
+    //     "day9": 6,
+    //     "ShipOut": "2023-11-30"
 
     return (
         <main className='data6_container'>
@@ -491,25 +524,24 @@ const Datagrid6 = () => {
             </div>
             <div className='data6_content'>
                 <div className='data6_content_head'>
-                    {showlotno && <div className='data6_content_head_same' onClick={toggleSortOrder}>
+                    {showlotno && <div className='data6_content_head_same' onClick={() => toggleSortOrder('LotNo')}>
                         <div style={{ borderRight: "1px solid black" }}>
                             <p>Lot No.</p>
-                            {/* <div>Sr</div> */}
-                            {sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span>}
+                            {sortBy === 'LotNo' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
                     </div>}
 
-                    {showdiereceipt && <div className='data6_content_head_same'>
+                    {showdiereceipt && <div className='data6_content_head_same' onClick={() => toggleSortOrder('DieReceipt')}>
                         <div>
                             <p>DieReceipt</p>
-                            <div>Sr</div>
+                            {sortBy === 'DieReceipt' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
                         </div>
                     </div>}
 
-                    {showday1 && <div className='data6_content_head_diff'>
+                    {showday1 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day1')}>
                         <div>
                             <div />
-                            <div>V</div>
+                            {sortBy === 'day1' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>): <div><span>&#9660;</span></div>}
                         </div>
                     </div>}
 
@@ -625,14 +657,12 @@ const Datagrid6 = () => {
                             {showlotno && <div className='data6_content_body_same'>
                                 <div style={{ borderRight: "1px solid black" }}>
                                     <p>{t.LotNo}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>}
 
                             {showdiereceipt && <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.DieReceipt}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>}
 
@@ -646,7 +676,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.BumpIn}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
                             <div className='data6_content_body_diff'>
@@ -658,7 +687,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.BumpOut}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
                             <div className='data6_content_body_diff'>
@@ -670,7 +698,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.ProbeIn}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
                             <div className='data6_content_body_diff'>
@@ -682,7 +709,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.ProbeOut}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
                             <div className='data6_content_body_diff'>
@@ -694,7 +720,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.AssemblyIn}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
 
@@ -707,7 +732,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.AssemblyOut}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
                             <div className='data6_content_body_diff'>
@@ -719,7 +743,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.TestIn}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
 
@@ -732,7 +755,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.TestOut}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
                             <div className='data6_content_body_diff'>
@@ -744,7 +766,6 @@ const Datagrid6 = () => {
                             <div className='data6_content_body_same'>
                                 <div>
                                     <p>{t.ShipOut}</p>
-                                    <div>Sr</div>
                                 </div>
                             </div>
                         </div>
