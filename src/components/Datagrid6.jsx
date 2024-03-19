@@ -495,49 +495,127 @@ const Datagrid6 = () => {
 
     // CSV PART
 
-    const escapeCSVValue = (value) => {
-        // If the value is a date, convert it to a string format
-        if (value instanceof Date) {
-            return `"${value.toISOString().split('T')[0]}"`; // Convert date to string format yyyy-mm-dd
-        }
-    
-        // If the value contains double quotes, escape them by doubling them
-        const escapedValue = String(value).replace(/"/g, '""');
-        // If the value contains commas or line breaks, enclose it in double quotes
-        return /[,\"\n]/.test(escapedValue) ? `"${escapedValue}"` : escapedValue;
-    };
-    
+
+    //     const currentpagecsvdataHandler = () => {
+    //     // Format dates before converting to CSV
+    //     const formattedData = sortedData
+    //         .slice(startIndex, endIndex)
+    //         .map(row => ({
+    //             ...row,
+    //             DieReceipt: formatDate(row.DieReceipt),
+    //             BumpIn: formatDate(row.BumpIn),
+    //             BumpOut: formatDate(row.BumpOut),
+    //             ProbeIn: formatDate(row.ProbeIn),
+    //             ProbeOut: formatDate(row.ProbeOut),
+    //             AssemblyIn: formatDate(row.AssemblyIn),
+    //             AssemblyOut: formatDate(row.AssemblyOut),
+    //             TestIn: formatDate(row.TestIn),
+    //             TestOut: formatDate(row.TestOut),
+    //             ShipOut: formatDate(row.ShipOut)
+    //         }));
+
+    //     // Convert formatted data to CSV format
+    //     const csvContent = "data:text/csv;charset=utf-8," +
+    //         formattedData
+    //             .map(row => Object.values(row).join(","))
+    //             .join("\n");
+
+    //     // Create a virtual link element to trigger the download
+    //     const encodedUri = encodeURI(csvContent);
+    //     const link = document.createElement("a");
+    //     link.setAttribute("href", encodedUri);
+    //     link.setAttribute("download", "current_page_data.csv");
+    //     document.body.appendChild(link);
+
+    //     // Trigger the download
+    //     link.click();
+    // };
+
+    // // Function to format date strings (assuming input format is "YYYY-MM-DD")
+    // const formatDate = (dateString) => {
+    //     const date = new Date(dateString);
+    //     return date.toLocaleDateString(); // Adjust date formatting as needed
+    // };
+
+    // const currentpagecsvdataHandler = () => {
+    //     console.log("currentPageData ", currentPageData)
+    // }
+
 
     const currentpagecsvdataHandler = () => {
-        // const csvData = currentPageData.map(item => {
-        //     // Map each property value to a properly escaped CSV value
-        //     return Object.values(item).map(escapeCSVValue).join(',');
-        // }).join('\n');
+        // Convert dates to a consistent format ("YYYY-MM-DD")
+        const formattedData = currentPageData.map(row => ({
+            ...row,
+            DieReceipt: formatDate(row.DieReceipt),
+            BumpIn: formatDate(row.BumpIn),
+            BumpOut: formatDate(row.BumpOut),
+            ProbeIn: formatDate(row.ProbeIn),
+            ProbeOut: formatDate(row.ProbeOut),
+            AssemblyIn: formatDate(row.AssemblyIn),
+            AssemblyOut: formatDate(row.AssemblyOut),
+            TestIn: formatDate(row.TestIn),
+            TestOut: formatDate(row.TestOut),
+            ShipOut: formatDate(row.ShipOut)
+        }));
 
-        // downloadCSV(csvData, 'current_page_data.csv');
+        // Convert formatted data to CSV format
+        const csvContent = "data:text/csv;charset=utf-8," +
+            formattedData.map(row => Object.values(row).join(",")).join("\n");
 
-        console.log("currentPageData ",currentPageData)
-    }
+        // Create a virtual link element to trigger the download
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "current_page_data.csv");
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+    };
 
     const entirepagecsvdataHandler = () => {
         console.log("EntireCSVData ", data)
+
+        // Convert dates to a consistent format ("YYYY-MM-DD")
+        const formattedData = data.map(row => ({
+            ...row,
+            DieReceipt: formatDate(row.DieReceipt),
+            BumpIn: formatDate(row.BumpIn),
+            BumpOut: formatDate(row.BumpOut),
+            ProbeIn: formatDate(row.ProbeIn),
+            ProbeOut: formatDate(row.ProbeOut),
+            AssemblyIn: formatDate(row.AssemblyIn),
+            AssemblyOut: formatDate(row.AssemblyOut),
+            TestIn: formatDate(row.TestIn),
+            TestOut: formatDate(row.TestOut),
+            ShipOut: formatDate(row.ShipOut)
+        }));
+
+        // Convert formatted data to CSV format
+        const csvContent = "data:text/csv;charset=utf-8," +
+            formattedData.map(row => Object.values(row).join(",")).join("\n");
+
+        // Create a virtual link element to trigger the download
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "current_page_data.csv");
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
     }
 
 
-    // Function to initiate download of CSV data
-    const downloadCSV = (csvData, fileName) => {
-        const blob = new Blob([csvData], { type: 'text/csv' });
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-
-        // Cleanup
-        URL.revokeObjectURL(url);
-        document.body.removeChild(link);
+    // Function to format date strings (assuming input format is "YYYY-MM-DD")
+    const formatDate = (dateString) => {
+        // Check if the input string contains a forward slash ("/")
+        if (dateString.includes("/")) {
+            // Replace forward slashes with dashes ("-")
+            return dateString.replaceAll("/", "-");
+        } else {
+            return dateString; // If already in the correct format, return as is
+        }
     };
 
     //FILTERING DONE HERE
