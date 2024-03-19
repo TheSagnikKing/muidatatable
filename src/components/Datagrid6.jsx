@@ -437,35 +437,23 @@ const Datagrid6 = () => {
     const [showdiereceipt, setShowdiereceipt] = useState(true)
     const [showday1, setShowday1] = useState(true)
 
-    console.log(showlotno)
-
 
     const [sortOrder, setSortOrder] = useState('asc');
-    const [sortedColumn, setSortedColumn] = useState('');
 
     const toggleSortOrder = () => {
         setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    };
+      };
+    
+      // Function to sort data based on LotNo
+      const sortData = (dataArray, sortOrder) => {
+        return dataArray.sort((a, b) => {
+          return sortOrder === 'asc' ? a.LotNo.localeCompare(b.LotNo) : b.LotNo.localeCompare(a.LotNo);
+        });
+      };
+    
+      // Apply sorting to the data
+      const sortedData = sortData(data, sortOrder);
 
-    const handleSort = (column) => {
-        if (column === sortedColumn) {
-            toggleSortOrder();
-        } else {
-            setSortedColumn(column);
-            setSortOrder('asc');
-        }
-    };
-
-    const sortedData = sortedColumn ? [...data].sort((a, b) => {
-        const valueA = a[sortedColumn];
-        const valueB = b[sortedColumn];
-
-        if (sortOrder === 'asc') {
-            return valueA > valueB ? 1 : -1;
-        } else {
-            return valueA < valueB ? 1 : -1;
-        }
-    }) : data;
 
     return (
         <main className='data6_container'>
@@ -503,12 +491,11 @@ const Datagrid6 = () => {
             </div>
             <div className='data6_content'>
                 <div className='data6_content_head'>
-                    {showlotno && <div className='data6_content_head_same' onClick={() => handleSort('Sr')}>
+                    {showlotno && <div className='data6_content_head_same' onClick={toggleSortOrder}>
                         <div style={{ borderRight: "1px solid black" }}>
                             <p>Lot No.</p>
                             {/* <div>Sr</div> */}
-                            {sortedColumn === 'Sr' && sortOrder === 'asc' && <span>▲</span>}
-                {sortedColumn === 'Sr' && sortOrder === 'desc' && <span>▼</span>}
+                            {sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span>}
                         </div>
                     </div>}
 
@@ -633,7 +620,7 @@ const Datagrid6 = () => {
                 </div>
 
                 {
-                    data.map((t) => (
+                    sortedData.map((t) => (
                         <div className='data6_content_body' key={t._id}>
                             {showlotno && <div className='data6_content_body_same'>
                                 <div style={{ borderRight: "1px solid black" }}>
