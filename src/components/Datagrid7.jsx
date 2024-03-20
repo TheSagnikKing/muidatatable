@@ -237,8 +237,8 @@ const Datagrid7 = () => {
     const applyFilter = (dataArray, filterValue) => {
         return dataArray.filter((item) => {
             return (
-                item.LotNo.toLowerCase().includes(filterValue.toLowerCase()) ||
-                item.BumpIn.toLowerCase().includes(filterValue.toLowerCase())
+                item.LotNo.toLowerCase().includes(filterValue.toLowerCase()) 
+                // item.BumpIn.toLowerCase().includes(filterValue.toLowerCase())
             )
         }
         );

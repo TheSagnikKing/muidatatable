@@ -2,7 +2,7 @@ export const fakedata = [
     {
         "_id": 1,
         "LotNo": "A1B2C3",
-        "DieReceipt": "-",
+        "DieReceipt": "2028-11-22",
         "day1": 3,
         "BumpIn": "2028-11-22",
         "day2": 8,
