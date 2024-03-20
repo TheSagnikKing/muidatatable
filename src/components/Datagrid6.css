@@ -236,14 +236,14 @@ select{
     margin-right: 10px;
 }
 
-.data6_top_searchbox,.data6_top_selectdatebx{
+.data6_top_searchbox{
     height: 30px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
     border-radius: 5px;
 }
 
-.data6_top_searchbox>input,.data6_top_selectdatebx>input{
+.data6_top_searchbox>input{
     border: none;
     border-radius: 5px;
     padding-inline: 10px;
@@ -252,8 +252,50 @@ select{
     width: 100%;
 }
 
-.data6_top_searchbox>input:focus, .data6_top_selectdatebx>input:focus{
+.data6_top_searchbox>input:focus{
     outline: none;
+}
+
+.data6_top_selectdatebx{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.data6_top_selectdatebx>div{
+    width: 150px;
+    height: 30px;
+    padding-inline: 10px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.data6_top_selectdatebx>div>input{
+    width: 100%;
+    height: 100%;
+    border:none;
+    cursor: pointer;
+    outline: none;
+}
+
+.data6_top_selectdatebx>button{
+    width: 70px;
+    height: 30px;
+    padding-inline: 10px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.data6_top_selectdatebx>button:hover{
+    background-color: #ffeaea;
+    cursor: pointer;
 }
 
 .remove-filter-input{
