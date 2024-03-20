@@ -311,9 +311,9 @@ const Datagrid6 = () => {
                             onChange={(e) => setEndDate(e.target.value)}
                         />
                     </div>
-                </div>
 
-                <button onClick={removeFilter} className='remove-filter-input'>remove filter</button>
+                    <button onClick={removeFilter} className='remove-filter-input'>remove filter</button>
+                </div>
 
                 <div className='data6_top_showhide_bx'>
                     <button onClick={() => setShowColumn((prev) => !prev)}>Filter Columns</button>

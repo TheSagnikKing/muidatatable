@@ -281,7 +281,7 @@ select{
 }
 
 .data6_top_selectdatebx>button{
-    width: 70px;
+    width: auto;
     height: 30px;
     padding-inline: 10px;
     background-color: #fff;
