@@ -435,86 +435,108 @@ const Datagrid6 = () => {
                             <p>Lot No.</p>
                             {/* {sortBy === 'LotNo' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>} */}
 
-                            {sortBy === 'LotNo' ?
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span>INI</span>))
-                                : null}
+                            {sortBy === 'LotNo' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showdiereceipt && <div className='data6_content_head_same' onClick={() => toggleSortOrder('DieReceipt')}>
                         <div>
                             <p>DieReceipt</p>
-                            {sortBy === 'DieReceipt' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'DieReceipt' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showday1 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day1')}>
                         <div>
                             <div />
-                            {sortBy === 'day1' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day1' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showBumpIn && <div className='data6_content_head_same' onClick={() => toggleSortOrder('BumpIn')}>
                         <div>
                             <p>BumpIn</p>
-                            {sortBy === 'BumpIn' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'BumpIn' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showday2 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day2')}>
                         <div>
                             <div />
-                            {sortBy === 'day2' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day2' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showBumpOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('BumpOut')}>
                         <div>
                             <p>BumpOut</p>
-                            {sortBy === 'BumpOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'BumpOut' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showday3 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day3')}>
                         <div>
                             <div />
-                            {sortBy === 'day3' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day3' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showProbeIn && <div className='data6_content_head_same' onClick={() => toggleSortOrder('ProbeIn')}>
                         <div>
                             <p>ProbeIn</p>
-                            {sortBy === 'ProbeIn' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'ProbeIn' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showday4 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day4')}>
                         <div>
                             <div />
-                            {sortBy === 'day4' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day4' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showProbeOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('ProbeOut')}>
                         <div>
                             <p>ProbeOut</p>
-                            {sortBy === 'ProbeOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'ProbeOut' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showday5 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day5')}>
                         <div>
                             <div />
-                            {sortBy === 'day5' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day5' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showAssemblyIn && <div className='data6_content_head_same' onClick={() => toggleSortOrder('AssemblyIn')}>
                         <div>
                             <p>AssemblyIn</p>
-                            {sortBy === 'AssemblyIn' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'AssemblyIn' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
@@ -522,60 +544,75 @@ const Datagrid6 = () => {
                     {showday6 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day6')}>
                         <div>
                             <div />
-                            {sortBy === 'day6' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day6' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showAssemblyOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('AssemblyOut')}>
                         <div>
                             <p>AssemblyOut</p>
-                            {sortBy === 'AssemblyOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'AssemblyOut' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showday7 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day7')}>
                         <div>
                             <div />
-                            {sortBy === 'day7' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day7' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showTestIn && <div className='data6_content_head_same' onClick={() => toggleSortOrder('TestIn')}>
                         <div>
                             <p>TestIn</p>
-                            {sortBy === 'TestIn' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'TestIn' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showday8 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day8')}>
                         <div>
                             <div />
-                            {sortBy === 'day8' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day8' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showTestOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('TestOut')}>
                         <div>
                             <p>TestOut</p>
-                            {sortBy === 'TestOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'TestOut' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showday9 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day9')}>
                         <div>
                             <div />
-                            {sortBy === 'day9' ? (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : <div><span>&#9660;</span></div>) : <div><span>&#9660;</span></div>}
+                            {sortBy === 'day9' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
 
                     {showShipOut && <div className='data6_content_head_same' onClick={() => toggleSortOrder('ShipOut')}>
                         <div>
                             <p>ShipOut</p>
-                            {sortBy === 'ShipOut' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {sortBy === 'ShipOut' &&
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
+                            }
                         </div>
                     </div>}
                 </div>
-
 
                 {
                     filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
