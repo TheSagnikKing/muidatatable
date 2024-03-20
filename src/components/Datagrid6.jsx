@@ -227,13 +227,41 @@ const Datagrid6 = () => {
 
 
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate);
-    console.log(filteredData)
+    // console.log(filteredData)
 
     const removeFilter = () => {
         setFilterBy("")
         setStartDate("");
         setEndDate("");
     }
+
+    const dataPerFilterPage = 5;
+
+    const [currentFilterPage, setCurrentFilterPage] = useState(1);
+
+    const handleNextFilterPage = () => {
+        setCurrentFilterPage(prevPage => prevPage + 1);
+    };
+
+    const handlePrevFilterPage = () => {
+        setCurrentFilterPage(prevPage => prevPage - 1);
+    };
+
+    const totalFilterPages = Math.ceil(filteredData.length / dataPerFilterPage);
+
+    const filterStartIndex = (currentFilterPage - 1) * dataPerPage;
+    const filterEndIndex = Math.min(filterStartIndex + dataPerFilterPage, filteredData.length);
+
+    // Get data for the current page
+    const currentPageFilteredData = filteredData.slice(filterStartIndex, filterEndIndex);
+
+
+    console.log(totalPages)
+    console.log(totalFilterPages)
+
+    console.log("currentfilterpage ", currentFilterPage)
+
+    console.log(currentPageFilteredData)
 
 
     return (
@@ -526,7 +554,7 @@ const Datagrid6 = () => {
 
                 {
                     filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
-                        filteredData.map((t) => (
+                        currentPageFilteredData.map((t) => (
                             <div className='data6_content_body' key={t._id}>
                                 {showlotno && <div className='data6_content_body_same'>
                                     <div style={{ borderRight: "1px solid black", background: "var(--bg-color-1)" }}>
@@ -541,7 +569,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday1 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)" }}>
                                         <div />
                                         <div>{t.day1} days</div>
                                     </div>
@@ -554,7 +582,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday2 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-3) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-3) 50%)" }}>
                                         <div />
                                         <div>{t.day2} days</div>
                                     </div>
@@ -567,7 +595,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday3 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)" }}>
                                         <div />
                                         <div>{t.day3} days</div>
                                     </div>
@@ -580,7 +608,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday4 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-1) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-1) 50%)" }}>
                                         <div />
                                         <div>{t.day4} days</div>
                                     </div>
@@ -593,7 +621,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday5 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)" }}>
                                         <div />
                                         <div>{t.day5} days</div>
                                     </div>
@@ -605,7 +633,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday6 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)" }}>
                                         <div />
                                         <div>{t.day6} days</div>
                                     </div>
@@ -618,7 +646,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday7 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)" }}>
                                         <div />
                                         <div>{t.day7} days</div>
                                     </div>
@@ -631,7 +659,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday8 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)" }}>
                                         <div />
                                         <div>{t.day8} days</div>
                                     </div>
@@ -644,7 +672,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday9 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)" }}>
                                         <div />
                                         <div>{t.day9}</div>
                                     </div>
@@ -673,7 +701,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday1 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)" }}>
                                         <div />
                                         <div>{t.day1} days</div>
                                     </div>
@@ -686,7 +714,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday2 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-3) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-3) 50%)" }}>
                                         <div />
                                         <div>{t.day2} days</div>
                                     </div>
@@ -699,7 +727,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday3 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)" }}>
                                         <div />
                                         <div>{t.day3} days</div>
                                     </div>
@@ -712,7 +740,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday4 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-1) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-1) 50%)" }}>
                                         <div />
                                         <div>{t.day4} days</div>
                                     </div>
@@ -725,7 +753,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday5 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)" }}>
                                         <div />
                                         <div>{t.day5} days</div>
                                     </div>
@@ -737,7 +765,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday6 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)" }}>
                                         <div />
                                         <div>{t.day6} days</div>
                                     </div>
@@ -750,7 +778,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday7 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)" }}>
                                         <div />
                                         <div>{t.day7} days</div>
                                     </div>
@@ -763,7 +791,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday8 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)" }}>
                                         <div />
                                         <div>{t.day8} days</div>
                                     </div>
@@ -776,7 +804,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday9 && <div className='data6_content_body_diff'>
-                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)"}}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)" }}>
                                         <div />
                                         <div>{t.day9}</div>
                                     </div>
@@ -794,33 +822,61 @@ const Datagrid6 = () => {
 
             </div>
             <div className="data6_pagination">
-                <div>
-                    <p>Showing of </p>
-                    <select
-                        value={`${startIndex + 1} - ${endIndex}`}
-                        onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
-                    >
-                        {
-                            Array.from({ length: totalPages }, (_, index) => (
-                                <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, sortedData.length)}`}>
-                                    {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, sortedData.length)}
-                                </option>
-                            ))
-                        }
-                    </select>
-                </div>
-                <div>
-                    <button onClick={handlePrevPage} disabled={currentPage === 1}><FaChevronLeft /></button>
-                    <span>{currentPage} of {totalPages}</span>
-                    <button onClick={handleNextPage} disabled={currentPage === totalPages}><FaChevronRight /></button>
-                </div>
+
+                {
+                    filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? <>
+                        <div>
+                            <p>Showing of </p>
+                            <select
+                                value={`${filterStartIndex + 1} - ${filterEndIndex}`}
+                                onChange={(e) => setCurrentFilterPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerFilterPage))}
+                            >
+                                {
+                                    Array.from({ length: totalFilterPages }, (_, index) => (
+                                        <option key={index} value={`${index * dataPerFilterPage + 1} - ${Math.min((index + 1) * dataPerFilterPage, filteredData.length)}`}>
+                                            {index * dataPerFilterPage + 1} - {Math.min((index + 1) * dataPerFilterPage, filteredData.length)}
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <button onClick={handlePrevFilterPage} disabled={currentFilterPage === 1}><FaChevronLeft /></button>
+                            <span>{currentFilterPage} of {totalFilterPages}</span>
+                            <button onClick={handleNextFilterPage} disabled={currentFilterPage === totalFilterPages}><FaChevronRight /></button>
+                        </div>
+                    </> : <>
+                        <div>
+                            <p>Showing of </p>
+                            <select
+                                value={`${startIndex + 1} - ${endIndex}`}
+                                onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
+                            >
+                                {
+                                    Array.from({ length: totalPages }, (_, index) => (
+                                        <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, sortedData.length)}`}>
+                                            {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, sortedData.length)}
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <button onClick={handlePrevPage} disabled={currentPage === 1}><FaChevronLeft /></button>
+                            <span>{currentPage} of {totalPages}</span>
+                            <button onClick={handleNextPage} disabled={currentPage === totalPages}><FaChevronRight /></button>
+                        </div>
+                    </>
+                }
+
             </div>
 
             <div className='data6_csv'>
                 <button onClick={currentpagecsvdataHandler}>Current Page CSV Data</button>
                 <button onClick={entirepagecsvdataHandler}>Entire CSV Data</button>
             </div>
-        </main>
+
+        </main >
     )
 }
 
