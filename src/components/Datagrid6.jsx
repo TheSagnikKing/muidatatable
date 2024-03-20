@@ -699,7 +699,7 @@ const Datagrid6 = () => {
                                 {showday9 && <div className='data6_content_body_diff'>
                                     <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)" }}>
                                         <div />
-                                        <div>{t.day9}</div>
+                                        <div>{t.day9} days</div>
                                     </div>
                                 </div>}
 
@@ -831,7 +831,7 @@ const Datagrid6 = () => {
                                 {showday9 && <div className='data6_content_body_diff'>
                                     <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)" }}>
                                         <div />
-                                        <div>{t.day9}</div>
+                                        <div>{t.day9} days</div>
                                     </div>
                                 </div>}
 
