@@ -811,20 +811,20 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday4 && <div className='data6_content_body_diff'>
-                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-1) 50%)" }}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-2) 50%)" }}>
                                         <div />
                                         <div>{t.day4} days</div>
                                     </div>
                                 </div>}
 
                                 {showProbeOut && <div className='data6_content_body_same'>
-                                    <div style={{ background: "var(--bg-color-1)" }}>
+                                    <div style={{ background: "var(--bg-color-2)" }}>
                                         <p>{t.ProbeOut}</p>
                                     </div>
                                 </div>}
 
                                 {showday5 && <div className='data6_content_body_diff'>
-                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)" }}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)" }}>
                                         <div />
                                         <div>{t.day5} days</div>
                                     </div>
@@ -836,20 +836,20 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday6 && <div className='data6_content_body_diff'>
-                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)" }}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)" }}>
                                         <div />
                                         <div>{t.day6} days</div>
                                     </div>
                                 </div>}
 
                                 {showAssemblyOut && <div className='data6_content_body_same'>
-                                    <div style={{ background: "var(--bg-color-2)" }}>
+                                    <div style={{ background: "var(--bg-color-3)" }}>
                                         <p>{t.AssemblyOut}</p>
                                     </div>
                                 </div>}
 
                                 {showday7 && <div className='data6_content_body_diff'>
-                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)" }}>
+                                    <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)" }}>
                                         <div />
                                         <div>{t.day7} days</div>
                                     </div>
