@@ -3,7 +3,7 @@ import './Datagrid7.css'
 import { FaArrowUp, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { fakedata } from './fakedata';
 import { FaArrowDown } from "react-icons/fa6";
-
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const Datagrid7 = () => {
 
@@ -289,145 +289,148 @@ const Datagrid7 = () => {
     return (
         <main className='data7_container'>
             <div className='data7_top_bx'>
-                <div className='data7_top_searchbox'>
-                    <input
-                        type="text"
-                        placeholder='Search By LotNo.'
-                        value={filterBy}
-                        onChange={(e) => setFilterBy(e.target.value)}
-                    />
-                </div>
+                <p>Lots Status Tracking</p>
 
-                <div className='data7_top_selectdatebx'>
-                    <div>
-                        <input type="date"
-                            value={startDate}
-                            onChange={(e) => setStartDate(e.target.value)}
+                <div>
+                    <div className='data7_top_searchbox'>
+                        <input
+                            type="text"
+                            placeholder='Search By LotNo.'
+                            value={filterBy}
+                            onChange={(e) => setFilterBy(e.target.value)}
                         />
                     </div>
 
-                    <div>
-                        <input type="date"
-                            value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                        />
+                    <div className='data7_top_selectdatebx'>
+                        <div>
+                            <input type="date"
+                                value={startDate}
+                                onChange={(e) => setStartDate(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <input type="date"
+                                value={endDate}
+                                onChange={(e) => setEndDate(e.target.value)}
+                            />
+                        </div>
+
+                        <button onClick={removeFilter} className='remove-filter-input'><RiDeleteBin6Line /></button>
                     </div>
 
-                    <button onClick={removeFilter} className='remove-filter-input'>remove filter</button>
+                    <div className='data7_top_showhide_bx'>
+                        <button onClick={() => setShowColumn((prev) => !prev)}>Filter Columns</button>
+
+                        {showColumn && <div className='data7_top_showhide_bx_content'>
+                            <div>
+                                <input type="checkbox" onClick={toggleHandle} checked={showtoggleall} />
+                                <p>Toggle All</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowlotno((prev) => !prev)} checked={showlotno} />
+                                <p>Lot No.</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowdiereceipt((prev) => !prev)} checked={showdiereceipt} />
+                                <p>DieReceipt</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday1((prev) => !prev)} checked={showday1} />
+                                <p>Day 1</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowBumpIn((prev) => !prev)} checked={showBumpIn} />
+                                <p>BumpIn</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday2((prev) => !prev)} checked={showday2} />
+                                <p>Day 2</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowBumpOut((prev) => !prev)} checked={showBumpOut} />
+                                <p>BumpOut</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday3((prev) => !prev)} checked={showday3} />
+                                <p>Day 3</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowProbeIn((prev) => !prev)} checked={showProbeIn} />
+                                <p>ProbeIn</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday4((prev) => !prev)} checked={showday4} />
+                                <p>Day 4</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowProbeOut((prev) => !prev)} checked={showProbeOut} />
+                                <p>ProbeOut</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday5((prev) => !prev)} checked={showday5} />
+                                <p>Day 5</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowAssemblyIn((prev) => !prev)} checked={showAssemblyIn} />
+                                <p>AssemblyIn</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday6((prev) => !prev)} checked={showday6} />
+                                <p>Day 6</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowAssemblyOut((prev) => !prev)} checked={showAssemblyOut} />
+                                <p>AssemblyOut</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday7((prev) => !prev)} checked={showday7} />
+                                <p>Day 7</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowTestIn((prev) => !prev)} checked={showTestIn} />
+                                <p>TestIn</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday8((prev) => !prev)} checked={showday8} />
+                                <p>Day 8</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowTestOut((prev) => !prev)} checked={showTestOut} />
+                                <p>TestOut</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowday9((prev) => !prev)} checked={showday9} />
+                                <p>Day 9</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" onClick={() => setShowShipOut((prev) => !prev)} checked={showShipOut} />
+                                <p>ShipOut</p>
+                            </div>
+
+                        </div>}
+                    </div>
                 </div>
-
-                <div className='data7_top_showhide_bx'>
-                    <button onClick={() => setShowColumn((prev) => !prev)}>Filter Columns</button>
-
-                    {showColumn && <div className='data7_top_showhide_bx_content'>
-                        <div>
-                            <input type="checkbox" onClick={toggleHandle} checked={showtoggleall} />
-                            <p>Toggle All</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowlotno((prev) => !prev)} checked={showlotno} />
-                            <p>Lot No.</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowdiereceipt((prev) => !prev)} checked={showdiereceipt} />
-                            <p>DieReceipt</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday1((prev) => !prev)} checked={showday1} />
-                            <p>Day 1</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowBumpIn((prev) => !prev)} checked={showBumpIn} />
-                            <p>BumpIn</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday2((prev) => !prev)} checked={showday2} />
-                            <p>Day 2</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowBumpOut((prev) => !prev)} checked={showBumpOut} />
-                            <p>BumpOut</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday3((prev) => !prev)} checked={showday3} />
-                            <p>Day 3</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowProbeIn((prev) => !prev)} checked={showProbeIn} />
-                            <p>ProbeIn</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday4((prev) => !prev)} checked={showday4} />
-                            <p>Day 4</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowProbeOut((prev) => !prev)} checked={showProbeOut} />
-                            <p>ProbeOut</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday5((prev) => !prev)} checked={showday5} />
-                            <p>Day 5</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowAssemblyIn((prev) => !prev)} checked={showAssemblyIn} />
-                            <p>AssemblyIn</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday6((prev) => !prev)} checked={showday6} />
-                            <p>Day 6</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowAssemblyOut((prev) => !prev)} checked={showAssemblyOut} />
-                            <p>AssemblyOut</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday7((prev) => !prev)} checked={showday7} />
-                            <p>Day 7</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowTestIn((prev) => !prev)} checked={showTestIn} />
-                            <p>TestIn</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday8((prev) => !prev)} checked={showday8} />
-                            <p>Day 8</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowTestOut((prev) => !prev)} checked={showTestOut} />
-                            <p>TestOut</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday9((prev) => !prev)} checked={showday9} />
-                            <p>Day 9</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowShipOut((prev) => !prev)} checked={showShipOut} />
-                            <p>ShipOut</p>
-                        </div>
-
-                    </div>}
-                </div>
-
             </div>
 
             <div className='data7_content_pagination_box'>
