@@ -3,7 +3,6 @@ import './Datagrid6.css'
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { fakedata } from './fakedata';
 
-const data = fakedata
 
 const Datagrid6 = () => {
 
@@ -59,37 +58,72 @@ const Datagrid6 = () => {
         setShowShipOut((prev) => !prev)
     }
 
+    const data = fakedata; //cominmg from api
+    const copydata = [...fakedata]
+
+    // console.log("Data ",data)
+    // console.log("Copydata ",copydata)
+
 
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('');
 
     const toggleSortOrder = (columnName) => {
         setSortBy(columnName);
-        setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
+        setSortOrder((prevOrder) => {
+            if (prevOrder === 'asc') {
+                return 'desc';
+            } else if (prevOrder === 'desc') {
+                return 'initial';
+            } else {
+                // If previous order is 'initial' or any other state, toggle to 'asc'
+                return 'asc';
+            }
+        });
     };
 
 
-    const sortData = (dataArray, columnName, sortOrder) => {
+    const sortData = (dataArray, columnName, sortOrder, copydata) => {
         if (columnName === '') {
+            // No sorting if no column is specified
+            return dataArray;
+        } else if (sortOrder === "initial") {
+            console.log("Initial")
             return dataArray
-        } else {
-            return dataArray.sort((a, b) => {
+        } else if (sortOrder === 'asc') {
+            console.log("Ascending")
+            return copydata.sort((a, b) => {
                 const valueA = a[columnName];
                 const valueB = b[columnName];
 
                 // Check if both values are numbers
                 if (typeof valueA === 'number' && typeof valueB === 'number') {
                     // Compare numbers directly
-                    return sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
+                    return valueA - valueB
                 } else {
                     // Use localeCompare for strings
-                    return sortOrder === 'asc' ? String(valueA).localeCompare(String(valueB)) : String(valueB).localeCompare(String(valueA));
+                    return String(valueA).localeCompare(String(valueB))
+                }
+            });
+        } else if (sortOrder === 'desc') {
+            console.log("Descending")
+            return copydata.sort((a, b) => {
+                const valueA = a[columnName];
+                const valueB = b[columnName];
+
+                // Check if both values are numbers
+                if (typeof valueA === 'number' && typeof valueB === 'number') {
+                    // Compare numbers directly
+                    return valueB - valueA
+                } else {
+                    // Use localeCompare for strings
+                    return String(valueB).localeCompare(String(valueA))
                 }
             });
         }
     };
 
-    const sortedData = sortData(data, sortBy, sortOrder);
+    const sortedData = sortData(data, sortBy, sortOrder, copydata);
 
     const dataPerPage = 5;
 
@@ -199,10 +233,6 @@ const Datagrid6 = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    console.log('startDate', startDate)
-    console.log('endDate', endDate)
-
-
     const applyFilter = (dataArray, filterValue) => {
         return dataArray.filter((item) => {
             return (
@@ -254,15 +284,6 @@ const Datagrid6 = () => {
 
     // Get data for the current page
     const currentPageFilteredData = filteredData.slice(filterStartIndex, filterEndIndex);
-
-
-    console.log(totalPages)
-    console.log(totalFilterPages)
-
-    console.log("currentfilterpage ", currentFilterPage)
-
-    console.log(currentPageFilteredData)
-
 
     return (
         <main className='data6_container'>
@@ -412,7 +433,11 @@ const Datagrid6 = () => {
                     {showlotno && <div className='data6_content_head_same' onClick={() => toggleSortOrder('LotNo')}>
                         <div style={{ borderRight: "1px solid black" }}>
                             <p>Lot No.</p>
-                            {sortBy === 'LotNo' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>}
+                            {/* {sortBy === 'LotNo' ? sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span> : <span></span>} */}
+
+                            {sortBy === 'LotNo' ?
+                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span>INI</span>))
+                                : null}
                         </div>
                     </div>}
 
