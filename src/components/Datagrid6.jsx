@@ -195,7 +195,6 @@ const Datagrid6 = () => {
     //FILTERING DONE HERE
 
     const [filterBy, setFilterBy] = useState('');
-    // const [filterBydate, setFilterBydate] = useState("")
 
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -207,7 +206,8 @@ const Datagrid6 = () => {
     const applyFilter = (dataArray, filterValue) => {
         return dataArray.filter((item) => {
             return (
-                item.LotNo.toLowerCase().includes(filterValue.toLowerCase())
+                item.LotNo.toLowerCase().includes(filterValue.toLowerCase()) ||
+                item.BumpIn.toLowerCase().includes(filterValue.toLowerCase())
             )
         }
         );
@@ -216,47 +216,25 @@ const Datagrid6 = () => {
     const applyFilterByDateRange = (dataArray, startDateValue, endDateValue) => {
         return dataArray.filter((item) => {
             const dieReceiptDate = new Date(item.DieReceipt);
+            const BumpInDate = new Date(item.BumpIn);
             const startDate = new Date(startDateValue);
             const endDate = new Date(endDateValue);
-    
-            return dieReceiptDate >= startDate && dieReceiptDate <= endDate;
+
+            return (dieReceiptDate >= startDate && dieReceiptDate <= endDate)
+
         });
     };
 
-    // const applyFilterByDate = (dataArray, filterDateValue) => {
-    //     return dataArray.filter((item) => {
-    //         return (
-    //             item.DieReceipt.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.BumpIn.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.BumpOut.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.ProbeIn.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.ProbeOut.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.AssemblyIn.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.AssemblyOut.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.TestIn.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.TestOut.toLowerCase().includes(filterDateValue.toLowerCase()) ||
-    //             item.ShipOut.toLowerCase().includes(filterDateValue.toLowerCase())
-    //         )
-    //     }
-    //     );
-    // };
 
-    // const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDate(data, filterBydate);
-
-    const filteredData = applyFilterByDateRange(data, startDate, endDate);
-    // console.log(filteredData)
-
-    const searchDateHandler = () => {
-        const filteredData = applyFilterByDateRange(data, startDate, endDate);
-        console.log(filteredData)
-    }
+    const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate);
+    console.log(filteredData)
 
     const removeFilter = () => {
         setFilterBy("")
-        // setFilterBydate("")
+        setStartDate("");
+        setEndDate("");
     }
 
-    // search for 2021-02-20 in calender
 
     return (
         <main className='data6_container'>
@@ -271,25 +249,19 @@ const Datagrid6 = () => {
                 </div>
 
                 <div className='data6_top_selectdatebx'>
-                    {/* <input
-                        type="date"
-                        value={filterBydate}
-                        onChange={(e) => setFilterBydate(e.target.value)}
-                    /> */}
                     <div>
-                        <input type="date" 
-                        value={startDate}
-                        onChange={(e) => setStartDate(e.target.value)}
+                        <input type="date"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
                         />
                     </div>
 
                     <div>
-                        <input type="date" 
-                        value={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
+                        <input type="date"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
                         />
                     </div>
-                    <button onClick={searchDateHandler}>Search</button>
                 </div>
 
                 <button onClick={removeFilter} className='remove-filter-input'>remove filter</button>
@@ -552,8 +524,8 @@ const Datagrid6 = () => {
                 </div>
 
 
-                {/* {
-                    filterBy && filterBy !== '' || filterBydate && filterBydate !== '' ? (
+                {
+                    filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
                         filteredData.map((t) => (
                             <div className='data6_content_body' key={t._id}>
                                 {showlotno && <div className='data6_content_body_same'>
@@ -569,7 +541,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday1 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)"}}>
                                         <div />
                                         <div>{t.day1} days</div>
                                     </div>
@@ -582,7 +554,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday2 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-3) 50%)"}}>
                                         <div />
                                         <div>{t.day2} days</div>
                                     </div>
@@ -595,7 +567,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday3 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)"}}>
                                         <div />
                                         <div>{t.day3} days</div>
                                     </div>
@@ -608,7 +580,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday4 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-1) 50%)"}}>
                                         <div />
                                         <div>{t.day4} days</div>
                                     </div>
@@ -621,7 +593,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday5 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)"}}>
                                         <div />
                                         <div>{t.day5} days</div>
                                     </div>
@@ -633,7 +605,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday6 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)"}}>
                                         <div />
                                         <div>{t.day6} days</div>
                                     </div>
@@ -646,7 +618,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday7 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)"}}>
                                         <div />
                                         <div>{t.day7} days</div>
                                     </div>
@@ -659,7 +631,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday8 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)"}}>
                                         <div />
                                         <div>{t.day8} days</div>
                                     </div>
@@ -672,7 +644,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday9 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)"}}>
                                         <div />
                                         <div>{t.day9}</div>
                                     </div>
@@ -701,7 +673,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday1 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)"}}>
                                         <div />
                                         <div>{t.day1} days</div>
                                     </div>
@@ -714,7 +686,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday2 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-3) 50%)"}}>
                                         <div />
                                         <div>{t.day2} days</div>
                                     </div>
@@ -727,7 +699,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday3 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)"}}>
                                         <div />
                                         <div>{t.day3} days</div>
                                     </div>
@@ -740,7 +712,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday4 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-1) 50%)"}}>
                                         <div />
                                         <div>{t.day4} days</div>
                                     </div>
@@ -753,7 +725,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday5 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)"}}>
                                         <div />
                                         <div>{t.day5} days</div>
                                     </div>
@@ -765,7 +737,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday6 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)"}}>
                                         <div />
                                         <div>{t.day6} days</div>
                                     </div>
@@ -778,7 +750,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday7 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)"}}>
                                         <div />
                                         <div>{t.day7} days</div>
                                     </div>
@@ -791,7 +763,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday8 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)"}}>
                                         <div />
                                         <div>{t.day8} days</div>
                                     </div>
@@ -804,7 +776,7 @@ const Datagrid6 = () => {
                                 </div>}
 
                                 {showday9 && <div className='data6_content_body_diff'>
-                                    <div>
+                                    <div style={{background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)"}}>
                                         <div />
                                         <div>{t.day9}</div>
                                     </div>
@@ -818,7 +790,7 @@ const Datagrid6 = () => {
                             </div>
                         ))
                     )
-                } */}
+                }
 
             </div>
             <div className="data6_pagination">

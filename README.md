@@ -22,3 +22,6 @@ colSpan(4) means column or header width
           )
         }
       }, for sorting use the updateDirection(2)
+
+
+My cquestion is on a single row all the years value should be same right . is one 2023 then all the  other fields should be 2023 not 2024 or 2025.
