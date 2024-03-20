@@ -453,9 +453,10 @@ const Datagrid6 = () => {
                     {showday1 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day1')}>
                         <div>
                             <div />
-                            {sortBy === 'day1' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day1' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -471,9 +472,10 @@ const Datagrid6 = () => {
                     {showday2 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day2')}>
                         <div>
                             <div />
-                            {sortBy === 'day2' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day2' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -489,9 +491,10 @@ const Datagrid6 = () => {
                     {showday3 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day3')}>
                         <div>
                             <div />
-                            {sortBy === 'day3' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day3' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -507,9 +510,10 @@ const Datagrid6 = () => {
                     {showday4 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day4')}>
                         <div>
                             <div />
-                            {sortBy === 'day4' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day4' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -525,9 +529,10 @@ const Datagrid6 = () => {
                     {showday5 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day5')}>
                         <div>
                             <div />
-                            {sortBy === 'day5' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day5' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -544,9 +549,10 @@ const Datagrid6 = () => {
                     {showday6 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day6')}>
                         <div>
                             <div />
-                            {sortBy === 'day6' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day6' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -562,9 +568,10 @@ const Datagrid6 = () => {
                     {showday7 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day7')}>
                         <div>
                             <div />
-                            {sortBy === 'day7' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day7' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -580,9 +587,10 @@ const Datagrid6 = () => {
                     {showday8 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day8')}>
                         <div>
                             <div />
-                            {sortBy === 'day8' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day8' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -598,9 +606,10 @@ const Datagrid6 = () => {
                     {showday9 && <div className='data6_content_head_diff' onClick={() => toggleSortOrder('day9')}>
                         <div>
                             <div />
-                            {sortBy === 'day9' &&
-                                (sortOrder === 'asc' ? <span>&#9650;</span> : (sortOrder === 'desc' ? <span>&#9660;</span> : sortOrder === 'initial' && <span></span>))
-                            }
+                            {sortBy === 'day9' ?
+                                (sortOrder === 'asc' ? <div><span>&#9650;</span></div> : (sortOrder === 'desc' ? <div><span>&#9660;</span></div> : sortOrder === 'initial' && <div>-</div>))
+                                : <div><span>-</span></div>}
+
                         </div>
                     </div>}
 
@@ -893,13 +902,20 @@ const Datagrid6 = () => {
                                 value={`${filterStartIndex + 1} - ${filterEndIndex}`}
                                 onChange={(e) => setCurrentFilterPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerFilterPage))}
                             >
-                                {
-                                    Array.from({ length: totalFilterPages }, (_, index) => (
-                                        <option key={index} value={`${index * dataPerFilterPage + 1} - ${Math.min((index + 1) * dataPerFilterPage, filteredData.length)}`}>
-                                            {index * dataPerFilterPage + 1} - {Math.min((index + 1) * dataPerFilterPage, filteredData.length)}
+                                {Array.from({ length: totalFilterPages }, (_, index) => {
+                                    const start = index * dataPerFilterPage + 1;
+                                    const end = Math.min((index + 1) * dataPerFilterPage, filteredData.length);
+                                    const optionValue = `${start} - ${end}`;
+                                    return (
+                                        <option
+                                            key={index}
+                                            value={optionValue}
+                                            style={{ background: optionValue === `${filterStartIndex + 1} - ${filterEndIndex}` ? "var(--bg-color-1)" : "inherit" }}
+                                        >
+                                            {optionValue}
                                         </option>
-                                    ))
-                                }
+                                    );
+                                })}
                             </select>
                         </div>
                         <div>
@@ -914,13 +930,20 @@ const Datagrid6 = () => {
                                 value={`${startIndex + 1} - ${endIndex}`}
                                 onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
                             >
-                                {
-                                    Array.from({ length: totalPages }, (_, index) => (
-                                        <option key={index} value={`${index * dataPerPage + 1} - ${Math.min((index + 1) * dataPerPage, sortedData.length)}`}>
-                                            {index * dataPerPage + 1} - {Math.min((index + 1) * dataPerPage, sortedData.length)}
+                                {Array.from({ length: totalPages }, (_, index) => {
+                                    const start = index * dataPerPage + 1;
+                                    const end = Math.min((index + 1) * dataPerPage, sortedData.length);
+                                    const optionValue = `${start} - ${end}`;
+                                    return (
+                                        <option
+                                            key={index}
+                                            value={optionValue}
+                                            style={{ background: optionValue === `${startIndex + 1} - ${endIndex}` ? "var(--bg-color-1)" : "inherit" }}
+                                        >
+                                            {optionValue}
                                         </option>
-                                    ))
-                                }
+                                    );
+                                })}
                             </select>
                         </div>
                         <div>
