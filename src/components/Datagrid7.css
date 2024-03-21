@@ -445,7 +445,7 @@ select {
     }
 }
 
-@media((min-width:0px) and (max-width:1200px)) {
+@media((min-width:0px) and (max-width:1350px)) {
 
 
     .data7_top_bx_mobile {
@@ -516,7 +516,7 @@ select {
     }
 }
 
-@media((min-width:1200px) and (max-width:1550px)){
+@media((min-width:1350px) and (max-width:1550px)){
     .data7_content_pagination_box{
         width: 100%;
     }

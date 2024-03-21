@@ -7,7 +7,6 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { IoIosLink } from "react-icons/io";
 
-
 const Datagrid7 = () => {
 
     const [showColumn, setShowColumn] = useState(false)
