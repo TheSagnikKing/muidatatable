@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './Datagrid7.css'
-import { FaArrowUp, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { FaArrowUp, FaChevronLeft, FaChevronRight, FaPlus, FaSortDown } from "react-icons/fa6";
 import { fakedata } from './fakedata';
 import { FaArrowDown } from "react-icons/fa6";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { IoSearch } from "react-icons/io5";
+import { IoIosLink } from "react-icons/io";
+
 
 const Datagrid7 = () => {
 
@@ -237,8 +240,7 @@ const Datagrid7 = () => {
     const applyFilter = (dataArray, filterValue) => {
         return dataArray.filter((item) => {
             return (
-                item.LotNo.toLowerCase().includes(filterValue.toLowerCase()) 
-                // item.BumpIn.toLowerCase().includes(filterValue.toLowerCase())
+                item.LotNo.toLowerCase().includes(filterValue.toLowerCase())
             )
         }
         );
@@ -248,14 +250,30 @@ const Datagrid7 = () => {
         return dataArray.filter((item) => {
             const dieReceiptDate = new Date(item.DieReceipt);
             const BumpInDate = new Date(item.BumpIn);
+            const BumpOutDate = new Date(item.BumpOut);
+            const ProbeInDate = new Date(item.ProbeIn);
+            const ProbeOutDate = new Date(item.ProbeOut);
+            const AssemblyInDate = new Date(item.AssemblyIn);
+            const AssemblyOutDate = new Date(item.AssemblyOut);
+            const TestInDate = new Date(item.TestIn);
+            const TestOutDate = new Date(item.TestOut);
+            const ShipOutDate = new Date(item.ShipOut);
+
             const startDate = new Date(startDateValue);
             const endDate = new Date(endDateValue);
 
-            return (dieReceiptDate >= startDate && dieReceiptDate <= endDate)
-
+            return (dieReceiptDate >= startDate && dieReceiptDate <= endDate) ||
+                (BumpInDate >= startDate && BumpInDate <= endDate) ||
+                (BumpOutDate >= startDate && BumpOutDate <= endDate) ||
+                (ProbeInDate >= startDate && ProbeInDate <= endDate) ||
+                (ProbeOutDate >= startDate && ProbeOutDate <= endDate) ||
+                (AssemblyInDate >= startDate && AssemblyInDate <= endDate) ||
+                (AssemblyOutDate >= startDate && AssemblyOutDate <= endDate) ||
+                (TestInDate >= startDate && TestInDate <= endDate) ||
+                (TestOutDate >= startDate && TestOutDate <= endDate) ||
+                (ShipOutDate >= startDate && ShipOutDate <= endDate);
         });
     };
-
 
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate);
     // console.log(filteredData)
@@ -295,10 +313,12 @@ const Datagrid7 = () => {
                     <div className='data7_top_searchbox'>
                         <input
                             type="text"
-                            placeholder='Search By LotNo.'
+                            placeholder='Search'
                             value={filterBy}
                             onChange={(e) => setFilterBy(e.target.value)}
                         />
+
+                        <div><IoSearch /></div>
                     </div>
 
                     <div className='data7_top_selectdatebx'>
@@ -315,12 +335,13 @@ const Datagrid7 = () => {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </div>
-
-                        <button onClick={removeFilter} className='remove-filter-input'><RiDeleteBin6Line /></button>
                     </div>
 
                     <div className='data7_top_showhide_bx'>
-                        <button onClick={() => setShowColumn((prev) => !prev)}>Filter Columns</button>
+                        <div onClick={() => setShowColumn((prev) => !prev)}>
+                            <p>Show/Hide Columns </p>
+                            <div><FaSortDown /></div>
+                        </div>
 
                         {showColumn && <div className='data7_top_showhide_bx_content'>
                             <div>
@@ -430,6 +451,12 @@ const Datagrid7 = () => {
 
                         </div>}
                     </div>
+
+                    <button onClick={removeFilter} className='remove-filter-input'><RiDeleteBin6Line /></button>
+
+                    <button className='dwn_crt_csv_data_btn' onClick={currentpagecsvdataHandler}><FaPlus /></button>
+
+                    <button className='dwn_crt_entire_data_btn' onClick={entirepagecsvdataHandler}><IoIosLink /></button>
                 </div>
             </div>
 
@@ -439,10 +466,12 @@ const Datagrid7 = () => {
                 <div className='data7_top_searchbox'>
                     <input
                         type="text"
-                        placeholder='Search By LotNo.'
+                        placeholder='Search'
                         value={filterBy}
                         onChange={(e) => setFilterBy(e.target.value)}
                     />
+
+                    <div><IoSearch /></div>
                 </div>
 
                 <div className='data7_top_selectdatebx'>
@@ -459,122 +488,129 @@ const Datagrid7 = () => {
                             onChange={(e) => setEndDate(e.target.value)}
                         />
                     </div>
-
-                    <button onClick={removeFilter} className='remove-filter-input'><RiDeleteBin6Line /></button>
                 </div>
 
                 <div className='data7_top_showhide_bx'>
-                    <button onClick={() => setShowColumn((prev) => !prev)}>
-                        Filter Columns
-                        {showColumn && <div className='data7_top_showhide_bx_content'>
-                            <div>
-                                <input type="checkbox" onClick={toggleHandle} checked={showtoggleall} />
-                                <p>Toggle All</p>
-                            </div>
+                    <div onClick={() => setShowColumn((prev) => !prev)}>
+                        <p>Show/Hide Columns </p>
+                        <div><FaSortDown /></div>
+                    </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowlotno((prev) => !prev)} checked={showlotno} />
-                                <p>Lot No.</p>
-                            </div>
+                    {showColumn && <div className='data7_top_showhide_bx_content'>
+                        <div>
+                            <input type="checkbox" onClick={toggleHandle} checked={showtoggleall} />
+                            <p>Toggle All</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowdiereceipt((prev) => !prev)} checked={showdiereceipt} />
-                                <p>DieReceipt</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowlotno((prev) => !prev)} checked={showlotno} />
+                            <p>Lot No.</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday1((prev) => !prev)} checked={showday1} />
-                                <p>Day 1</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowdiereceipt((prev) => !prev)} checked={showdiereceipt} />
+                            <p>DieReceipt</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowBumpIn((prev) => !prev)} checked={showBumpIn} />
-                                <p>BumpIn</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday1((prev) => !prev)} checked={showday1} />
+                            <p>Day 1</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday2((prev) => !prev)} checked={showday2} />
-                                <p>Day 2</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowBumpIn((prev) => !prev)} checked={showBumpIn} />
+                            <p>BumpIn</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowBumpOut((prev) => !prev)} checked={showBumpOut} />
-                                <p>BumpOut</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday2((prev) => !prev)} checked={showday2} />
+                            <p>Day 2</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday3((prev) => !prev)} checked={showday3} />
-                                <p>Day 3</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowBumpOut((prev) => !prev)} checked={showBumpOut} />
+                            <p>BumpOut</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowProbeIn((prev) => !prev)} checked={showProbeIn} />
-                                <p>ProbeIn</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday3((prev) => !prev)} checked={showday3} />
+                            <p>Day 3</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday4((prev) => !prev)} checked={showday4} />
-                                <p>Day 4</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowProbeIn((prev) => !prev)} checked={showProbeIn} />
+                            <p>ProbeIn</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowProbeOut((prev) => !prev)} checked={showProbeOut} />
-                                <p>ProbeOut</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday4((prev) => !prev)} checked={showday4} />
+                            <p>Day 4</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday5((prev) => !prev)} checked={showday5} />
-                                <p>Day 5</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowProbeOut((prev) => !prev)} checked={showProbeOut} />
+                            <p>ProbeOut</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowAssemblyIn((prev) => !prev)} checked={showAssemblyIn} />
-                                <p>AssemblyIn</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday5((prev) => !prev)} checked={showday5} />
+                            <p>Day 5</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday6((prev) => !prev)} checked={showday6} />
-                                <p>Day 6</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowAssemblyIn((prev) => !prev)} checked={showAssemblyIn} />
+                            <p>AssemblyIn</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowAssemblyOut((prev) => !prev)} checked={showAssemblyOut} />
-                                <p>AssemblyOut</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday6((prev) => !prev)} checked={showday6} />
+                            <p>Day 6</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday7((prev) => !prev)} checked={showday7} />
-                                <p>Day 7</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowAssemblyOut((prev) => !prev)} checked={showAssemblyOut} />
+                            <p>AssemblyOut</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowTestIn((prev) => !prev)} checked={showTestIn} />
-                                <p>TestIn</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday7((prev) => !prev)} checked={showday7} />
+                            <p>Day 7</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday8((prev) => !prev)} checked={showday8} />
-                                <p>Day 8</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowTestIn((prev) => !prev)} checked={showTestIn} />
+                            <p>TestIn</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowTestOut((prev) => !prev)} checked={showTestOut} />
-                                <p>TestOut</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday8((prev) => !prev)} checked={showday8} />
+                            <p>Day 8</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday9((prev) => !prev)} checked={showday9} />
-                                <p>Day 9</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowTestOut((prev) => !prev)} checked={showTestOut} />
+                            <p>TestOut</p>
+                        </div>
 
-                            <div>
-                                <input type="checkbox" onClick={() => setShowShipOut((prev) => !prev)} checked={showShipOut} />
-                                <p>ShipOut</p>
-                            </div>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowday9((prev) => !prev)} checked={showday9} />
+                            <p>Day 9</p>
+                        </div>
 
-                        </div>}
-                    </button>
+                        <div>
+                            <input type="checkbox" onClick={() => setShowShipOut((prev) => !prev)} checked={showShipOut} />
+                            <p>ShipOut</p>
+                        </div>
 
+                    </div>}
+                </div>
+
+                <div className='mobile_fl_csv_box'>
+                    <button onClick={removeFilter} className='remove-filter-input'><RiDeleteBin6Line /></button>
+
+                    <button className='dwn_crt_csv_data_btn' onClick={currentpagecsvdataHandler}><FaPlus /></button>
+
+                    <button className='dwn_crt_entire_data_btn' onClick={entirepagecsvdataHandler}><IoIosLink /></button>
 
                 </div>
             </div>
@@ -604,8 +640,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day1' ?
-                                    (sortOrder === 'asc' ? <div className='data7_arrow'><FaArrowUp /></div> : (sortOrder === 'desc' ? <div className='data7_arrow'><FaArrowDown /></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div>-</div>}
+                                    (sortOrder === 'asc' ? <div className='data7_arrow'><FaArrowUp /></div> : (sortOrder === 'desc' ? <div className='data7_arrow'><FaArrowDown /></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><FaSortDown /></div>}
 
                             </div>
                         </div>}
@@ -623,8 +659,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day2' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div><span>-</span></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -642,8 +678,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day3' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div><span>-</span></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -661,8 +697,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day4' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div className='data7_arrow'><span><FaArrowDown /></span></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div><span>-</span></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div className='data7_arrow'><span><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -680,8 +716,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day5' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div><span>-</span></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -700,8 +736,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day6' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div><span>-</span></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -719,8 +755,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day7' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div><span>-</span></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -738,8 +774,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day8' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div><span>-</span></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -757,8 +793,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day9' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div>-</div>))
-                                    : <div><span>-</span></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -785,7 +821,7 @@ const Datagrid7 = () => {
 
                                     {showdiereceipt && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-1)" }}>
-                                            <p>{t.DieReceipt}</p>
+                                            <p style={{ color: "var(--text-color-1)" }}>{t.DieReceipt}</p>
                                         </div>
                                     </div>}
 
@@ -798,7 +834,7 @@ const Datagrid7 = () => {
 
                                     {showBumpIn && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-2)" }}>
-                                            <p>{t.BumpIn}</p>
+                                            <p style={{ color: "var(--text-color-2)" }}>{t.BumpIn}</p>
                                         </div>
                                     </div>}
 
@@ -811,7 +847,7 @@ const Datagrid7 = () => {
 
                                     {showBumpOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-2)" }}>
-                                            <p>{t.BumpOut}</p>
+                                            <p style={{ color: "var(--text-color-2)" }}>{t.BumpOut}</p>
                                         </div>
                                     </div>}
 
@@ -824,7 +860,7 @@ const Datagrid7 = () => {
 
                                     {showProbeIn && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-3)" }}>
-                                            <p>{t.ProbeIn}</p>
+                                            <p style={{ color: "var(--text-color-3)" }}>{t.ProbeIn}</p>
                                         </div>
                                     </div>}
 
@@ -837,7 +873,7 @@ const Datagrid7 = () => {
 
                                     {showProbeOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-3)" }}>
-                                            <p>{t.ProbeOut}</p>
+                                            <p style={{ color: "var(--text-color-3)" }}>{t.ProbeOut}</p>
                                         </div>
                                     </div>}
 
@@ -849,7 +885,7 @@ const Datagrid7 = () => {
                                     </div>}
                                     {showAssemblyIn && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-4)" }}>
-                                            <p>{t.AssemblyIn}</p>
+                                            <p style={{ color: "var(--text-color-4)" }}>{t.AssemblyIn}</p>
                                         </div>
                                     </div>}
 
@@ -862,7 +898,7 @@ const Datagrid7 = () => {
 
                                     {showAssemblyOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-4)" }}>
-                                            <p>{t.AssemblyOut}</p>
+                                            <p style={{ color: "var(--text-color-4)" }}>{t.AssemblyOut}</p>
                                         </div>
                                     </div>}
 
@@ -875,7 +911,7 @@ const Datagrid7 = () => {
 
                                     {showTestIn && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-5)" }}>
-                                            <p>{t.TestIn}</p>
+                                            <p style={{ color: "var(--text-color-5)" }}>{t.TestIn}</p>
                                         </div>
                                     </div>}
 
@@ -888,7 +924,7 @@ const Datagrid7 = () => {
 
                                     {showTestOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-5)" }}>
-                                            <p>{t.TestOut}</p>
+                                            <p style={{ color: "var(--text-color-5)" }}>{t.TestOut}</p>
                                         </div>
                                     </div>}
 
@@ -901,7 +937,7 @@ const Datagrid7 = () => {
 
                                     {showShipOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-6)" }}>
-                                            <p>{t.ShipOut}</p>
+                                            <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p>
                                         </div>
                                     </div>}
                                 </div>
@@ -917,7 +953,7 @@ const Datagrid7 = () => {
 
                                     {showdiereceipt && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-1)" }}>
-                                            <p>{t.DieReceipt}</p>
+                                            <p style={{ color: "var(--text-color-1)" }}>{t.DieReceipt}</p>
                                         </div>
                                     </div>}
 
@@ -930,7 +966,7 @@ const Datagrid7 = () => {
 
                                     {showBumpIn && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-2)" }}>
-                                            <p>{t.BumpIn}</p>
+                                            <p style={{ color: "var(--text-color-2)" }}>{t.BumpIn}</p>
                                         </div>
                                     </div>}
 
@@ -943,7 +979,7 @@ const Datagrid7 = () => {
 
                                     {showBumpOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-2)" }}>
-                                            <p>{t.BumpOut}</p>
+                                            <p style={{ color: "var(--text-color-2)" }}>{t.BumpOut}</p>
                                         </div>
                                     </div>}
 
@@ -956,7 +992,7 @@ const Datagrid7 = () => {
 
                                     {showProbeIn && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-3)" }}>
-                                            <p>{t.ProbeIn}</p>
+                                            <p style={{ color: "var(--text-color-3)" }}>{t.ProbeIn}</p>
                                         </div>
                                     </div>}
 
@@ -969,7 +1005,7 @@ const Datagrid7 = () => {
 
                                     {showProbeOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-3)" }}>
-                                            <p>{t.ProbeOut}</p>
+                                            <p style={{ color: "var(--text-color-3)" }}>{t.ProbeOut}</p>
                                         </div>
                                     </div>}
 
@@ -981,7 +1017,7 @@ const Datagrid7 = () => {
                                     </div>}
                                     {showAssemblyIn && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-4)" }}>
-                                            <p>{t.AssemblyIn}</p>
+                                            <p style={{ color: "var(--text-color-4)" }}>{t.AssemblyIn}</p>
                                         </div>
                                     </div>}
 
@@ -994,7 +1030,7 @@ const Datagrid7 = () => {
 
                                     {showAssemblyOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-4)" }}>
-                                            <p>{t.AssemblyOut}</p>
+                                            <p style={{ color: "var(--text-color-4)" }}>{t.AssemblyOut}</p>
                                         </div>
                                     </div>}
 
@@ -1007,7 +1043,7 @@ const Datagrid7 = () => {
 
                                     {showTestIn && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-5)" }}>
-                                            <p>{t.TestIn}</p>
+                                            <p style={{ color: "var(--text-color-5)" }}>{t.TestIn}</p>
                                         </div>
                                     </div>}
 
@@ -1020,7 +1056,7 @@ const Datagrid7 = () => {
 
                                     {showTestOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-5)" }}>
-                                            <p>{t.TestOut}</p>
+                                            <p style={{ color: "var(--text-color-5)" }}>{t.TestOut}</p>
                                         </div>
                                     </div>}
 
@@ -1033,7 +1069,7 @@ const Datagrid7 = () => {
 
                                     {showShipOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-6)" }}>
-                                            <p>{t.ShipOut}</p>
+                                            <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p>
                                         </div>
                                     </div>}
                                 </div>
@@ -1107,16 +1143,6 @@ const Datagrid7 = () => {
                     }
 
                 </div>
-            </div>
-
-            <div className='data7_csv'>
-                <button onClick={currentpagecsvdataHandler}>
-                    <p>Current Page CSV Data</p>
-                    <div><FaArrowDown /></div>
-                </button>
-                <button onClick={entirepagecsvdataHandler}>
-                    <p>Current Page CSV Data</p>
-                    <div><FaArrowDown /></div></button>
             </div>
 
         </main >
