@@ -7,6 +7,12 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { IoIosLink } from "react-icons/io";
 
+import { DatePicker } from 'antd';
+import { getISOWeek } from 'date-fns';
+
+const { RangePicker } = DatePicker;
+
+
 const Datagrid7 = () => {
 
     const [showColumn, setShowColumn] = useState(false)
@@ -232,9 +238,42 @@ const Datagrid7 = () => {
     //FILTERING DONE HERE
 
     const [filterBy, setFilterBy] = useState('');
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+    const [date, setDate] = useState(null);
 
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const onChange = (dates) => {
+        console.log('onChange: ', dates);
+        setDate(dates);
+    };
+
+    useEffect(() => {
+        // Accessing the date objects from the array
+        const startDateObject = date?.[0]?.$d;
+        const endDateObject = date?.[1]?.$d;
+    
+        if (startDateObject && endDateObject) {
+          // Formatting the dates in "YYYY-MM-DD" format
+          const formatDateString = (dateObject) => {
+            const year = dateObject.getFullYear();
+            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+            const day = dateObject.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+          };
+    
+          const startDateFormatted = formatDateString(startDateObject);
+          const endDateFormatted = formatDateString(endDateObject);
+    
+          console.log('Start Date:', startDateFormatted);
+          console.log('End Date:', endDateFormatted);
+    
+          setStartDate(startDateFormatted);
+          setEndDate(endDateFormatted);
+        } else {
+          console.log('Error: Dates are null');
+        }
+      }, [date]); 
+
 
     const applyFilter = (dataArray, filterValue) => {
         return dataArray.filter((item) => {
@@ -276,6 +315,7 @@ const Datagrid7 = () => {
 
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate);
     // console.log(filteredData)
+
 
     const removeFilter = () => {
         setFilterBy("")
@@ -321,19 +361,7 @@ const Datagrid7 = () => {
                     </div>
 
                     <div className='data7_top_selectdatebx'>
-                        <div>
-                            <input type="date"
-                                value={startDate}
-                                onChange={(e) => setStartDate(e.target.value)}
-                            />
-                        </div>
-
-                        <div>
-                            <input type="date"
-                                value={endDate}
-                                onChange={(e) => setEndDate(e.target.value)}
-                            />
-                        </div>
+                        <RangePicker onChange={onChange} />
                     </div>
 
                     <div className='data7_top_showhide_bx'>
@@ -474,19 +502,7 @@ const Datagrid7 = () => {
                 </div>
 
                 <div className='data7_top_selectdatebx'>
-                    <div>
-                        <input type="date"
-                            value={startDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                        />
-                    </div>
-
-                    <div>
-                        <input type="date"
-                            value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                        />
-                    </div>
+                    <RangePicker onChange={onChange} />
                 </div>
 
                 <div className='data7_top_showhide_bx'>
@@ -1141,7 +1157,6 @@ const Datagrid7 = () => {
 
                 </div>
             </div>
-
         </main >
     )
 }

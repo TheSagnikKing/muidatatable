@@ -307,7 +307,7 @@ select {
 }
 
 .data7_top_selectdatebx>div {
-    width: 150px;
+    width: 250px;
     height: 44px;
     padding-inline: 10px;
     background-color: #fff;
@@ -506,7 +506,7 @@ select {
     }
 
     .data7_top_selectdatebx>div{
-        width: 50%;
+        width: 100%;
     }
 
     .mobile_fl_csv_box{
@@ -525,3 +525,5 @@ select {
         width: 100%;
     }
 }
+
+
