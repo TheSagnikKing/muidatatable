@@ -640,8 +640,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day1' ?
-                                    (sortOrder === 'asc' ? <div className='data7_arrow'><FaArrowUp /></div> : (sortOrder === 'desc' ? <div className='data7_arrow'><FaArrowDown /></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
-                                    : <div><FaSortDown /></div>}
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
+                                    : <div><span><FaSortDown /></span></div>}
 
                             </div>
                         </div>}
@@ -659,9 +659,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day2' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
                                     : <div><span><FaSortDown /></span></div>}
-
                             </div>
                         </div>}
 
@@ -678,7 +677,7 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day3' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
                                     : <div><span><FaSortDown /></span></div>}
 
                             </div>
@@ -688,7 +687,7 @@ const Datagrid7 = () => {
                             <div>
                                 <p>ProbeIn</p>
                                 {sortBy === 'ProbeIn' &&
-                                    (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                                    (sortOrder === 'asc' ? <div className='data7_arrow'><FaArrowUp /></div> : (sortOrder === 'desc' ? <div className='data7_arrow'><FaArrowDown /></div> : sortOrder === 'initial' && <span></span>))
                                 }
                             </div>
                         </div>}
@@ -697,7 +696,7 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day4' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div className='data7_arrow'><span><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
                                     : <div><span><FaSortDown /></span></div>}
 
                             </div>
@@ -716,7 +715,7 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day5' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
                                     : <div><span><FaSortDown /></span></div>}
 
                             </div>
@@ -736,9 +735,8 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day6' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
                                     : <div><span><FaSortDown /></span></div>}
-
                             </div>
                         </div>}
 
@@ -755,7 +753,7 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day7' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
                                     : <div><span><FaSortDown /></span></div>}
 
                             </div>
@@ -774,7 +772,7 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day8' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
                                     : <div><span><FaSortDown /></span></div>}
 
                             </div>
@@ -793,7 +791,7 @@ const Datagrid7 = () => {
                             <div>
                                 <div />
                                 {sortBy === 'day9' ?
-                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><FaSortDown /></div>))
+                                    (sortOrder === 'asc' ? <div><span className='data7_arrow'><FaArrowUp /></span></div> : (sortOrder === 'desc' ? <div><span className='data7_arrow'><FaArrowDown /></span></div> : sortOrder === 'initial' && <div><span><FaSortDown /></span></div>))
                                     : <div><span><FaSortDown /></span></div>}
 
                             </div>
