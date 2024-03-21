@@ -242,37 +242,42 @@ const Datagrid7 = () => {
     const [endDate, setEndDate] = useState('')
     const [date, setDate] = useState(null);
 
+    const [openDateBox, setOpenDateBox] = useState(false)
+
     const onChange = (dates) => {
         console.log('onChange: ', dates);
         setDate(dates);
+        if (dates) {
+            setOpenDateBox(false)
+        }
     };
 
     useEffect(() => {
         // Accessing the date objects from the array
         const startDateObject = date?.[0]?.$d;
         const endDateObject = date?.[1]?.$d;
-    
+
         if (startDateObject && endDateObject) {
-          // Formatting the dates in "YYYY-MM-DD" format
-          const formatDateString = (dateObject) => {
-            const year = dateObject.getFullYear();
-            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-            const day = dateObject.getDate().toString().padStart(2, '0');
-            return `${year}-${month}-${day}`;
-          };
-    
-          const startDateFormatted = formatDateString(startDateObject);
-          const endDateFormatted = formatDateString(endDateObject);
-    
-          console.log('Start Date:', startDateFormatted);
-          console.log('End Date:', endDateFormatted);
-    
-          setStartDate(startDateFormatted);
-          setEndDate(endDateFormatted);
+            // Formatting the dates in "YYYY-MM-DD" format
+            const formatDateString = (dateObject) => {
+                const year = dateObject.getFullYear();
+                const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+                const day = dateObject.getDate().toString().padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
+            const startDateFormatted = formatDateString(startDateObject);
+            const endDateFormatted = formatDateString(endDateObject);
+
+            console.log('Start Date:', startDateFormatted);
+            console.log('End Date:', endDateFormatted);
+
+            setStartDate(startDateFormatted);
+            setEndDate(endDateFormatted);
         } else {
-          console.log('Error: Dates are null');
+            console.log('Error: Dates are null');
         }
-      }, [date]); 
+    }, [date]);
 
 
     const applyFilter = (dataArray, filterValue) => {
@@ -283,6 +288,11 @@ const Datagrid7 = () => {
         }
         );
     };
+
+    const [diereceptcheckbox, setDiereceiptcheckbox] = useState(false)
+    const [Bumpcheckbox, setBumpCheckbox] = useState(false)
+
+    console.log("sdv", diereceptcheckbox)
 
     const applyFilterByDateRange = (dataArray, startDateValue, endDateValue) => {
         return dataArray.filter((item) => {
@@ -314,13 +324,16 @@ const Datagrid7 = () => {
     };
 
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate);
-    // console.log(filteredData)
+    console.log(filteredData)
 
 
     const removeFilter = () => {
         setFilterBy("")
         setStartDate("");
         setEndDate("");
+        setDate(null)
+
+        // console.log("NULL")
     }
 
     const dataPerFilterPage = 5;
@@ -343,8 +356,22 @@ const Datagrid7 = () => {
     // Get data for the current page
     const currentPageFilteredData = filteredData.slice(filterStartIndex, filterEndIndex);
 
+    const handleOpenChange = () => {
+        setOpenDateBox((prev) => !prev)
+
+        if (boxOpen) {
+            setOpenDateBox(true)
+        }
+    };
+
+    const [boxOpen, setBoxOpen] = useState(false)
+
+    const openHandler = () => {
+        setBoxOpen(true)
+    }
+
     return (
-        <main className='data7_container'>
+        <main className='data7_container' >
             <div className='data7_top_bx'>
                 <p>Lots Status Tracking</p>
 
@@ -361,10 +388,45 @@ const Datagrid7 = () => {
                     </div>
 
                     <div className='data7_top_selectdatebx'>
-                        <RangePicker onChange={onChange} />
+                        <RangePicker onChange={onChange} open={openDateBox} onOpenChange={handleOpenChange} />
+
+                        {openDateBox && <div className='data7_top_selectdatebox_filterbox' onMouseEnter={openHandler} onMouseLeave={() => setBoxOpen(false)}>
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    value={diereceptcheckbox}
+                                    onChange={(e) => setDiereceiptcheckbox(prev => !prev)}
+                                />
+                                <p>Die Receipt</p>
+                            </div>
+
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    value={Bumpcheckbox}
+                                    onChange={(e) => setBumpCheckbox(prev => !prev)}
+                                />
+                                <p>Bump</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" />
+                                <p>Probe</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" />
+                                <p>Assembly</p>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" />
+                                <p>Test</p>
+                            </div>
+                        </div>}
                     </div>
 
-                    <div className='data7_top_showhide_bx'>
+                    <div className='data7_top_showhide_bx' >
                         <div onClick={() => setShowColumn((prev) => !prev)}>
                             <p>Show/Hide Columns </p>
                             <div><FaSortDown /></div>

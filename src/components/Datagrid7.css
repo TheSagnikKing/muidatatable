@@ -304,7 +304,33 @@ select {
     display: flex;
     align-items: center;
     gap: 5px;
+    position: relative;
 }
+
+.data7_top_selectdatebox_filterbox{
+    position: absolute;
+    top: 370px;
+    left: 0px;
+    background-color: #fff !important;
+    height: 40px;
+    width: 578px !important;
+    z-index: 2000 !important;
+    border-radius: 7px !important;
+    border: none !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 4px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.data7_top_selectdatebox_filterbox>div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
 
 .data7_top_selectdatebx>div {
     width: 250px;
