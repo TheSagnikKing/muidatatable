@@ -553,3 +553,20 @@ select {
 }
 
 
+
+
+
+.data7_top_selectdatebox_filterbox_2{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #efefef;
+}
+
+.data7_top_selectdatebox_filterbox_2>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
