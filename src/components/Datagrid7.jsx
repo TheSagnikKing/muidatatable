@@ -379,7 +379,6 @@ const Datagrid7 = () => {
 
                 setNewFilterData(newdata)
 
-
             } else if (message === 'Bump') {
                 setDiereceiptcheckbox(false)
                 setProbeCheckbox(false)
@@ -399,14 +398,6 @@ const Datagrid7 = () => {
 
                 setNewFilterData(newdata)
 
-                console.log({
-                    message,
-                    dataArray,
-                    startDate: startDateValue,
-                    endDate: endDateValue,
-                    text: "I am Bump",
-                    filterdata: newdata
-                })
             } else if (message === 'Probe') {
                 setDiereceiptcheckbox(false)
                 setBumpCheckbox(false)
@@ -426,14 +417,6 @@ const Datagrid7 = () => {
 
                 setNewFilterData(newdata)
 
-                console.log({
-                    message,
-                    dataArray,
-                    startDate: startDateValue,
-                    endDate: endDateValue,
-                    text: "I am Probe",
-                    filterdata: newdata
-                })
             } else if (message === 'Assembly') {
                 setDiereceiptcheckbox(false)
                 setBumpCheckbox(false)
@@ -453,14 +436,6 @@ const Datagrid7 = () => {
 
                 setNewFilterData(newdata)
 
-                console.log({
-                    message,
-                    dataArray,
-                    startDate: startDateValue,
-                    endDate: endDateValue,
-                    text: "I am Assembly",
-                    filterdata: newdata
-                })
             } else if (message === 'Test') {
                 setDiereceiptcheckbox(false)
                 setBumpCheckbox(false)
@@ -479,48 +454,8 @@ const Datagrid7 = () => {
                 })
 
                 setNewFilterData(newdata)
-
-                console.log({
-                    message,
-                    dataArray,
-                    startDate: startDateValue,
-                    endDate: endDateValue,
-                    text: "I am Test",
-                    filterdata: newdata
-                })
             }
-
-            // return dataArray.filter((item) => {
-            //     const dieReceiptDate = new Date(item.DieReceipt);
-            //     const BumpInDate = new Date(item.BumpIn);
-            //     const BumpOutDate = new Date(item.BumpOut);
-            //     const ProbeInDate = new Date(item.ProbeIn);
-            //     const ProbeOutDate = new Date(item.ProbeOut);
-            // const AssemblyInDate = new Date(item.AssemblyIn);
-            // const AssemblyOutDate = new Date(item.AssemblyOut);
-            //     const TestInDate = new Date(item.TestIn);
-            //     const TestOutDate = new Date(item.TestOut);
-            //     const ShipOutDate = new Date(item.ShipOut);
-
-            // const startDate = new Date(startDateValue);
-            // const endDate = new Date(endDateValue);
-
-            //     let filterResult = (diereceptcheckbox && (dieReceiptDate >= startDate && dieReceiptDate <= endDate)) ||
-            //         (Bumpcheckbox && (BumpInDate >= startDate && BumpInDate <= endDate)) ||
-            //         (Bumpcheckbox && (BumpOutDate >= startDate && BumpOutDate <= endDate)) ||
-            //         (ProbeInDate >= startDate && ProbeInDate <= endDate) ||
-            //         (ProbeOutDate >= startDate && ProbeOutDate <= endDate) ||
-            // (AssemblyInDate >= startDate && AssemblyInDate <= endDate) ||
-            // (AssemblyOutDate >= startDate && AssemblyOutDate <= endDate) ||
-            // (TestInDate >= startDate && TestInDate <= endDate) ||
-            // (TestOutDate >= startDate && TestOutDate <= endDate) ||
-            //         (ShipOutDate >= startDate && ShipOutDate <= endDate);
-
-            //     // Apply additional filters here if needed based on other checkboxes
-
-            //     return filterResult;
-            // });
-
+ 
         } else {
             setNewFilterData([])
         }
@@ -619,6 +554,8 @@ const Datagrid7 = () => {
         setBoxOpen(true)
     }
 
+    console.log(diereceptcheckbox,"diecheck")
+
     const resetHandler = () => {
         setDiereceiptcheckbox(false)
         setBumpCheckbox(false)
@@ -646,10 +583,10 @@ const Datagrid7 = () => {
                     </div>
 
                     <div className='data7_top_selectdatebx' onClick={resetHandler} style={{ width: "250px", height: "44px" }}>
-                        .
-                        <RangePicker onChange={onChange} open={openDateBox} onOpenChange={handleOpenChange} />
+                        
+                        <RangePicker onChange={onChange} open={openDateBox} onOpenChange={handleOpenChange} value={date}/>
 
-                        {openDateBox && <div className='data7_top_selectdatebox_filterbox' onMouseEnter={openHandler} onMouseLeave={() => setBoxOpen(false)}>
+                        {/* {openDateBox && <div className='data7_top_selectdatebox_filterbox' onMouseEnter={openHandler} onMouseLeave={() => setBoxOpen(false)}>
                             <div>
                                 <input
                                     type="checkbox"
@@ -690,7 +627,7 @@ const Datagrid7 = () => {
                                     onChange={handleTestChange} />
                                 <p>Test</p>
                             </div>
-                        </div>}
+                        </div>} */}
                     </div>
 
                     <div className='data7_top_showhide_bx' >
@@ -1423,7 +1360,12 @@ const Datagrid7 = () => {
                 <div className="data7_pagination">
 
                     {
-                        filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? <>
+                        filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? <div>
+                            <div>
+                                <button onClick={handlePrevFilterPage} disabled={currentFilterPage === 1}><FaChevronLeft /></button>
+                                <span>{currentFilterPage} of {totalFilterPages}</span>
+                                <button onClick={handleNextFilterPage} disabled={currentFilterPage === totalFilterPages || filteredData.length === 0}><FaChevronRight /></button>
+                            </div>
                             <div>
                                 <p>Showing of </p>
                                 <select
@@ -1447,12 +1389,13 @@ const Datagrid7 = () => {
                                 </select>
                                 <p>of {totalPages}</p>
                             </div>
+                        </div> : <div>
+                            
                             <div>
-                                <button onClick={handlePrevFilterPage} disabled={currentFilterPage === 1}><FaChevronLeft /></button>
-                                <span>{currentFilterPage} of {totalFilterPages}</span>
-                                <button onClick={handleNextFilterPage} disabled={currentFilterPage === totalFilterPages}><FaChevronRight /></button>
+                                <button onClick={handlePrevPage} disabled={currentPage === 1}><FaChevronLeft /></button>
+                                <span>{currentPage} of {totalPages}</span>
+                                <button onClick={handleNextPage} disabled={currentPage === totalPages}><FaChevronRight /></button>
                             </div>
-                        </> : <>
                             <div>
                                 <p>Showing of </p>
                                 <select
@@ -1476,18 +1419,13 @@ const Datagrid7 = () => {
                                 </select>
                                 <p>of {totalPages}</p>
                             </div>
-                            <div>
-                                <button onClick={handlePrevPage} disabled={currentPage === 1}><FaChevronLeft /></button>
-                                <span>{currentPage} of {totalPages}</span>
-                                <button onClick={handleNextPage} disabled={currentPage === totalPages}><FaChevronRight /></button>
-                            </div>
-                        </>
+                        </div>
                     }
 
                 </div>
             </div>
 
-            <div className='data7_top_selectdatebox_filterbox_2' onMouseEnter={openHandler} onMouseLeave={() => setBoxOpen(false)}>
+            <div className='data7_top_selectdatebox_filterbox_2'>
                 <div>
                     <input
                         type="checkbox"
