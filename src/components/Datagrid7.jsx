@@ -306,13 +306,13 @@ const Datagrid7 = () => {
             const TestInDate = new Date(item.TestIn);
             const TestOutDate = new Date(item.TestOut);
             const ShipOutDate = new Date(item.ShipOut);
-
+    
             const startDate = new Date(startDateValue);
             const endDate = new Date(endDateValue);
-
-            return (dieReceiptDate >= startDate && dieReceiptDate <= endDate) ||
-                (BumpInDate >= startDate && BumpInDate <= endDate) ||
-                (BumpOutDate >= startDate && BumpOutDate <= endDate) ||
+    
+            let filterResult = (diereceptcheckbox && (dieReceiptDate >= startDate && dieReceiptDate <= endDate)) ||
+                (Bumpcheckbox && (BumpInDate >= startDate && BumpInDate <= endDate)) ||
+                (Bumpcheckbox && (BumpOutDate >= startDate && BumpOutDate <= endDate)) ||
                 (ProbeInDate >= startDate && ProbeInDate <= endDate) ||
                 (ProbeOutDate >= startDate && ProbeOutDate <= endDate) ||
                 (AssemblyInDate >= startDate && AssemblyInDate <= endDate) ||
@@ -320,11 +320,27 @@ const Datagrid7 = () => {
                 (TestInDate >= startDate && TestInDate <= endDate) ||
                 (TestOutDate >= startDate && TestOutDate <= endDate) ||
                 (ShipOutDate >= startDate && ShipOutDate <= endDate);
+    
+            // Apply additional filters here if needed based on other checkboxes
+    
+            return filterResult;
         });
     };
 
-    const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate);
-    console.log(filteredData)
+    const [currentFilteredData, setCurrentFilteredData] = useState([])
+
+    useEffect(() => {
+        const filteredData = applyFilterByDateRange(data, startDate, endDate);
+        console.log(filteredData);
+        setCurrentFilteredData(filteredData)
+
+    }, [diereceptcheckbox, Bumpcheckbox, startDate, endDate]);
+
+    
+    // const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate);
+    // console.log(filteredData)
+
+    const filteredData = []
 
 
     const removeFilter = () => {
@@ -425,7 +441,7 @@ const Datagrid7 = () => {
                             </div>
                         </div>}
                     </div>
-
+                    
                     <div className='data7_top_showhide_bx' >
                         <div onClick={() => setShowColumn((prev) => !prev)}>
                             <p>Show/Hide Columns </p>
