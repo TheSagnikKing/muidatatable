@@ -8,7 +8,7 @@ export const fakedata = [
         "day2": 8,
         "BumpOut": "2023-11-23",
         "day3": 5,
-        "ProbeIn": "2023-11-24",
+        "ProbeIn": "2019-11-24",
         "day4": 7,
         "ProbeOut": "2023-11-25",
         "day5": 2,
@@ -18,7 +18,7 @@ export const fakedata = [
         "day7": 9,
         "TestIn": "2023-11-28",
         "day8": 4,
-        "TestOut": "2023-11-29",
+        "TestOut": "2030-11-29",
         "day9": 6,
         "ShipOut": "2029-11-30"
     },

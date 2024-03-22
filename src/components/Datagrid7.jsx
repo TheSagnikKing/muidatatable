@@ -246,6 +246,10 @@ const Datagrid7 = () => {
 
     const onChange = (dates) => {
         console.log('onChange: ', dates);
+
+        // setDiereceiptcheckbox(false)
+        // setBumpCheckbox(false)
+        // alert("Yes")
         setDate(dates);
         if (dates) {
             setOpenDateBox(false)
@@ -291,6 +295,9 @@ const Datagrid7 = () => {
 
     const [diereceptcheckbox, setDiereceiptcheckbox] = useState(false)
     const [Bumpcheckbox, setBumpCheckbox] = useState(false)
+    const [Probecheckbox, setProbeCheckbox] = useState(false)
+    const [Assemblycheckbox, setAssemblyCheckbox] = useState(false)
+    const [Testcheckbox, setTestCheckbox] = useState(false)
 
     // console.log("Diereceptcheckbox ", diereceptcheckbox)
     // console.log("BumpCheckbox ", Bumpcheckbox)
@@ -298,10 +305,10 @@ const Datagrid7 = () => {
     // const applyFilterByDateRange = (dataArray, startDateValue, endDateValue) => {
     //     return dataArray.filter((item) => {
     //         const dieReceiptDate = new Date(item.DieReceipt);
-    //         const BumpInDate = new Date(item.BumpIn);
-    //         const BumpOutDate = new Date(item.BumpOut);
-    //         const ProbeInDate = new Date(item.ProbeIn);
-    //         const ProbeOutDate = new Date(item.ProbeOut);
+    // const BumpInDate = new Date(item.BumpIn);
+    // const BumpOutDate = new Date(item.BumpOut);
+    // const ProbeInDate = new Date(item.ProbeIn);
+    // const ProbeOutDate = new Date(item.ProbeOut);
     //         const AssemblyInDate = new Date(item.AssemblyIn);
     //         const AssemblyOutDate = new Date(item.AssemblyOut);
     //         const TestInDate = new Date(item.TestIn);
@@ -312,10 +319,10 @@ const Datagrid7 = () => {
     //         const endDate = new Date(endDateValue);
 
     //         let filterResult = (diereceptcheckbox && (dieReceiptDate >= startDate && dieReceiptDate <= endDate)) ||
-    //             (Bumpcheckbox && (BumpInDate >= startDate && BumpInDate <= endDate)) ||
-    //             (Bumpcheckbox && (BumpOutDate >= startDate && BumpOutDate <= endDate)) ||
-    //             (ProbeInDate >= startDate && ProbeInDate <= endDate) ||
-    //             (ProbeOutDate >= startDate && ProbeOutDate <= endDate) ||
+    // (Bumpcheckbox && (BumpInDate >= startDate && BumpInDate <= endDate)) ||
+    // (Bumpcheckbox && (BumpOutDate >= startDate && BumpOutDate <= endDate)) ||
+    // (ProbeInDate >= startDate && ProbeInDate <= endDate) ||
+    // (ProbeOutDate >= startDate && ProbeOutDate <= endDate) ||
     //             (AssemblyInDate >= startDate && AssemblyInDate <= endDate) ||
     //             (AssemblyOutDate >= startDate && AssemblyOutDate <= endDate) ||
     //             (TestInDate >= startDate && TestInDate <= endDate) ||
@@ -347,54 +354,166 @@ const Datagrid7 = () => {
     // };
 
 
+    const [newFilterData, setNewFilterData] = useState([])
+
+
     const handleCheckboxChange = (checkboxState, setCheckbox, message, dataArray, startDateValue, endDateValue) => {
         setCheckbox(prev => !prev);
         if (!checkboxState) {
 
-            if(message === 'Diereceipt'){
+            if (message === 'Diereceipt') {
                 setBumpCheckbox(false)
-                console.log({
-                    message,
-                    dataArray,
-                    startDate: startDateValue,
-                    endDate: endDateValue,
-                    text: "I am Diereceipt"
+                setProbeCheckbox(false)
+                setAssemblyCheckbox(false)
+                setTestCheckbox(false)
+
+                const newdata = dataArray.filter((item) => {
+                    const dieReceiptDate = new Date(item.DieReceipt);
+
+                    const startDate = new Date(startDateValue);
+                    const endDate = new Date(endDateValue);
+
+                    return dieReceiptDate >= startDate && dieReceiptDate <= endDate
+
                 })
-            }else if(message === 'Bump'){
+
+                setNewFilterData(newdata)
+
+
+            } else if (message === 'Bump') {
                 setDiereceiptcheckbox(false)
+                setProbeCheckbox(false)
+                setAssemblyCheckbox(false)
+                setTestCheckbox(false)
+
+                const newdata = dataArray.filter((item) => {
+                    const BumpInDate = new Date(item.BumpIn);
+                    const BumpOutDate = new Date(item.BumpOut);
+
+                    const startDate = new Date(startDateValue);
+                    const endDate = new Date(endDateValue);
+
+                    return (BumpInDate >= startDate && BumpInDate <= endDate) ||
+                        (BumpOutDate >= startDate && BumpOutDate <= endDate)
+                })
+
+                setNewFilterData(newdata)
+
                 console.log({
                     message,
                     dataArray,
                     startDate: startDateValue,
                     endDate: endDateValue,
-                    text: "I am Bump"
+                    text: "I am Bump",
+                    filterdata: newdata
+                })
+            } else if (message === 'Probe') {
+                setDiereceiptcheckbox(false)
+                setBumpCheckbox(false)
+                setAssemblyCheckbox(false)
+                setTestCheckbox(false)
+
+                const newdata = dataArray.filter((item) => {
+                    const ProbeInDate = new Date(item.ProbeIn);
+                    const ProbeOutDate = new Date(item.ProbeOut);
+
+                    const startDate = new Date(startDateValue);
+                    const endDate = new Date(endDateValue);
+
+                    return (ProbeInDate >= startDate && ProbeInDate <= endDate) ||
+                        (ProbeOutDate >= startDate && ProbeOutDate <= endDate)
+                })
+
+                setNewFilterData(newdata)
+
+                console.log({
+                    message,
+                    dataArray,
+                    startDate: startDateValue,
+                    endDate: endDateValue,
+                    text: "I am Probe",
+                    filterdata: newdata
+                })
+            } else if (message === 'Assembly') {
+                setDiereceiptcheckbox(false)
+                setBumpCheckbox(false)
+                setTestCheckbox(false)
+                setProbeCheckbox(false)
+
+                const newdata = dataArray.filter((item) => {
+                    const AssemblyInDate = new Date(item.AssemblyIn);
+                    const AssemblyOutDate = new Date(item.AssemblyOut);
+
+                    const startDate = new Date(startDateValue);
+                    const endDate = new Date(endDateValue);
+
+                    return (AssemblyInDate >= startDate && AssemblyInDate <= endDate) ||
+                        (AssemblyOutDate >= startDate && AssemblyOutDate <= endDate)
+                })
+
+                setNewFilterData(newdata)
+
+                console.log({
+                    message,
+                    dataArray,
+                    startDate: startDateValue,
+                    endDate: endDateValue,
+                    text: "I am Assembly",
+                    filterdata: newdata
+                })
+            } else if (message === 'Test') {
+                setDiereceiptcheckbox(false)
+                setBumpCheckbox(false)
+                setAssemblyCheckbox(false)
+                setProbeCheckbox(false)
+
+                const newdata = dataArray.filter((item) => {
+                    const TestInDate = new Date(item.TestIn);
+                    const TestOutDate = new Date(item.TestOut);
+
+                    const startDate = new Date(startDateValue);
+                    const endDate = new Date(endDateValue);
+
+                    return (TestInDate >= startDate && TestInDate <= endDate) ||
+                        (TestOutDate >= startDate && TestOutDate <= endDate)
+                })
+
+                setNewFilterData(newdata)
+
+                console.log({
+                    message,
+                    dataArray,
+                    startDate: startDateValue,
+                    endDate: endDateValue,
+                    text: "I am Test",
+                    filterdata: newdata
                 })
             }
-            
+
             // return dataArray.filter((item) => {
             //     const dieReceiptDate = new Date(item.DieReceipt);
             //     const BumpInDate = new Date(item.BumpIn);
             //     const BumpOutDate = new Date(item.BumpOut);
             //     const ProbeInDate = new Date(item.ProbeIn);
             //     const ProbeOutDate = new Date(item.ProbeOut);
-            //     const AssemblyInDate = new Date(item.AssemblyIn);
-            //     const AssemblyOutDate = new Date(item.AssemblyOut);
+            // const AssemblyInDate = new Date(item.AssemblyIn);
+            // const AssemblyOutDate = new Date(item.AssemblyOut);
             //     const TestInDate = new Date(item.TestIn);
             //     const TestOutDate = new Date(item.TestOut);
             //     const ShipOutDate = new Date(item.ShipOut);
 
-            //     const startDate = new Date(startDateValue);
-            //     const endDate = new Date(endDateValue);
+            // const startDate = new Date(startDateValue);
+            // const endDate = new Date(endDateValue);
 
             //     let filterResult = (diereceptcheckbox && (dieReceiptDate >= startDate && dieReceiptDate <= endDate)) ||
             //         (Bumpcheckbox && (BumpInDate >= startDate && BumpInDate <= endDate)) ||
             //         (Bumpcheckbox && (BumpOutDate >= startDate && BumpOutDate <= endDate)) ||
             //         (ProbeInDate >= startDate && ProbeInDate <= endDate) ||
             //         (ProbeOutDate >= startDate && ProbeOutDate <= endDate) ||
-            //         (AssemblyInDate >= startDate && AssemblyInDate <= endDate) ||
-            //         (AssemblyOutDate >= startDate && AssemblyOutDate <= endDate) ||
-            //         (TestInDate >= startDate && TestInDate <= endDate) ||
-            //         (TestOutDate >= startDate && TestOutDate <= endDate) ||
+            // (AssemblyInDate >= startDate && AssemblyInDate <= endDate) ||
+            // (AssemblyOutDate >= startDate && AssemblyOutDate <= endDate) ||
+            // (TestInDate >= startDate && TestInDate <= endDate) ||
+            // (TestOutDate >= startDate && TestOutDate <= endDate) ||
             //         (ShipOutDate >= startDate && ShipOutDate <= endDate);
 
             //     // Apply additional filters here if needed based on other checkboxes
@@ -402,6 +521,8 @@ const Datagrid7 = () => {
             //     return filterResult;
             // });
 
+        } else {
+            setNewFilterData([])
         }
     };
 
@@ -422,16 +543,47 @@ const Datagrid7 = () => {
         }
     };
 
-    const filteredData = []
+    const handleProbeChange = () => {
+        if (startDate !== "" && endDate !== "") {
+            handleCheckboxChange(Probecheckbox, setProbeCheckbox, "Probe", data, startDate, endDate);
+        } else {
+            alert("Please select Date First")
+        }
+    };
+
+
+    const handleAssemblyChange = () => {
+        if (startDate !== "" && endDate !== "") {
+            handleCheckboxChange(Assemblycheckbox, setAssemblyCheckbox, "Assembly", data, startDate, endDate);
+        } else {
+            alert("Please select Date First")
+        }
+    }
+
+    const handleTestChange = () => {
+        if (startDate !== "" && endDate !== "") {
+            handleCheckboxChange(Testcheckbox, setTestCheckbox, "Test", data, startDate, endDate);
+        } else {
+            alert("Please select Date First")
+        }
+    }
+
+    const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : newFilterData
 
 
     const removeFilter = () => {
         setFilterBy("")
         setStartDate("");
         setEndDate("");
-        setDate(null)
+        setDate(null);
+        setDiereceiptcheckbox(false)
+        setBumpCheckbox(false)
+        setProbeCheckbox(false)
+        setAssemblyCheckbox(false)
+        setTestCheckbox(false)
+        setStartDate("")
+        setEndDate("")
 
-        // console.log("NULL")
     }
 
     const dataPerFilterPage = 5;
@@ -456,7 +608,6 @@ const Datagrid7 = () => {
 
     const handleOpenChange = () => {
         setOpenDateBox((prev) => !prev)
-
         if (boxOpen) {
             setOpenDateBox(true)
         }
@@ -466,6 +617,15 @@ const Datagrid7 = () => {
 
     const openHandler = () => {
         setBoxOpen(true)
+    }
+
+    const resetHandler = () => {
+        setDiereceiptcheckbox(false)
+        setBumpCheckbox(false)
+        setProbeCheckbox(false)
+        setAssemblyCheckbox(false)
+        setTestCheckbox(false)
+        setNewFilterData([])
     }
 
     return (
@@ -485,15 +645,16 @@ const Datagrid7 = () => {
                         <div><IoSearch /></div>
                     </div>
 
-                    <div className='data7_top_selectdatebx'>
+                    <div className='data7_top_selectdatebx' onClick={resetHandler} style={{ width: "250px", height: "44px" }}>
+                        .
                         <RangePicker onChange={onChange} open={openDateBox} onOpenChange={handleOpenChange} />
 
                         {openDateBox && <div className='data7_top_selectdatebox_filterbox' onMouseEnter={openHandler} onMouseLeave={() => setBoxOpen(false)}>
                             <div>
                                 <input
                                     type="checkbox"
-                                // value={diereceptcheckbox}
-                                // onChange={(e) => setDiereceiptcheckbox(prev => !prev)}
+                                    checked={diereceptcheckbox}
+                                    onChange={handleDiereceiptChange}
                                 />
                                 <p>Die Receipt</p>
                             </div>
@@ -501,24 +662,32 @@ const Datagrid7 = () => {
                             <div>
                                 <input
                                     type="checkbox"
-                                // value={Bumpcheckbox}
-                                // onChange={(e) => setBumpCheckbox(prev => !prev)}
+                                    checked={Bumpcheckbox}
+                                    onChange={handleBumpChange}
                                 />
                                 <p>Bump</p>
                             </div>
 
                             <div>
-                                <input type="checkbox" />
+                                <input
+                                    type="checkbox"
+                                    checked={Probecheckbox}
+                                    onChange={handleProbeChange} />
                                 <p>Probe</p>
                             </div>
 
                             <div>
-                                <input type="checkbox" />
+                                <input
+                                    type="checkbox"
+                                    checked={Assemblycheckbox}
+                                    onChange={handleAssemblyChange} />
                                 <p>Assembly</p>
                             </div>
 
                             <div>
-                                <input type="checkbox" />
+                                <input type="checkbox"
+                                    checked={Testcheckbox}
+                                    onChange={handleTestChange} />
                                 <p>Test</p>
                             </div>
                         </div>}
@@ -1338,17 +1507,25 @@ const Datagrid7 = () => {
                 </div>
 
                 <div>
-                    <input type="checkbox" />
+                    <input
+                        type="checkbox"
+                        checked={Probecheckbox}
+                        onChange={handleProbeChange} />
                     <p>Probe</p>
                 </div>
 
                 <div>
-                    <input type="checkbox" />
+                    <input
+                        type="checkbox"
+                        checked={Assemblycheckbox}
+                        onChange={handleAssemblyChange} />
                     <p>Assembly</p>
                 </div>
 
                 <div>
-                    <input type="checkbox" />
+                    <input type="checkbox"
+                        checked={Testcheckbox}
+                        onChange={handleTestChange} />
                     <p>Test</p>
                 </div>
             </div>
