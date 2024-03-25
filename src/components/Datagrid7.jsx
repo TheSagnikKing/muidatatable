@@ -455,7 +455,7 @@ const Datagrid7 = () => {
 
                 setNewFilterData(newdata)
             }
- 
+
         } else {
             setNewFilterData([])
         }
@@ -554,7 +554,7 @@ const Datagrid7 = () => {
         setBoxOpen(true)
     }
 
-    console.log(diereceptcheckbox,"diecheck")
+    console.log(diereceptcheckbox, "diecheck")
 
     const resetHandler = () => {
         setDiereceiptcheckbox(false)
@@ -564,6 +564,8 @@ const Datagrid7 = () => {
         setTestCheckbox(false)
         setNewFilterData([])
     }
+
+    const [newdiv, setNewDiv] = useState(false)
 
     return (
         <main className='data7_container' >
@@ -582,10 +584,11 @@ const Datagrid7 = () => {
                         <div><IoSearch /></div>
                     </div>
 
-                    <div className='data7_top_selectdatebx' onClick={resetHandler} style={{ width: "250px", height: "44px" }}>
-                        
-                        <RangePicker onChange={onChange} open={openDateBox} onOpenChange={handleOpenChange} value={date}/>
-
+                    {/* <div className='data7_top_selectdatebx' onClick={resetHandler} style={{ width: "250px", height: "44px" }} >
+                        <button onClick={() => setNewDiv(prev => !prev)}>open/close</button>
+                        {newdiv && <div>
+                        <RangePicker onChange={onChange} open={true} onOpenChange={handleOpenChange} value={date}/>
+                        </div>}
                         {/* {openDateBox && <div className='data7_top_selectdatebox_filterbox' onMouseEnter={openHandler} onMouseLeave={() => setBoxOpen(false)}>
                             <div>
                                 <input
@@ -627,8 +630,22 @@ const Datagrid7 = () => {
                                     onChange={handleTestChange} />
                                 <p>Test</p>
                             </div>
-                        </div>} */}
+                        </div>} 
+                    </div> */}
+
+                    <div style={{ position: "relative" }}>
+                        <button onClick={() => setNewDiv(prev => !prev)}>open/close</button>
+                        {newdiv && <div style={{
+                            background: "red", height: "400px", width: "540px",
+                            marginTop: "50px", zIndex: "2",
+                            position: "absolute",
+                            top: "20px",
+                            left: "0px"
+                        }}>
+                            <RangePicker onChange={onChange} open={true} onOpenChange={handleOpenChange} value={date} />
+                        </div>}
                     </div>
+
 
                     <div className='data7_top_showhide_bx' >
                         <div onClick={() => setShowColumn((prev) => !prev)}>
@@ -1390,7 +1407,7 @@ const Datagrid7 = () => {
                                 <p>of {totalPages}</p>
                             </div>
                         </div> : <div>
-                            
+
                             <div>
                                 <button onClick={handlePrevPage} disabled={currentPage === 1}><FaChevronLeft /></button>
                                 <span>{currentPage} of {totalPages}</span>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 *{
   margin: 0px;
@@ -6,14 +6,6 @@
   box-sizing: border-box;
   font-family: "Rubik", sans-serif;
 }
-
-/* :root{
-  --bg-color-1: #ff02023f;
-  --bg-color-2: #ffb7023f;
-  --bg-color-3: #41ff023f;
-  --bg-color-4: #5f02ff3f;
-} */
-
 
 :root{
   --bg-color-1:#0d1d7e1a;
@@ -107,15 +99,6 @@
   margin: auto;
 }
 
-/* .css-5wly58-MuiDataGrid-root .MuiDataGrid-columnHeader{
-  padding: 0px;
-  background-color: none;
-}
-
-.css-5wly58-MuiDataGrid-root .MuiDataGrid-columnHeader--moving {
-  background-color: #fff !important;
-} */
-
 
 
 .diff_div_3{
@@ -143,7 +126,6 @@
   background-color: #efefef;
   border: none;
   width: 48px;
-  /* height: 20px; */
   font-size: 12px;
   display: flex;
   justify-content: center;
@@ -157,7 +139,6 @@
   position: relative;
   width: 80px;
   background-color: #1e293b;
-  /* background-color: ; */
   border-right: 1px solid white;
 }
 
@@ -184,7 +165,6 @@
   background-color: #efefef;
   border: none;
   width: 23px;
-  /* height: 20px; */
   font-size: 12px;
   display: flex;
   justify-content: center;
@@ -207,13 +187,10 @@
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid white;
-  /* border-left: 1px solid white;
-  border-right: 1px solid white; */
+
 }
 
-/* .css-117ylda-MuiTableCell-root{
-  border-bottom: 1px solid white !important;
-} */
+
 
 .he{
   margin-top: -80px;
@@ -223,4 +200,4 @@
   height: 40px;
   padding-inline: 10px;
   margin-left: -20px;
-}
+} */

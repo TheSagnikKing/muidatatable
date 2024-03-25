@@ -1,47 +1,28 @@
-:root{
-    font-size: 95.5%;
+.css-16b5y55-MuiPickersLayout-contentWrapper,.css-4pax7l-MuiPickersLayout-root .MuiPickersLayout-toolbar {
+    width: 630px;
 }
 
-.css-1ex1afd-MuiTableCell-root{
-    padding: 0px !important;
-    text-align: center !important;
-    border-bottom: none !important;
-    height: 60px !important;
-    background-color: red !important;
-}
-
-.css-1w1rijm-MuiButtonBase-root-MuiButton-root {
-    background-color: rgb(67, 112, 203) !important;
-    padding: 0px !important;
-    width: 130px !important;
-    border-radius: 0px !important;
-    height: 60px !important;
-}
-
-.css-1ygcj2i-MuiTableCell-root{
-    padding: 0px !important;
-    border-bottom: none !important;
-    border-radius: 0px !important;
-    background-color: rgb(240, 208, 208) !important; 
-}
-
-.grid5_div_col_body{
-    background-color: rgb(240, 208, 208);
-    border-right: 2px solid black;
-    height: 60px;
+.year-navigation-buttons {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 130px;
-}
+    justify-content: space-between; /* Align buttons horizontally */
+    margin: 5px 0; /* Add some spacing */
+  }
+  
+  .year-navigation-buttons button {
+    /* Style your buttons here (e.g., border, padding) */
+  }
+  
+  .css-4pax7l-MuiPickersLayout-root .MuiPickersLayout-actionBar{
+    width: 650px;
+  }
 
-.grid5_div_col_body>p{
-    
-}
 
-@media((min-width:0px) and (max-width:900px)){
-    .tss-1vd39vz-MUIDataTableBodyCell-stackedCommon:nth-last-of-type(2) {
-        border-bottom: none;
-        display: none !important;
-    }
-}
+  /* OPTIONAL CSS */
+
+  .css-4pax7l-MuiPickersLayout-root,.css-1aj9me-MuiPickersLayout-root{
+    display: block !important;
+    width: 630px;
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px !important;
+    border-radius: 10px;
+    margin: 50px;
+  }
