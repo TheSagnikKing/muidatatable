@@ -560,6 +560,33 @@ select {
     border: 1px solid #a8abc2;;
 }
 
+.rmdp-range {
+    background-color: var(--bg-color-2) !important;
+    box-shadow: 0 0 1px #8798ad !important;
+    color: red !important;
+}
+
+.rmdp-day.rmdp-today span {
+    background-color: #ff7f7f !important;
+    color: #fff;
+}
+
+.rmdp-week-day {
+    color: #d90000 !important;
+    cursor: default;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.rmdp-week>div:nth-child(7){
+    color: gray !important;
+}
+
+.rmdp-week>div:nth-child(1){
+    color: gray !important;
+}
+
+
 @media((min-width:0px) and (max-width:430px)){
     .data7_csv{
         display: flex;
