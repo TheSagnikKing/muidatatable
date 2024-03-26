@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Datagrid7.css'
 import { FaArrowUp, FaChevronLeft, FaChevronRight, FaPlus, FaSortDown } from "react-icons/fa6";
 import { fakedata } from './fakedata';
@@ -9,6 +9,7 @@ import { IoIosLink } from "react-icons/io";
 
 import { DatePicker } from 'antd';
 import { getISOWeek } from 'date-fns';
+import { Calendar, DateObject } from "react-multi-date-picker";
 
 const { RangePicker } = DatePicker;
 
@@ -256,32 +257,27 @@ const Datagrid7 = () => {
         }
     };
 
+
+    const [selectedDates, setSelectedDates] = useState([]);
+
+    const handleDateChange = (dates) => {
+        setSelectedDates(dates);
+    };
+
+
     useEffect(() => {
-        // Accessing the date objects from the array
-        const startDateObject = date?.[0]?.$d;
-        const endDateObject = date?.[1]?.$d;
-
-        if (startDateObject && endDateObject) {
-            // Formatting the dates in "YYYY-MM-DD" format
-            const formatDateString = (dateObject) => {
-                const year = dateObject.getFullYear();
-                const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-                const day = dateObject.getDate().toString().padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            };
-
-            const startDateFormatted = formatDateString(startDateObject);
-            const endDateFormatted = formatDateString(endDateObject);
-
-            console.log('Start Date:', startDateFormatted);
-            console.log('End Date:', endDateFormatted);
-
-            setStartDate(startDateFormatted);
-            setEndDate(endDateFormatted);
-        } else {
-            console.log('Error: Dates are null');
+        const formattedDates = selectedDates.map(date => date.format("YYYY-MM-DD"));
+    
+        // Assuming you want to set the first date as startDate and the second date as endDate
+        if (formattedDates.length === 2) {
+            setStartDate(formattedDates[0]);
+            setEndDate(formattedDates[1]);
         }
-    }, [date]);
+    }, [selectedDates]);
+
+
+    console.log("StartDate ",startDate)
+    console.log("End Date ",endDate)
 
 
     const applyFilter = (dataArray, filterValue) => {
@@ -299,59 +295,6 @@ const Datagrid7 = () => {
     const [Assemblycheckbox, setAssemblyCheckbox] = useState(false)
     const [Testcheckbox, setTestCheckbox] = useState(false)
 
-    // console.log("Diereceptcheckbox ", diereceptcheckbox)
-    // console.log("BumpCheckbox ", Bumpcheckbox)
-
-    // const applyFilterByDateRange = (dataArray, startDateValue, endDateValue) => {
-    //     return dataArray.filter((item) => {
-    //         const dieReceiptDate = new Date(item.DieReceipt);
-    // const BumpInDate = new Date(item.BumpIn);
-    // const BumpOutDate = new Date(item.BumpOut);
-    // const ProbeInDate = new Date(item.ProbeIn);
-    // const ProbeOutDate = new Date(item.ProbeOut);
-    //         const AssemblyInDate = new Date(item.AssemblyIn);
-    //         const AssemblyOutDate = new Date(item.AssemblyOut);
-    //         const TestInDate = new Date(item.TestIn);
-    //         const TestOutDate = new Date(item.TestOut);
-    //         const ShipOutDate = new Date(item.ShipOut);
-
-    //         const startDate = new Date(startDateValue);
-    //         const endDate = new Date(endDateValue);
-
-    //         let filterResult = (diereceptcheckbox && (dieReceiptDate >= startDate && dieReceiptDate <= endDate)) ||
-    // (Bumpcheckbox && (BumpInDate >= startDate && BumpInDate <= endDate)) ||
-    // (Bumpcheckbox && (BumpOutDate >= startDate && BumpOutDate <= endDate)) ||
-    // (ProbeInDate >= startDate && ProbeInDate <= endDate) ||
-    // (ProbeOutDate >= startDate && ProbeOutDate <= endDate) ||
-    //             (AssemblyInDate >= startDate && AssemblyInDate <= endDate) ||
-    //             (AssemblyOutDate >= startDate && AssemblyOutDate <= endDate) ||
-    //             (TestInDate >= startDate && TestInDate <= endDate) ||
-    //             (TestOutDate >= startDate && TestOutDate <= endDate) ||
-    //             (ShipOutDate >= startDate && ShipOutDate <= endDate);
-
-    //         // Apply additional filters here if needed based on other checkboxes
-
-    //         return filterResult;
-    //     });
-    // };
-
-
-    // const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate);
-    // console.log(filteredData)
-
-    // const handleDiereceiptChange = () => {
-    //     setDiereceiptcheckbox(prev => !prev);
-    //     if (!diereceptcheckbox) {
-    //         alert("Diereceipt value is true");
-    //     }
-    // };
-
-    // const handleBumpChange = () => {
-    //     setBumpCheckbox(prev => !prev);
-    //     if (!Bumpcheckbox) {
-    //         alert("Bump value is true");
-    //     }
-    // };
 
 
     const [newFilterData, setNewFilterData] = useState([])
@@ -508,9 +451,7 @@ const Datagrid7 = () => {
 
     const removeFilter = () => {
         setFilterBy("")
-        setStartDate("");
-        setEndDate("");
-        setDate(null);
+        setSelectedDates([])
         setDiereceiptcheckbox(false)
         setBumpCheckbox(false)
         setProbeCheckbox(false)
@@ -518,6 +459,7 @@ const Datagrid7 = () => {
         setTestCheckbox(false)
         setStartDate("")
         setEndDate("")
+        setOpenRangeCalender(false)
 
     }
 
@@ -556,16 +498,16 @@ const Datagrid7 = () => {
 
     console.log(diereceptcheckbox, "diecheck")
 
-    const resetHandler = () => {
-        setDiereceiptcheckbox(false)
-        setBumpCheckbox(false)
-        setProbeCheckbox(false)
-        setAssemblyCheckbox(false)
-        setTestCheckbox(false)
-        setNewFilterData([])
-    }
+    // const resetHandler = () => {
+    //     setDiereceiptcheckbox(false)
+    //     setBumpCheckbox(false)
+    //     setProbeCheckbox(false)
+    //     setAssemblyCheckbox(false)
+    //     setTestCheckbox(false)
+    //     setNewFilterData([])
+    // }
 
-    const [newdiv, setNewDiv] = useState(false)
+    const [openRangeCalender, setOpenRangeCalender] = useState(false)
 
     return (
         <main className='data7_container' >
@@ -584,67 +526,86 @@ const Datagrid7 = () => {
                         <div><IoSearch /></div>
                     </div>
 
-                    {/* <div className='data7_top_selectdatebx' onClick={resetHandler} style={{ width: "250px", height: "44px" }} >
-                        <button onClick={() => setNewDiv(prev => !prev)}>open/close</button>
-                        {newdiv && <div>
-                        <RangePicker onChange={onChange} open={true} onOpenChange={handleOpenChange} value={date}/>
-                        </div>}
-                        {/* {openDateBox && <div className='data7_top_selectdatebox_filterbox' onMouseEnter={openHandler} onMouseLeave={() => setBoxOpen(false)}>
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    checked={diereceptcheckbox}
-                                    onChange={handleDiereceiptChange}
-                                />
-                                <p>Die Receipt</p>
-                            </div>
+                    <div className='data7_top_selectdatebx' onClick={() => setOpenRangeCalender(prev => !prev)}>
+                        <div>
+                            <div>Select Dates</div>
+                            <div><FaSortDown /></div>
+                        </div>
 
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    checked={Bumpcheckbox}
-                                    onChange={handleBumpChange}
-                                />
-                                <p>Bump</p>
-                            </div>
+                        {
+                            openRangeCalender && <main className='data7_top_selectdatebx_calender' onClick={(e) => e.stopPropagation()}>
+                                <div>
+                                    <Calendar
+                                        range
+                                        numberOfMonths={2}
+                                        value={selectedDates}
+                                        onChange={handleDateChange}
+                                        plugins={[
+                                            // colors({ defaultColor: "green" })
+                                        ]}
+                                    />
+                                </div>
 
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    checked={Probecheckbox}
-                                    onChange={handleProbeChange} />
-                                <p>Probe</p>
-                            </div>
+                                <div>
+                                    {selectedDates && (
+                                        <p>
+                                            {selectedDates.map((date, index) => (
+                                                <React.Fragment key={index}>
+                                                    {index !== 0 && " - "}
+                                                    {date.format("YYYY-MM-DD")}
+                                                </React.Fragment>
+                                            ))}
+                                        </p>
+                                    )}
 
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    checked={Assemblycheckbox}
-                                    onChange={handleAssemblyChange} />
-                                <p>Assembly</p>
-                            </div>
+                                </div>
 
-                            <div>
-                                <input type="checkbox"
-                                    checked={Testcheckbox}
-                                    onChange={handleTestChange} />
-                                <p>Test</p>
-                            </div>
-                        </div>} 
-                    </div> */}
+                                <div>
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            checked={diereceptcheckbox}
+                                            onChange={handleDiereceiptChange}
+                                        />
+                                        <p>Die Receipt</p>
+                                    </div>
 
-                    <div style={{ position: "relative" }}>
-                        <button onClick={() => setNewDiv(prev => !prev)}>open/close</button>
-                        {newdiv && <div style={{
-                            background: "red", height: "400px", width: "540px",
-                            marginTop: "50px", zIndex: "2",
-                            position: "absolute",
-                            top: "20px",
-                            left: "0px"
-                        }}>
-                            <RangePicker onChange={onChange} open={true} onOpenChange={handleOpenChange} value={date} />
-                        </div>}
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            checked={Bumpcheckbox}
+                                            onChange={handleBumpChange}
+                                        />
+                                        <p>Bump</p>
+                                    </div>
+
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            checked={Probecheckbox}
+                                            onChange={handleProbeChange} />
+                                        <p>Probe</p>
+                                    </div>
+
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            checked={Assemblycheckbox}
+                                            onChange={handleAssemblyChange} />
+                                        <p>Assembly</p>
+                                    </div>
+
+                                    <div>
+                                        <input type="checkbox"
+                                            checked={Testcheckbox}
+                                            onChange={handleTestChange} />
+                                        <p>Test</p>
+                                    </div>
+                                </div>
+                            </main>
+                        }
                     </div>
+
 
 
                     <div className='data7_top_showhide_bx' >
@@ -784,9 +745,85 @@ const Datagrid7 = () => {
                     <div><IoSearch /></div>
                 </div>
 
-                <div className='data7_top_selectdatebx'>
-                    <RangePicker onChange={onChange} />
-                </div>
+                <div className='data7_top_mobile_selectdatebx' onClick={() => setOpenRangeCalender(prev => !prev)}>
+                        <div>
+                            <div>Select Dates</div>
+                            <div><FaSortDown /></div>
+                        </div>
+
+                        {
+                            openRangeCalender && <main className='data7_top_mobile_selectdatebx_calender' onClick={(e) => e.stopPropagation()}>
+                                <div>
+                                    <Calendar
+                                        range
+                                        numberOfMonths={2}
+                                        value={selectedDates}
+                                        onChange={handleDateChange}
+                                        plugins={[
+                                            // colors({ defaultColor: "green" })
+                                        ]}
+                                    />
+                                </div>
+
+                                <div>
+                                    {selectedDates && (
+                                        <p>
+                                            {selectedDates.map((date, index) => (
+                                                <React.Fragment key={index}>
+                                                    {index !== 0 && " - "}
+                                                    {date.format("YYYY-MM-DD")}
+                                                </React.Fragment>
+                                            ))}
+                                        </p>
+                                    )}
+
+                                </div>
+
+                                <div>
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            checked={diereceptcheckbox}
+                                            onChange={handleDiereceiptChange}
+                                        />
+                                        <p>Die Receipt</p>
+                                    </div>
+
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            checked={Bumpcheckbox}
+                                            onChange={handleBumpChange}
+                                        />
+                                        <p>Bump</p>
+                                    </div>
+
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            checked={Probecheckbox}
+                                            onChange={handleProbeChange} />
+                                        <p>Probe</p>
+                                    </div>
+
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            checked={Assemblycheckbox}
+                                            onChange={handleAssemblyChange} />
+                                        <p>Assembly</p>
+                                    </div>
+
+                                    <div>
+                                        <input type="checkbox"
+                                            checked={Testcheckbox}
+                                            onChange={handleTestChange} />
+                                        <p>Test</p>
+                                    </div>
+                                </div>
+                            </main>
+                        }
+                    </div>
 
                 <div className='data7_top_showhide_bx'>
                     <div onClick={() => setShowColumn((prev) => !prev)}>
@@ -1442,7 +1479,7 @@ const Datagrid7 = () => {
                 </div>
             </div>
 
-            <div className='data7_top_selectdatebox_filterbox_2'>
+            {/* <div className='data7_top_selectdatebox_filterbox_2'>
                 <div>
                     <input
                         type="checkbox"
@@ -1483,7 +1520,7 @@ const Datagrid7 = () => {
                         onChange={handleTestChange} />
                     <p>Test</p>
                 </div>
-            </div>
+            </div> */}
         </main >
     )
 }
