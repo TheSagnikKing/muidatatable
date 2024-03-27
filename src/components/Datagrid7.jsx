@@ -305,10 +305,10 @@ const Datagrid7 = () => {
         if (!checkboxState) {
 
             if (message === 'Diereceipt') {
-                setBumpCheckbox(false)
-                setProbeCheckbox(false)
-                setAssemblyCheckbox(false)
-                setTestCheckbox(false)
+                // setBumpCheckbox(false)
+                // setProbeCheckbox(false)
+                // setAssemblyCheckbox(false)
+                // setTestCheckbox(false)
 
                 const newdata = dataArray.filter((item) => {
                     const dieReceiptDate = new Date(item.DieReceipt);
@@ -323,10 +323,10 @@ const Datagrid7 = () => {
                 setNewFilterData(newdata)
 
             } else if (message === 'Bump') {
-                setDiereceiptcheckbox(false)
-                setProbeCheckbox(false)
-                setAssemblyCheckbox(false)
-                setTestCheckbox(false)
+                // setDiereceiptcheckbox(false)
+                // setProbeCheckbox(false)
+                // setAssemblyCheckbox(false)
+                // setTestCheckbox(false)
 
                 const newdata = dataArray.filter((item) => {
                     const BumpInDate = new Date(item.BumpIn);
@@ -342,10 +342,10 @@ const Datagrid7 = () => {
                 setNewFilterData(newdata)
 
             } else if (message === 'Probe') {
-                setDiereceiptcheckbox(false)
-                setBumpCheckbox(false)
-                setAssemblyCheckbox(false)
-                setTestCheckbox(false)
+                // setDiereceiptcheckbox(false)
+                // setBumpCheckbox(false)
+                // setAssemblyCheckbox(false)
+                // setTestCheckbox(false)
 
                 const newdata = dataArray.filter((item) => {
                     const ProbeInDate = new Date(item.ProbeIn);
@@ -361,10 +361,10 @@ const Datagrid7 = () => {
                 setNewFilterData(newdata)
 
             } else if (message === 'Assembly') {
-                setDiereceiptcheckbox(false)
-                setBumpCheckbox(false)
-                setTestCheckbox(false)
-                setProbeCheckbox(false)
+                // setDiereceiptcheckbox(false)
+                // setBumpCheckbox(false)
+                // setTestCheckbox(false)
+                // setProbeCheckbox(false)
 
                 const newdata = dataArray.filter((item) => {
                     const AssemblyInDate = new Date(item.AssemblyIn);
@@ -380,10 +380,10 @@ const Datagrid7 = () => {
                 setNewFilterData(newdata)
 
             } else if (message === 'Test') {
-                setDiereceiptcheckbox(false)
-                setBumpCheckbox(false)
-                setAssemblyCheckbox(false)
-                setProbeCheckbox(false)
+                // setDiereceiptcheckbox(false)
+                // setBumpCheckbox(false)
+                // setAssemblyCheckbox(false)
+                // setProbeCheckbox(false)
 
                 const newdata = dataArray.filter((item) => {
                     const TestInDate = new Date(item.TestIn);
@@ -533,6 +533,8 @@ const Datagrid7 = () => {
         setShowTestOut((prev) => !prev)
         setShowShipOut((prev) => !prev)
     }
+
+    const [ checkdatafilterArray, setCheckDataFilterArray ] = useState([])
 
     return (
         <main className='data7_container' >
