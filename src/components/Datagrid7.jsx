@@ -135,7 +135,9 @@ const Datagrid7 = () => {
 
     const sortedData = sortData(data, sortBy, sortOrder, copydata);
 
-    const dataPerPage = 5;
+    const [dataPerPageState, setDataPerPageState] = useState(4)
+
+    const dataPerPage = dataPerPageState;
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -304,10 +306,10 @@ const Datagrid7 = () => {
             const AssemblyOutDate = new Date(item.AssemblyOut);
             const TestInDate = new Date(item.TestIn);
             const TestOutDate = new Date(item.TestOut);
-    
+
             const startDate = new Date(startDateValue);
             const endDate = new Date(endDateValue);
-    
+
             let filterResult = (
                 (diereceptcheckbox && (dieReceiptDate >= startDate && dieReceiptDate <= endDate)) ||
                 (Bumpcheckbox && (
@@ -327,12 +329,12 @@ const Datagrid7 = () => {
                     (TestOutDate >= startDate && TestOutDate <= endDate)
                 ))
             );
-                
+
             return filterResult;
         });
     };
-    
-    
+
+
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox);
 
 
@@ -350,7 +352,8 @@ const Datagrid7 = () => {
 
     }
 
-    const dataPerFilterPage = 5;
+
+    const dataPerFilterPage = dataPerPageState;
 
     const [currentFilterPage, setCurrentFilterPage] = useState(1);
 
@@ -382,7 +385,7 @@ const Datagrid7 = () => {
     const [DurationCheck, setDurationCheck] = useState(false)
     const [DatesCheck, setDatesCheck] = useState(false)
 
-    console.log("DurationCheck  ",DurationCheck)
+    console.log("DurationCheck  ", DurationCheck)
 
 
     const DatesCheckClicked = (e) => {
@@ -488,7 +491,7 @@ const Datagrid7 = () => {
                                             type="checkbox"
                                             checked={Probecheckbox}
                                             onChange={(e) => setProbeCheckbox((prev) => !prev)}
-                                            />
+                                        />
                                         <p>Probe</p>
                                     </div>
 
@@ -497,7 +500,7 @@ const Datagrid7 = () => {
                                             type="checkbox"
                                             checked={Assemblycheckbox}
                                             onChange={(e) => setAssemblyCheckbox((prev) => !prev)}
-                                            />
+                                        />
                                         <p>Assembly</p>
                                     </div>
 
@@ -505,7 +508,7 @@ const Datagrid7 = () => {
                                         <input type="checkbox"
                                             checked={Testcheckbox}
                                             onChange={(e) => setTestCheckbox((prev) => !prev)}
-                                            />
+                                        />
                                         <p>Test</p>
                                     </div>
                                 </div>
@@ -608,7 +611,7 @@ const Datagrid7 = () => {
                                     <input
                                         type="checkbox"
                                         checked={diereceptcheckbox}
-                                            onChange={(e) => setDiereceiptcheckbox((prev) => !prev)}
+                                        onChange={(e) => setDiereceiptcheckbox((prev) => !prev)}
                                     />
                                     <p>Die Receipt</p>
                                 </div>
@@ -1162,27 +1165,41 @@ const Datagrid7 = () => {
                                 <button onClick={handleNextFilterPage} disabled={currentFilterPage === totalFilterPages || filteredData.length === 0}><FaChevronRight /></button>
                             </div>
                             <div>
-                                <p>Showing of </p>
-                                <select
-                                    value={`${filterStartIndex + 1} - ${filterEndIndex}`}
-                                    onChange={(e) => setCurrentFilterPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerFilterPage))}
-                                >
-                                    {Array.from({ length: totalFilterPages }, (_, index) => {
-                                        const start = index * dataPerFilterPage + 1;
-                                        const end = Math.min((index + 1) * dataPerFilterPage, filteredData.length);
-                                        const optionValue = `${start} - ${end}`;
-                                        return (
-                                            <option
-                                                key={index}
-                                                value={optionValue}
-                                                style={{ background: optionValue === `${filterStartIndex + 1} - ${filterEndIndex}` ? "var(--bg-color-2)" : "inherit" }}
-                                            >
-                                                {optionValue}
-                                            </option>
-                                        );
-                                    })}
-                                </select>
-                                <p>of {totalPages}</p>
+                                <div>
+                                    <p>Rows Per Page</p>
+                                    <select
+                                        value={dataPerPageState}
+                                        onChange={(e) => setDataPerPageState(e.target.value)}
+                                    >
+                                        <option value="2" style={{ backgroundColor: dataPerPageState == 2 ? 'var(--bg-color-2)' : 'initial' }}>2</option>
+                                        <option value="4" style={{ backgroundColor: dataPerPageState == 4 ? 'var(--bg-color-2)' : 'initial' }}>4</option>
+                                        <option value="6" style={{ backgroundColor: dataPerPageState == 6 ? 'var(--bg-color-2)' : 'initial' }}>6</option>
+                                        <option value="8" style={{ backgroundColor: dataPerPageState == 8 ? 'var(--bg-color-2)' : 'initial' }}>8</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <p>Showing of </p>
+                                    <select
+                                        value={`${filterStartIndex + 1} - ${filterEndIndex}`}
+                                        onChange={(e) => setCurrentFilterPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerFilterPage))}
+                                    >
+                                        {Array.from({ length: totalFilterPages }, (_, index) => {
+                                            const start = index * dataPerFilterPage + 1;
+                                            const end = Math.min((index + 1) * dataPerFilterPage, filteredData.length);
+                                            const optionValue = `${start} - ${end}`;
+                                            return (
+                                                <option
+                                                    key={index}
+                                                    value={optionValue}
+                                                    style={{ background: optionValue === `${filterStartIndex + 1} - ${filterEndIndex}` ? "var(--bg-color-2)" : "inherit" }}
+                                                >
+                                                    {optionValue}
+                                                </option>
+                                            );
+                                        })}
+                                    </select>
+                                    <p>of {totalPages}</p>
+                                </div>
                             </div>
                         </div> : <div>
 
@@ -1191,77 +1208,51 @@ const Datagrid7 = () => {
                                 <span>{currentPage} of {totalPages}</span>
                                 <button onClick={handleNextPage} disabled={currentPage === totalPages}><FaChevronRight /></button>
                             </div>
+
                             <div>
-                                <p>Showing of </p>
-                                <select
-                                    value={`${startIndex + 1} - ${endIndex}`}
-                                    onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
-                                >
-                                    {Array.from({ length: totalPages }, (_, index) => {
-                                        const start = index * dataPerPage + 1;
-                                        const end = Math.min((index + 1) * dataPerPage, sortedData.length);
-                                        const optionValue = `${start} - ${end}`;
-                                        return (
-                                            <option
-                                                key={index}
-                                                value={optionValue}
-                                                style={{ background: optionValue === `${startIndex + 1} - ${endIndex}` ? "var(--bg-color-2)" : "inherit" }}
-                                            >
-                                                {optionValue}
-                                            </option>
-                                        );
-                                    })}
-                                </select>
-                                <p>of {totalPages}</p>
+                                <div>
+                                    <p>Rows Per Page</p>
+                                    <select
+                                        value={dataPerPageState}
+                                        onChange={(e) => setDataPerPageState(e.target.value)}
+                                    >
+                                        <option value="2" style={{ backgroundColor: dataPerPageState == 2 ? 'var(--bg-color-2)' : 'initial' }}>2</option>
+                                        <option value="4" style={{ backgroundColor: dataPerPageState == 4 ? 'var(--bg-color-2)' : 'initial' }}>4</option>
+                                        <option value="6" style={{ backgroundColor: dataPerPageState == 6 ? 'var(--bg-color-2)' : 'initial' }}>6</option>
+                                        <option value="8" style={{ backgroundColor: dataPerPageState == 8 ? 'var(--bg-color-2)' : 'initial' }}>8</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <p>Showing of </p>
+                                    <select
+                                        value={`${startIndex + 1} - ${endIndex}`}
+                                        onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
+                                    >
+                                        {Array.from({ length: totalPages }, (_, index) => {
+                                            const start = index * dataPerPage + 1;
+                                            const end = Math.min((index + 1) * dataPerPage, sortedData.length);
+                                            const optionValue = `${start} - ${end}`;
+                                            return (
+                                                <option
+                                                    key={index}
+                                                    value={optionValue}
+                                                    style={{ background: optionValue === `${startIndex + 1} - ${endIndex}` ? "var(--bg-color-2)" : "inherit" }}
+                                                >
+                                                    {optionValue}
+                                                </option>
+                                            );
+                                        })}
+                                    </select>
+                                    <p>of {totalPages}</p>
+                                </div>
                             </div>
+
                         </div>
                     }
 
                 </div>
             </div>
 
-            {/* <div className='data7_top_selectdatebox_filterbox_2'>
-                <div>
-                    <input
-                        type="checkbox"
-                        checked={diereceptcheckbox}
-                        onChange={handleDiereceiptChange}
-                    />
-                    <p>Die Receipt</p>
-                </div>
-
-                <div>
-                    <input
-                        type="checkbox"
-                        checked={Bumpcheckbox}
-                        onChange={handleBumpChange}
-                    />
-                    <p>Bump</p>
-                </div>
-
-                <div>
-                    <input
-                        type="checkbox"
-                        checked={Probecheckbox}
-                        onChange={handleProbeChange} />
-                    <p>Probe</p>
-                </div>
-
-                <div>
-                    <input
-                        type="checkbox"
-                        checked={Assemblycheckbox}
-                        onChange={handleAssemblyChange} />
-                    <p>Assembly</p>
-                </div>
-
-                <div>
-                    <input type="checkbox"
-                        checked={Testcheckbox}
-                        onChange={handleTestChange} />
-                    <p>Test</p>
-                </div>
-            </div> */}
         </main >
     )
 }
