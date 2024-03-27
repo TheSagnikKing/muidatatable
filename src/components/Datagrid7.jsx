@@ -884,6 +884,42 @@ const Datagrid7 = () => {
                                 }
                             </div>
                         </div>}
+
+                        <div className='data7_content_head_same' onClick={() => toggleSortOrder('AssemblyOut')} style={{ borderLeft: "3px solid var(--bg-primary-color)" }}>
+                            <div>
+                                <p>BumpIn-Y</p>
+                                {sortBy === 'AssemblyOut' &&
+                                    (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                                }
+                            </div>
+                        </div>
+
+                        <div className='data7_content_head_same' onClick={() => toggleSortOrder('AssemblyOut')}>
+                            <div>
+                                <p>ProbeIn-Y</p>
+                                {sortBy === 'AssemblyOut' &&
+                                    (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                                }
+                            </div>
+                        </div>
+
+                        <div className='data7_content_head_same' onClick={() => toggleSortOrder('AssemblyOut')}>
+                            <div>
+                                <p>AssemblyIn-Y</p>
+                                {sortBy === 'AssemblyOut' &&
+                                    (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                                }
+                            </div>
+                        </div>
+
+                        <div className='data7_content_head_same' onClick={() => toggleSortOrder('AssemblyOut')}>
+                            <div>
+                                <p>TestIn-Y</p>
+                                {sortBy === 'AssemblyOut' &&
+                                    (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                                }
+                            </div>
+                        </div>
                     </div>
 
                     {
@@ -1149,6 +1185,69 @@ const Datagrid7 = () => {
                                             <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p>
                                         </div>
                                     </div>}
+
+                                    <div className='data7_content_body_same_yield' style={{ background: "var(--bg-color-3)", borderLeft: "3px solid var(--bg-primary-color)" }}>
+                                        {
+                                            typeof t.BumpInYield === 'object' ? (<div>
+                                                <div>
+                                                    <span style={{ color: "var(--progress-bg-color-1)" }}>{t?.BumpInYield?.BumpIn_Per}%</span> <span>{t?.BumpInYield?.BumpIn_Quantity}</span>
+                                                </div>
+                                                <div>
+                                                    <div style={{ width: t?.BumpInYield?.BumpIn_Per > 100 ? '100%' : `${t?.BumpInYield?.BumpIn_Per}%`, background: "var(--progress-bg-color-1)" }}></div>
+                                                </div>
+                                            </div>) : (
+                                                <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>-</span></div>
+                                            )
+                                        }
+
+                                    </div>
+
+                                    <div className='data7_content_body_same_yield' style={{ background: "var(--bg-color-3)" }}>
+                                        {
+                                            typeof t.ProbeInYield === 'object' ? (<div>
+                                                <div>
+                                                    <span style={{ color: "var(--progress-bg-color-2)" }}>{t?.ProbeInYield?.ProbeIn_Per}%</span> <span>{t?.ProbeInYield?.ProbeIn_Quantity}</span>
+                                                </div>
+                                                <div>
+                                                    <div style={{ width: t?.ProbeInYield?.ProbeIn_Per > 100 ? '100%' : `${t?.ProbeInYield?.ProbeIn_Per}%`, background: "var(--progress-bg-color-2)" }}></div>
+                                                </div>
+                                            </div>) : (
+                                                <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-2)" }}>-</span></div>
+                                            )
+                                        }
+                                    </div>
+
+                                    <div className='data7_content_body_same_yield' style={{ background: "var(--bg-color-4)" }}>
+                                        
+                                        {
+                                            typeof t.AssemblyInYield === 'object' ? (<div>
+                                                <div>
+                                                    <span style={{ color: "var(--progress-bg-color-3)" }}>{t?.AssemblyInYield?.AssemblyIn_Per}%</span> <span>{t?.AssemblyInYield?.AssemblyIn_Quantity}</span>
+                                                </div>
+                                                <div>
+                                                    <div style={{ width: t?.AssemblyInYield?.AssemblyIn_Per > 100 ? '100%' : `${t?.AssemblyInYield?.AssemblyIn_Per}%`, background: "var(--progress-bg-color-3)" }}></div>
+                                                </div>
+                                            </div>) : (
+                                                <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-3)" }}>-</span></div>
+                                            )
+                                        }
+                                    </div>
+
+                                    <div className='data7_content_body_same_yield' style={{ background: "var(--bg-color-5)" }}>
+                                        {
+                                            typeof t.TestInYield === 'object' ? (<div>
+                                                <div>
+                                                    <span style={{ color: "var(--progress-bg-color-4)" }}>{t?.TestInYield?.TestIn_Per}%</span> <span>{t?.TestInYield?.TestIn_Quantity}</span>
+                                                </div>
+                                                <div>
+                                                    <div style={{ width: t?.TestInYield?.TestIn_Per > 100 ? '100%' : `${t?.TestInYield?.TestIn_Per}%`, background: "var(--progress-bg-color-4)" }}></div>
+                                                </div>
+                                            </div>) : (
+                                                <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-4)" }}>-</span></div>
+                                            )
+                                        }  
+                                    </div>
+
                                 </div>
                             ))
                         )

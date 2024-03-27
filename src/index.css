@@ -26,6 +26,11 @@
   --text-color-6:  rgb(22, 230, 243);
 
   --bg-primary-color: #565a75;
+
+  --progress-bg-color-1: orangered;
+  --progress-bg-color-2:orange;
+  --progress-bg-color-3:#F6C324;
+  --progress-bg-color-4:#097969;
 }
 
 
