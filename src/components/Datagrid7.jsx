@@ -267,7 +267,7 @@ const Datagrid7 = () => {
 
     useEffect(() => {
         const formattedDates = selectedDates.map(date => date.format("YYYY-MM-DD"));
-    
+
         // Assuming you want to set the first date as startDate and the second date as endDate
         if (formattedDates.length === 2) {
             setStartDate(formattedDates[0]);
@@ -276,8 +276,8 @@ const Datagrid7 = () => {
     }, [selectedDates]);
 
 
-    console.log("StartDate ",startDate)
-    console.log("End Date ",endDate)
+    console.log("StartDate ", startDate)
+    console.log("End Date ", endDate)
 
 
     const applyFilter = (dataArray, filterValue) => {
@@ -498,16 +498,41 @@ const Datagrid7 = () => {
 
     console.log(diereceptcheckbox, "diecheck")
 
-    // const resetHandler = () => {
-    //     setDiereceiptcheckbox(false)
-    //     setBumpCheckbox(false)
-    //     setProbeCheckbox(false)
-    //     setAssemblyCheckbox(false)
-    //     setTestCheckbox(false)
-    //     setNewFilterData([])
-    // }
-
     const [openRangeCalender, setOpenRangeCalender] = useState(false)
+
+
+    const [DurationCheck, setDurationCheck] = useState(false)
+    const [DatesCheck, setDatesCheck] = useState(false)
+
+    console.log("DurationCheck  ",DurationCheck)
+
+
+    const DatesCheckClicked = (e) => {
+        setDatesCheck((prev) => !prev)
+        setShowday1((prev) => !prev)
+        setShowday2((prev) => !prev)
+        setShowday3((prev) => !prev)
+        setShowday4((prev) => !prev)
+        setShowday5((prev) => !prev)
+        setShowday6((prev) => !prev)
+        setShowday7((prev) => !prev)
+        setShowday8((prev) => !prev)
+        setShowday9((prev) => !prev)
+    }
+
+    const DurationCheckClicked = (e) => {
+        setDurationCheck((prev) => !prev)
+        setShowdiereceipt((prev) => !prev)
+        setShowBumpIn((prev) => !prev)
+        setShowBumpOut((prev) => !prev)
+        setShowProbeIn((prev) => !prev)
+        setShowProbeOut((prev) => !prev)
+        setShowAssemblyIn((prev) => !prev)
+        setShowAssemblyOut((prev) => !prev)
+        setShowTestIn((prev) => !prev)
+        setShowTestOut((prev) => !prev)
+        setShowShipOut((prev) => !prev)
+    }
 
     return (
         <main className='data7_container' >
@@ -616,110 +641,27 @@ const Datagrid7 = () => {
 
                         {showColumn && <div className='data7_top_showhide_bx_content'>
                             <div>
-                                <input type="checkbox" onClick={toggleHandle} checked={showtoggleall} />
-                                <p>Toggle All</p>
+                                <input
+                                    type="checkbox"
+                                    checked={DatesCheck}
+                                    onChange={(e) => DatesCheckClicked(e)}
+                                />
+                                <p>Dates</p>
                             </div>
 
                             <div>
-                                <input type="checkbox" onClick={() => setShowlotno((prev) => !prev)} checked={showlotno} />
-                                <p>Lot No.</p>
+                                <input
+                                    type="checkbox"
+                                    checked={DurationCheck}
+                                    onChange={(e) => DurationCheckClicked(e)}
+                                />
+                                <p>Duration</p>
                             </div>
 
                             <div>
-                                <input type="checkbox" onClick={() => setShowdiereceipt((prev) => !prev)} checked={showdiereceipt} />
-                                <p>DieReceipt</p>
+                                <input type="checkbox" />
+                                <p>Yield / Quantity</p>
                             </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday1((prev) => !prev)} checked={showday1} />
-                                <p>Day 1</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowBumpIn((prev) => !prev)} checked={showBumpIn} />
-                                <p>BumpIn</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday2((prev) => !prev)} checked={showday2} />
-                                <p>Day 2</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowBumpOut((prev) => !prev)} checked={showBumpOut} />
-                                <p>BumpOut</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday3((prev) => !prev)} checked={showday3} />
-                                <p>Day 3</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowProbeIn((prev) => !prev)} checked={showProbeIn} />
-                                <p>ProbeIn</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday4((prev) => !prev)} checked={showday4} />
-                                <p>Day 4</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowProbeOut((prev) => !prev)} checked={showProbeOut} />
-                                <p>ProbeOut</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday5((prev) => !prev)} checked={showday5} />
-                                <p>Day 5</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowAssemblyIn((prev) => !prev)} checked={showAssemblyIn} />
-                                <p>AssemblyIn</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday6((prev) => !prev)} checked={showday6} />
-                                <p>Day 6</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowAssemblyOut((prev) => !prev)} checked={showAssemblyOut} />
-                                <p>AssemblyOut</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday7((prev) => !prev)} checked={showday7} />
-                                <p>Day 7</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowTestIn((prev) => !prev)} checked={showTestIn} />
-                                <p>TestIn</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday8((prev) => !prev)} checked={showday8} />
-                                <p>Day 8</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowTestOut((prev) => !prev)} checked={showTestOut} />
-                                <p>TestOut</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowday9((prev) => !prev)} checked={showday9} />
-                                <p>Day 9</p>
-                            </div>
-
-                            <div>
-                                <input type="checkbox" onClick={() => setShowShipOut((prev) => !prev)} checked={showShipOut} />
-                                <p>ShipOut</p>
-                            </div>
-
                         </div>}
                     </div>
 
@@ -746,84 +688,84 @@ const Datagrid7 = () => {
                 </div>
 
                 <div className='data7_top_mobile_selectdatebx' onClick={() => setOpenRangeCalender(prev => !prev)}>
-                        <div>
-                            <div>Select Dates</div>
-                            <div><FaSortDown /></div>
-                        </div>
-
-                        {
-                            openRangeCalender && <main className='data7_top_mobile_selectdatebx_calender' onClick={(e) => e.stopPropagation()}>
-                                <div>
-                                    <Calendar
-                                        range
-                                        numberOfMonths={2}
-                                        value={selectedDates}
-                                        onChange={handleDateChange}
-                                        plugins={[
-                                            // colors({ defaultColor: "green" })
-                                        ]}
-                                    />
-                                </div>
-
-                                <div>
-                                    {selectedDates && (
-                                        <p>
-                                            {selectedDates.map((date, index) => (
-                                                <React.Fragment key={index}>
-                                                    {index !== 0 && " - "}
-                                                    {date.format("YYYY-MM-DD")}
-                                                </React.Fragment>
-                                            ))}
-                                        </p>
-                                    )}
-
-                                </div>
-
-                                <div>
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            checked={diereceptcheckbox}
-                                            onChange={handleDiereceiptChange}
-                                        />
-                                        <p>Die Receipt</p>
-                                    </div>
-
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            checked={Bumpcheckbox}
-                                            onChange={handleBumpChange}
-                                        />
-                                        <p>Bump</p>
-                                    </div>
-
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            checked={Probecheckbox}
-                                            onChange={handleProbeChange} />
-                                        <p>Probe</p>
-                                    </div>
-
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            checked={Assemblycheckbox}
-                                            onChange={handleAssemblyChange} />
-                                        <p>Assembly</p>
-                                    </div>
-
-                                    <div>
-                                        <input type="checkbox"
-                                            checked={Testcheckbox}
-                                            onChange={handleTestChange} />
-                                        <p>Test</p>
-                                    </div>
-                                </div>
-                            </main>
-                        }
+                    <div>
+                        <div>Select Dates</div>
+                        <div><FaSortDown /></div>
                     </div>
+
+                    {
+                        openRangeCalender && <main className='data7_top_mobile_selectdatebx_calender' onClick={(e) => e.stopPropagation()}>
+                            <div>
+                                <Calendar
+                                    range
+                                    numberOfMonths={2}
+                                    value={selectedDates}
+                                    onChange={handleDateChange}
+                                    plugins={[
+                                        // colors({ defaultColor: "green" })
+                                    ]}
+                                />
+                            </div>
+
+                            <div>
+                                {selectedDates && (
+                                    <p>
+                                        {selectedDates.map((date, index) => (
+                                            <React.Fragment key={index}>
+                                                {index !== 0 && " - "}
+                                                {date.format("YYYY-MM-DD")}
+                                            </React.Fragment>
+                                        ))}
+                                    </p>
+                                )}
+
+                            </div>
+
+                            <div>
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        checked={diereceptcheckbox}
+                                        onChange={handleDiereceiptChange}
+                                    />
+                                    <p>Die Receipt</p>
+                                </div>
+
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        checked={Bumpcheckbox}
+                                        onChange={handleBumpChange}
+                                    />
+                                    <p>Bump</p>
+                                </div>
+
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        checked={Probecheckbox}
+                                        onChange={handleProbeChange} />
+                                    <p>Probe</p>
+                                </div>
+
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        checked={Assemblycheckbox}
+                                        onChange={handleAssemblyChange} />
+                                    <p>Assembly</p>
+                                </div>
+
+                                <div>
+                                    <input type="checkbox"
+                                        checked={Testcheckbox}
+                                        onChange={handleTestChange} />
+                                    <p>Test</p>
+                                </div>
+                            </div>
+                        </main>
+                    }
+                </div>
 
                 <div className='data7_top_showhide_bx'>
                     <div onClick={() => setShowColumn((prev) => !prev)}>
@@ -833,110 +775,27 @@ const Datagrid7 = () => {
 
                     {showColumn && <div className='data7_top_showhide_bx_content'>
                         <div>
-                            <input type="checkbox" onClick={toggleHandle} checked={showtoggleall} />
-                            <p>Toggle All</p>
+                            <input
+                                type="checkbox"
+                                checked={DatesCheck}
+                                onChange={(e) => DatesCheckClicked(e)}
+                            />
+                            <p>Dates</p>
                         </div>
 
                         <div>
-                            <input type="checkbox" onClick={() => setShowlotno((prev) => !prev)} checked={showlotno} />
-                            <p>Lot No.</p>
+                            <input
+                                type="checkbox"
+                                checked={DurationCheck}
+                                onChange={(e) => DurationCheckClicked(e)}
+                            />
+                            <p>Duration</p>
                         </div>
 
                         <div>
-                            <input type="checkbox" onClick={() => setShowdiereceipt((prev) => !prev)} checked={showdiereceipt} />
-                            <p>DieReceipt</p>
+                            <input type="checkbox" />
+                            <p>Yield / Quantity</p>
                         </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday1((prev) => !prev)} checked={showday1} />
-                            <p>Day 1</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowBumpIn((prev) => !prev)} checked={showBumpIn} />
-                            <p>BumpIn</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday2((prev) => !prev)} checked={showday2} />
-                            <p>Day 2</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowBumpOut((prev) => !prev)} checked={showBumpOut} />
-                            <p>BumpOut</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday3((prev) => !prev)} checked={showday3} />
-                            <p>Day 3</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowProbeIn((prev) => !prev)} checked={showProbeIn} />
-                            <p>ProbeIn</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday4((prev) => !prev)} checked={showday4} />
-                            <p>Day 4</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowProbeOut((prev) => !prev)} checked={showProbeOut} />
-                            <p>ProbeOut</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday5((prev) => !prev)} checked={showday5} />
-                            <p>Day 5</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowAssemblyIn((prev) => !prev)} checked={showAssemblyIn} />
-                            <p>AssemblyIn</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday6((prev) => !prev)} checked={showday6} />
-                            <p>Day 6</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowAssemblyOut((prev) => !prev)} checked={showAssemblyOut} />
-                            <p>AssemblyOut</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday7((prev) => !prev)} checked={showday7} />
-                            <p>Day 7</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowTestIn((prev) => !prev)} checked={showTestIn} />
-                            <p>TestIn</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday8((prev) => !prev)} checked={showday8} />
-                            <p>Day 8</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowTestOut((prev) => !prev)} checked={showTestOut} />
-                            <p>TestOut</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowday9((prev) => !prev)} checked={showday9} />
-                            <p>Day 9</p>
-                        </div>
-
-                        <div>
-                            <input type="checkbox" onClick={() => setShowShipOut((prev) => !prev)} checked={showShipOut} />
-                            <p>ShipOut</p>
-                        </div>
-
                     </div>}
                 </div>
 

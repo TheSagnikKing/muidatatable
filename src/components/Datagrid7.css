@@ -37,7 +37,7 @@
 }
 
 .data7_top_showhide_bx_content {
-    height: 150px;
+    height: auto;
     width: 200px;
     background-color: #fff;
     margin-bottom: 30px;
@@ -50,12 +50,16 @@
     cursor: pointer;
     z-index: 100;
     overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .data7_top_showhide_bx_content>div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
     height: 30px;
 }
 
@@ -778,7 +782,7 @@ select {
 
     .data7_top_showhide_bx_content {
         width: 100%;
-        height: 200px;
+        height: auto;
     }
 
     .data7_top_selectdatebx{
