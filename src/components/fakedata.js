@@ -40,7 +40,11 @@ export const fakedata = [
         "TestInYield":{
             "TestIn_Per": 50,
             "TestIn_Quantity": 6712
-        }
+        },
+
+        "McmTakaD": 0,
+        "McmTaka": 6712,
+        "TakaRatio": 0
     },
     {
         "_id": 2,
@@ -65,12 +69,12 @@ export const fakedata = [
         "day9": 6,
         "ShipOut": "2024-02-23",
 
-        // "BumpInYield": {
-        //     "BumpIn_Per": 98.45,
-        //     "BumpIn_Quantity": 58569 
-        // },
+        "BumpInYield": {
+            "BumpIn_Per": 98.45,
+            "BumpIn_Quantity": 58569 
+        },
 
-        "BumpInYield": "-",
+        // "BumpInYield": "-",
         
         "ProbeInYield": {
             "ProbeIn_Per": 82.13,
@@ -86,6 +90,9 @@ export const fakedata = [
             "TestIn_Per": 91.27,
             "TestIn_Quantity": 7963
         },
+        "McmTakaD": 3846,
+        "McmTaka": 2569,
+        "TakaRatio": 59.95
     },
     // {
     //     "_id": 3,

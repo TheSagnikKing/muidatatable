@@ -205,6 +205,19 @@
 }
 
 
+.data7_content_body_same_taka{
+    width: 145px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.data7_content_body_same_taka>p{
+    font-size: 12px;
+    font-weight: 500;
+}
+
 .data7_content_body_diff {
     width: 50px;
     height: 100%;
@@ -583,7 +596,7 @@ select {
     left: 0px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
-    width: 525px;
+    width: 545px;
     padding: 10px;
     border-radius: 10px;
     z-index: 1000;
@@ -593,7 +606,7 @@ select {
 }
 
 .data7_top_selectdatebx_calender>div:nth-child(2){
-    background-color: #a8abc2;;
+    background-color: var(--bg-primary-color);
     width: 45%;
     margin: 0px auto;
     display: flex;
@@ -623,7 +636,6 @@ select {
 
 .rmdp-shadow{
     box-shadow: none !important;
-    border: 1px solid #a8abc2;;
 }
 
 .rmdp-range {
@@ -638,20 +650,73 @@ select {
 }
 
 .rmdp-week-day {
-    color: #d90000 !important;
+    color: gray !important;
     cursor: default;
     font-size: 13px;
     font-weight: 500;
 }
 
 .rmdp-week>div:nth-child(7){
-    color: gray !important;
+    color: #d90000 !important;
 }
 
 .rmdp-week>div:nth-child(1){
-    color: gray !important;
+    color: #d90000 !important;
 }
 
+.rmdp-day.rmdp-today span{
+    background-color: #d90000 !important;
+    border-radius: 4px !important;
+}
+
+.rmdp-day:not(.rmdp-disabled,.rmdp-day-hidden) span:hover {
+    background-color: #d90000 !important;
+    border-radius: 4px !important;
+}
+
+.rmdp-header-values{
+    background-color: var(--bg-primary-color);
+    color: #fff !important;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+.rmdp-day-picker>div:nth-child(1){
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.rmdp-day-picker>div:nth-child(2){
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.rmdp-arrow-container{
+    height: 30px !important;
+    width: 30px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+}
+
+.rmdp-arrow-container:hover{
+    background-color: #fff !important;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--bg-primary-color) !important;
+}
+
+.rmdp-right i{
+    margin-right: 0px !important;
+    -webkit-transform: rotate(0 deg)
+}
+
+.rmdp-arrow{
+    border-color:#727272 !important;
+    margin-top: 0px !important;
+}
 
 @media((min-width:0px) and (max-width:430px)){
     .data7_csv{

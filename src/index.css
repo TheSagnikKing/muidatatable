@@ -31,6 +31,16 @@
   --progress-bg-color-2:orange;
   --progress-bg-color-3:#F6C324;
   --progress-bg-color-4:#097969;
+
+  --border-color: #a8abc2;
+
+  --mcm-taka-d-bg-color:#fb2b0f1a;
+  --mcm-taka-bg-color: rgba(0, 128, 0, 0.372);
+  --mcm-taka-bg-color2: rgba(0, 128, 0, 0.783);
+
+  --mcm-taka-ratio-bg-color-1 : rgba(0, 128, 0, 0.783);
+  --mcm-taka-ratio-bg-color-2 : #FFD700;
+  --mcm-taka-ratio-bg-color-3 : #FEBE10;
 }
 
 
