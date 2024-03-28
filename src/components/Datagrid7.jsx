@@ -967,7 +967,7 @@ const Datagrid7 = () => {
                             </div>
                         </div>}
 
-                        {showShipOut && <div className='data7_content_head_same' onClick={() => toggleSortOrder('ShipOut')}>
+                        {showShipOut && <div className='data7_content_head_same' onClick={() => toggleSortOrder('ShipOut')} style={{width:"135px"}}>
                             <div>
                                 <p>ShipOut</p>
                                 {sortBy === 'ShipOut' &&
@@ -1199,7 +1199,7 @@ const Datagrid7 = () => {
                                         </div>
                                     </div>}
 
-                                    {showShipOut && <div className='data7_content_body_same'>
+                                    {showShipOut && <div className='data7_content_body_same' style={{width:"135px"}}>
                                         <div style={{ background: "var(--bg-color-6)" }}>
                                             <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p>
                                         </div>
@@ -1435,7 +1435,7 @@ const Datagrid7 = () => {
                                         </div>
                                     </div>}
 
-                                    {showShipOut && <div className='data7_content_body_same'>
+                                    {showShipOut && <div className='data7_content_body_same' style={{width:"135px"}}>
                                         <div style={{ background: "var(--bg-color-6)" }}>
                                             <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p>
                                         </div>
@@ -1569,7 +1569,7 @@ const Datagrid7 = () => {
                                         <option value="2" style={{ backgroundColor: dataPerPageState == 2 ? 'var(--bg-color-2)' : 'initial' }}>2</option>
                                         <option value="4" style={{ backgroundColor: dataPerPageState == 4 ? 'var(--bg-color-2)' : 'initial' }}>4</option>
                                         <option value="6" style={{ backgroundColor: dataPerPageState == 6 ? 'var(--bg-color-2)' : 'initial' }}>6</option>
-                                        <option value="8" style={{ backgroundColor: dataPerPageState == 8 ? 'var(--bg-color-2)' : 'initial' }}>8</option>
+                                        <option value="9" style={{ backgroundColor: dataPerPageState == 9 ? 'var(--bg-color-2)' : 'initial' }}>9</option>
                                     </select>
                                 </div>
                                 <div>
@@ -1614,7 +1614,7 @@ const Datagrid7 = () => {
                                         <option value="2" style={{ backgroundColor: dataPerPageState == 2 ? 'var(--bg-color-2)' : 'initial' }}>2</option>
                                         <option value="4" style={{ backgroundColor: dataPerPageState == 4 ? 'var(--bg-color-2)' : 'initial' }}>4</option>
                                         <option value="6" style={{ backgroundColor: dataPerPageState == 6 ? 'var(--bg-color-2)' : 'initial' }}>6</option>
-                                        <option value="8" style={{ backgroundColor: dataPerPageState == 8 ? 'var(--bg-color-2)' : 'initial' }}>8</option>
+                                        <option value="9" style={{ backgroundColor: dataPerPageState == 9 ? 'var(--bg-color-2)' : 'initial' }}>9</option>
                                     </select>
                                 </div>
                                 <div>

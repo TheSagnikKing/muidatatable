@@ -74,10 +74,9 @@
 }
 
 .data7_content_head {
-    width: 3060px;
+    width: 3050px;
     height: 48px;
     display: flex;
-    border-top: 1px solid var(--bg-primary-color);
 }
 
 .data7_content_head_same {
@@ -137,7 +136,7 @@
 
 /* //table body */
 .data7_content_body {
-    width: 3060px;
+    width: 3050px;
     height: 48px;
     display: flex;
     border-top: 1px solid var(--bg-primary-color);
