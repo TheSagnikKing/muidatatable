@@ -10,6 +10,7 @@ import { IoIosLink } from "react-icons/io";
 import { DatePicker } from 'antd';
 import { getISOWeek } from 'date-fns';
 import { Calendar, DateObject } from "react-multi-date-picker";
+import dayjs from 'dayjs';
 
 const { RangePicker } = DatePicker;
 
@@ -18,7 +19,6 @@ const Datagrid7 = () => {
 
     const [showColumn, setShowColumn] = useState(false)
 
-    const [showtoggleall, setShowtoggleall] = useState(true)
     const [showlotno, setShowlotno] = useState(true)
     const [showdiereceipt, setShowdiereceipt] = useState(true)
     const [showday1, setShowday1] = useState(true)
@@ -45,39 +45,9 @@ const Datagrid7 = () => {
     const [showAssemblyInYield, setShowAssemblyInYield] = useState(true)
     const [showTestInYield, setShowTestInYield] = useState(true)
 
-    const toggleHandle = () => {
-        setShowtoggleall((prev) => !prev)
-
-        setShowlotno((prev) => !prev)
-        setShowdiereceipt((prev) => !prev)
-        setShowday1((prev) => !prev)
-        setShowBumpIn((prev) => !prev)
-        setShowday2((prev) => !prev)
-        setShowBumpOut((prev) => !prev)
-
-        setShowday3((prev) => !prev)
-        setShowProbeIn((prev) => !prev)
-        setShowday4((prev) => !prev)
-        setShowProbeOut((prev) => !prev)
-        setShowday5((prev) => !prev)
-
-        setShowAssemblyIn((prev) => !prev)
-        setShowday6((prev) => !prev)
-        setShowAssemblyOut((prev) => !prev)
-        setShowday7((prev) => !prev)
-        setShowTestIn((prev) => !prev)
-
-        setShowday8((prev) => !prev)
-        setShowTestOut((prev) => !prev)
-        setShowday9((prev) => !prev)
-        setShowShipOut((prev) => !prev)
-    }
 
     const data = fakedata; //cominmg from api
     const copydata = [...fakedata]
-
-    // console.log("Data ",data)
-    // console.log("Copydata ",copydata)
 
 
     const [sortOrder, setSortOrder] = useState('asc');
@@ -108,15 +78,15 @@ const Datagrid7 = () => {
             if (sortOrder === 'asc') {
                 console.log("Ascending")
                 return copydata.sort((a, b) => {
-                    const valueA = a[columnName].BumpIn_Per;
-                    const valueB = b[columnName].BumpIn_Per;
+                    const valueA = a[columnName]?.BumpIn_Per;
+                    const valueB = b[columnName]?.BumpIn_Per;
                     return valueA - valueB;
                 });
             } else if (sortOrder === 'desc') {
                 console.log("Descending")
                 return copydata.sort((a, b) => {
-                    const valueA = a[columnName].BumpIn_Per;
-                    const valueB = b[columnName].BumpIn_Per;
+                    const valueA = a[columnName]?.BumpIn_Per;
+                    const valueB = b[columnName]?.BumpIn_Per;
                     return valueB - valueA;
                 });
             }
@@ -124,15 +94,15 @@ const Datagrid7 = () => {
             if (sortOrder === 'asc') {
                 console.log("Ascending")
                 return copydata.sort((a, b) => {
-                    const valueA = a[columnName].ProbeIn_Per;
-                    const valueB = b[columnName].ProbeIn_Per;
+                    const valueA = a[columnName]?.ProbeIn_Per;
+                    const valueB = b[columnName]?.ProbeIn_Per;
                     return valueA - valueB;
                 });
             } else if (sortOrder === 'desc') {
                 console.log("Descending")
                 return copydata.sort((a, b) => {
-                    const valueA = a[columnName].ProbeIn_Per;
-                    const valueB = b[columnName].ProbeIn_Per;
+                    const valueA = a[columnName]?.ProbeIn_Per;
+                    const valueB = b[columnName]?.ProbeIn_Per;
                     return valueB - valueA;
                 });
             }
@@ -140,15 +110,15 @@ const Datagrid7 = () => {
             if (sortOrder === 'asc') {
                 console.log("Ascending")
                 return copydata.sort((a, b) => {
-                    const valueA = a[columnName].AssemblyIn_Per;
-                    const valueB = b[columnName].AssemblyIn_Per;
+                    const valueA = a[columnName]?.AssemblyIn_Per;
+                    const valueB = b[columnName]?.AssemblyIn_Per;
                     return valueA - valueB;
                 });
             } else if (sortOrder === 'desc') {
                 console.log("Descending")
                 return copydata.sort((a, b) => {
-                    const valueA = a[columnName].AssemblyIn_Per;
-                    const valueB = b[columnName].AssemblyIn_Per;
+                    const valueA = a[columnName]?.AssemblyIn_Per;
+                    const valueB = b[columnName]?.AssemblyIn_Per;
                     return valueB - valueA;
                 });
             }
@@ -156,15 +126,15 @@ const Datagrid7 = () => {
             if (sortOrder === 'asc') {
                 console.log("Ascending")
                 return copydata.sort((a, b) => {
-                    const valueA = a[columnName].TestIn_Per;
-                    const valueB = b[columnName].TestIn_Per;
+                    const valueA = a[columnName]?.TestIn_Per;
+                    const valueB = b[columnName]?.TestIn_Per;
                     return valueA - valueB;
                 });
             } else if (sortOrder === 'desc') {
                 console.log("Descending")
                 return copydata.sort((a, b) => {
-                    const valueA = a[columnName].TestIn_Per;
-                    const valueB = b[columnName].TestIn_Per;
+                    const valueA = a[columnName]?.TestIn_Per;
+                    const valueB = b[columnName]?.TestIn_Per;
                     return valueB - valueA;
                 });
             }
@@ -335,6 +305,7 @@ const Datagrid7 = () => {
     const [selectedDates, setSelectedDates] = useState([]);
 
     const handleDateChange = (dates) => {
+        console.log(dates)
         setSelectedDates(dates);
     };
 
@@ -365,9 +336,10 @@ const Datagrid7 = () => {
     const [Probecheckbox, setProbeCheckbox] = useState(false)
     const [Assemblycheckbox, setAssemblyCheckbox] = useState(false)
     const [Testcheckbox, setTestCheckbox] = useState(false)
+    const [shipcheckbox, setShipCheckbox] = useState(false)
 
 
-    const applyFilterByDateRange = (dataArray, startDateValue, endDateValue, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox) => {
+    const applyFilterByDateRange = (dataArray, startDateValue, endDateValue, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox, shipcheckbox) => {
         return dataArray.filter((item) => {
             const dieReceiptDate = new Date(item.DieReceipt);
             const BumpInDate = new Date(item.BumpIn);
@@ -378,6 +350,7 @@ const Datagrid7 = () => {
             const AssemblyOutDate = new Date(item.AssemblyOut);
             const TestInDate = new Date(item.TestIn);
             const TestOutDate = new Date(item.TestOut);
+            const ShipOutDate = new Date(item.ShipOut);
 
             const startDate = new Date(startDateValue);
             const endDate = new Date(endDateValue);
@@ -399,6 +372,9 @@ const Datagrid7 = () => {
                 (Testcheckbox && (
                     (TestInDate >= startDate && TestInDate <= endDate) ||
                     (TestOutDate >= startDate && TestOutDate <= endDate)
+                )) ||
+                (shipcheckbox && (
+                    (ShipOutDate >= startDate && ShipOutDate <= endDate)
                 ))
             );
 
@@ -407,7 +383,7 @@ const Datagrid7 = () => {
     };
 
 
-    const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox);
+    const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox, shipcheckbox);
 
 
     const removeFilter = () => {
@@ -445,20 +421,12 @@ const Datagrid7 = () => {
     // Get data for the current page
     const currentPageFilteredData = filteredData.slice(filterStartIndex, filterEndIndex);
 
-
-    const [boxOpen, setBoxOpen] = useState(false)
-
-
-    console.log(diereceptcheckbox, "diecheck")
-
     const [openRangeCalender, setOpenRangeCalender] = useState(false)
 
 
-    const [DurationCheck, setDurationCheck] = useState(false)
-    const [DatesCheck, setDatesCheck] = useState(false)
-    const [YieldCheck, setYieldCheck] = useState(false)
-
-    console.log("DurationCheck  ", DurationCheck)
+    const [DurationCheck, setDurationCheck] = useState(true)
+    const [DatesCheck, setDatesCheck] = useState(true)
+    const [YieldCheck, setYieldCheck] = useState(true)
 
 
     const DatesCheckClicked = (e) => {
@@ -496,7 +464,112 @@ const Datagrid7 = () => {
         setShowTestInYield((prev) => !prev)
     }
 
-    console.log("sort ", sortBy)
+    const [selectedDateBtnStyle, setSelectedDateBtnStyle] = useState(null);
+
+    const today = dayjs();
+
+    const datebtnarray = [
+        {
+            _id:1,
+            name: "Today",
+            dateHandler: () => {
+                const currentday = [today.startOf('day'), today.endOf('day')]
+                setSelectedDates(currentday)
+                setSelectedDateBtnStyle(1);
+            }
+        },
+        {
+            _id:2,
+            name: "Yesterday",
+            dateHandler: () => {
+                const yesterday = [today.subtract(1, 'day').startOf('day'), today.subtract(1, 'day').endOf('day')]
+                setSelectedDates(yesterday)
+                setSelectedDateBtnStyle(2);
+            }
+        },
+        {
+            _id:3,
+            name: "This week",
+            dateHandler: () => {
+                const Weekvalue = [today.startOf('week'), today.endOf('week')]
+                setSelectedDates(Weekvalue)
+                setSelectedDateBtnStyle(3);
+            }
+        },
+        {
+            _id:4,
+            name: "Last 7 days",
+            dateHandler: () => {
+                const last7day = [today.subtract(6, 'day').startOf('day'), today.endOf('day')]
+                setSelectedDates(last7day)
+                setSelectedDateBtnStyle(4);
+            }
+        },
+        {
+            _id:5,
+            name: "Last 14 days",
+            dateHandler: () => {
+                const last14day = [today.subtract(13, 'day').startOf('day'), today.endOf('day')]
+                setSelectedDates(last14day)
+                setSelectedDateBtnStyle(5);
+            }
+        },
+        {
+            _id:6,
+            name: "Last 30 days",
+            dateHandler: () => {
+                const last30day = [today.subtract(29, 'day').startOf('day'), today.endOf('day')]
+                setSelectedDates(last30day)
+                setSelectedDateBtnStyle(6);
+            }
+        },
+        {
+            _id:7,
+            name: "This month",
+            dateHandler: () => {
+                const thismonth = [today.startOf('month'), today.endOf('month')]
+                setSelectedDates(thismonth)
+                setSelectedDateBtnStyle(7);
+            }
+        },
+        {
+            _id:8,
+            name: "Last month",
+            dateHandler: () => {
+                const lastmonth = [today.subtract(1, 'month').startOf('month'), today.subtract(1, 'month').endOf('month')]
+                setSelectedDates(lastmonth)
+                setSelectedDateBtnStyle(8);
+            }
+        },
+        {
+            _id:9,
+            name: "This year",
+            dateHandler: () => {
+                const thisyear = [today.startOf('year'), today.endOf('year')]
+                setSelectedDates(thisyear)
+                setSelectedDateBtnStyle(9);
+            }
+        },
+        {
+            _id:10,
+            name: "Last year",
+            dateHandler: () => {
+                const lastyear = [today.subtract(1, 'year').startOf('year'), today.subtract(1, 'year').endOf('year')]
+                setSelectedDates(lastyear)
+                setSelectedDateBtnStyle(10);
+            }
+        },
+        {
+            _id:11,
+            name: "All time",
+            dateHandler: () => {
+                const alltime = [dayjs(0), today.endOf('day')]
+                setSelectedDates(alltime)
+                setSelectedDateBtnStyle(11);
+            }
+        }
+    ];
+    
 
     return (
         <main className='data7_container' >
@@ -527,7 +600,7 @@ const Datagrid7 = () => {
                                     <Calendar
                                         range
                                         numberOfMonths={2}
-                                        value={selectedDates}
+                                        value={selectedDates.map(d => d.format('YYYY-MM-DD'))}
                                         onChange={handleDateChange}
                                         plugins={[
                                             // colors({ defaultColor: "green" })
@@ -555,6 +628,7 @@ const Datagrid7 = () => {
                                             type="checkbox"
                                             checked={diereceptcheckbox}
                                             onChange={(e) => setDiereceiptcheckbox((prev) => !prev)}
+                                            style={{ accentColor: diereceptcheckbox ? "var(--checkbox-bg-color)" : "" }}
                                         />
                                         <p>Die Receipt</p>
                                     </div>
@@ -564,6 +638,7 @@ const Datagrid7 = () => {
                                             type="checkbox"
                                             checked={Bumpcheckbox}
                                             onChange={(e) => setBumpCheckbox((prev) => !prev)}
+                                            style={{ accentColor: Bumpcheckbox ? "var(--checkbox-bg-color)" : "" }}
                                         />
                                         <p>Bump</p>
                                     </div>
@@ -573,6 +648,7 @@ const Datagrid7 = () => {
                                             type="checkbox"
                                             checked={Probecheckbox}
                                             onChange={(e) => setProbeCheckbox((prev) => !prev)}
+                                            style={{ accentColor: Probecheckbox ? "var(--checkbox-bg-color)" : "" }}
                                         />
                                         <p>Probe</p>
                                     </div>
@@ -582,6 +658,7 @@ const Datagrid7 = () => {
                                             type="checkbox"
                                             checked={Assemblycheckbox}
                                             onChange={(e) => setAssemblyCheckbox((prev) => !prev)}
+                                            style={{ accentColor: Assemblycheckbox ? "var(--checkbox-bg-color)" : "" }}
                                         />
                                         <p>Assembly</p>
                                     </div>
@@ -590,9 +667,34 @@ const Datagrid7 = () => {
                                         <input type="checkbox"
                                             checked={Testcheckbox}
                                             onChange={(e) => setTestCheckbox((prev) => !prev)}
+                                            style={{ accentColor: Testcheckbox ? "var(--checkbox-bg-color)" : "" }}
                                         />
                                         <p>Test</p>
                                     </div>
+
+                                    <div>
+                                        <input type="checkbox"
+                                            checked={shipcheckbox}
+                                            onChange={(e) => setShipCheckbox((prev) => !prev)}
+                                            style={{ accentColor: shipcheckbox ? "var(--checkbox-bg-color)" : "" }}
+                                        />
+                                        <p>Ship</p>
+                                    </div>
+                                </div>
+
+                                <div className='data7_calender_selectdate_button_container'>
+                                    {
+                                        datebtnarray.map((c) => (
+                                            <button key={c._id}
+                                            onClick={c.dateHandler}
+                                            disabled={c._id === selectedDateBtnStyle}
+                                            style={{
+                                                background: selectedDateBtnStyle === c._id ? "var(--checkbox-bg-color)" : "",
+                                                color: selectedDateBtnStyle === c._id ? "#fff" : "#000"
+                                            }}
+                                            >{c.name}</button>
+                                        ))
+                                    }
                                 </div>
                             </main>
                         }
@@ -612,6 +714,7 @@ const Datagrid7 = () => {
                                     type="checkbox"
                                     checked={DatesCheck}
                                     onChange={(e) => DatesCheckClicked(e)}
+                                    style={{ accentColor: DatesCheck ? "var(--checkbox-bg-color)" : "" }}
                                 />
                                 <p>Dates</p>
                             </div>
@@ -621,15 +724,17 @@ const Datagrid7 = () => {
                                     type="checkbox"
                                     checked={DurationCheck}
                                     onChange={(e) => DurationCheckClicked(e)}
+                                    style={{ accentColor: DurationCheck ? "var(--checkbox-bg-color)" : "" }}
                                 />
                                 <p>Duration</p>
                             </div>
 
                             <div>
-                                <input 
-                                type="checkbox" 
-                                value={YieldCheck}
-                                onChange={(e) => YieldCheckClicked(e)}
+                                <input
+                                    type="checkbox"
+                                    checked={YieldCheck}
+                                    onChange={(e) => YieldCheckClicked(e)}
+                                    style={{ accentColor: YieldCheck ? "var(--checkbox-bg-color)" : "" }}
                                 />
                                 <p>Yield / Quantity</p>
                             </div>
@@ -733,6 +838,15 @@ const Datagrid7 = () => {
                                         onChange={(e) => setTestCheckbox((prev) => !prev)} />
                                     <p>Test</p>
                                 </div>
+
+                                <div>
+                                    <input type="checkbox"
+                                        checked={shipcheckbox}
+                                        onChange={(e) => setShipCheckbox((prev) => !prev)}
+                                        style={{ accentColor: shipcheckbox ? "var(--checkbox-bg-color)" : "" }}
+                                    />
+                                    <p>Ship</p>
+                                </div>
                             </div>
                         </main>
                     }
@@ -764,11 +878,11 @@ const Datagrid7 = () => {
                         </div>
 
                         <div>
-                            <input 
-                            type="checkbox" 
-                            value={YieldCheck}
-                            onChange={(e) => YieldCheckClicked(e)}
-                            
+                            <input
+                                type="checkbox"
+                                value={YieldCheck}
+                                onChange={(e) => YieldCheckClicked(e)}
+
                             />
                             <p>Yield / Quantity</p>
                         </div>
@@ -967,7 +1081,7 @@ const Datagrid7 = () => {
                             </div>
                         </div>}
 
-                        {showShipOut && <div className='data7_content_head_same' onClick={() => toggleSortOrder('ShipOut')} style={{width:"135px"}}>
+                        {showShipOut && <div className='data7_content_head_same' onClick={() => toggleSortOrder('ShipOut')} style={{ width: "135px" }}>
                             <div>
                                 <p>ShipOut</p>
                                 {sortBy === 'ShipOut' &&
@@ -1199,7 +1313,7 @@ const Datagrid7 = () => {
                                         </div>
                                     </div>}
 
-                                    {showShipOut && <div className='data7_content_body_same' style={{width:"135px"}}>
+                                    {showShipOut && <div className='data7_content_body_same' style={{ width: "135px" }}>
                                         <div style={{ background: "var(--bg-color-6)" }}>
                                             <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p>
                                         </div>
@@ -1220,7 +1334,7 @@ const Datagrid7 = () => {
                                                         <div style={{ width: t?.BumpInYield?.BumpIn_Per > 100 ? '100%' : `${t?.BumpInYield?.BumpIn_Per}%`, background: "var(--progress-bg-color-1)" }}></div>
                                                     </div>
                                                 </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>-</span></div>
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>{t?.BumpInYield}</span></div>
                                                 )
                                             }
 
@@ -1242,7 +1356,7 @@ const Datagrid7 = () => {
                                                         <div style={{ width: t?.ProbeInYield?.ProbeIn_Per > 100 ? '100%' : `${t?.ProbeInYield?.ProbeIn_Per}%`, background: "var(--progress-bg-color-2)" }}></div>
                                                     </div>
                                                 </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-2)" }}>-</span></div>
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-2)" }}>{t?.ProbeInYield}</span></div>
                                                 )
                                             }
                                         </div>
@@ -1263,7 +1377,7 @@ const Datagrid7 = () => {
                                                         <div style={{ width: t?.AssemblyInYield?.AssemblyIn_Per > 100 ? '100%' : `${t?.AssemblyInYield?.AssemblyIn_Per}%`, background: "var(--progress-bg-color-3)" }}></div>
                                                     </div>
                                                 </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-3)" }}>-</span></div>
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-3)" }}>{t?.AssemblyInYield}</span></div>
                                                 )
                                             }
                                         </div>
@@ -1283,7 +1397,7 @@ const Datagrid7 = () => {
                                                         <div style={{ width: t?.TestInYield?.TestIn_Per > 100 ? '100%' : `${t?.TestInYield?.TestIn_Per}%`, background: "var(--progress-bg-color-4)" }}></div>
                                                     </div>
                                                 </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-4)" }}>-</span></div>
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-4)" }}>{t?.TestInYield}</span></div>
                                                 )
                                             }
                                         </div>
@@ -1307,7 +1421,7 @@ const Datagrid7 = () => {
                                     <div className='data7_content_body_same_taka' style={{ background: t.TakaRatio <= 50 ? "var(--mcm-taka-ratio-bg-color-1)" : (t.TakaRatio > 50 && t.TakaRatio <= 70) ? "var(--mcm-taka-ratio-bg-color-2)" : (t.TakaRatio > 70 ? "orange" : (t.TakaRatio === "-" ? "var(--mcm-taka-ratio-bg-color-1)" : "")) }}>
                                         <p>{t.TakaRatio}</p>
                                     </div>
-                                    
+
                                 </div>
                             ))
                         ) : (
@@ -1435,7 +1549,7 @@ const Datagrid7 = () => {
                                         </div>
                                     </div>}
 
-                                    {showShipOut && <div className='data7_content_body_same' style={{width:"135px"}}>
+                                    {showShipOut && <div className='data7_content_body_same' style={{ width: "135px" }}>
                                         <div style={{ background: "var(--bg-color-6)" }}>
                                             <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p>
                                         </div>
@@ -1456,7 +1570,7 @@ const Datagrid7 = () => {
                                                         <div style={{ width: t?.BumpInYield?.BumpIn_Per > 100 ? '100%' : `${t?.BumpInYield?.BumpIn_Per}%`, background: "var(--progress-bg-color-1)" }}></div>
                                                     </div>
                                                 </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>-</span></div>
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>{t?.BumpInYield}</span></div>
                                                 )
                                             }
 
@@ -1478,7 +1592,7 @@ const Datagrid7 = () => {
                                                         <div style={{ width: t?.ProbeInYield?.ProbeIn_Per > 100 ? '100%' : `${t?.ProbeInYield?.ProbeIn_Per}%`, background: "var(--progress-bg-color-2)" }}></div>
                                                     </div>
                                                 </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-2)" }}>-</span></div>
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-2)" }}>{t?.ProbeInYield}</span></div>
                                                 )
                                             }
                                         </div>
@@ -1499,7 +1613,7 @@ const Datagrid7 = () => {
                                                         <div style={{ width: t?.AssemblyInYield?.AssemblyIn_Per > 100 ? '100%' : `${t?.AssemblyInYield?.AssemblyIn_Per}%`, background: "var(--progress-bg-color-3)" }}></div>
                                                     </div>
                                                 </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-3)" }}>-</span></div>
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-3)" }}>{t?.AssemblyInYield}</span></div>
                                                 )
                                             }
                                         </div>
@@ -1519,7 +1633,7 @@ const Datagrid7 = () => {
                                                         <div style={{ width: t?.TestInYield?.TestIn_Per > 100 ? '100%' : `${t?.TestInYield?.TestIn_Per}%`, background: "var(--progress-bg-color-4)" }}></div>
                                                     </div>
                                                 </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-4)" }}>-</span></div>
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-4)" }}>{t?.TestInYield}</span></div>
                                                 )
                                             }
                                         </div>

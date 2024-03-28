@@ -498,7 +498,7 @@ export const fakedata = [
     {
         "_id": 18,
         "LotNo": "P7Q8R9",
-        "DieReceipt": "2024-02-20",
+        "DieReceipt": "2024-03-25",
         "day1": 5,
         "BumpIn": "2024-02-21",
         "day2": 8,
