@@ -848,6 +848,21 @@ const Datagrid7 = () => {
                                     <p>Ship</p>
                                 </div>
                             </div>
+
+                            <div className='data7_calender_selectdate_button_container'>
+                                    {
+                                        datebtnarray.map((c) => (
+                                            <button key={c._id}
+                                            onClick={c.dateHandler}
+                                            disabled={c._id === selectedDateBtnStyle}
+                                            style={{
+                                                background: selectedDateBtnStyle === c._id ? "var(--checkbox-bg-color)" : "",
+                                                color: selectedDateBtnStyle === c._id ? "#fff" : "#000"
+                                            }}
+                                            >{c.name}</button>
+                                        ))
+                                    }
+                                </div>
                         </main>
                     }
                 </div>

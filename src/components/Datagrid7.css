@@ -730,13 +730,12 @@ select {
     padding: 4px 10px;
     border-radius: 15px;
     cursor: pointer;
-    /* box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px; */
 }
 
-/* .data7_calender_selectdate_button_container>button:hover{
+.data7_calender_selectdate_button_container>button:hover{
     background-color: var(--checkbox-bg-color);
-    color: #fff;
-} */
+    color: #fff !important;
+}
 
 @media((min-width:0px) and (max-width:430px)){
     .data7_csv{
@@ -980,7 +979,7 @@ select {
         right: 0px;
         background-color: #fff;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
-        width: 530px;
+        width: 550px;
         padding: 10px;
         border-radius: 10px;
         z-index: 1000;
