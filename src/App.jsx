@@ -11,7 +11,7 @@ import Datagrid8 from './components/Datagrid8'
 const App = () => {
   return (
     <>
-    <Datagrid8/>
+    <Datagrid7/>
     </>
   )
 }

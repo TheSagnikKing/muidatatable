@@ -915,6 +915,7 @@ const Datagrid7 = () => {
             </div>
 
             <div className='data7_content_pagination_box'>
+                <div className='data7_content_box'>
                 <div className='data7_content'>
                     <div className='data7_content_head'>
                         {showlotno && <div className='data7_content_head_same' onClick={() => toggleSortOrder('LotNo')}>
@@ -1204,8 +1205,10 @@ const Datagrid7 = () => {
 
                     {
                         filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
-                            currentPageFilteredData.map((t) => (
-                                <div className='data7_content_body' key={t._id}>
+                            currentPageFilteredData.map((t,i) => (
+                                <div className='data7_content_body' key={t._id}
+                                style={{borderBottom: (currentPageFilteredData.length - 1) === i ? "none" : "1px solid black"}}
+                                >
                                     {showlotno && <div className='data7_content_body_same'>
                                         <div style={{ borderRight: "1px solid black" }}>
                                             <p>{t.LotNo}</p>
@@ -1440,8 +1443,10 @@ const Datagrid7 = () => {
                                 </div>
                             ))
                         ) : (
-                            currentPageData.map((t) => (
-                                <div className='data7_content_body' key={t._id}>
+                            currentPageData.map((t,i) => (
+                                <div className='data7_content_body' key={t._id}
+                                style={{borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black"}}
+                                >
                                     {showlotno && <div className='data7_content_body_same'>
                                         <div style={{ borderRight: "1px solid black" }}>
                                             <p>{t.LotNo}</p>
@@ -1678,6 +1683,7 @@ const Datagrid7 = () => {
                         )
                     }
 
+                </div>
                 </div>
                 <div className="data7_pagination">
 
