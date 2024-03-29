@@ -1564,7 +1564,7 @@ const Datagrid7 = () => {
                                         </div>
                                     </div>}
 
-                                    {showShipOut && <div className='data7_content_body_same' style={{ width: "135px" }}>
+                                    {showShipOut && <div className='data7_content_body_same'>
                                         <div style={{ background: "var(--bg-color-6)" }}>
                                             <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p>
                                         </div>
