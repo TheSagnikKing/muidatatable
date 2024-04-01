@@ -85,6 +85,7 @@ const Datagrid7 = () => {
         });
     };
 
+
     const sortData = (dataArray, columnName, sortOrder, copydata) => {
         if (columnName === '') {
             // No sorting if no column is specified
@@ -92,59 +93,58 @@ const Datagrid7 = () => {
         } else if (sortOrder === "initial") {
             console.log("Initial")
             return dataArray
-        } 
-        else {
-            // General sorting logic for other columns
-            if (sortOrder === 'asc') {
-                console.log("Ascending")
-                return copydata.sort((a, b) => {
-                    const valueA = a[columnName];
-                    const valueB = b[columnName];
+        }
+        else if (sortOrder === 'asc') {
+            console.log("Ascending")
+            return copydata.sort((a, b) => {
+                const valueA = a[columnName];
+                const valueB = b[columnName];
 
-                    console.log(valueA)
-                    console.log(valueB)
+                console.log(valueA)
+                console.log(valueB)
 
-                    // Check if both values are numbers
-                    if (typeof valueA === 'number' && typeof valueB === 'number') {
-                        // Compare numbers directly
-                        return valueA - valueB
+                // Check if both values are numbers
+                if (typeof valueA === 'number' && typeof valueB === 'number') {
+                    // Compare numbers directly
+                    return valueA - valueB
+                } else {
+                    // Use localeCompare for strings
+                    return String(valueA).localeCompare(String(valueB))
+                }
+            });
+        }
+
+        else if (sortOrder === 'desc') {
+            console.log("Descending")
+            return copydata.sort((a, b) => {
+                const valueA = a[columnName];
+                const valueB = b[columnName];
+
+                // Check if both values are numbers
+                if (typeof valueA === 'number' && typeof valueB === 'number') {
+                    // Compare numbers directly
+                    return valueB - valueA;
+                } else {
+                    // Handle empty values
+                    if (!valueA && !valueB) {
+                        // If both values are empty, consider them equal
+                        return 0;
+                    } else if (!valueA) {
+                        // If valueA is empty, move it to the end
+                        return 1;
+                    } else if (!valueB) {
+                        // If valueB is empty, move it to the end
+                        return -1;
                     } else {
                         // Use localeCompare for strings
-                        return String(valueA).localeCompare(String(valueB))
+                        return String(valueB).localeCompare(String(valueA));
                     }
-                });
-            } 
-            else if (sortOrder === 'desc') {
-                console.log("Descending")
-                return copydata.sort((a, b) => {
-                    const valueA = a[columnName];
-                    const valueB = b[columnName];
-            
-                    // Check if both values are numbers
-                    if (typeof valueA === 'number' && typeof valueB === 'number') {
-                        // Compare numbers directly
-                        return valueB - valueA;
-                    } else {
-                        // Handle empty values
-                        if (!valueA && !valueB) {
-                            // If both values are empty, consider them equal
-                            return 0;
-                        } else if (!valueA) {
-                            // If valueA is empty, move it to the end
-                            return 1;
-                        } else if (!valueB) {
-                            // If valueB is empty, move it to the end
-                            return -1;
-                        } else {
-                            // Use localeCompare for strings
-                            return String(valueB).localeCompare(String(valueA));
-                        }
-                    }
-                });
-            }
-            
+                }
+            });
         }
-    };
+
+    }
+
 
 
     const sortedData = sortData(data, sortBy, sortOrder, copydata);
