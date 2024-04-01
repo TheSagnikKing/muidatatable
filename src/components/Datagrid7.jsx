@@ -576,22 +576,22 @@ const Datagrid7 = () => {
         }
     ];
 
-    function ColorGenerator(percentage){
-        var r , g, b = 0;
-    
-        if(isNaN(percentage)){
+    function ColorGenerator(percentage) {
+        var r, g, b = 0;
+
+        if (isNaN(percentage)) {
             g = 255;
             r = 0;
         }
-        else if(percentage < 50){
+        else if (percentage < 50) {
             g = 255;
             r = Math.round(5.1 * percentage);
         }
-        else{
+        else {
             r = 255;
             g = Math.round(510 - 5.10 * percentage);
         }
-    
+
         var h = (r * 0x10000) + (g * 0x100) + (b * 0x1);
         return '#' + ('000000' + h.toString(16)).slice(-6);
     }
@@ -601,24 +601,186 @@ const Datagrid7 = () => {
             key: "LotNumber",
             header: "Lot Number",
             className: "data7_content_body_same",
+            background: "#fff",
+            show: showLotNumber,
             render: (value) => <p>{value}</p>
         },
         {
             key: "DieReceipt",
             header: "Die Receipt",
             className: "data7_content_body_same",
+            background: "var(--bg-color-1)",
+            show: showDieReceipt,
             render: (value) => value ? <p style={{ color: "var(--text-color-1)" }}>{value}</p> : <p style={{ color: "var(--text-color-1)" }}>-</p>
         },
         {
             key: "ReceiptBumpDuration",
             header: "Receipt Bump Duration",
             className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)",
+            show: showReceiptBumpDuration,
             render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
         },
+
+        {
+            key: "BumpIn",
+            header: "BumpIn",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-2)",
+            show: showBumpIn,
+            render: (value) => value ? <p style={{ color: "var(--text-color-2)" }}>{value}</p> : <p style={{ color: "var(--text-color-2)" }}>-</p>
+        },
+
+        {
+            key: "BumpDuration",
+            header: "showBumpDuration",
+            className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)",
+            show: showReceiptBumpDuration,
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+
+        {
+            key: "BumpOut ",
+            header: "BumpOut ",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-2)",
+            show: showBumpOut,
+            render: (value) => value ? <p style={{ color: "var(--text-color-2)" }}>{value}</p> : <p style={{ color: "var(--text-color-2)" }}>-</p>
+        },
+
+        {
+            key: "BumpProbeDuration",
+            header: "BumpProbeDuration",
+            className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)",
+            show: showBumpProbeDuration,
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+
+        {
+            key: "ProbeIn",
+            header: "ProbeIn",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-3)",
+            show: showProbeIn,
+            render: (value) => value ? <p style={{ color: "var(--text-color-3)" }}>{value}</p> : <p style={{ color: "var(--text-color-3)" }}>-</p>
+        },
+
+        {
+            key: "ProbeDuration",
+            header: "ProbeDuration",
+            className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)",
+            show: showProbeDuration,
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+
+        {
+            key: "ProbeOut",
+            header: "ProbeOut ",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-3)",
+            show: showProbeOut,
+            render: (value) => value ? <p style={{ color: "var(--text-color-3)" }}>{value}</p> : <p style={{ color: "var(--text-color-3)" }}>-</p>
+        },
+
+        {
+            key: "ProbeAssemblyDuration",
+            header: "ProbeAssemblyDuration",
+            className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)",
+            show: showProbeAssemblyDuration,
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+
+        {
+            key: "AssemblyIn",
+            header: "AssemblyIn ",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-4)",
+            show: showAssemblyIn,
+            render: (value) => value ? <p style={{ color: "var(--text-color-4)" }}>{value}</p> : <p style={{ color: "var(--text-color-4)" }}>-</p>
+        },
+
+        {
+            key: "AssemblyDuration",
+            header: "AssemblyDuration",
+            className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)",
+            show: showAssemblyDuration,
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+
+        {
+            key: "AssemblyOut",
+            header: "AssemblyOut ",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-4)",
+            show: showAssemblyOut,
+            render: (value) => value ? <p style={{ color: "var(--text-color-4)" }}>{value}</p> : <p style={{ color: "var(--text-color-4)" }}>-</p>
+        },
+
+        {
+            key: "AssemblyTestDuration ",
+            header: "AssemblyTestDuration ",
+            className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-5) 50%)",
+            show: showAssemblyTestDuration,
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+
+        {
+            key: "TestIn",
+            header: "TestIn ",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-5)",
+            show: showTestIn,
+            render: (value) => value ? <p style={{ color: "var(--text-color-5)" }}>{value}</p> : <p style={{ color: "var(--text-color-5)" }}>-</p>
+        },
+
+        {
+            key: "TestDuration",
+            header: "TestDuration",
+            className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-5) 50%, var(--bg-color-5) 50%)",
+            show: showTestDuration,
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+
+        {
+            key: "TestOut",
+            header: "TestOut ",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-5)",
+            show: showTestOut,
+            render: (value) => value ? <p style={{ color: "var(--text-color-5)" }}>{value}</p> : <p style={{ color: "var(--text-color-6)" }}>-</p>
+        },
+
+        {
+            key: "TestShipDuration",
+            header: "TestShipDuration",
+            className: "data7_content_body_diff",
+            background: "linear-gradient(to right, var(--bg-color-5) 50%, var(--bg-color-6) 50%)",
+            show: showTestShipDuration,
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+
+        {
+            key: "ShipOut",
+            header: "ShipOut ",
+            className: "data7_content_body_same",
+            background: "var(--bg-color-6)",
+            show: showShipOut,
+            render: (value) => value ? <p style={{ color: "var(--text-color-6)" }}>{value}</p> : <p style={{ color: "var(--text-color-6)" }}>-</p>
+        },
     ];
-    
+
+    // VVP==========================
+    // similarly create a columnYield Array for three
+    // similary create a column Array for the last
     console.log(columnConfigs)
-    
+
     return (
         <main className='data7_container' >
             <div className='data7_top_bx'>
@@ -789,16 +951,16 @@ const Datagrid7 = () => {
                         </div>}
                     </div>
 
-                    <button onClick={removeFilter} className='remove-filter-input' style={{fontSize:"20px"}}
-                    title="Clear All Filters"
+                    <button onClick={removeFilter} className='remove-filter-input' style={{ fontSize: "20px" }}
+                        title="Clear All Filters"
                     ><MdFilterAltOff /></button>
 
-                    <button className='dwn_crt_csv_data_btn' onClick={currentpagecsvdataHandler} style={{fontSize:"20px"}}
-                    title="Download Current Entry"
+                    <button className='dwn_crt_csv_data_btn' onClick={currentpagecsvdataHandler} style={{ fontSize: "20px" }}
+                        title="Download Current Entry"
                     ><RiDownload2Fill /></button>
 
-                    <button className='dwn_crt_entire_data_btn' onClick={entirepagecsvdataHandler} style={{fontSize:"20px"}}
-                    title="Download Entire Entry"
+                    <button className='dwn_crt_entire_data_btn' onClick={entirepagecsvdataHandler} style={{ fontSize: "20px" }}
+                        title="Download Entire Entry"
                     ><RiDownload2Fill /></button>
                 </div>
             </div>
@@ -1264,7 +1426,7 @@ const Datagrid7 = () => {
 
                         </div>
 
-                        {
+                        {/* {
                             filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
                                 currentPageFilteredData.map((t, i) => (
                                     <div className='data7_content_body' key={t.LotNo}
@@ -1843,6 +2005,45 @@ const Datagrid7 = () => {
                                     </div>
                                 ))
                             )
+                        } */}
+
+                        {
+                            currentPageData.map((data, i) => (
+                                <div className='data7_content_body' key={i} style={{ borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black" }}>
+                                    {columnConfigs.map((column, j) => (
+                                        <div className={column.className} key={j} style={{ background: `${column.background}` }}>
+                                            <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
+                                                {column.className === "data7_content_body_diff" && <div />}
+                                                {column.show && column.render(data[column.key])}
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    {
+                                        showBumpYield && <div className='data7_content_body_same_yield' style={{
+                                            background: "var(--bg-color-3)",
+                                            borderLeft: "3px solid var(--bg-primary-color)",
+                                            borderRight: "1px solid #000"
+                                        }}>
+                                            {
+                                                data?.BumpYield && data?.BumpOutDie ? (<div>
+                                                    <div>
+                                                        <span style={{ color: "var(--progress-bg-color-1)" }}>{data.BumpYield}%</span> <span>{data.BumpOutDie}</span>
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ width: data.BumpYield > 100 ? '100%' : `${data.BumpYield}%`, background: "var(--progress-bg-color-1)" }}></div>
+                                                    </div>
+                                                </div>) : (
+                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>-</span></div>
+                                                )
+                                            }
+
+                                        </div>
+                                    }
+
+                                </div>
+                            ))
+
                         }
 
                     </div>
@@ -1863,7 +2064,7 @@ const Datagrid7 = () => {
                                         value={dataPerPageState}
                                         onChange={(e) => {
                                             setDataPerPageState(e.target.value);
-                                            setCurrentPage(1); 
+                                            setCurrentPage(1);
                                         }}
                                     >
                                         <option value="10" style={{ backgroundColor: dataPerPageState == 10 ? 'var(--bg-color-2)' : 'initial' }}>10</option>
@@ -1891,7 +2092,7 @@ const Datagrid7 = () => {
                                                     {optionValue}
                                                 </option>
                                             );
-                                         })}
+                                        })}
                                     </select>
                                     <p>of {totalPages}</p>
                                 </div>
@@ -1911,7 +2112,7 @@ const Datagrid7 = () => {
                                         value={dataPerPageState}
                                         onChange={(e) => {
                                             setDataPerPageState(e.target.value);
-                                            setCurrentPage(1); 
+                                            setCurrentPage(1);
                                         }}
                                     >
                                         <option value="10" style={{ backgroundColor: dataPerPageState == 10 ? 'var(--bg-color-2)' : 'initial' }}>10</option>
