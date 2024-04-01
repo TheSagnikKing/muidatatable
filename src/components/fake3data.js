@@ -30,4 +30,47 @@ export const fake3data = [
         "BumpYield": "-",
         "TakaDRatio": 39.59
       }
+
+
+      {
+    LotNumber: LotNo: "TGSU24",
+    DieReceipt: DieReceipt,
+    ReceiptBumpDuration: day1,
+    BumpIn: BumpIn,
+    BumpDuration: day2,
+    BumpOut: BumpOut,
+    BumpProbeDuration: day3,
+    ProbeIn: ProbeIn,
+    ProbeDuration: day4,
+    ProbeOut: ProbeOut,
+    ProbeAssemblyDuration: day5,
+    AssemblyIn: AssemblyIn,
+    AssemblyDuration: day6,
+    AssemblyOut: AssemblyOut,
+    AssemblyTestDuration: day7,
+    TestIn: TestIn,
+    TestDuration: day8,
+    TestOut: TestOut,
+    TestShipDuration: day9,
+    ShipOut:ShipOut
+    {
+
+    "TestYield": 97.15,
+    "AssemblyYield": 99.99,
+    "ProbeYield": 84.17,
+    "BumpYield": 99.85,
+
+    "TestOutDie": 7429,
+    "AssemblyOutDie": 7647,
+    "BumpOutDie": 18173,
+    "ProbeOutDie": 15297
+    }
+
+    "TakaDRatio":"Taka Ratio",
+    "TestOutDieM": "MCM Taka D",
+    "TestOutDieN" : "MCM Taka"
+    {
+        takadration: 0 -> Green, 100% -> Red, 50% -> yellow,
+    }
+}
 ]
