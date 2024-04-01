@@ -92,7 +92,8 @@ const Datagrid7 = () => {
         } else if (sortOrder === "initial") {
             console.log("Initial")
             return dataArray
-        } else {
+        } 
+        else {
             // General sorting logic for other columns
             if (sortOrder === 'asc') {
                 console.log("Ascending")
@@ -112,22 +113,36 @@ const Datagrid7 = () => {
                         return String(valueA).localeCompare(String(valueB))
                     }
                 });
-            } else if (sortOrder === 'desc') {
+            } 
+            else if (sortOrder === 'desc') {
                 console.log("Descending")
                 return copydata.sort((a, b) => {
                     const valueA = a[columnName];
                     const valueB = b[columnName];
-
+            
                     // Check if both values are numbers
                     if (typeof valueA === 'number' && typeof valueB === 'number') {
                         // Compare numbers directly
-                        return valueB - valueA
+                        return valueB - valueA;
                     } else {
-                        // Use localeCompare for strings
-                        return String(valueB).localeCompare(String(valueA))
+                        // Handle empty values
+                        if (!valueA && !valueB) {
+                            // If both values are empty, consider them equal
+                            return 0;
+                        } else if (!valueA) {
+                            // If valueA is empty, move it to the end
+                            return 1;
+                        } else if (!valueB) {
+                            // If valueB is empty, move it to the end
+                            return -1;
+                        } else {
+                            // Use localeCompare for strings
+                            return String(valueB).localeCompare(String(valueA));
+                        }
                     }
                 });
             }
+            
         }
     };
 
