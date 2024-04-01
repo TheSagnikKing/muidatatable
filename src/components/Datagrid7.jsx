@@ -1814,7 +1814,7 @@ const Datagrid7 = () => {
                                         value={dataPerPageState}
                                         onChange={(e) => {
                                             setDataPerPageState(e.target.value);
-                                            setCurrentPage(1); // Set currentPage to 1 whenever a new option is selected
+                                            setCurrentPage(1); 
                                         }}
                                     >
                                         <option value="10" style={{ backgroundColor: dataPerPageState == 10 ? 'var(--bg-color-2)' : 'initial' }}>10</option>
@@ -1862,7 +1862,7 @@ const Datagrid7 = () => {
                                         value={dataPerPageState}
                                         onChange={(e) => {
                                             setDataPerPageState(e.target.value);
-                                            setCurrentPage(1); // Set currentPage to 1 whenever a new option is selected
+                                            setCurrentPage(1); 
                                         }}
                                     >
                                         <option value="10" style={{ backgroundColor: dataPerPageState == 10 ? 'var(--bg-color-2)' : 'initial' }}>10</option>
