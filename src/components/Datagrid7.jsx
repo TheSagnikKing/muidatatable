@@ -1886,7 +1886,7 @@ const Datagrid7 = () => {
                                             );
                                         })}
                                     </select>
-                                    <p>of {totalPages}</p>
+                                    <p>of {fakedata.length}</p>
                                 </div>
                             </div>
 
