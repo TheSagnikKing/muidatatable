@@ -3,9 +3,10 @@ import './Datagrid7.css'
 import { FaArrowUp, FaChevronLeft, FaChevronRight, FaPlus, FaSortDown } from "react-icons/fa6";
 import { fakedata } from './fakedata';
 import { FaArrowDown } from "react-icons/fa6";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { RiDeleteBin6Line, RiDownload2Fill } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { IoIosLink } from "react-icons/io";
+import { MdFilterAltOff } from "react-icons/md";
 
 import { Calendar } from "react-multi-date-picker";
 import dayjs from 'dayjs';
@@ -575,7 +576,49 @@ const Datagrid7 = () => {
         }
     ];
 
+    function ColorGenerator(percentage){
+        var r , g, b = 0;
+    
+        if(isNaN(percentage)){
+            g = 255;
+            r = 0;
+        }
+        else if(percentage < 50){
+            g = 255;
+            r = Math.round(5.1 * percentage);
+        }
+        else{
+            r = 255;
+            g = Math.round(510 - 5.10 * percentage);
+        }
+    
+        var h = (r * 0x10000) + (g * 0x100) + (b * 0x1);
+        return '#' + ('000000' + h.toString(16)).slice(-6);
+    }
 
+    const columnConfigs = [
+        {
+            key: "LotNumber",
+            header: "Lot Number",
+            className: "data7_content_body_same",
+            render: (value) => <p>{value}</p>
+        },
+        {
+            key: "DieReceipt",
+            header: "Die Receipt",
+            className: "data7_content_body_same",
+            render: (value) => value ? <p style={{ color: "var(--text-color-1)" }}>{value}</p> : <p style={{ color: "var(--text-color-1)" }}>-</p>
+        },
+        {
+            key: "ReceiptBumpDuration",
+            header: "Receipt Bump Duration",
+            className: "data7_content_body_diff",
+            render: (value) => <div>{value !== undefined ? `${value} days` : 'days'}</div>
+        },
+    ];
+    
+    console.log(columnConfigs)
+    
     return (
         <main className='data7_container' >
             <div className='data7_top_bx'>
@@ -585,7 +628,7 @@ const Datagrid7 = () => {
                     <div className='data7_top_searchbox'>
                         <input
                             type="text"
-                            placeholder='Search'
+                            placeholder='Search By Lot No.'
                             value={filterBy}
                             onChange={(e) => setFilterBy(e.target.value)}
                         />
@@ -746,11 +789,17 @@ const Datagrid7 = () => {
                         </div>}
                     </div>
 
-                    <button onClick={removeFilter} className='remove-filter-input'><RiDeleteBin6Line /></button>
+                    <button onClick={removeFilter} className='remove-filter-input' style={{fontSize:"20px"}}
+                    title="Clear All Filters"
+                    ><MdFilterAltOff /></button>
 
-                    <button className='dwn_crt_csv_data_btn' onClick={currentpagecsvdataHandler}><FaPlus /></button>
+                    <button className='dwn_crt_csv_data_btn' onClick={currentpagecsvdataHandler} style={{fontSize:"20px"}}
+                    title="Download Current Entry"
+                    ><RiDownload2Fill /></button>
 
-                    <button className='dwn_crt_entire_data_btn' onClick={entirepagecsvdataHandler}><IoIosLink /></button>
+                    <button className='dwn_crt_entire_data_btn' onClick={entirepagecsvdataHandler} style={{fontSize:"20px"}}
+                    title="Download Entire Entry"
+                    ><RiDownload2Fill /></button>
                 </div>
             </div>
 
@@ -1783,7 +1832,7 @@ const Datagrid7 = () => {
                                         }
 
                                         {
-                                            showTakaDRatio && <div className='data7_content_body_same_taka' style={{ background: t.TakaDRatio <= 50 ? "var(--mcm-taka-ratio-bg-color-1)" : (t.TakaDRatio > 50 && t.TakaDRatio <= 70) ? "var(--mcm-taka-ratio-bg-color-2)" : (t.TakaDRatio > 70 ? "orange" : (t.TakaDRatio === "-" ? "var(--mcm-taka-ratio-bg-color-1)" : "")) }}>
+                                            showTakaDRatio && <div className='data7_content_body_same_taka' style={{ background: ColorGenerator(t?.TakaDRatio) }}>
                                                 {
                                                     t?.TakaDRatio ? <p style={{ color: "black" }}>{t.TakaDRatio}</p> : <p style={{ color: "black" }}>-</p>
                                                 }
@@ -1842,7 +1891,7 @@ const Datagrid7 = () => {
                                                     {optionValue}
                                                 </option>
                                             );
-                                        })}
+                                         })}
                                     </select>
                                     <p>of {totalPages}</p>
                                 </div>
