@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import './Datagrid7.css'
 import { FaArrowUp, FaChevronLeft, FaChevronRight, FaPlus, FaSortDown } from "react-icons/fa6";
 import { fakedata } from './fakedata';
@@ -7,13 +7,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { IoIosLink } from "react-icons/io";
 
-import { DatePicker } from 'antd';
-import { getISOWeek } from 'date-fns';
-import { Calendar, DateObject } from "react-multi-date-picker";
+import { Calendar } from "react-multi-date-picker";
 import dayjs from 'dayjs';
-
-const { RangePicker } = DatePicker;
-
 
 const Datagrid7 = () => {
 
@@ -61,7 +56,6 @@ const Datagrid7 = () => {
             } else if (prevOrder === 'desc') {
                 return 'initial';
             } else {
-                // If previous order is 'initial' or any other state, toggle to 'asc'
                 return 'asc';
             }
         });

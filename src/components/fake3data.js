@@ -1,0 +1,33 @@
+export const fake3data = [
+    {
+        "LotNumber": "TGNM99",
+        "ShipOut": "2022-07-20",
+        "TestOut": "2022-07-20",
+        "TestOutDie": 7802,
+        "TestOutDieM": 3089,
+        "TestOutDieN": 4713,
+        "TestIn": "2022-06-26",
+        "TestInDie": 7957,
+        "AssemblyIn": "2022-04-24",
+        "AssemblyInDie": 7963,
+        "AssemblyOut": "2022-05-14",
+        "AssemblyOutDie": 7957,
+        "ProbeOutDie": 15927,
+        "ProbeOut": "2022-03-29",
+        "TestDuration": 24,
+        "AssemblyDuration": 20,
+        "ProbeDuration": 0,
+        "BumpDuration": 0,
+        "ReceiptBumpDuration": 0,
+        "BumpProbeDuration": 0,
+        "ProbeAssemblyDuration": 26,
+        "AssemblyTestDuration": 43,
+        "TestShipDuration": 0,
+        "TotalDuration": 113,
+        "TestYield": 98.05,
+        "AssemblyYield": 99.92,
+        "ProbeYield": "-",
+        "BumpYield": "-",
+        "TakaDRatio": 39.59
+      }
+]
