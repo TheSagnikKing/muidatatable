@@ -652,6 +652,7 @@ select {
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .data7_top_selectdatebx>div>div:nth-child(2){

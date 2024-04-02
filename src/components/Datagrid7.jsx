@@ -318,12 +318,15 @@ const Datagrid7 = () => {
     // This function is for removing filters
     const removeFilter = () => {
         setFilterBy("")
-        setSelectedDates([])
+
+        const startDate = dayjs('2019-01-01');
+        const endDate = dayjs(); // Current date
+        const allTimeRange = [startDate, endDate.endOf('day')];
+        setSelectedDates(allTimeRange);
+        setSelectedDateBtnStyle(11);
         setStartDate("")
         setEndDate("")
         setOpenRangeCalender(false)
-        setSelectedDates([]);
-        setSelectedDateBtnStyle(null);
     }
 
     // Dates of the Calender button Start
@@ -1468,6 +1471,9 @@ const Datagrid7 = () => {
 
 
     console.log("showBympDU ",showReceiptBumpDuration)
+
+
+    const [darkTheme, setDarktheme] = useState(false)
     return (
         <main className='data7_container' >
             <div className='data7_top_bx'>
@@ -1488,12 +1494,23 @@ const Datagrid7 = () => {
                     <div className='data7_top_selectdatebx' onClick={() => setOpenRangeCalender(prev => !prev)}>
                         <div>
                             <div>
-                                <p>{selectedDates.length > 0 ? selectedDates.map((date, index) => (
+                                {/* <p>{selectedDates.length > 0 ? selectedDates.map((date, index) => (
                                     <React.Fragment key={index}>
                                         {index !== 0 && " - "}
                                         {date.format("YYYY-MM-DD")}
                                     </React.Fragment>
-                                )) : "Select Dates"}</p>
+                                )) : "Select Dates"}</p> */}
+
+                                <p>
+                                {
+                                    selectedDates.map((date, index) => (
+                                        <React.Fragment key={index}>
+                                            {index !== 0 && " - "}
+                                            {date.format("YYYY-MM-DD")}
+                                        </React.Fragment>
+                                    ))
+                                }
+                                </p>
                             </div>
                             <div><FaSortDown /></div>
                         </div>
@@ -1825,8 +1842,12 @@ const Datagrid7 = () => {
             </div>
 
             <div className='data7_content_pagination_box'>
-                <div className='data7_content_box'>
-                    <div className='data7_content'>
+                <div className='data7_content_box'
+                
+                >
+                    <div className='data7_content'
+                    style={{background:darkTheme ? "black" : "white"}}
+                    >
 
                         <div className='data7_content_head'>
                             {
