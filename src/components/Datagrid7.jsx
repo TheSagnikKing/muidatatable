@@ -65,8 +65,6 @@ const Datagrid7 = () => {
 
     const data = fakedata; //cominmg from api
 
-    console.log(data)
-
     const copydata = [...fakedata]
 
 
@@ -92,7 +90,6 @@ const Datagrid7 = () => {
             // No sorting if no column is specified
             return dataArray;
         } else if (sortOrder === "initial") {
-            console.log("Initial")
             return dataArray
         }
         else if (sortOrder === 'asc') {
@@ -100,9 +97,6 @@ const Datagrid7 = () => {
             return copydata.sort((a, b) => {
                 const valueA = a[columnName];
                 const valueB = b[columnName];
-
-                console.log(valueA)
-                console.log(valueB)
 
                 // Check if both values are numbers
                 if (typeof valueA === 'number' && typeof valueB === 'number') {
@@ -599,7 +593,6 @@ const Datagrid7 = () => {
     const columnConfigs = [
         {
             key: "LotNumber",
-            header: "Lot Number",
             className: "data7_content_body_same",
             background: "#fff",
             show: showLotNumber,
@@ -607,7 +600,6 @@ const Datagrid7 = () => {
         },
         {
             key: "DieReceipt",
-            header: "Die Receipt",
             className: "data7_content_body_same",
             background: "var(--bg-color-1)",
             show: showDieReceipt,
@@ -615,7 +607,6 @@ const Datagrid7 = () => {
         },
         {
             key: "ReceiptBumpDuration",
-            header: "Receipt Bump Duration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)",
             show: showReceiptBumpDuration,
@@ -624,7 +615,6 @@ const Datagrid7 = () => {
 
         {
             key: "BumpIn",
-            header: "BumpIn",
             className: "data7_content_body_same",
             background: "var(--bg-color-2)",
             show: showBumpIn,
@@ -633,7 +623,6 @@ const Datagrid7 = () => {
 
         {
             key: "BumpDuration",
-            header: "showBumpDuration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)",
             show: showReceiptBumpDuration,
@@ -641,8 +630,7 @@ const Datagrid7 = () => {
         },
 
         {
-            key: "BumpOut ",
-            header: "BumpOut ",
+            key: "BumpOut",
             className: "data7_content_body_same",
             background: "var(--bg-color-2)",
             show: showBumpOut,
@@ -651,7 +639,6 @@ const Datagrid7 = () => {
 
         {
             key: "BumpProbeDuration",
-            header: "BumpProbeDuration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)",
             show: showBumpProbeDuration,
@@ -660,7 +647,6 @@ const Datagrid7 = () => {
 
         {
             key: "ProbeIn",
-            header: "ProbeIn",
             className: "data7_content_body_same",
             background: "var(--bg-color-3)",
             show: showProbeIn,
@@ -669,7 +655,6 @@ const Datagrid7 = () => {
 
         {
             key: "ProbeDuration",
-            header: "ProbeDuration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)",
             show: showProbeDuration,
@@ -678,7 +663,6 @@ const Datagrid7 = () => {
 
         {
             key: "ProbeOut",
-            header: "ProbeOut ",
             className: "data7_content_body_same",
             background: "var(--bg-color-3)",
             show: showProbeOut,
@@ -687,7 +671,6 @@ const Datagrid7 = () => {
 
         {
             key: "ProbeAssemblyDuration",
-            header: "ProbeAssemblyDuration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)",
             show: showProbeAssemblyDuration,
@@ -696,7 +679,6 @@ const Datagrid7 = () => {
 
         {
             key: "AssemblyIn",
-            header: "AssemblyIn ",
             className: "data7_content_body_same",
             background: "var(--bg-color-4)",
             show: showAssemblyIn,
@@ -705,7 +687,6 @@ const Datagrid7 = () => {
 
         {
             key: "AssemblyDuration",
-            header: "AssemblyDuration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)",
             show: showAssemblyDuration,
@@ -714,7 +695,6 @@ const Datagrid7 = () => {
 
         {
             key: "AssemblyOut",
-            header: "AssemblyOut ",
             className: "data7_content_body_same",
             background: "var(--bg-color-4)",
             show: showAssemblyOut,
@@ -722,8 +702,7 @@ const Datagrid7 = () => {
         },
 
         {
-            key: "AssemblyTestDuration ",
-            header: "AssemblyTestDuration ",
+            key: "AssemblyTestDuration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-5) 50%)",
             show: showAssemblyTestDuration,
@@ -732,7 +711,6 @@ const Datagrid7 = () => {
 
         {
             key: "TestIn",
-            header: "TestIn ",
             className: "data7_content_body_same",
             background: "var(--bg-color-5)",
             show: showTestIn,
@@ -741,7 +719,6 @@ const Datagrid7 = () => {
 
         {
             key: "TestDuration",
-            header: "TestDuration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-5) 50%, var(--bg-color-5) 50%)",
             show: showTestDuration,
@@ -750,7 +727,6 @@ const Datagrid7 = () => {
 
         {
             key: "TestOut",
-            header: "TestOut ",
             className: "data7_content_body_same",
             background: "var(--bg-color-5)",
             show: showTestOut,
@@ -759,7 +735,6 @@ const Datagrid7 = () => {
 
         {
             key: "TestShipDuration",
-            header: "TestShipDuration",
             className: "data7_content_body_diff",
             background: "linear-gradient(to right, var(--bg-color-5) 50%, var(--bg-color-6) 50%)",
             show: showTestShipDuration,
@@ -768,7 +743,6 @@ const Datagrid7 = () => {
 
         {
             key: "ShipOut",
-            header: "ShipOut ",
             className: "data7_content_body_same",
             background: "var(--bg-color-6)",
             show: showShipOut,
@@ -776,10 +750,617 @@ const Datagrid7 = () => {
         },
     ];
 
-    // VVP==========================
-    // similarly create a columnYield Array for three
-    // similary create a column Array for the last
-    console.log(columnConfigs)
+    const columnConfigs2 = [
+        {
+            className: "data7_content_body_same_yield",
+            background: "var(--bg-color-3)",
+            color: "var(--progress-bg-color-1)",
+            show: showBumpYield,
+            render: (data, column) => (
+                <>
+                    {data?.BumpYield && data?.BumpOutDie ? (
+                        <div>
+                            <div>
+                                <span style={{ color: column.color }}>{data.BumpYield}%</span>{" "}
+                                <span>{data.BumpOutDie}</span>
+                            </div>
+                            <div>
+                                <div
+                                    style={{
+                                        width: data.BumpYield > 100 ? "100%" : `${data.BumpYield}%`,
+                                        background: column.color,
+                                    }}
+                                ></div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div style={{ textAlign: "center" }}>
+                            <span style={{ color: column.color }}>-</span>
+                        </div>
+                    )}
+                </>
+            ),
+        },
+
+        {
+            className: "data7_content_body_same_yield",
+            background: "var(--bg-color-3)",
+            color: "var(--progress-bg-color-2)",
+            show: showProbeYield,
+            render: (data, column) => (
+                <>
+                    {data?.ProbeYield && data?.ProbeOutDie ? (
+                        <div>
+                            <div>
+                                <span style={{ color: column.color }}>{data.ProbeYield}%</span>{" "}
+                                <span>{data.ProbeOutDie}</span>
+                            </div>
+                            <div>
+                                <div
+                                    style={{
+                                        width: data.ProbeYield > 100 ? "100%" : `${data.ProbeYield}%`,
+                                        background: column.color,
+                                    }}
+                                ></div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div style={{ textAlign: "center" }}>
+                            <span style={{ color: column.color }}>-</span>
+                        </div>
+                    )}
+                </>
+            ),
+        },
+
+        {
+            className: "data7_content_body_same_yield",
+            background: "var(--bg-color-4)",
+            color: "var(--progress-bg-color-3)",
+            show: showAssemblyYield,
+            render: (data, column) => (
+                <>
+                    {data?.AssemblyYield && data?.AssemblyOutDie ? (
+                        <div>
+                            <div>
+                                <span style={{ color: column.color }}>{data.AssemblyYield}%</span>{" "}
+                                <span>{data.AssemblyOutDie}</span>
+                            </div>
+                            <div>
+                                <div
+                                    style={{
+                                        width: data.AssemblyYield > 100 ? "100%" : `${data.AssemblyYield}%`,
+                                        background: column.color,
+                                    }}
+                                ></div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div style={{ textAlign: "center" }}>
+                            <span style={{ color: column.color }}>-</span>
+                        </div>
+                    )}
+                </>
+            ),
+        },
+
+        {
+            className: "data7_content_body_same_yield",
+            background: "var(--bg-color-5)",
+            color: "var(--progress-bg-color-4)",
+            show: showTestYield,
+            render: (data, column) => (
+                <>
+                    {data?.TestYield && data?.TestOutDie ? (
+                        <div>
+                            <div>
+                                <span style={{ color: column.color }}>{data.TestYield}%</span>{" "}
+                                <span>{data.TestOutDie}</span>
+                            </div>
+                            <div>
+                                <div
+                                    style={{
+                                        width: data.TestYield > 100 ? "100%" : `${data.TestYield}%`,
+                                        background: column.color,
+                                    }}
+                                ></div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div style={{ textAlign: "center" }}>
+                            <span style={{ color: column.color }}>-</span>
+                        </div>
+                    )}
+                </>
+            ),
+        },
+    ];
+
+    const columnConfigs3 = [
+        {
+            className: "data7_content_body_same_taka",
+            background: "var(--mcm-taka-d-bg-color)",
+            color: "red",
+            show: showMCMTakaD,
+            render: (data, column) => (
+                <>
+                    {data?.TestOutDieM ? <p style={{ color: column.color }}>{data.TestOutDieM}</p> : <p style={{ color: column.color }}>-</p>}
+                </>
+            )
+        },
+        {
+            className: "data7_content_body_same_taka",
+            background: "var(--mcm-taka-bg-color)",
+            color: "green",
+            show: showMCMTaka,
+            render: (data, column) => (
+                <>
+                    {data?.TestOutDieN ? <p style={{ color: column.color }}>{data.TestOutDieN}</p> : <p style={{ color: column.color }}>-</p>}
+                </>
+            )
+        },
+        {
+            className: "data7_content_body_same_taka",
+            color: "black",
+            show: showMCMTaka,
+            render: (data, column) => (
+                <>
+                    {data?.TakaDRatio ? <p style={{ color: column.color }}>{data.TestOutDieN}</p> : <p style={{ color: column.color }}>-</p>}
+                </>
+            )
+        }
+    ]
+
+    const columnHeaders = [
+        {
+            key: "LotNumber",
+            title: "Lot No.",
+            className: "data7_content_head_same",
+            show: showLotNumber,
+            render: (column) => (
+                <div style={{ borderRight: "1px solid black" }}>
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+                </div>
+            )
+        },
+        {
+            key: "DieReceipt",
+            title: "DieReceipt",
+            className: "data7_content_head_same",
+            show: showDieReceipt,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+
+                </div>
+            )
+        },
+        {
+            key: "ReceiptBumpDuration",
+            className: "data7_content_head_diff",
+            show: showReceiptBumpDuration,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
+                                    <div><span><FaSortDown /></span></div>
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
+                </div>
+            )
+        },
+        {
+            key: "BumpIn",
+            title: "BumpIn",
+            className: "data7_content_head_same",
+            show: showBumpIn,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "BumpDuration",
+            className: "data7_content_head_diff",
+            show: showBumpDuration,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
+                                    <div><span><FaSortDown /></span></div>
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "BumpOut",
+            title: "BumpOut",
+            className: "data7_content_head_same",
+            show: showBumpOut,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "BumpProbeDuration",
+            className: "data7_content_head_diff",
+            show: showBumpProbeDuration,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
+                                    <div><span><FaSortDown /></span></div>
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
+
+                </div>
+            )
+        },
+
+        {
+            key: "ProbeIn",
+            title: "ProbeIn",
+            className: "data7_content_head_same",
+            show: showProbeIn,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "ProbeDuration",
+            className: "data7_content_head_diff",
+            show: showProbeDuration,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
+                                    <div><span><FaSortDown /></span></div>
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
+
+                </div>
+            )
+        },
+
+        {
+            key: "ProbeOut",
+            title: "ProbeOut",
+            className: "data7_content_head_same",
+            show: showProbeOut,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "ProbeAssemblyDuration",
+            className: "data7_content_head_diff",
+            show: showProbeAssemblyDuration,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
+                                    <div><span><FaSortDown /></span></div>
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
+
+                </div>
+            )
+        },
+
+        {
+            key: "AssemblyIn",
+            title: "AssemblyIn",
+            className: "data7_content_head_same",
+            show: showAssemblyIn,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "AssemblyDuration",
+            className: "data7_content_head_diff",
+            show: showAssemblyDuration,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
+                                    <div><span><FaSortDown /></span></div>
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
+
+                </div>
+            )
+        },
+
+        {
+            key: "AssemblyOut",
+            title: "AssemblyOut",
+            className: "data7_content_head_same",
+            show: showAssemblyOut,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "AssemblyTestDuration",
+            className: "data7_content_head_diff",
+            show: showAssemblyTestDuration,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
+                                    <div><span><FaSortDown /></span></div>
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "TestIn",
+            title: "TestIn",
+            className: "data7_content_head_same",
+            show: showTestIn,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "TestDuration",
+            className: "data7_content_head_diff",
+            show: showTestDuration,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
+                                    <div><span><FaSortDown /></span></div>
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
+
+                </div>
+            )
+        },
+
+        {
+            key: "TestOut",
+            title: "TestOut",
+            className: "data7_content_head_same",
+            show: showTestOut,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+
+        {
+            key: "TestShipDuration",
+            className: "data7_content_head_diff",
+            show: showTestShipDuration,
+            render: (column) => (
+                <div className={column.className} onClick={() => toggleSortOrder(column.key)}
+                    key={column.key}
+                >
+                    <div>
+                        {column.show && (
+                            <>
+                                <div />
+                                {sortBy === column.key ? (
+                                    sortOrder === 'asc' ? (
+                                        <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                    ) : sortOrder === 'desc' ? (
+                                        <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                    ) : sortOrder === 'initial' && (
+                                        <div><span><FaSortDown /></span></div>
+                                    )
+                                ) : (
+                                    <div><span><FaSortDown /></span></div>
+                                )}
+                            </>
+                        )}
+
+                    </div>
+                </div>
+            )
+        },
+
+        {
+            key: "ShipOut",
+            title: "ShipOut",
+            className: "data7_content_head_same",
+            show: showShipOut,
+            render: (column) => (
+                <div>
+                    {column.show && (
+                        <>
+                            <p>{column.title}</p>
+                            {sortBy === column.key &&
+                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                            }
+                        </>
+                    )}
+                </div>
+            )
+        },
+    ]
+
+    console.log("sortby from header-Col ", sortBy)
 
     return (
         <main className='data7_container' >
@@ -1133,7 +1714,7 @@ const Datagrid7 = () => {
             <div className='data7_content_pagination_box'>
                 <div className='data7_content_box'>
                     <div className='data7_content'>
-                        <div className='data7_content_head'>
+                        {/* <div className='data7_content_head'>
                             {showLotNumber && <div className='data7_content_head_same' onClick={() => toggleSortOrder('LotNumber')}>
                                 <div style={{ borderRight: "1px solid black" }}>
                                     <p>Lot No.</p>
@@ -1424,626 +2005,87 @@ const Datagrid7 = () => {
 
                             }
 
+                        </div> */}
+
+                        <div className='data7_content_head'>
+                            {
+                                columnHeaders.map((column, i) => (
+                                    // <div className={column.className} onClick={() => toggleSortOrder(column.key)}
+                                    //     key={column.key}
+                                    // >
+                                    <>
+                                        {column.render(column)}
+                                    </>
+                                    // </div>
+                                ))
+                            }
                         </div>
 
-                        {/* {
-                            filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
-                                currentPageFilteredData.map((t, i) => (
-                                    <div className='data7_content_body' key={t.LotNo}
-                                        style={{ borderBottom: (currentPageFilteredData.length - 1) === i ? "none" : "1px solid black" }}
-                                    >
-                                        {showLotNumber && <div className='data7_content_body_same'>
-                                            <div style={{ borderRight: "1px solid black" }}>
-                                                <p>{t.LotNumber}</p>
-                                            </div>
-                                        </div>}
-
-                                        {showDieReceipt && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-1)" }}>
-                                                {
-                                                    t?.DieReceipt ? <p style={{ color: "var(--text-color-1)" }}>{t.DieReceipt}</p> : <p style={{ color: "var(--text-color-1)" }}>-</p>
-                                                }
-
-                                            </div>
-                                        </div>}
-
-                                        {showReceiptBumpDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.ReceiptBumpDuration || t?.ReceiptBumpDuration === 0 ? <div>{t.ReceiptBumpDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showBumpIn && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-2)" }}>
-                                                {
-                                                    t?.BumpIn ? <p style={{ color: "var(--text-color-2)" }}>{t.BumpIn}</p> : <p style={{ color: "var(--text-color-2)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showBumpDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.BumpDuration || t?.BumpDuration === 0 ? <div>{t.BumpDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showBumpOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-2)" }}>
-                                                {
-                                                    t?.BumpOut ? <p style={{ color: "var(--text-color-2)" }}>{t.BumpOut}</p> : <p style={{ color: "var(--text-color-2)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showBumpProbeDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.BumpProbeDuration || t?.BumpProbeDuration === 0 ? <div>{t.BumpProbeDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showProbeIn && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-3)" }}>
-                                                {
-                                                    t?.ProbeIn ? <p style={{ color: "var(--text-color-3)" }}>{t.ProbeIn}</p> : <p style={{ color: "var(--text-color-3)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showProbeDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.ProbeDuration || t?.ProbeDuration === 0 ? <div>{t.ProbeDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showProbeOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-3)" }}>
-                                                {
-                                                    t?.ProbeOut ? <p style={{ color: "var(--text-color-3)" }}>{t.ProbeOut}</p> : <p style={{ color: "var(--text-color-3)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showProbeAssemblyDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.ProbeAssemblyDuration || t?.ProbeAssemblyDuration === 0 ? <div>{t.ProbeAssemblyDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-                                        {showAssemblyIn && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-4)" }}>
-                                                {
-                                                    t?.AssemblyIn ? <p style={{ color: "var(--text-color-4)" }}>{t.AssemblyIn}</p> : <p style={{ color: "var(--text-color-4)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showAssemblyDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.AssemblyDuration || t?.AssemblyDuration === 0 ? <div>{t.AssemblyDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showAssemblyOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-4)" }}>
-                                                {
-                                                    t?.AssemblyOut ? <p style={{ color: "var(--text-color-4)" }}>{t.AssemblyOut}</p> : <p style={{ color: "var(--text-color-4)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showAssemblyTestDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-5) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.AssemblyTestDuration || t?.AssemblyTestDuration === 0 ? <div>{t.AssemblyTestDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showTestIn && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-5)" }}>
-                                                {
-                                                    t?.TestIn ? <p style={{ color: "var(--text-color-5)" }}>{t.TestIn}</p> : <p style={{ color: "var(--text-color-5)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showTestDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-5) 50%, var(--bg-color-5) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.TestDuration || t?.TestDuration === 0 ? <div>{t.TestDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showTestOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-5)" }}>
-                                                {
-                                                    t?.TestOut ? <p style={{ color: "var(--text-color-5)" }}>{t.TestOut}</p> : <p style={{ color: "var(--text-color-6)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showTestShipDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-5) 50%, var(--bg-color-6) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.TestShipDuration || t?.TestShipDuration === 0 ? <div>{t.TestShipDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showShipOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-6)" }}>
-                                                {
-                                                    t?.ShipOut ? <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p> : <p style={{ color: "var(--text-color-6)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {
-                                            showBumpYield && <div className='data7_content_body_same_yield' style={{
-                                                background: "var(--bg-color-3)",
-                                                borderLeft: "3px solid var(--bg-primary-color)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.BumpYield && t?.BumpOutDie ? (<div>
-                                                        <div>
-                                                            <span style={{ color: "var(--progress-bg-color-1)" }}>{t.BumpYield}%</span> <span>{t.BumpOutDie}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ width: t.BumpYield > 100 ? '100%' : `${t.BumpYield}%`, background: "var(--progress-bg-color-1)" }}></div>
-                                                        </div>
-                                                    </div>) : (
-                                                        <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>-</span></div>
-                                                    )
-                                                }
-
-                                            </div>
-                                        }
-
-
-                                        {
-                                            showProbeYield && <div className='data7_content_body_same_yield' style={{
-                                                background: "var(--bg-color-3)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.ProbeYield && t?.ProbeOutDie ? (<div>
-                                                        <div>
-                                                            <span style={{ color: "var(--progress-bg-color-2)" }}>{t.ProbeYield}%</span> <span>{t.ProbeOutDie}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ width: t.ProbeYield > 100 ? '100%' : `${t.ProbeYield}%`, background: "var(--progress-bg-color-2)" }}></div>
-                                                        </div>
-                                                    </div>) : (
-                                                        <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-2)" }}>-</span></div>
-                                                    )
-                                                }
-                                            </div>
-                                        }
-
-                                        {
-                                            showAssemblyYield && <div className='data7_content_body_same_yield' style={{
-                                                background: "var(--bg-color-4)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.AssemblyYield && t?.AssemblyOutDie ? (<div>
-                                                        <div>
-                                                            <span style={{ color: "var(--progress-bg-color-3)" }}>{t.AssemblyYield}%</span> <span>{t.AssemblyOutDie}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ width: t.AssemblyYield > 100 ? '100%' : `${t.AssemblyYield}%`, background: "var(--progress-bg-color-3)" }}></div>
-                                                        </div>
-                                                    </div>) : (
-                                                        <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-3)" }}>-</span></div>
-                                                    )
-                                                }
-                                            </div>
-                                        }
-
-                                        {
-                                            showTestYield && <div className='data7_content_body_same_yield' style={{
-                                                background: "var(--bg-color-5)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.TestYield && t?.TestOutDie ? (<div>
-                                                        <div>
-                                                            <span style={{ color: "var(--progress-bg-color-4)" }}>{t.TestYield}%</span> <span>{t.TestOutDie}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ width: t.TestYield > 100 ? '100%' : `${t.AssemblyYield}%`, background: "var(--progress-bg-color-4)" }}></div>
-                                                        </div>
-                                                    </div>) : (
-                                                        <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-4)" }}>-</span></div>
-                                                    )
-                                                }
-                                            </div>
-                                        }
-
-
-                                        {
-                                            showMCMTakaD && <div className='data7_content_body_same_taka' style={{
-                                                background: "var(--mcm-taka-d-bg-color)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.TestOutDieM ? <p style={{ color: "red" }}>{t.TestOutDieM}</p> : <p style={{ color: "red" }}>-</p>
-                                                }
-                                            </div>
-                                        }
-
-                                        {
-                                            showMCMTaka && <div className='data7_content_body_same_taka' style={{
-                                                background: "var(--mcm-taka-bg-color)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.TestOutDieN ? <p style={{ color: "green" }}>{t.TestOutDieN}</p> : <p style={{ color: "green" }}>-</p>
-                                                }
-                                            </div>
-                                        }
-
-                                        {
-                                            showTakaDRatio && <div className='data7_content_body_same_taka' style={{ background: t.TakaDRatio <= 50 ? "var(--mcm-taka-ratio-bg-color-1)" : (t.TakaDRatio > 50 && t.TakaDRatio <= 70) ? "var(--mcm-taka-ratio-bg-color-2)" : (t.TakaDRatio > 70 ? "orange" : (t.TakaDRatio === "-" ? "var(--mcm-taka-ratio-bg-color-1)" : "")) }}>
-                                                {
-                                                    t?.TakaDRatio ? <p style={{ color: "black" }}>{t.TakaDRatio}</p> : <p style={{ color: "black" }}>-</p>
-                                                }
-                                            </div>
-                                        }
-
-                                    </div>
-                                ))
-                            ) : (
-                                currentPageData.map((t, i) => (
-                                    <div className='data7_content_body' key={t.LotNumber}
-                                        style={{ borderBottom: (data.length - 1) === i ? "none" : "1px solid black" }}
-                                    >
-                                        {showLotNumber && <div className='data7_content_body_same'>
-                                            <div style={{ borderRight: "1px solid black" }}>
-                                                <p>{t.LotNumber}</p>
-                                            </div>
-                                        </div>}
-
-                                        {showDieReceipt && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-1)" }}>
-                                                {
-                                                    t?.DieReceipt ? <p style={{ color: "var(--text-color-1)" }}>{t.DieReceipt}</p> : <p style={{ color: "var(--text-color-1)" }}>-</p>
-                                                }
-
-                                            </div>
-                                        </div>}
-
-                                        {showReceiptBumpDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-1) 50%, var(--bg-color-2) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.ReceiptBumpDuration || t?.ReceiptBumpDuration === 0 ? <div>{t.ReceiptBumpDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showBumpIn && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-2)" }}>
-                                                {
-                                                    t?.BumpIn ? <p style={{ color: "var(--text-color-2)" }}>{t.BumpIn}</p> : <p style={{ color: "var(--text-color-2)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showBumpDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-2) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.BumpDuration || t?.BumpDuration === 0 ? <div>{t.BumpDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showBumpOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-2)" }}>
-                                                {
-                                                    t?.BumpOut ? <p style={{ color: "var(--text-color-2)" }}>{t.BumpOut}</p> : <p style={{ color: "var(--text-color-2)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showBumpProbeDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-2) 50%, var(--bg-color-3) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.BumpProbeDuration || t?.BumpProbeDuration === 0 ? <div>{t.BumpProbeDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showProbeIn && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-3)" }}>
-                                                {
-                                                    t?.ProbeIn ? <p style={{ color: "var(--text-color-3)" }}>{t.ProbeIn}</p> : <p style={{ color: "var(--text-color-3)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showProbeDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-3) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.ProbeDuration || t?.ProbeDuration === 0 ? <div>{t.ProbeDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showProbeOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-3)" }}>
-                                                {
-                                                    t?.ProbeOut ? <p style={{ color: "var(--text-color-3)" }}>{t.ProbeOut}</p> : <p style={{ color: "var(--text-color-3)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showProbeAssemblyDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-3) 50%, var(--bg-color-4) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.ProbeAssemblyDuration || t?.ProbeAssemblyDuration === 0 ? <div>{t.ProbeAssemblyDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-                                        {showAssemblyIn && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-4)" }}>
-                                                {
-                                                    t?.AssemblyIn ? <p style={{ color: "var(--text-color-4)" }}>{t.AssemblyIn}</p> : <p style={{ color: "var(--text-color-4)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showAssemblyDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-4) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.AssemblyDuration || t?.AssemblyDuration === 0 ? <div>{t.AssemblyDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showAssemblyOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-4)" }}>
-                                                {
-                                                    t?.AssemblyOut ? <p style={{ color: "var(--text-color-4)" }}>{t.AssemblyOut}</p> : <p style={{ color: "var(--text-color-4)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showAssemblyTestDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-4) 50%, var(--bg-color-5) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.AssemblyTestDuration || t?.AssemblyTestDuration === 0 ? <div>{t.AssemblyTestDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showTestIn && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-5)" }}>
-                                                {
-                                                    t?.TestIn ? <p style={{ color: "var(--text-color-5)" }}>{t.TestIn}</p> : <p style={{ color: "var(--text-color-5)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showTestDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-5) 50%, var(--bg-color-5) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.TestDuration || t?.TestDuration === 0 ? <div>{t.TestDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showTestOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-5)" }}>
-                                                {
-                                                    t?.TestOut ? <p style={{ color: "var(--text-color-5)" }}>{t.TestOut}</p> : <p style={{ color: "var(--text-color-5)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showTestShipDuration && <div className='data7_content_body_diff'>
-                                            <div style={{ background: "linear-gradient(to right, var(--bg-color-5) 50%, var(--bg-color-6) 50%)" }}>
-                                                <div />
-                                                {
-                                                    t?.TestShipDuration || t?.TestShipDuration === 0 ? <div>{t.TestShipDuration} days</div> : <div>days</div>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {showShipOut && <div className='data7_content_body_same'>
-                                            <div style={{ background: "var(--bg-color-6)" }}>
-                                                {
-                                                    t?.ShipOut ? <p style={{ color: "var(--text-color-6)" }}>{t.ShipOut}</p> : <p style={{ color: "var(--text-color-6)" }}>-</p>
-                                                }
-                                            </div>
-                                        </div>}
-
-                                        {
-                                            showBumpYield && <div className='data7_content_body_same_yield' style={{
-                                                background: "var(--bg-color-3)",
-                                                borderLeft: "3px solid var(--bg-primary-color)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.BumpYield && t?.BumpOutDie ? (<div>
-                                                        <div>
-                                                            <span style={{ color: "var(--progress-bg-color-1)" }}>{t.BumpYield}%</span> <span>{t.BumpOutDie}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ width: t.BumpYield > 100 ? '100%' : `${t.BumpYield}%`, background: "var(--progress-bg-color-1)" }}></div>
-                                                        </div>
-                                                    </div>) : (
-                                                        <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>-</span></div>
-                                                    )
-                                                }
-
-                                            </div>
-                                        }
-
-
-                                        {
-                                            showProbeYield && <div className='data7_content_body_same_yield' style={{
-                                                background: "var(--bg-color-3)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.ProbeYield && t?.ProbeOutDie ? (<div>
-                                                        <div>
-                                                            <span style={{ color: "var(--progress-bg-color-2)" }}>{t.ProbeYield}%</span> <span>{t.ProbeOutDie}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ width: t.ProbeYield > 100 ? '100%' : `${t.ProbeYield}%`, background: "var(--progress-bg-color-2)" }}></div>
-                                                        </div>
-                                                    </div>) : (
-                                                        <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-2)" }}>-</span></div>
-                                                    )
-                                                }
-                                            </div>
-                                        }
-
-                                        {
-                                            showAssemblyYield && <div className='data7_content_body_same_yield' style={{
-                                                background: "var(--bg-color-4)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.AssemblyYield && t?.AssemblyOutDie ? (<div>
-                                                        <div>
-                                                            <span style={{ color: "var(--progress-bg-color-3)" }}>{t.AssemblyYield}%</span> <span>{t.AssemblyOutDie}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ width: t.AssemblyYield > 100 ? '100%' : `${t.AssemblyYield}%`, background: "var(--progress-bg-color-3)" }}></div>
-                                                        </div>
-                                                    </div>) : (
-                                                        <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-3)" }}>-</span></div>
-                                                    )
-                                                }
-                                            </div>
-                                        }
-
-                                        {
-                                            showTestYield && <div className='data7_content_body_same_yield' style={{
-                                                background: "var(--bg-color-5)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.TestYield && t?.TestOutDie ? (<div>
-                                                        <div>
-                                                            <span style={{ color: "var(--progress-bg-color-4)" }}>{t.TestYield}%</span> <span>{t.TestOutDie}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ width: t.TestYield > 100 ? '100%' : `${t.AssemblyYield}%`, background: "var(--progress-bg-color-4)" }}></div>
-                                                        </div>
-                                                    </div>) : (
-                                                        <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-4)" }}>-</span></div>
-                                                    )
-                                                }
-                                            </div>
-                                        }
-
-
-                                        {
-                                            showMCMTakaD && <div className='data7_content_body_same_taka' style={{
-                                                background: "var(--mcm-taka-d-bg-color)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.TestOutDieM ? <p style={{ color: "red" }}>{t.TestOutDieM}</p> : <p style={{ color: "red" }}>-</p>
-                                                }
-                                            </div>
-                                        }
-
-                                        {
-                                            showMCMTaka && <div className='data7_content_body_same_taka' style={{
-                                                background: "var(--mcm-taka-bg-color)",
-                                                borderRight: "1px solid #000"
-                                            }}>
-                                                {
-                                                    t?.TestOutDieN ? <p style={{ color: "green" }}>{t.TestOutDieN}</p> : <p style={{ color: "green" }}>-</p>
-                                                }
-                                            </div>
-                                        }
-
-                                        {
-                                            showTakaDRatio && <div className='data7_content_body_same_taka' style={{ background: ColorGenerator(t?.TakaDRatio) }}>
-                                                {
-                                                    t?.TakaDRatio ? <p style={{ color: "black" }}>{t.TakaDRatio}</p> : <p style={{ color: "black" }}>-</p>
-                                                }
-                                            </div>
-                                        }
-
-
-                                    </div>
-                                ))
-                            )
-                        } */}
-
                         {
-                            currentPageData.map((data, i) => (
-                                <div className='data7_content_body' key={i} style={{ borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black" }}>
-                                    {columnConfigs.map((column, j) => (
-                                        <div className={column.className} key={j} style={{ background: `${column.background}` }}>
-                                            <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
-                                                {column.className === "data7_content_body_diff" && <div />}
-                                                {column.show && column.render(data[column.key])}
+                            filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
+                                (currentPageFilteredData.map((data, i) => (
+                                    <div className='data7_content_body' key={i} style={{ borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black" }}>
+                                        {columnConfigs.map((column, j) => (
+                                            <div className={column.className} key={j} style={{ background: `${column.background}` }}>
+                                                <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
+                                                    {column.className === "data7_content_body_diff" && <div />}
+                                                    {column.show && column.render(data[column.key])}
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
 
-                                    {
-                                        showBumpYield && <div className='data7_content_body_same_yield' style={{
-                                            background: "var(--bg-color-3)",
-                                            borderLeft: "3px solid var(--bg-primary-color)",
-                                            borderRight: "1px solid #000"
-                                        }}>
-                                            {
-                                                data?.BumpYield && data?.BumpOutDie ? (<div>
-                                                    <div>
-                                                        <span style={{ color: "var(--progress-bg-color-1)" }}>{data.BumpYield}%</span> <span>{data.BumpOutDie}</span>
-                                                    </div>
-                                                    <div>
-                                                        <div style={{ width: data.BumpYield > 100 ? '100%' : `${data.BumpYield}%`, background: "var(--progress-bg-color-1)" }}></div>
-                                                    </div>
-                                                </div>) : (
-                                                    <div style={{ textAlign: "center" }}><span style={{ color: "var(--progress-bg-color-1)" }}>-</span></div>
-                                                )
-                                            }
+                                        {columnConfigs2.map((column, j) => (
+                                            <div className={column.className} style={{
+                                                background: `${column.background}`,
+                                                borderLeft: j === 0 && "3px solid var(--bg-primary-color)",
+                                                borderRight: "1px solid #000"
+                                            }} key={j}>
+                                                {column.show && column.render(data, column)}
+                                            </div>
+                                        ))}
 
-                                        </div>
-                                    }
+                                        {columnConfigs3.map((column, j) => (
+                                            <div className={column.className} style={{
+                                                background: columnConfigs3.length - 1 === j ? ColorGenerator(data?.TakaDRatio) : column.background,
+                                                borderRight: "1px solid #000"
+                                            }} key={j}>
+                                                {column.show && column.render(data, column)}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )))
+                            ) :
+                                (currentPageData.map((data, i) => (
+                                    <div className='data7_content_body' key={i} style={{ borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black" }}>
+                                        {columnConfigs.map((column, j) => (
+                                            <div className={column.className} key={j} style={{ background: `${column.background}` }}>
+                                                <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
+                                                    {column.className === "data7_content_body_diff" && <div />}
+                                                    {column.show && column.render(data[column.key])}
+                                                </div>
+                                            </div>
+                                        ))}
 
-                                </div>
-                            ))
+                                        {columnConfigs2.map((column, j) => (
+                                            <div className={column.className} style={{
+                                                background: `${column.background}`,
+                                                borderLeft: j === 0 && "3px solid var(--bg-primary-color)",
+                                                borderRight: "1px solid #000"
+                                            }} key={j}>
+                                                {column.show && column.render(data, column)}
+                                            </div>
+                                        ))}
 
+                                        {columnConfigs3.map((column, j) => (
+                                            <div className={column.className} style={{
+                                                background: columnConfigs3.length - 1 === j ? ColorGenerator(data?.TakaDRatio) : column.background,
+                                                borderRight: "1px solid #000"
+                                            }} key={j}>
+                                                {column.show && column.render(data, column)}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )))
                         }
 
                     </div>
@@ -2094,7 +2136,7 @@ const Datagrid7 = () => {
                                             );
                                         })}
                                     </select>
-                                    <p>of {totalPages}</p>
+                                    <p>of {filteredData.length}</p>
                                 </div>
                             </div>
                         </div> : <div>
