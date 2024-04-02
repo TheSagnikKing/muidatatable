@@ -162,6 +162,7 @@
     justify-content: center;
     gap: 10px;
     cursor: pointer;
+    font-weight: 500;
 }
 
 .data7_content_head_same>div>p {
@@ -456,6 +457,10 @@ select {
     outline: none;
 }
 
+.data7_top_searchbox>input::placeholder{
+    color: #000;
+}
+
 .data7_top_selectdatebx {
     display: flex;
     align-items: center;
@@ -489,7 +494,7 @@ select {
 
 
 .data7_top_selectdatebx>div {
-    width: 250px;
+    width: 270px;
     height: 44px;
     padding-inline: 10px;
     background-color: #fff;

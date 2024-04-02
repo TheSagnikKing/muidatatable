@@ -168,113 +168,6 @@ const Datagrid7 = () => {
     const currentPageData = sortedData.slice(startIndex, endIndex);
 
 
-    // CSV PART
-
-    const currentpagecsvdataHandler = () => {
-        // Define headers
-        const headers = [
-            "LotNumber",
-            "DieReceipt",
-            "ReceiptBumpDuration",
-            "BumpIn",
-            "BumpDuration",
-            "BumpOut",
-            "BumpProbeDuration",
-            "ProbeIn",
-            "ProbeDuration",
-            "ProbeOut",
-            "ProbeAssemblyDuration",
-            "AssemblyIn",
-            "AssemblyDuration",
-            "AssemblyOut",
-            "AssemblyTestDuration",
-            "TestIn",
-            "TestDuration",
-            "TestOut",
-            "TestShipDuration",
-            "ShipOut",
-            "BumpYield",
-            "BumpOutDie",
-            "ProbeYield",
-            "ProbeOutDie",
-            "AssemblyYield",
-            "AssemblyOutDie",
-            "TestYield",
-            "TestOutDie",
-            "TestOutDieM",
-            "TestOutDieN",
-            "TakaDRatio"
-        ];
-
-        // Convert data to CSV format
-        const csvContent = "data:text/csv;charset=utf-8," +
-            headers.join(",") + "\n" +
-            currentPageData.map(row => headers.map(header => row[header]).join(",")).join("\n");
-
-        // Create a virtual link element to trigger the download
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "current_page_data.csv");
-        document.body.appendChild(link);
-
-        // Trigger the download
-        link.click();
-    };
-
-
-    const entirepagecsvdataHandler = () => {
-        // Define headers
-        const headers = [
-            "LotNumber",
-            "DieReceipt",
-            "ReceiptBumpDuration",
-            "BumpIn",
-            "BumpDuration",
-            "BumpOut",
-            "BumpProbeDuration",
-            "ProbeIn",
-            "ProbeDuration",
-            "ProbeOut",
-            "ProbeAssemblyDuration",
-            "AssemblyIn",
-            "AssemblyDuration",
-            "AssemblyOut",
-            "AssemblyTestDuration",
-            "TestIn",
-            "TestDuration",
-            "TestOut",
-            "TestShipDuration",
-            "ShipOut",
-            "BumpYield",
-            "BumpOutDie",
-            "ProbeYield",
-            "ProbeOutDie",
-            "AssemblyYield",
-            "AssemblyOutDie",
-            "TestYield",
-            "TestOutDie",
-            "TestOutDieM",
-            "TestOutDieN",
-            "TakaDRatio"
-        ];
-
-        // Convert data to CSV format
-        const csvContent = "data:text/csv;charset=utf-8," +
-            headers.join(",") + "\n" +
-            data.map(row => headers.map(header => row[header]).join(",")).join("\n");
-
-        // Create a virtual link element to trigger the download
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "current_page_data.csv");
-        document.body.appendChild(link);
-
-        // Trigger the download
-        link.click();
-    }
-
     //FILTERING DONE HERE
 
     const [filterBy, setFilterBy] = useState('');
@@ -282,6 +175,14 @@ const Datagrid7 = () => {
     const [endDate, setEndDate] = useState('')
 
     const [selectedDates, setSelectedDates] = useState([]);
+
+    useEffect(() => {
+        const startDate = dayjs('2019-01-01');
+        const endDate = dayjs(); // Current date
+        const allTimeRange = [startDate, endDate.endOf('day')];
+        setSelectedDates(allTimeRange);
+        setSelectedDateBtnStyle(11);
+    }, []);
 
     const handleDateChange = (dates) => {
         console.log(dates)
@@ -363,7 +264,6 @@ const Datagrid7 = () => {
 
 
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox, shipcheckbox);
-
 
     const removeFilter = () => {
         setFilterBy("")
@@ -531,6 +431,7 @@ const Datagrid7 = () => {
             name: "Last year",
             dateHandler: () => {
                 const lastyear = [today.subtract(1, 'year').startOf('year'), today.subtract(1, 'year').endOf('year')]
+                console.log(lastyear)
                 setSelectedDates(lastyear)
                 setSelectedDateBtnStyle(10);
             }
@@ -539,8 +440,10 @@ const Datagrid7 = () => {
             _id: 11,
             name: "All time",
             dateHandler: () => {
-                const alltime = [dayjs(0), today.endOf('day')]
-                setSelectedDates(alltime)
+                const startDate = dayjs('2019-01-01');
+                const endDate = dayjs(); // Current date
+                const allTimeRange = [startDate, endDate.endOf('day')];
+                setSelectedDates(allTimeRange);
                 setSelectedDateBtnStyle(11);
             }
         }
@@ -566,13 +469,120 @@ const Datagrid7 = () => {
         return '#' + ('000000' + h.toString(16)).slice(-6);
     }
 
+    // CSV PART
+
+    const currentpagecsvdataHandler = () => {
+        // Define headers
+        const headers = [
+            "LotNumber",
+            "DieReceipt",
+            "ReceiptBumpDuration",
+            "BumpIn",
+            "BumpDuration",
+            "BumpOut",
+            "BumpProbeDuration",
+            "ProbeIn",
+            "ProbeDuration",
+            "ProbeOut",
+            "ProbeAssemblyDuration",
+            "AssemblyIn",
+            "AssemblyDuration",
+            "AssemblyOut",
+            "AssemblyTestDuration",
+            "TestIn",
+            "TestDuration",
+            "TestOut",
+            "TestShipDuration",
+            "ShipOut",
+            "BumpYield",
+            "BumpOutDie",
+            "ProbeYield",
+            "ProbeOutDie",
+            "AssemblyYield",
+            "AssemblyOutDie",
+            "TestYield",
+            "TestOutDie",
+            "TestOutDieM",
+            "TestOutDieN",
+            "TakaDRatio"
+        ];
+
+        // Convert data to CSV format
+        const csvContent = "data:text/csv;charset=utf-8," +
+            headers.join(",") + "\n" +
+            filteredData.map(row => headers.map(header => row[header]).join(",")).join("\n");
+
+        // Create a virtual link element to trigger the download
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "current_page_data.csv");
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+    };
+
+
+    const entirepagecsvdataHandler = () => {
+        // Define headers
+        const headers = [
+            "LotNumber",
+            "DieReceipt",
+            "ReceiptBumpDuration",
+            "BumpIn",
+            "BumpDuration",
+            "BumpOut",
+            "BumpProbeDuration",
+            "ProbeIn",
+            "ProbeDuration",
+            "ProbeOut",
+            "ProbeAssemblyDuration",
+            "AssemblyIn",
+            "AssemblyDuration",
+            "AssemblyOut",
+            "AssemblyTestDuration",
+            "TestIn",
+            "TestDuration",
+            "TestOut",
+            "TestShipDuration",
+            "ShipOut",
+            "BumpYield",
+            "BumpOutDie",
+            "ProbeYield",
+            "ProbeOutDie",
+            "AssemblyYield",
+            "AssemblyOutDie",
+            "TestYield",
+            "TestOutDie",
+            "TestOutDieM",
+            "TestOutDieN",
+            "TakaDRatio"
+        ];
+
+        // Convert data to CSV format
+        const csvContent = "data:text/csv;charset=utf-8," +
+            headers.join(",") + "\n" +
+            data.map(row => headers.map(header => row[header]).join(",")).join("\n");
+
+        // Create a virtual link element to trigger the download
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "current_page_data.csv");
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+    }
+
     const columnConfigs = [
         {
             key: "LotNumber",
             className: "data7_content_body_same",
             background: "#fff",
             show: showLotNumber,
-            render: (value) => <p>{value}</p>
+            render: (value) => <p style={{ fontWeight: "500" }}>{value}</p>
         },
         {
             key: "DieReceipt",
@@ -1486,7 +1496,14 @@ const Datagrid7 = () => {
 
                     <div className='data7_top_selectdatebx' onClick={() => setOpenRangeCalender(prev => !prev)}>
                         <div>
-                            <div>Select Dates</div>
+                            <div>
+                                <p>{selectedDates.length > 0 ? selectedDates.map((date, index) => (
+                                    <React.Fragment key={index}>
+                                        {index !== 0 && " - "}
+                                        {date.format("YYYY-MM-DD")}
+                                    </React.Fragment>
+                                )) : "Select Dates"}</p>
+                            </div>
                             <div><FaSortDown /></div>
                         </div>
 
@@ -1642,7 +1659,7 @@ const Datagrid7 = () => {
                     ><MdFilterAltOff /></button>
 
                     <button className='dwn_crt_csv_data_btn' onClick={currentpagecsvdataHandler} style={{ fontSize: "20px" }}
-                        title="Download Current Entry"
+                        title="Download Filtered Entry"
                     ><RiDownload2Fill /></button>
 
                     <button className='dwn_crt_entire_data_btn' onClick={entirepagecsvdataHandler} style={{ fontSize: "20px" }}
@@ -1883,14 +1900,14 @@ const Datagrid7 = () => {
 
                                         {columnConfigs2.map((column, j) => (
                                             column.show && (
-                                            <div className={column.className} style={{
-                                                background: `${column.background}`,
-                                                borderLeft: j === 0 && "3px solid var(--bg-primary-color)",
-                                                borderRight: "1px solid #000"
-                                            }} key={j}>
-                                                {column.render(data, column)}
-                                            </div>
-                                        )
+                                                <div className={column.className} style={{
+                                                    background: `${column.background}`,
+                                                    borderLeft: j === 0 && "3px solid var(--bg-primary-color)",
+                                                    borderRight: "1px solid #000"
+                                                }} key={j}>
+                                                    {column.render(data, column)}
+                                                </div>
+                                            )
                                         ))}
 
                                         {columnConfigs3.map((column, j) => (
