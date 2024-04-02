@@ -63,13 +63,51 @@ const Datagrid7 = () => {
     const [showTakaDRatio, setShowTakaDRatio] = useState(true)
 
 
-    const data = fakedata; //cominmg from api
+    //These are calender checkboxes
+    const [diereceptcheckbox, setDiereceiptcheckbox] = useState(true)
+    const [Bumpcheckbox, setBumpCheckbox] = useState(true)
+    const [Probecheckbox, setProbeCheckbox] = useState(true)
+    const [Assemblycheckbox, setAssemblyCheckbox] = useState(true)
+    const [Testcheckbox, setTestCheckbox] = useState(true)
+    const [shipcheckbox, setShipCheckbox] = useState(true)
 
-    const copydata = [...fakedata]
+    //These is for active state in calender dates
+    const [selectedDateBtnStyle, setSelectedDateBtnStyle] = useState(null);
 
-
+    //These are for sorting
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('');
+
+
+    //These are for filtering
+    const [filterBy, setFilterBy] = useState('');
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+
+    //These are for Show/Hide Columns
+    const [DurationCheck, setDurationCheck] = useState(true)
+    const [DatesCheck, setDatesCheck] = useState(true)
+    const [YieldCheck, setYieldCheck] = useState(true)
+
+    //These is used for opening and closing the calender
+    const [openRangeCalender, setOpenRangeCalender] = useState(false)
+
+    //This useState is taking the calender date value on selection
+    const [selectedDates, setSelectedDates] = useState([]);
+
+    // Pagination States
+    const [dataPerPageState, setDataPerPageState] = useState(10)
+    const [currentFilterPage, setCurrentFilterPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
+
+
+    // I copied the real api data so that i can do sorting on it.
+
+    // Sorting of Data Starts from here
+
+    const data = fakedata; //cominmg from api
+    const copydata = [...fakedata]
 
     const toggleSortOrder = (columnName) => {
         setSortBy(columnName);
@@ -143,38 +181,10 @@ const Datagrid7 = () => {
 
     const sortedData = sortData(data, sortBy, sortOrder, copydata);
 
-    const [dataPerPageState, setDataPerPageState] = useState(10)
-
-    const dataPerPage = dataPerPageState;
-
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const handleNextPage = () => {
-        setCurrentPage(prevPage => prevPage + 1);
-    };
-
-    const handlePrevPage = () => {
-        setCurrentPage(prevPage => prevPage - 1);
-    };
-
-    // Calculate total number of pages
-    const totalPages = Math.ceil(sortedData.length / dataPerPage);
-
-    // Calculate starting and ending indexes for the current page
-    const startIndex = (currentPage - 1) * dataPerPage;
-    const endIndex = Math.min(startIndex + dataPerPage, sortedData.length);
-
-    // Get data for the current page
-    const currentPageData = sortedData.slice(startIndex, endIndex);
+    // Sorting of Data Ends here
 
 
-    //FILTERING DONE HERE
-
-    const [filterBy, setFilterBy] = useState('');
-    const [startDate, setStartDate] = useState('')
-    const [endDate, setEndDate] = useState('')
-
-    const [selectedDates, setSelectedDates] = useState([]);
+    // Filtering Starts From Here====================
 
     useEffect(() => {
         const startDate = dayjs('2019-01-01');
@@ -193,7 +203,6 @@ const Datagrid7 = () => {
     useEffect(() => {
         const formattedDates = selectedDates.map(date => date.format("YYYY-MM-DD"));
 
-        // Assuming you want to set the first date as startDate and the second date as endDate
         if (formattedDates.length === 2) {
             setStartDate(formattedDates[0]);
             setEndDate(formattedDates[1]);
@@ -201,7 +210,7 @@ const Datagrid7 = () => {
     }, [selectedDates]);
 
 
-
+    // This function is for Lot Number Filtering
     const applyFilter = (dataArray, filterValue) => {
         return dataArray.filter((item) => {
             return (
@@ -211,14 +220,7 @@ const Datagrid7 = () => {
         );
     };
 
-    const [diereceptcheckbox, setDiereceiptcheckbox] = useState(true)
-    const [Bumpcheckbox, setBumpCheckbox] = useState(true)
-    const [Probecheckbox, setProbeCheckbox] = useState(true)
-    const [Assemblycheckbox, setAssemblyCheckbox] = useState(true)
-    const [Testcheckbox, setTestCheckbox] = useState(true)
-    const [shipcheckbox, setShipCheckbox] = useState(true)
-
-
+    // This function is for rest of the Filtering columns
     const applyFilterByDateRange = (dataArray, startDateValue, endDateValue, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox, shipcheckbox) => {
         return dataArray.filter((item) => {
             const dieReceiptDate = new Date(item?.DieReceipt);
@@ -265,42 +267,13 @@ const Datagrid7 = () => {
 
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox, shipcheckbox);
 
-    const removeFilter = () => {
-        setFilterBy("")
-        setSelectedDates([])
-        setStartDate("")
-        setEndDate("")
-        setOpenRangeCalender(false)
-    }
+    // const copyFilteredDate = [...filteredData]
 
-    const dataPerFilterPage = dataPerPageState;
+    // const sortedFilteredData = filteredData && sortData(filteredData, sortBy, sortOrder, copyFilteredDate);
 
-    const [currentFilterPage, setCurrentFilterPage] = useState(1);
+    // Filtering Ends From Here
 
-    const handleNextFilterPage = () => {
-        setCurrentFilterPage(prevPage => prevPage + 1);
-    };
-
-    const handlePrevFilterPage = () => {
-        setCurrentFilterPage(prevPage => prevPage - 1);
-    };
-
-    const totalFilterPages = Math.ceil(filteredData.length / dataPerFilterPage);
-
-    const filterStartIndex = (currentFilterPage - 1) * dataPerPage;
-    const filterEndIndex = Math.min(filterStartIndex + dataPerFilterPage, filteredData.length);
-
-    // Get data for the current page
-    const currentPageFilteredData = filteredData.slice(filterStartIndex, filterEndIndex);
-
-    const [openRangeCalender, setOpenRangeCalender] = useState(false)
-
-
-    const [DurationCheck, setDurationCheck] = useState(true)
-    const [DatesCheck, setDatesCheck] = useState(true)
-    const [YieldCheck, setYieldCheck] = useState(true)
-
-
+    // These Functions are for show/Hide Columns
     const DatesCheckClicked = (e) => {
         setDatesCheck((prev) => (!prev))
         setShowDieReceipt((prev) => !prev)
@@ -339,9 +312,21 @@ const Datagrid7 = () => {
         setShowMCMTaka((prev) => !prev)
         setShowTakaDRatio((prev) => !prev)
     }
+    //==========================================
 
-    const [selectedDateBtnStyle, setSelectedDateBtnStyle] = useState(null);
 
+    // This function is for removing filters
+    const removeFilter = () => {
+        setFilterBy("")
+        setSelectedDates([])
+        setStartDate("")
+        setEndDate("")
+        setOpenRangeCalender(false)
+        setSelectedDates([]);
+        setSelectedDateBtnStyle(null);
+    }
+
+    // Dates of the Calender button Start
     const today = dayjs();
 
     const datebtnarray = [
@@ -449,6 +434,12 @@ const Datagrid7 = () => {
         }
     ];
 
+    // Dates of the Calender button End
+
+
+    // Table Columns and Headers. I have break the table row into three different column because of design
+    // Table Column Start
+    // Color Code generator Code for the last Column
     function ColorGenerator(percentage) {
         var r, g, b = 0;
 
@@ -467,113 +458,6 @@ const Datagrid7 = () => {
 
         var h = (r * 0x10000) + (g * 0x100) + (b * 0x1);
         return '#' + ('000000' + h.toString(16)).slice(-6);
-    }
-
-    // CSV PART
-
-    const currentpagecsvdataHandler = () => {
-        // Define headers
-        const headers = [
-            "LotNumber",
-            "DieReceipt",
-            "ReceiptBumpDuration",
-            "BumpIn",
-            "BumpDuration",
-            "BumpOut",
-            "BumpProbeDuration",
-            "ProbeIn",
-            "ProbeDuration",
-            "ProbeOut",
-            "ProbeAssemblyDuration",
-            "AssemblyIn",
-            "AssemblyDuration",
-            "AssemblyOut",
-            "AssemblyTestDuration",
-            "TestIn",
-            "TestDuration",
-            "TestOut",
-            "TestShipDuration",
-            "ShipOut",
-            "BumpYield",
-            "BumpOutDie",
-            "ProbeYield",
-            "ProbeOutDie",
-            "AssemblyYield",
-            "AssemblyOutDie",
-            "TestYield",
-            "TestOutDie",
-            "TestOutDieM",
-            "TestOutDieN",
-            "TakaDRatio"
-        ];
-
-        // Convert data to CSV format
-        const csvContent = "data:text/csv;charset=utf-8," +
-            headers.join(",") + "\n" +
-            filteredData.map(row => headers.map(header => row[header]).join(",")).join("\n");
-
-        // Create a virtual link element to trigger the download
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "current_page_data.csv");
-        document.body.appendChild(link);
-
-        // Trigger the download
-        link.click();
-    };
-
-
-    const entirepagecsvdataHandler = () => {
-        // Define headers
-        const headers = [
-            "LotNumber",
-            "DieReceipt",
-            "ReceiptBumpDuration",
-            "BumpIn",
-            "BumpDuration",
-            "BumpOut",
-            "BumpProbeDuration",
-            "ProbeIn",
-            "ProbeDuration",
-            "ProbeOut",
-            "ProbeAssemblyDuration",
-            "AssemblyIn",
-            "AssemblyDuration",
-            "AssemblyOut",
-            "AssemblyTestDuration",
-            "TestIn",
-            "TestDuration",
-            "TestOut",
-            "TestShipDuration",
-            "ShipOut",
-            "BumpYield",
-            "BumpOutDie",
-            "ProbeYield",
-            "ProbeOutDie",
-            "AssemblyYield",
-            "AssemblyOutDie",
-            "TestYield",
-            "TestOutDie",
-            "TestOutDieM",
-            "TestOutDieN",
-            "TakaDRatio"
-        ];
-
-        // Convert data to CSV format
-        const csvContent = "data:text/csv;charset=utf-8," +
-            headers.join(",") + "\n" +
-            data.map(row => headers.map(header => row[header]).join(",")).join("\n");
-
-        // Create a virtual link element to trigger the download
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "current_page_data.csv");
-        document.body.appendChild(link);
-
-        // Trigger the download
-        link.click();
     }
 
     const columnConfigs = [
@@ -888,10 +772,10 @@ const Datagrid7 = () => {
         {
             className: "data7_content_body_same_taka",
             color: "black",
-            show: showMCMTaka,
+            show: showTakaDRatio,
             render: (data, column) => (
                 <>
-                    {data?.TakaDRatio ? <p style={{ color: column.color }}>{data.TestOutDieN}</p> : <p style={{ color: column.color }}>-</p>}
+                    {data?.TakaDRatio ? <p style={{ color: column.color }}>{data.TakaDRatio}</p> : <p style={{ color: column.color }}>-</p>}
                 </>
             )
         }
@@ -919,15 +803,10 @@ const Datagrid7 = () => {
             show: showDieReceipt,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
-
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
                 </div>
             )
         },
@@ -937,22 +816,20 @@ const Datagrid7 = () => {
             show: showReceiptBumpDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
+
                 </div>
             )
         },
@@ -963,14 +840,12 @@ const Datagrid7 = () => {
             show: showBumpIn,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -981,22 +856,20 @@ const Datagrid7 = () => {
             show: showBumpDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
+
                 </div>
             )
         },
@@ -1008,14 +881,12 @@ const Datagrid7 = () => {
             show: showBumpOut,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1026,22 +897,20 @@ const Datagrid7 = () => {
             show: showBumpProbeDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
+
 
                 </div>
             )
@@ -1054,14 +923,12 @@ const Datagrid7 = () => {
             show: showProbeIn,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1072,22 +939,20 @@ const Datagrid7 = () => {
             show: showProbeDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
+
 
                 </div>
             )
@@ -1100,14 +965,12 @@ const Datagrid7 = () => {
             show: showProbeOut,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1118,21 +981,18 @@ const Datagrid7 = () => {
             show: showProbeAssemblyDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
 
                 </div>
@@ -1146,14 +1006,12 @@ const Datagrid7 = () => {
             show: showAssemblyIn,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1164,22 +1022,20 @@ const Datagrid7 = () => {
             show: showAssemblyDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
+
 
                 </div>
             )
@@ -1192,14 +1048,12 @@ const Datagrid7 = () => {
             show: showAssemblyOut,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1210,22 +1064,20 @@ const Datagrid7 = () => {
             show: showAssemblyTestDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
+
                 </div>
             )
         },
@@ -1237,14 +1089,12 @@ const Datagrid7 = () => {
             show: showTestIn,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1255,22 +1105,20 @@ const Datagrid7 = () => {
             show: showTestDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
+
 
                 </div>
             )
@@ -1283,14 +1131,12 @@ const Datagrid7 = () => {
             show: showTestOut,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1301,22 +1147,20 @@ const Datagrid7 = () => {
             show: showTestShipDuration,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <div />
-                            {sortBy === column.key ? (
-                                sortOrder === 'asc' ? (
-                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                ) : sortOrder === 'desc' ? (
-                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                ) : sortOrder === 'initial' && (
-                                    <div><span><FaSortDown /></span></div>
-                                )
-                            ) : (
-                                <div><span><FaSortDown /></span></div>
-                            )}
-                        </>
+
+                    <div />
+                    {sortBy === column.key ? (
+                        sortOrder === 'asc' ? (
+                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                        ) : sortOrder === 'desc' ? (
+                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                        ) : sortOrder === 'initial' && (
+                            <div><span><FaSortDown /></span></div>
+                        )
+                    ) : (
+                        <div><span><FaSortDown /></span></div>
                     )}
+
 
                 </div>
             )
@@ -1329,14 +1173,12 @@ const Datagrid7 = () => {
             show: showShipOut,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1348,14 +1190,12 @@ const Datagrid7 = () => {
             show: showBumpYield,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1367,14 +1207,12 @@ const Datagrid7 = () => {
             show: showProbeYield,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1386,14 +1224,12 @@ const Datagrid7 = () => {
             show: showAssemblyYield,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1405,14 +1241,12 @@ const Datagrid7 = () => {
             show: showTestYield,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1424,14 +1258,12 @@ const Datagrid7 = () => {
             show: showMCMTakaD,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1443,14 +1275,12 @@ const Datagrid7 = () => {
             show: showMCMTaka,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
@@ -1462,21 +1292,182 @@ const Datagrid7 = () => {
             show: showTakaDRatio,
             render: (column) => (
                 <div>
-                    {column.show && (
-                        <>
-                            <p>{column.title}</p>
-                            {sortBy === column.key &&
-                                (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                            }
-                        </>
-                    )}
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
                 </div>
             )
         },
     ]
+    // Table Column End
+
+    // Total Data Pagination Starts Here
+
+    const dataPerPage = dataPerPageState;
+
+    const handleNextPage = () => {
+        setCurrentPage(prevPage => prevPage + 1);
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage(prevPage => prevPage - 1);
+    };
+
+    // Calculate total number of pages
+    const totalPages = Math.ceil(sortedData.length / dataPerPage);
+
+    // Calculate starting and ending indexes for the current page
+    const startIndex = (currentPage - 1) * dataPerPage;
+    const endIndex = Math.min(startIndex + dataPerPage, sortedData.length);
+
+    // Get data for the current page
+    const currentPageData = sortedData.slice(startIndex, endIndex);
+
+    // Total Data Pagination Ends Here
+
+    // Filter Pagiantion Starts From Here
+
+    const dataPerFilterPage = dataPerPageState;
+
+    const handleNextFilterPage = () => {
+        setCurrentFilterPage(prevPage => prevPage + 1);
+    };
+
+    const handlePrevFilterPage = () => {
+        setCurrentFilterPage(prevPage => prevPage - 1);
+    };
+
+    const copyFilteredDate = [...filteredData]
+
+    const sortedFilteredData = filteredData && sortData(filteredData, sortBy, sortOrder, copyFilteredDate);
+
+    console.log("Sorted ", sortedFilteredData.length)
+
+
+    const totalFilterPages = Math.ceil(sortedFilteredData.length / dataPerFilterPage);
+
+    const filterStartIndex = (currentFilterPage - 1) * dataPerPage;
+    const filterEndIndex = Math.min(filterStartIndex + dataPerFilterPage, sortedFilteredData.length);
+
+    // Get data for the current page
+    // const currentPageFilteredData = sortedFilteredData.slice(filterStartIndex, filterEndIndex);
+    const currentPageFilteredData = sortedFilteredData.slice(filterStartIndex, filterEndIndex)
 
     const paginationFilterLogic = filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== ''
 
+    // Filter Pagiantion Starts Ends Here
+
+    // CSV DownLoad Part
+    const currentpagecsvdataHandler = () => {
+        // Define headers
+        const headers = [
+            "LotNumber",
+            "DieReceipt",
+            "ReceiptBumpDuration",
+            "BumpIn",
+            "BumpDuration",
+            "BumpOut",
+            "BumpProbeDuration",
+            "ProbeIn",
+            "ProbeDuration",
+            "ProbeOut",
+            "ProbeAssemblyDuration",
+            "AssemblyIn",
+            "AssemblyDuration",
+            "AssemblyOut",
+            "AssemblyTestDuration",
+            "TestIn",
+            "TestDuration",
+            "TestOut",
+            "TestShipDuration",
+            "ShipOut",
+            "BumpYield",
+            "BumpOutDie",
+            "ProbeYield",
+            "ProbeOutDie",
+            "AssemblyYield",
+            "AssemblyOutDie",
+            "TestYield",
+            "TestOutDie",
+            "TestOutDieM",
+            "TestOutDieN",
+            "TakaDRatio"
+        ];
+
+        // Convert data to CSV format
+        const csvContent = "data:text/csv;charset=utf-8," +
+            headers.join(",") + "\n" +
+            filteredData.map(row => headers.map(header => row[header]).join(",")).join("\n");
+
+        // Create a virtual link element to trigger the download
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "current_page_data.csv");
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+    };
+
+
+    const entirepagecsvdataHandler = () => {
+        // Define headers
+        const headers = [
+            "LotNumber",
+            "DieReceipt",
+            "ReceiptBumpDuration",
+            "BumpIn",
+            "BumpDuration",
+            "BumpOut",
+            "BumpProbeDuration",
+            "ProbeIn",
+            "ProbeDuration",
+            "ProbeOut",
+            "ProbeAssemblyDuration",
+            "AssemblyIn",
+            "AssemblyDuration",
+            "AssemblyOut",
+            "AssemblyTestDuration",
+            "TestIn",
+            "TestDuration",
+            "TestOut",
+            "TestShipDuration",
+            "ShipOut",
+            "BumpYield",
+            "BumpOutDie",
+            "ProbeYield",
+            "ProbeOutDie",
+            "AssemblyYield",
+            "AssemblyOutDie",
+            "TestYield",
+            "TestOutDie",
+            "TestOutDieM",
+            "TestOutDieN",
+            "TakaDRatio"
+        ];
+
+        // Convert data to CSV format
+        const csvContent = "data:text/csv;charset=utf-8," +
+            headers.join(",") + "\n" +
+            data.map(row => headers.map(header => row[header]).join(",")).join("\n");
+
+        // Create a virtual link element to trigger the download
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "current_page_data.csv");
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+    }
+
+
+    console.log("showBympDU ",showReceiptBumpDuration)
     return (
         <main className='data7_container' >
             <div className='data7_top_bx'>
@@ -1659,11 +1650,11 @@ const Datagrid7 = () => {
                     ><MdFilterAltOff /></button>
 
                     <button className='dwn_crt_csv_data_btn' onClick={currentpagecsvdataHandler} style={{ fontSize: "20px" }}
-                        title="Download Filtered Entry"
+                        title="Download Current Entries"
                     ><RiDownload2Fill /></button>
 
                     <button className='dwn_crt_entire_data_btn' onClick={entirepagecsvdataHandler} style={{ fontSize: "20px" }}
-                        title="Download Entire Entry"
+                        title="Download All Entries"
                     ><RiDownload2Fill /></button>
                 </div>
             </div>
@@ -1840,15 +1831,17 @@ const Datagrid7 = () => {
                         <div className='data7_content_head'>
                             {
                                 columnHeaders.map((column, i) => (
+                                    column.show && (
                                     <div className={column.className} onClick={column.show ? () => toggleSortOrder(column.key) : null}
                                         key={column.key}
                                         style={{
                                             borderRight: i >= 20 && i < 26 && "1px solid #000",
-                                            borderLeft: i === 20 && "3px solid var(--bg-primary-color)"
+                                            borderLeft: i === 20 && "3px solid var(--bg-primary-color)",
+                                            marginRight: !showDieReceipt && (i % 2 === 0 && i <= 18) && column.key !== "LotNumber" && column.key !== "TestShipDuration" && "15px" 
                                         }}
                                     >
                                         {column.render(column)}
-                                    </div>
+                                    </div>)
                                 ))
                             }
                         </div>
@@ -1856,46 +1849,59 @@ const Datagrid7 = () => {
                         {
                             filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
                                 (currentPageFilteredData.map((data, i) => (
-                                    <div className='data7_content_body' key={i} style={{ borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black" }}>
+                                    <div className='data7_content_body' key={i} style={{ 
+                                        borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
+                                        }}>
                                         {columnConfigs.map((column, j) => (
-                                            <div className={column.className} key={j} style={{ background: `${column.background}` }}>
+                                            column.show && (<div className={column.className} key={j} style={{ 
+                                                background: `${column.background}`,
+                                                marginRight: !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null 
+                                                }}>
                                                 <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
                                                     {column.className === "data7_content_body_diff" && <div />}
                                                     {column.show && column.render(data[column.key])}
                                                 </div>
-                                            </div>
+                                            </div>)
                                         ))}
 
                                         {columnConfigs2.map((column, j) => (
-                                            <div className={column.className} style={{
-                                                background: `${column.background}`,
-                                                borderLeft: j === 0 && "3px solid var(--bg-primary-color)",
-                                                borderRight: "1px solid #000"
-                                            }} key={j}>
-                                                {column.show && column.render(data, column)}
-                                            </div>
+                                            column.show && (
+                                                <div className={column.className} style={{
+                                                    background: `${column.background}`,
+                                                    borderLeft: j === 0 && "3px solid var(--bg-primary-color)",
+                                                    borderRight: "1px solid #000"
+                                                }} key={j}>
+                                                    {column.render(data, column)}
+                                                </div>
+                                            )
                                         ))}
 
                                         {columnConfigs3.map((column, j) => (
-                                            <div className={column.className} style={{
-                                                background: columnConfigs3.length - 1 === j ? ColorGenerator(data?.TakaDRatio) : column.background,
-                                                borderRight: j === columnConfigs3.length - 1 ? "none" : "1px solid #000"
-                                            }} key={j}>
-                                                {column.show && column.render(data, column)}
-                                            </div>
+                                            column.show && (
+                                                <div className={column.className} style={{
+                                                    background: columnConfigs3.length - 1 === j ? ColorGenerator(data?.TakaDRatio) : column.background,
+                                                    borderRight: j === columnConfigs3.length - 1 ? "none" : "1px solid #000"
+                                                }} key={j}>
+                                                    {column.render(data, column)}
+                                                </div>
+                                            )
                                         ))}
                                     </div>
                                 )))
                             ) :
                                 (currentPageData.map((data, i) => (
-                                    <div className='data7_content_body' key={i} style={{ borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black" }}>
+                                    <div className='data7_content_body' key={i} style={{ 
+                                        borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black"}}>
                                         {columnConfigs.map((column, j) => (
-                                            <div className={column.className} key={j} style={{ background: `${column.background}` }}>
+                                            column.show && (<div className={column.className} key={j} style={{ 
+                                                background: `${column.background}`,
+                                                marginRight: !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null 
+                                                }}>
                                                 <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
                                                     {column.className === "data7_content_body_diff" && <div />}
-                                                    {column.show && column.render(data[column.key])}
+                                                    {column.render(data[column.key])}
                                                 </div>
-                                            </div>
+                                            </div>)
                                         ))}
 
                                         {columnConfigs2.map((column, j) => (
