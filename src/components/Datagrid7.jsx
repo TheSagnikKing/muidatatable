@@ -144,7 +144,7 @@ const Datagrid7 = () => {
 
     const sortedData = sortData(data, sortBy, sortOrder, copydata);
 
-    const [dataPerPageState, setDataPerPageState] = useState(10)
+    const [dataPerPageState, setDataPerPageState] = useState(4)
 
     const dataPerPage = dataPerPageState;
 
@@ -394,7 +394,6 @@ const Datagrid7 = () => {
         setEndDate("")
         setOpenRangeCalender(false)
     }
-
 
     const dataPerFilterPage = dataPerPageState;
 
@@ -1313,25 +1312,25 @@ const Datagrid7 = () => {
             className: "data7_content_head_diff",
             show: showTestShipDuration,
             render: (column) => (
-                    <div>
-                        {column.show && (
-                            <>
-                                <div />
-                                {sortBy === column.key ? (
-                                    sortOrder === 'asc' ? (
-                                        <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                                    ) : sortOrder === 'desc' ? (
-                                        <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                                    ) : sortOrder === 'initial' && (
-                                        <div><span><FaSortDown /></span></div>
-                                    )
-                                ) : (
+                <div>
+                    {column.show && (
+                        <>
+                            <div />
+                            {sortBy === column.key ? (
+                                sortOrder === 'asc' ? (
+                                    <div><span className='data7_arrow'><FaArrowUp /></span></div>
+                                ) : sortOrder === 'desc' ? (
+                                    <div><span className='data7_arrow'><FaArrowDown /></span></div>
+                                ) : sortOrder === 'initial' && (
                                     <div><span><FaSortDown /></span></div>
-                                )}
-                            </>
-                        )}
+                                )
+                            ) : (
+                                <div><span><FaSortDown /></span></div>
+                            )}
+                        </>
+                    )}
 
-                    </div>
+                </div>
             )
         },
 
@@ -1487,6 +1486,8 @@ const Datagrid7 = () => {
             )
         },
     ]
+
+    const paginationFilterLogic = filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== ''
 
     return (
         <main className='data7_container' >
@@ -1851,7 +1852,6 @@ const Datagrid7 = () => {
                                             borderLeft: i === 20 && "3px solid var(--bg-primary-color)"
                                         }}
                                     >
-                                        {console.log(i)}
                                         {column.render(column)}
                                     </div>
                                 ))
@@ -1904,22 +1904,26 @@ const Datagrid7 = () => {
                                         ))}
 
                                         {columnConfigs2.map((column, j) => (
+                                            column.show && (
                                             <div className={column.className} style={{
                                                 background: `${column.background}`,
                                                 borderLeft: j === 0 && "3px solid var(--bg-primary-color)",
                                                 borderRight: "1px solid #000"
                                             }} key={j}>
-                                                {column.show && column.render(data, column)}
+                                                {column.render(data, column)}
                                             </div>
+                                        )
                                         ))}
 
                                         {columnConfigs3.map((column, j) => (
-                                            <div className={column.className} style={{
-                                                background: columnConfigs3.length - 1 === j ? ColorGenerator(data?.TakaDRatio) : column.background,
-                                                borderRight: j === columnConfigs3.length - 1 ? "none" : "1px solid #000"
-                                            }} key={j}>
-                                                {column.show && column.render(data, column)}
-                                            </div>
+                                            column.show && (
+                                                <div className={column.className} style={{
+                                                    background: columnConfigs3.length - 1 === j ? ColorGenerator(data?.TakaDRatio) : column.background,
+                                                    borderRight: j === columnConfigs3.length - 1 ? "none" : "1px solid #000"
+                                                }} key={j}>
+                                                    {column.render(data, column)}
+                                                </div>
+                                            )
                                         ))}
                                     </div>
                                 )))
@@ -1929,8 +1933,9 @@ const Datagrid7 = () => {
                 </div>
                 <div className="data7_pagination">
 
-                    {
-                        filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? <div>
+                    {/* {
+                        filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? 
+                        <div>
                             <div>
                                 <button onClick={handlePrevFilterPage} disabled={currentFilterPage === 1}><FaChevronLeft /></button>
                                 <span>{currentFilterPage} of {totalFilterPages}</span>
@@ -1942,8 +1947,9 @@ const Datagrid7 = () => {
                                     <select
                                         value={dataPerPageState}
                                         onChange={(e) => {
-                                            setDataPerPageState(e.target.value);
-                                            setCurrentPage(1);
+                                            const newDataPerPage = parseInt(e.target.value);
+                                            setDataPerPageState(newDataPerPage);
+                                            setCurrentFilterPage(1);
                                         }}
                                     >
                                         <option value="10" style={{ backgroundColor: dataPerPageState == 10 ? 'var(--bg-color-2)' : 'initial' }}>10</option>
@@ -1976,57 +1982,132 @@ const Datagrid7 = () => {
                                     <p>of {filteredData.length}</p>
                                 </div>
                             </div>
-                        </div> : <div>
-
-                            <div>
-                                <button onClick={handlePrevPage} disabled={currentPage === 1}><FaChevronLeft /></button>
-                                <span>{currentPage} of {totalPages}</span>
-                                <button onClick={handleNextPage} disabled={currentPage === totalPages}><FaChevronRight /></button>
-                            </div>
-
-                            <div>
-                                <div>
-                                    <p>Rows Per Page</p>
-                                    <select
-                                        value={dataPerPageState}
-                                        onChange={(e) => {
-                                            setDataPerPageState(e.target.value);
-                                            setCurrentPage(1);
-                                        }}
-                                    >
-                                        <option value="10" style={{ backgroundColor: dataPerPageState == 10 ? 'var(--bg-color-2)' : 'initial' }}>10</option>
-                                        <option value="25" style={{ backgroundColor: dataPerPageState == 25 ? 'var(--bg-color-2)' : 'initial' }}>25</option>
-                                        <option value="50" style={{ backgroundColor: dataPerPageState == 50 ? 'var(--bg-color-2)' : 'initial' }}>50</option>
-                                        <option value="100" style={{ backgroundColor: dataPerPageState == 100 ? 'var(--bg-color-2)' : 'initial' }}>100</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <p>Showing of </p>
-                                    <select
-                                        value={`${startIndex + 1} - ${endIndex}`}
-                                        onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
-                                    >
-                                        {Array.from({ length: totalPages }, (_, index) => {
-                                            const start = index * dataPerPage + 1;
-                                            const end = Math.min((index + 1) * dataPerPage, sortedData.length);
-                                            const optionValue = `${start} - ${end}`;
-                                            return (
-                                                <option
-                                                    key={index}
-                                                    value={optionValue}
-                                                    style={{ background: optionValue === `${startIndex + 1} - ${endIndex}` ? "var(--bg-color-2)" : "inherit" }}
-                                                >
-                                                    {optionValue}
-                                                </option>
-                                            );
-                                        })}
-                                    </select>
-                                    <p>of {fakedata.length}</p>
-                                </div>
-                            </div>
-
+                        </div> 
+                        : 
+                        <div>
+                        <div>
+                            <button onClick={handlePrevPage} disabled={currentPage === 1}><FaChevronLeft /></button>
+                            <span>{currentPage} of {totalPages}</span>
+                            <button onClick={handleNextPage} disabled={currentPage === totalPages}><FaChevronRight /></button>
                         </div>
-                    }
+                    
+                        <div>
+                            <div>
+                                <p>Rows Per Page</p>
+                                <select
+                                    value={dataPerPageState}
+                                    onChange={(e) => {
+                                        const newDataPerPage = parseInt(e.target.value);
+                                        setDataPerPageState(newDataPerPage);
+                                        setCurrentPage(1);
+                                    }}
+                                >
+                                    <option value="10" style={{ backgroundColor: dataPerPageState === 10 ? 'var(--bg-color-2)' : 'initial' }}>10</option>
+                                    <option value="25" style={{ backgroundColor: dataPerPageState === 25 ? 'var(--bg-color-2)' : 'initial' }}>25</option>
+                                    <option value="50" style={{ backgroundColor: dataPerPageState === 50 ? 'var(--bg-color-2)' : 'initial' }}>50</option>
+                                    <option value="100" style={{ backgroundColor: dataPerPageState === 100 ? 'var(--bg-color-2)' : 'initial' }}>100</option>
+                                </select>
+                            </div>
+                            <div>
+                                <p>Showing of </p>
+                                <select
+                                    value={`${startIndex + 1} - ${endIndex}`}
+                                    onChange={(e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
+                                >
+                                    {Array.from({ length: totalPages }, (_, index) => {
+                                        const start = index * dataPerPageState + 1;
+                                        const end = Math.min((index + 1) * dataPerPageState, fakedata.length);
+                                        const optionValue = `${start} - ${end}`;
+                                        return (
+                                            <option
+                                                key={index}
+                                                value={optionValue}
+                                                style={{ background: optionValue === `${startIndex + 1} - ${endIndex}` ? "var(--bg-color-2)" : "inherit" }}
+                                            >
+                                                {optionValue}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                                <p>of {fakedata.length}</p>
+                            </div>
+                        </div>
+                        </div>
+                    } */}
+
+                    <div>
+                        <div>
+                            <button onClick={paginationFilterLogic ? handlePrevFilterPage : handlePrevPage} disabled={paginationFilterLogic ? currentFilterPage === 1 : currentPage === 1}><FaChevronLeft /></button>
+                            <span>{paginationFilterLogic ? `${currentFilterPage} of ${totalFilterPages}` : `${currentPage} of ${totalPages}`}</span>
+                            <button onClick={paginationFilterLogic ? handleNextFilterPage : handleNextPage} disabled={paginationFilterLogic ? currentFilterPage === totalFilterPages || filteredData.length === 0 : currentPage === totalPages} ><FaChevronRight /></button>
+                        </div>
+                        <div>
+                            <div>
+                                <p>Rows Per Page</p>
+                                <select
+                                    value={dataPerPageState}
+                                    onChange={paginationFilterLogic ? (e) => {
+                                        setDataPerPageState(parseInt(e.target.value));
+                                        setCurrentFilterPage(1);
+                                    } : (e) => {
+                                        setDataPerPageState(parseInt(e.target.value));
+                                        setCurrentPage(1);
+                                    }}
+                                >
+                                    <option value="10" style={{ backgroundColor: dataPerPageState == 10 ? 'var(--bg-color-2)' : 'initial' }}>10</option>
+                                    <option value="25" style={{ backgroundColor: dataPerPageState == 25 ? 'var(--bg-color-2)' : 'initial' }}>25</option>
+                                    <option value="50" style={{ backgroundColor: dataPerPageState == 50 ? 'var(--bg-color-2)' : 'initial' }}>50</option>
+                                    <option value="100" style={{ backgroundColor: dataPerPageState == 100 ? 'var(--bg-color-2)' : 'initial' }}>100</option>
+                                </select>
+                            </div>
+                            <div>
+                                <p>Showing of </p>
+                                <select
+                                    value={paginationFilterLogic ? `${filterStartIndex + 1} - ${filterEndIndex}` : `${startIndex + 1} - ${endIndex}`}
+                                    onChange={paginationFilterLogic ? (e) => setCurrentFilterPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerFilterPage)) : (e) => setCurrentPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / dataPerPage))}
+                                >
+                                    {
+                                        paginationFilterLogic ? (
+                                            Array.from({ length: totalFilterPages }, (_, index) => {
+                                                const start = index * dataPerFilterPage + 1;
+                                                const end = Math.min((index + 1) * dataPerFilterPage, filteredData.length);
+                                                const optionValue = `${start} - ${end}`;
+                                                return (
+                                                    <option
+                                                        key={index}
+                                                        value={optionValue}
+                                                        style={{ background: optionValue === `${filterStartIndex + 1} - ${filterEndIndex}` ? "var(--bg-color-2)" : "inherit" }}
+                                                    >
+                                                        {console.log(optionValue)}
+                                                        {optionValue}
+                                                    </option>
+                                                );
+                                            })
+                                        ) : (
+                                            Array.from({ length: totalPages }, (_, index) => {
+                                                const start = index * dataPerPage + 1;
+                                                const end = Math.min((index + 1) * dataPerPage, sortedData.length);
+                                                const optionValue = `${start} - ${end}`;
+                                                return (
+                                                    <option
+                                                        key={index}
+                                                        value={optionValue}
+                                                        style={{ background: optionValue === `${startIndex + 1} - ${endIndex}` ? "var(--bg-color-2)" : "inherit" }}
+                                                    >
+                                                        {optionValue}
+                                                    </option>
+                                                );
+                                            })
+                                        )
+                                    }
+
+
+
+                                </select>
+                                <p>of {paginationFilterLogic ? filteredData.length : fakedata.length}</p>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
