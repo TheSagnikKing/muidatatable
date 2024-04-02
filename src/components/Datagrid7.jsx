@@ -141,10 +141,9 @@ const Datagrid7 = () => {
     }
 
 
-
     const sortedData = sortData(data, sortBy, sortOrder, copydata);
 
-    const [dataPerPageState, setDataPerPageState] = useState(4)
+    const [dataPerPageState, setDataPerPageState] = useState(10)
 
     const dataPerPage = dataPerPageState;
 
@@ -281,22 +280,6 @@ const Datagrid7 = () => {
     const [filterBy, setFilterBy] = useState('');
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
-    const [date, setDate] = useState(null);
-
-    const [openDateBox, setOpenDateBox] = useState(false)
-
-    const onChange = (dates) => {
-        console.log('onChange: ', dates);
-
-        // setDiereceiptcheckbox(false)
-        // setBumpCheckbox(false)
-        // alert("Yes")
-        setDate(dates);
-        if (dates) {
-            setOpenDateBox(false)
-        }
-    };
-
 
     const [selectedDates, setSelectedDates] = useState([]);
 
@@ -385,11 +368,6 @@ const Datagrid7 = () => {
     const removeFilter = () => {
         setFilterBy("")
         setSelectedDates([])
-        setDiereceiptcheckbox(false)
-        setBumpCheckbox(false)
-        setProbeCheckbox(false)
-        setAssemblyCheckbox(false)
-        setTestCheckbox(false)
         setStartDate("")
         setEndDate("")
         setOpenRangeCalender(false)
