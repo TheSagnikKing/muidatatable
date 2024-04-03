@@ -1,0 +1,45 @@
+.animation_container{
+    height: 100vh;
+    width: 100%;
+    background-color: #efefef;
+    padding: 20px;
+}
+
+.animate_div{
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    background-color: lightblue;
+    animation-name: sliding;
+    animation-duration: 2s;
+    /* refresh korar pore 1s delay hbe tarpor animation start hbe ar 2s obdhi cholbe */
+    animation-delay: 1s; 
+    /* animation fill mode mane jokhn animation sesh hoejabe tarpore ami ki korte chai */
+    /* animation-fill-mode:both; */
+    animation-iteration-count: 2;
+    animation-timing-function: linear;
+    animation-direction:alternate;
+}
+
+@keyframes sliding {
+    0%{
+        background-color: lightblue;
+        top:0%;
+        left: 0%;
+        rotate: 0deg;
+    }
+
+    50%{
+        background-color: crimson;
+        top:0%;
+        left: 60%;
+        rotate: 360deg;
+    }
+
+    100%{
+        background-color: lightgreen;
+        left: 60%;
+        top: 60%;
+        rotate: 0deg;
+    }
+}
