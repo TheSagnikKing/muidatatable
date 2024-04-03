@@ -42,7 +42,8 @@
     --mcm-taka-ratio-bg-color-2 : #FFD700;
     --mcm-taka-ratio-bg-color-3 : #FEBE10;
   
-    --checkbox-bg-color: #d90000;
+    --checkbox-bg-color: #9a0143;
+    --calender-color: #9a0143;
   }
 
 .data7_container {
@@ -715,7 +716,7 @@ select {
 .rmdp-range {
     background-color: var(--bg-color-2) !important;
     box-shadow: 0 0 1px #8798ad !important;
-    color: red !important;
+    color: var(--calender-color) !important;
 }
 
 .rmdp-day.rmdp-today span {
@@ -731,20 +732,20 @@ select {
 }
 
 .rmdp-week>div:nth-child(7){
-    color: #d90000 !important;
+    color: var(--calender-color) !important;
 }
 
 .rmdp-week>div:nth-child(1){
-    color: #d90000 !important;
+    color: var(--calender-color) !important;
 }
 
 .rmdp-day.rmdp-today span{
-    background-color: #d90000 !important;
+    background-color:var(--calender-color) !important;
     border-radius: 4px !important;
 }
 
 .rmdp-day:not(.rmdp-disabled,.rmdp-day-hidden) span:hover {
-    background-color: #d90000 !important;
+    background-color:var(--calender-color) !important;
     border-radius: 4px !important;
 }
 
@@ -1123,7 +1124,7 @@ select {
     }
 }
 
-@media((min-width:1350px) and (max-width:1550px)){
+@media((min-width:1350px) and (max-width:1700px)){
     .data7_content_pagination_box{
         width: 100%;
     }
@@ -1149,6 +1150,10 @@ select {
         display: flex;
         align-items: center;
         gap: 10px;
+    }
+
+    .data7_content{
+        height: 65.5vh;
     }
 }
 
