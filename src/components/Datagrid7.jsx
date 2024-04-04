@@ -259,7 +259,7 @@ const Datagrid7 = () => {
                     (ShipOutDate >= startDate && ShipOutDate <= endDate)
                 ))
             );
-            
+
             return filterResult;
         });
     };
@@ -267,13 +267,13 @@ const Datagrid7 = () => {
 
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox, shipcheckbox);
 
-    useEffect(() =>{
-        if(filterBy){
+    useEffect(() => {
+        if (filterBy) {
             setCurrentFilterPage(1)
-        }else if (startDate && endDate){
+        } else if (startDate && endDate) {
             setCurrentFilterPage(1)
         }
-    },[filterBy,startDate,endDate])
+    }, [filterBy, startDate, endDate])
 
     // console.log("Filter Check" ,filtercheck)
 
@@ -1358,9 +1358,6 @@ const Datagrid7 = () => {
 
     const sortedFilteredData = filteredData && sortData(filteredData, sortBy, sortOrder, copyFilteredDate);
 
-    console.log("Sorted ", sortedFilteredData.length)
-
-
     const totalFilterPages = Math.ceil(sortedFilteredData.length / dataPerFilterPage);
 
     const filterStartIndex = (currentFilterPage - 1) * dataPerPage;
@@ -1481,31 +1478,8 @@ const Datagrid7 = () => {
     }
 
 
-    console.log("showBympDU ",showReceiptBumpDuration)
-
-
     const [darkTheme, setDarktheme] = useState(false)
 
-    const calenderRef = useRef(null)
-
-    useEffect(() => {
-        // Function to handle clicks outside the dropdown menu
-        const handleClickOutside = (event) => {
-          if (!calenderRef.current.contains(event.target)) {
-            setOpenRangeCalender(false); // Close the dropdown if clicked outside
-          }
-          console.log(calenderRef.current.contains(event.target))
-        };
-    
-        // Add event listener to detect clicks outside the dropdown menu
-        document.addEventListener('mousedown', handleClickOutside);
-    
-        return () => {
-          // Cleanup: remove event listener when component unmounts
-          document.removeEventListener('mousedown', handleClickOutside);
-        };
-      }, [])
-    
     return (
         <main className='data7_container' >
             <div className='data7_top_bx'>
@@ -1523,127 +1497,128 @@ const Datagrid7 = () => {
                         <div><IoSearch /></div>
                     </div>
 
-                    <div className='data7_top_selectdatebx' onClick={() => setOpenRangeCalender(prev => !prev)}>
-                        <div>
+                    <div className='data7_top_selectdatebx'>
+                        <div onClick={() => setOpenRangeCalender(prev => !prev)}>
                             <div>
                                 <p>
-                                {
-                                    selectedDates.map((date, index) => (
-                                        <React.Fragment key={index}>
-                                            {index !== 0 && " - "}
-                                            {date.format("YYYY-MM-DD")}
-                                        </React.Fragment>
-                                    ))
-                                }
+                                    {
+                                        selectedDates.map((date, index) => (
+                                            <React.Fragment key={index}>
+                                                {index !== 0 && " - "}
+                                                {date.format("YYYY-MM-DD")}
+                                            </React.Fragment>
+                                        ))
+                                    }
                                 </p>
                             </div>
                             <div><FaSortDown /></div>
                         </div>
 
-                        {
-                            openRangeCalender && <main className='data7_top_selectdatebx_calender' onClick={(e) => e.stopPropagation()} ref={calenderRef}>
+                        <main className={`data7_top_selectdatebx_calender ${openRangeCalender ? "calenderActive" : "calenderInActive"}`} onClick={(e) => e.stopPropagation()}>
+                            <div>
+                                <Calendar
+                                    range
+                                    numberOfMonths={2}
+                                    value={selectedDates.map(d => d.format('YYYY-MM-DD'))}
+                                    onChange={handleDateChange}
+                                    plugins={[
+                                        // colors({ defaultColor: "green" })
+                                    ]}
+                                />
+                            </div>
+
+                            <div>
+                                {selectedDates && (
+                                    <p>
+                                        {selectedDates.map((date, index) => (
+                                            <React.Fragment key={index}>
+                                                {index !== 0 && " - "}
+                                                {date.format("YYYY-MM-DD")}
+                                            </React.Fragment>
+                                        ))}
+                                    </p>
+                                )}
+
+                            </div>
+
+                            <div>
                                 <div>
-                                    <Calendar
-                                        range
-                                        numberOfMonths={2}
-                                        value={selectedDates.map(d => d.format('YYYY-MM-DD'))}
-                                        onChange={handleDateChange}
-                                        plugins={[
-                                            // colors({ defaultColor: "green" })
-                                        ]}
+                                    <input
+                                        type="checkbox"
+                                        checked={diereceptcheckbox}
+                                        onChange={(e) => setDiereceiptcheckbox((prev) => !prev)}
+                                        style={{ accentColor: diereceptcheckbox ? "var(--checkbox-bg-color)" : "" }}
                                     />
+                                    <p>Die Receipt</p>
                                 </div>
 
                                 <div>
-                                    {selectedDates && (
-                                        <p>
-                                            {selectedDates.map((date, index) => (
-                                                <React.Fragment key={index}>
-                                                    {index !== 0 && " - "}
-                                                    {date.format("YYYY-MM-DD")}
-                                                </React.Fragment>
-                                            ))}
-                                        </p>
-                                    )}
-
+                                    <input
+                                        type="checkbox"
+                                        checked={Bumpcheckbox}
+                                        onChange={(e) => setBumpCheckbox((prev) => !prev)}
+                                        style={{ accentColor: Bumpcheckbox ? "var(--checkbox-bg-color)" : "" }}
+                                    />
+                                    <p>Bump</p>
                                 </div>
 
                                 <div>
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            checked={diereceptcheckbox}
-                                            onChange={(e) => setDiereceiptcheckbox((prev) => !prev)}
-                                            style={{ accentColor: diereceptcheckbox ? "var(--checkbox-bg-color)" : "" }}
-                                        />
-                                        <p>Die Receipt</p>
-                                    </div>
-
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            checked={Bumpcheckbox}
-                                            onChange={(e) => setBumpCheckbox((prev) => !prev)}
-                                            style={{ accentColor: Bumpcheckbox ? "var(--checkbox-bg-color)" : "" }}
-                                        />
-                                        <p>Bump</p>
-                                    </div>
-
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            checked={Probecheckbox}
-                                            onChange={(e) => setProbeCheckbox((prev) => !prev)}
-                                            style={{ accentColor: Probecheckbox ? "var(--checkbox-bg-color)" : "" }}
-                                        />
-                                        <p>Probe</p>
-                                    </div>
-
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            checked={Assemblycheckbox}
-                                            onChange={(e) => setAssemblyCheckbox((prev) => !prev)}
-                                            style={{ accentColor: Assemblycheckbox ? "var(--checkbox-bg-color)" : "" }}
-                                        />
-                                        <p>Assembly</p>
-                                    </div>
-
-                                    <div>
-                                        <input type="checkbox"
-                                            checked={Testcheckbox}
-                                            onChange={(e) => setTestCheckbox((prev) => !prev)}
-                                            style={{ accentColor: Testcheckbox ? "var(--checkbox-bg-color)" : "" }}
-                                        />
-                                        <p>Test</p>
-                                    </div>
-
-                                    <div>
-                                        <input type="checkbox"
-                                            checked={shipcheckbox}
-                                            onChange={(e) => setShipCheckbox((prev) => !prev)}
-                                            style={{ accentColor: shipcheckbox ? "var(--checkbox-bg-color)" : "" }}
-                                        />
-                                        <p>Ship</p>
-                                    </div>
+                                    <input
+                                        type="checkbox"
+                                        checked={Probecheckbox}
+                                        onChange={(e) => setProbeCheckbox((prev) => !prev)}
+                                        style={{ accentColor: Probecheckbox ? "var(--checkbox-bg-color)" : "" }}
+                                    />
+                                    <p>Probe</p>
                                 </div>
 
-                                <div className='data7_calender_selectdate_button_container'>
-                                    {
-                                        datebtnarray.map((c) => (
-                                            <button key={c._id}
-                                                onClick={c.dateHandler}
-                                                disabled={c._id === selectedDateBtnStyle}
-                                                style={{
-                                                    background: selectedDateBtnStyle === c._id ? "var(--checkbox-bg-color)" : "",
-                                                    color: selectedDateBtnStyle === c._id ? "#fff" : "#000"
-                                                }}
-                                            >{c.name}</button>
-                                        ))
-                                    }
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        checked={Assemblycheckbox}
+                                        onChange={(e) => setAssemblyCheckbox((prev) => !prev)}
+                                        style={{ accentColor: Assemblycheckbox ? "var(--checkbox-bg-color)" : "" }}
+                                    />
+                                    <p>Assembly</p>
                                 </div>
-                            </main>
-                        }
+
+                                <div>
+                                    <input type="checkbox"
+                                        checked={Testcheckbox}
+                                        onChange={(e) => setTestCheckbox((prev) => !prev)}
+                                        style={{ accentColor: Testcheckbox ? "var(--checkbox-bg-color)" : "" }}
+                                    />
+                                    <p>Test</p>
+                                </div>
+
+                                <div>
+                                    <input type="checkbox"
+                                        checked={shipcheckbox}
+                                        onChange={(e) => setShipCheckbox((prev) => !prev)}
+                                        style={{ accentColor: shipcheckbox ? "var(--checkbox-bg-color)" : "" }}
+                                    />
+                                    <p>Ship</p>
+                                </div>
+                            </div>
+
+                            <div className='data7_calender_selectdate_button_container'>
+                                {
+                                    datebtnarray.map((c) => (
+                                        <button key={c._id}
+                                            onClick={c.dateHandler}
+                                            disabled={c._id === selectedDateBtnStyle}
+                                            style={{
+                                                background: selectedDateBtnStyle === c._id ? "var(--checkbox-bg-color)" : "",
+                                                color: selectedDateBtnStyle === c._id ? "#fff" : "#000"
+                                            }}
+                                        >{c.name}</button>
+                                    ))
+                                }
+
+                                <button onClick={() => setOpenRangeCalender(false)}>OK</button>
+                            </div>
+                        </main>
+
                     </div>
 
 
@@ -1654,7 +1629,7 @@ const Datagrid7 = () => {
                             <div><FaSortDown /></div>
                         </div>
 
-                        {showColumn && <div className='data7_top_showhide_bx_content'>
+                         <div className={`data7_top_showhide_bx_content ${showColumn ? 'columnActive' : 'columnInActive'}`}>
                             <div>
                                 <input
                                     type="checkbox"
@@ -1684,7 +1659,7 @@ const Datagrid7 = () => {
                                 />
                                 <p>Yield / Quantity</p>
                             </div>
-                        </div>}
+                        </div>
                     </div>
 
                     <button onClick={removeFilter} className='remove-filter-input' style={{ fontSize: "20px" }}
@@ -1868,30 +1843,30 @@ const Datagrid7 = () => {
 
             <div className='data7_content_pagination_box'>
                 <div className='data7_content_box'
-                
+
                 >
                     <div className='data7_content'
-                    style={{background:darkTheme ? "black" : "white"}}
+                        style={{ background: darkTheme ? "black" : "white" }}
                     >
 
                         <div className='data7_content_head'
-                        style={{
-                             width:`${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}` 
-                        }}
+                            style={{
+                                width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                            }}
                         >
                             {
                                 columnHeaders.map((column, i) => (
                                     column.show && (
-                                    <div className={column.className} onClick={column.show ? () => toggleSortOrder(column.key) : null}
-                                        key={column.key}
-                                        style={{
-                                            borderRight: i >= 20 && i < 26 && "1px solid #000",
-                                            borderLeft: i === 20 && "3px solid var(--bg-primary-color)",
-                                            marginRight: !showDieReceipt && (i % 2 === 0 && i <= 18) && column.key !== "LotNumber" && column.key !== "TestShipDuration" && "15px"
-                                        }}
-                                    >
-                                        {column.render(column)}
-                                    </div>)
+                                        <div className={column.className} onClick={column.show ? () => toggleSortOrder(column.key) : null}
+                                            key={column.key}
+                                            style={{
+                                                borderRight: i >= 20 && i < 26 && "1px solid #000",
+                                                borderLeft: i === 20 && "3px solid var(--bg-primary-color)",
+                                                marginRight: !showDieReceipt && (i % 2 === 0 && i <= 18) && column.key !== "LotNumber" && column.key !== "TestShipDuration" && "15px"
+                                            }}
+                                        >
+                                            {column.render(column)}
+                                        </div>)
                                 ))
                             }
                         </div>
@@ -1899,15 +1874,15 @@ const Datagrid7 = () => {
                         {
                             filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
                                 (currentPageFilteredData.map((data, i) => (
-                                    <div className='data7_content_body' key={i} style={{ 
+                                    <div className='data7_content_body' key={i} style={{
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        width:`${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
-                                        }}>
+                                        width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                                    }}>
                                         {columnConfigs.map((column, j) => (
-                                            column.show && (<div className={column.className} key={j} style={{ 
+                                            column.show && (<div className={column.className} key={j} style={{
                                                 background: `${column.background}`,
-                                                marginRight: !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null 
-                                                }}>
+                                                marginRight: !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                            }}>
                                                 <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
                                                     {column.className === "data7_content_body_diff" && <div />}
                                                     {column.show && column.render(data[column.key])}
@@ -1941,15 +1916,15 @@ const Datagrid7 = () => {
                                 )))
                             ) :
                                 (currentPageData.map((data, i) => (
-                                    <div className='data7_content_body' key={i} style={{ 
+                                    <div className='data7_content_body' key={i} style={{
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        width:`${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
-                                        }}>
+                                        width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                                    }}>
                                         {columnConfigs.map((column, j) => (
-                                            column.show && (<div className={column.className} key={j} style={{ 
+                                            column.show && (<div className={column.className} key={j} style={{
                                                 background: `${column.background}`,
-                                                marginRight: !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null 
-                                                }}>
+                                                marginRight: !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                            }}>
                                                 <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
                                                     {column.className === "data7_content_body_diff" && <div />}
                                                     {column.render(data[column.key])}
@@ -2030,7 +2005,6 @@ const Datagrid7 = () => {
                                                         value={optionValue}
                                                         style={{ background: optionValue === `${filterStartIndex + 1} - ${filterEndIndex}` ? "var(--bg-color-2)" : "inherit" }}
                                                     >
-                                                        {console.log(optionValue)}
                                                         {optionValue}
                                                     </option>
                                                 );

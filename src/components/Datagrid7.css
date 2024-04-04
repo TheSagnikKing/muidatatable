@@ -813,6 +813,34 @@ select {
     color: #fff !important;
 }
 
+.calenderActive{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: 400ms ease;
+}
+
+.calenderInActive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: 400ms ease;
+}
+
+.columnActive{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: 400ms ease;
+}
+
+.columnInActive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: 400ms ease;
+}
+
 @media((min-width:0px) and (max-width:430px)){
     .data7_csv{
         display: flex;
