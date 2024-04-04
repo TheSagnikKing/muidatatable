@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Datagrid7.css'
 import { FaArrowUp, FaChevronLeft, FaChevronRight, FaPlus, FaSortDown } from "react-icons/fa6";
 import { fakedata } from './fakedata';
@@ -259,13 +259,23 @@ const Datagrid7 = () => {
                     (ShipOutDate >= startDate && ShipOutDate <= endDate)
                 ))
             );
-
+            
             return filterResult;
         });
     };
 
 
     const filteredData = filterBy && filterBy !== "" ? applyFilter(data, filterBy) : applyFilterByDateRange(data, startDate, endDate, diereceptcheckbox, Bumpcheckbox, Probecheckbox, Assemblycheckbox, Testcheckbox, shipcheckbox);
+
+    useEffect(() =>{
+        if(filterBy){
+            setCurrentFilterPage(1)
+        }else if (startDate && endDate){
+            setCurrentFilterPage(1)
+        }
+    },[filterBy,startDate,endDate])
+
+    // console.log("Filter Check" ,filtercheck)
 
     // const copyFilteredDate = [...filteredData]
 
@@ -327,6 +337,7 @@ const Datagrid7 = () => {
         setStartDate("")
         setEndDate("")
         setOpenRangeCalender(false)
+        setCurrentFilterPage(1)
     }
 
     // Dates of the Calender button Start
@@ -1474,6 +1485,27 @@ const Datagrid7 = () => {
 
 
     const [darkTheme, setDarktheme] = useState(false)
+
+    const calenderRef = useRef(null)
+
+    useEffect(() => {
+        // Function to handle clicks outside the dropdown menu
+        const handleClickOutside = (event) => {
+          if (!calenderRef.current.contains(event.target)) {
+            setOpenRangeCalender(false); // Close the dropdown if clicked outside
+          }
+          console.log(calenderRef.current.contains(event.target))
+        };
+    
+        // Add event listener to detect clicks outside the dropdown menu
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          // Cleanup: remove event listener when component unmounts
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [])
+    
     return (
         <main className='data7_container' >
             <div className='data7_top_bx'>
@@ -1494,13 +1526,6 @@ const Datagrid7 = () => {
                     <div className='data7_top_selectdatebx' onClick={() => setOpenRangeCalender(prev => !prev)}>
                         <div>
                             <div>
-                                {/* <p>{selectedDates.length > 0 ? selectedDates.map((date, index) => (
-                                    <React.Fragment key={index}>
-                                        {index !== 0 && " - "}
-                                        {date.format("YYYY-MM-DD")}
-                                    </React.Fragment>
-                                )) : "Select Dates"}</p> */}
-
                                 <p>
                                 {
                                     selectedDates.map((date, index) => (
@@ -1516,7 +1541,7 @@ const Datagrid7 = () => {
                         </div>
 
                         {
-                            openRangeCalender && <main className='data7_top_selectdatebx_calender' onClick={(e) => e.stopPropagation()}>
+                            openRangeCalender && <main className='data7_top_selectdatebx_calender' onClick={(e) => e.stopPropagation()} ref={calenderRef}>
                                 <div>
                                     <Calendar
                                         range
@@ -1849,7 +1874,11 @@ const Datagrid7 = () => {
                     style={{background:darkTheme ? "black" : "white"}}
                     >
 
-                        <div className='data7_content_head'>
+                        <div className='data7_content_head'
+                        style={{
+                             width:`${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}` 
+                        }}
+                        >
                             {
                                 columnHeaders.map((column, i) => (
                                     column.show && (
@@ -1858,7 +1887,7 @@ const Datagrid7 = () => {
                                         style={{
                                             borderRight: i >= 20 && i < 26 && "1px solid #000",
                                             borderLeft: i === 20 && "3px solid var(--bg-primary-color)",
-                                            marginRight: !showDieReceipt && (i % 2 === 0 && i <= 18) && column.key !== "LotNumber" && column.key !== "TestShipDuration" && "15px" 
+                                            marginRight: !showDieReceipt && (i % 2 === 0 && i <= 18) && column.key !== "LotNumber" && column.key !== "TestShipDuration" && "15px"
                                         }}
                                     >
                                         {column.render(column)}
@@ -1872,6 +1901,7 @@ const Datagrid7 = () => {
                                 (currentPageFilteredData.map((data, i) => (
                                     <div className='data7_content_body' key={i} style={{ 
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
+                                        width:`${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
                                         }}>
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{ 
@@ -1912,7 +1942,9 @@ const Datagrid7 = () => {
                             ) :
                                 (currentPageData.map((data, i) => (
                                     <div className='data7_content_body' key={i} style={{ 
-                                        borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black"}}>
+                                        borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
+                                        width:`${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                                        }}>
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{ 
                                                 background: `${column.background}`,

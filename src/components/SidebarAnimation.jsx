@@ -23,7 +23,7 @@ const SidebarAnimation = () => {
       // Cleanup: remove event listener when component unmounts
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [setOpen]);
+  }, []);
 
   const [leftbarOpen, setLeftBarOpen] = useState(false)
 

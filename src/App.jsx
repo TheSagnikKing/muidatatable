@@ -13,7 +13,7 @@ import SidebarAnimation from './components/SidebarAnimation'
 const App = () => {
   return (
     <>
-    <SidebarAnimation/>
+    <Datagrid7/>
     </>
   )
 }
