@@ -1629,7 +1629,7 @@ const Datagrid7 = () => {
                             <div><FaSortDown /></div>
                         </div>
 
-                         <div className={`data7_top_showhide_bx_content ${showColumn ? 'columnActive' : 'columnInActive'}`}>
+                        <div className={`data7_top_showhide_bx_content ${showColumn ? 'columnActive' : 'columnInActive'}`}>
                             <div>
                                 <input
                                     type="checkbox"
@@ -1848,6 +1848,24 @@ const Datagrid7 = () => {
                     <div className='data7_content'
                         style={{ background: darkTheme ? "black" : "white" }}
                     >
+                        <div className='data7_content_head'
+                            style={{
+                                width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                            }}
+                        >
+                            <div className='data7_content_tophead'>
+                                <div style={{
+                                    width: showDieReceipt === false ? "calc(1935px - 1350px)" : showBumpDuration === false ? "calc(1935px - 450px)" : "1935px",
+                                    display: showDieReceipt === false && showBumpDuration === false ? "none" : "flex"
+                                }}><p>Duration / Dates</p></div>
+                                <div
+                                style={{
+                                    // marginLeft: showDieReceipt === false && "135px"
+                                    display: showBumpYield ? "flex" : "none"
+                                }}
+                                ><p>Yield / Quantity</p></div>
+                            </div>
+                        </div>
 
                         <div className='data7_content_head'
                             style={{
