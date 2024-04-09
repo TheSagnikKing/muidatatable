@@ -1850,13 +1850,14 @@ const Datagrid7 = () => {
                     >
                         <div className='data7_content_head'
                             style={{
-                                width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                                width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`
                             }}
                         >
                             <div className='data7_content_tophead'>
                                 <div style={{
-                                    width: showDieReceipt === false ? "calc(1935px - 1350px)" : showBumpDuration === false ? "calc(1935px - 450px)" : "1935px",
-                                    display: showDieReceipt === false && showBumpDuration === false ? "none" : "flex"
+                                    width: showDieReceipt === false ? "calc(1935px - 1350px)"  : showDieReceipt === false && showBumpDuration === false ? "calc(2880px - 1800px)" : "1935px",
+                                    // width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`,
+                                    display: showDieReceipt === false && showBumpDuration === false || showDieReceipt === false ? "none" : "flex"
                                 }}><p>Duration / Dates</p></div>
                                 <div
                                 style={{
@@ -1869,7 +1870,7 @@ const Datagrid7 = () => {
 
                         <div className='data7_content_head'
                             style={{
-                                width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                                width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`,
                             }}
                         >
                             {
@@ -1894,7 +1895,10 @@ const Datagrid7 = () => {
                                 (currentPageFilteredData.map((data, i) => (
                                     <div className='data7_content_body' key={i} style={{
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                                        // width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                                        // width: showDieReceipt === false ? "calc(2880px - 1350px)" : showBumpDuration === false ? "calc(2880px - 570px)" : showDieReceipt === false && showBumpDuration === false ? "calc(2880px - 1920px)" : showBumpYield === false ? "calc(2880px - 945px)" : "2880px"
+                                        // width: showDieReceipt === true && showBumpDuration === false && showBumpYield === false ? "calc(2880px - 945px - 570px)" : "2880px"
+                                        width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`
                                     }}>
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{
@@ -1936,7 +1940,7 @@ const Datagrid7 = () => {
                                 (currentPageData.map((data, i) => (
                                     <div className='data7_content_body' key={i} style={{
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
+                                        width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`
                                     }}>
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{

@@ -211,6 +211,7 @@
     width: 2880px;
     height: 48px;
     display: flex;
+    /* background-color: red; */
 }
 
 .data7_content_body_same {
@@ -870,6 +871,7 @@ select {
     display: flex;
     align-items: center; 
     justify-content: center;
+    /* background-color: #565a75; */
 }
 
 .data7_content_tophead>div:nth-child(2)>p{
