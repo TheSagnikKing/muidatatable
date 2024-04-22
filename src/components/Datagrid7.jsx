@@ -795,527 +795,6 @@ const Datagrid7 = () => {
         }
     ]
 
-    const columnHeaders = [
-        {
-            key: "LotNumber",
-            title: "Lot No.",
-            className: "data7_content_head_same",
-            show: showLotNumber,
-            render: (column) => (
-                <div style={{ borderRight: "1px solid black" }}>
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-                </div>
-            )
-        },
-        {
-            key: "DieReceipt",
-            title: "DieReceipt",
-            className: "data7_content_head_same",
-            show: showDieReceipt,
-            render: (column) => (
-                <div>
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-                </div>
-            )
-        },
-        {
-            key: "ReceiptBumpDuration",
-            className: "data7_content_head_diff",
-            show: showReceiptBumpDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-                </div>
-            )
-        },
-        {
-            key: "BumpIn",
-            title: "BumpIn",
-            className: "data7_content_head_same",
-            show: showBumpIn,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "BumpDuration",
-            className: "data7_content_head_diff",
-            show: showBumpDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-                </div>
-            )
-        },
-
-        {
-            key: "BumpOut",
-            title: "BumpOut",
-            className: "data7_content_head_same",
-            show: showBumpOut,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "BumpProbeDuration",
-            className: "data7_content_head_diff",
-            show: showBumpProbeDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-
-                </div>
-            )
-        },
-
-        {
-            key: "ProbeIn",
-            title: "ProbeIn",
-            className: "data7_content_head_same",
-            show: showProbeIn,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "ProbeDuration",
-            className: "data7_content_head_diff",
-            show: showProbeDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-
-                </div>
-            )
-        },
-
-        {
-            key: "ProbeOut",
-            title: "ProbeOut",
-            className: "data7_content_head_same",
-            show: showProbeOut,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "ProbeAssemblyDuration",
-            className: "data7_content_head_diff",
-            show: showProbeAssemblyDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-                </div>
-            )
-        },
-
-        {
-            key: "AssemblyIn",
-            title: "AssemblyIn",
-            className: "data7_content_head_same",
-            show: showAssemblyIn,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "AssemblyDuration",
-            className: "data7_content_head_diff",
-            show: showAssemblyDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-
-                </div>
-            )
-        },
-
-        {
-            key: "AssemblyOut",
-            title: "AssemblyOut",
-            className: "data7_content_head_same",
-            show: showAssemblyOut,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "AssemblyTestDuration",
-            className: "data7_content_head_diff",
-            show: showAssemblyTestDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-                </div>
-            )
-        },
-
-        {
-            key: "TestIn",
-            title: "TestIn",
-            className: "data7_content_head_same",
-            show: showTestIn,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "TestDuration",
-            className: "data7_content_head_diff",
-            show: showTestDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-
-                </div>
-            )
-        },
-
-        {
-            key: "TestOut",
-            title: "TestOut",
-            className: "data7_content_head_same",
-            show: showTestOut,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "TestShipDuration",
-            className: "data7_content_head_diff",
-            show: showTestShipDuration,
-            render: (column) => (
-                <div>
-
-                    <div />
-                    {sortBy === column.key ? (
-                        sortOrder === 'asc' ? (
-                            <div><span className='data7_arrow'><FaArrowUp /></span></div>
-                        ) : sortOrder === 'desc' ? (
-                            <div><span className='data7_arrow'><FaArrowDown /></span></div>
-                        ) : sortOrder === 'initial' && (
-                            <div><span><FaSortDown /></span></div>
-                        )
-                    ) : (
-                        <div><span><FaSortDown /></span></div>
-                    )}
-
-
-                </div>
-            )
-        },
-
-        {
-            key: "ShipOut",
-            title: "ShipOut",
-            className: "data7_content_head_same",
-            show: showShipOut,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "BumpYield",
-            title: "BumpIn",
-            className: "data7_content_head_same",
-            show: showBumpYield,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "ProbeYield",
-            title: "ProbeIn",
-            className: "data7_content_head_same",
-            show: showProbeYield,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "AssemblyYield",
-            title: "AssemblyIn",
-            className: "data7_content_head_same",
-            show: showAssemblyYield,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "TestYield",
-            title: "TestIn",
-            className: "data7_content_head_same",
-            show: showTestYield,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "TestOutDieM",
-            title: "MCM Taka D",
-            className: "data7_content_head_same",
-            show: showMCMTakaD,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "TestOutDieN",
-            title: "MCM Taka",
-            className: "data7_content_head_same",
-            show: showMCMTaka,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-
-        {
-            key: "TakaDRatio",
-            title: "Taka Ratio",
-            className: "data7_content_head_same",
-            show: showTakaDRatio,
-            render: (column) => (
-                <div>
-
-                    <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
-                    }
-
-                </div>
-            )
-        },
-    ]
 
     const columnConfigshead = [
         {
@@ -2014,9 +1493,44 @@ const Datagrid7 = () => {
     let yldwidth = 945
     let lotnowidth = 135
 
+    let columnRef = useRef()
 
-    console.log(durationwidth)
+    useEffect(() => {
+        let handler = (e) => {
+            if(!columnRef.current.contains(e.target)){
+                setShowColumn(false)
+            }
+        }
 
+        document.addEventListener('mousedown',handler)
+
+        return () => {
+            document.removeEventListener('mousedown',handler)
+        }
+    },[])
+
+
+    let calenderRef = useRef()
+    let calenderinputRef = useRef()
+
+
+    console.log(calenderinputRef.current)
+
+    useEffect(() => {
+        let calenderhandler = (e) => {
+            if(!calenderRef.current.contains(e.target)){
+                setOpenRangeCalender(false)
+            }
+        }
+
+        document.addEventListener('mousedown',calenderhandler)
+
+        return () => {
+            document.removeEventListener('mousedown',calenderhandler)
+        }
+    },[])
+
+    console.log("openCalender ",openRangeCalender)
 
     return (
         <main className='data7_container' >
@@ -2052,7 +1566,7 @@ const Datagrid7 = () => {
                             <div><FaSortDown /></div>
                         </div>
 
-                        <main className={`data7_top_selectdatebx_calender ${openRangeCalender ? "calenderActive" : "calenderInActive"}`} onClick={(e) => e.stopPropagation()}>
+                        <main className={`data7_top_selectdatebx_calender ${openRangeCalender ? "calenderActive" : "calenderInActive"}`} onClick={(e) => e.stopPropagation()} ref={calenderRef}>
                             <div>
                                 <Calendar
                                     range
@@ -2167,7 +1681,7 @@ const Datagrid7 = () => {
                             <div><FaSortDown /></div>
                         </div>
 
-                        <div className={`data7_top_showhide_bx_content ${showColumn ? 'columnActive' : 'columnInActive'}`}>
+                        <div className={`data7_top_showhide_bx_content ${showColumn ? 'columnActive' : 'columnInActive'}`} ref={columnRef}>
                             <div>
                                 <input
                                     type="checkbox"
@@ -2405,7 +1919,6 @@ const Datagrid7 = () => {
                                 ><p>Yield / Quantity</p></div>
                             </div>
                         </div> */}
-
                         <div className='data7_content_head'
                             style={{
                                 width:
@@ -2540,12 +2053,26 @@ const Datagrid7 = () => {
                                 (currentPageData.map((data, i) => (
                                     <div className='data7_content_body' key={i} style={{
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`
+                                        width:
+                                            showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
+                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
+                                                    !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
+                                                        showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
+                                                            showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
+
+                                                                showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
+                                                                    !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
+                                                                        !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
                                     }}>
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{
                                                 background: `${column.background}`,
-                                                marginRight: !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                                marginRight:
+                                                    // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                                    !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
+                                                        showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
+                                                            !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
+                                                                showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
                                             }}>
                                                 <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
                                                     {column.className === "data7_content_body_diff" && <div />}
