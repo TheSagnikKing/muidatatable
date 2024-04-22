@@ -1480,6 +1480,16 @@ const Datagrid7 = () => {
 
     const [darkTheme, setDarktheme] = useState(false)
 
+    let datewidth = 1350
+    //Here 150 is the value of total margin present in the duration
+    let durationwidth = 450 + 150
+    let yldwidth = 945
+    let lotnowidth = 135
+
+
+    console.log(durationwidth)
+
+
     return (
         <main className='data7_container' >
             <div className='data7_top_bx'>
@@ -1848,7 +1858,7 @@ const Datagrid7 = () => {
                     <div className='data7_content'
                         style={{ background: darkTheme ? "black" : "white" }}
                     >
-                        <div className='data7_content_head'
+                        {/* <div className='data7_content_head'
                             style={{
                                 width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`
                             }}
@@ -1866,11 +1876,20 @@ const Datagrid7 = () => {
                                 }}
                                 ><p>Yield / Quantity</p></div>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className='data7_content_head'
                             style={{
-                                width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`,
+                                width:
+                                    showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
+                                        !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
+                                            !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
+                                                showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
+                                                    showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
+
+                                                        showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
+                                                            !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
+                                                                !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
                             }}
                         >
                             {
@@ -1881,7 +1900,9 @@ const Datagrid7 = () => {
                                             style={{
                                                 borderRight: i >= 20 && i < 26 && "1px solid #000",
                                                 borderLeft: i === 20 && "3px solid var(--bg-primary-color)",
-                                                marginRight: !showDieReceipt && (i % 2 === 0 && i <= 18) && column.key !== "LotNumber" && column.key !== "TestShipDuration" && "15px"
+                                                marginRight:"0px"
+                                                    // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                                    
                                             }}
                                         >
                                             {column.render(column)}
@@ -1895,15 +1916,27 @@ const Datagrid7 = () => {
                                 (currentPageFilteredData.map((data, i) => (
                                     <div className='data7_content_body' key={i} style={{
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        // width: `${showBumpYield ? '2880px' : 'calc(2880px - 945px)'}`
-                                        // width: showDieReceipt === false ? "calc(2880px - 1350px)" : showBumpDuration === false ? "calc(2880px - 570px)" : showDieReceipt === false && showBumpDuration === false ? "calc(2880px - 1920px)" : showBumpYield === false ? "calc(2880px - 945px)" : "2880px"
-                                        // width: showDieReceipt === true && showBumpDuration === false && showBumpYield === false ? "calc(2880px - 945px - 570px)" : "2880px"
-                                        width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`
+                                        // width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showDieReceipt === false ? 'calc(2880px - 1800px)' : "2880px"}`
+                                        width:
+                                            showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
+                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
+                                                    !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
+                                                        showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
+                                                            showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
+
+                                                                showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
+                                                                    !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
+                                                                        !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
                                     }}>
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{
                                                 background: `${column.background}`,
-                                                marginRight: !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                                marginRight:
+                                                    // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                                    !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
+                                                        showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
+                                                            !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
+                                                                showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
                                             }}>
                                                 <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
                                                     {column.className === "data7_content_body_diff" && <div />}
