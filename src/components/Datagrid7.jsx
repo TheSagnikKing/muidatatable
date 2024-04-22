@@ -1653,7 +1653,11 @@ const Datagrid7 = () => {
                                 </div>
                             </div>
 
-                            <div className='data7_calender_selectdate_button_container'>
+                            <div className='data7_calender_selectdate_button_container'
+                            // style={{
+                            //     position:"relative"
+                            // }}
+                            >
                                 {
                                     datebtnarray.map((c) => (
                                         <button key={c._id}
@@ -1667,7 +1671,13 @@ const Datagrid7 = () => {
                                     ))
                                 }
 
-                                <button onClick={() => setOpenRangeCalender(false)}>OK</button>
+                                <button 
+                                // style={{
+                                //     position:"absolute",
+                                //     right: "10px",
+                                //     bottom:"0px"
+                                // }}
+                                onClick={() => setOpenRangeCalender(false)}>OK</button>
                             </div>
                         </main>
 
