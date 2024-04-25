@@ -188,9 +188,9 @@ const Datagrid2 = () => {
                             onChange={(e) => parseInt(setRowsPerPage(e.target.value))}
                         >
 
-                            <option value="5" >5</option>
-                            <option value="10">10</option>
-                            <option value="18">18</option>
+                            <option value="5" style={{ backgroundColor: pageSize == 5 ? 'limegreen' : 'initial' }}>5</option>
+                            <option value="10" style={{ backgroundColor: pageSize == 10 ? 'limegreen' : 'initial' }}>10</option>
+                            <option value="18" style={{ backgroundColor: pageSize == 18 ? 'limegreen' : 'initial' }}>18</option>
                         </select>
                     </div>
 
