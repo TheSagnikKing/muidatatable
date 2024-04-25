@@ -75,6 +75,7 @@
 // export default Datagrid2
 
 import React, { useState } from 'react';
+import "./Datagrid2.css"
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import Pagination from '@mui/material/Pagination';
@@ -134,16 +135,28 @@ const rows = [
 ];
 
 const Datagrid2 = () => {
+
+    const [rowsPerPage, setRowsPerPage] = useState(5)
+
     const [page, setPage] = useState(1);
-    const pageSize = 5;
+    const pageSize = rowsPerPage;
     const totalRows = rows.length;
+    // console.log(totalRows)
     const totalPages = Math.ceil(totalRows / pageSize);
 
     const handlePageChange = (event, value) => {
         setPage(value);
     };
 
+    //This code is calculating the start and endIndex of each page
     const paginatedRows = rows.slice((page - 1) * pageSize, page * pageSize);
+
+    const startIndex = (page - 1) * pageSize
+    // console.log("startIndex ", startIndex)
+    const endIndex = page * pageSize
+    // console.log("endIndex ", endIndex)
+
+    // console.log("start - end Index ", startIndex, endIndex)
 
     return (
         <Box sx={{ height: 400, width: '80%', margin: 'auto', marginTop: '30px' }}>
@@ -156,12 +169,64 @@ const Datagrid2 = () => {
                 hideFooterPagination
                 hideFooter
             />
-            <Pagination
-                count={totalPages}
-                page={page}
-                color="secondary"
-                onChange={handlePageChange}
-            />
+
+            <div className='data2_pagination_container'>
+                <div>
+                    <Pagination
+                        count={totalPages}
+                        page={page}
+                        color="secondary"
+                        onChange={handlePageChange}
+                    />
+                </div>
+
+                <div>
+                    <div>
+                        <label style={{ marginRight: "30px" }}>Rows Per Page</label>
+                        <select
+                            value={rowsPerPage}
+                            onChange={(e) => parseInt(setRowsPerPage(e.target.value))}
+                        >
+
+                            <option value="5" >5</option>
+                            <option value="10">10</option>
+                            <option value="18">18</option>
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <label>Showing of </label>
+                        <select
+                            value={`${startIndex + 1} - ${endIndex}`}
+                            onChange={(e) => setPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / pageSize))}
+                        >
+                            {
+                                Array.from({ length: totalPages }, (_, index) => {
+                                    const start = index * pageSize + 1;
+                                    const end = Math.min((index + 1) * pageSize, totalRows);
+                                    const optionValue = `${start} - ${end}`;
+
+                                    return (
+                                        <option
+                                            key={index}
+                                            value={optionValue}
+                                            style={{ background: optionValue === `${startIndex + 1} - ${endIndex}` ? "skyblue" : "inherit" }}
+                                        >
+                                            {optionValue}
+                                        </option>
+                                    );
+                                })
+                            }
+                        </select>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
         </Box>
     );
 };
