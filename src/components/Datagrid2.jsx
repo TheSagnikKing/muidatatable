@@ -153,10 +153,10 @@ const Datagrid2 = () => {
 
     const startIndex = (page - 1) * pageSize
     // console.log("startIndex ", startIndex)
-    const endIndex = page * pageSize
+    const endIndex = Math.min(page * pageSize,totalRows)
     // console.log("endIndex ", endIndex)
 
-    // console.log("start - end Index ", startIndex, endIndex)
+    console.log("start - end Index ", startIndex, endIndex)
 
     return (
         <Box sx={{ height: 400, width: '80%', margin: 'auto', marginTop: '30px' }}>
@@ -198,6 +198,7 @@ const Datagrid2 = () => {
                     <div>
                         <label>Showing of </label>
                         <select
+                            value={`${startIndex + 1} - ${endIndex}`}
                             onChange={(e) => setPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / pageSize))}
                         >
                             {
