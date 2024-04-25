@@ -1,4 +1,5 @@
 import React from 'react'
+import Datagrid2 from './components/Datagrid2'
 import Datagrid6 from './components/Datagrid6'
 import Datagrid7 from './components/Datagrid7'
 import Datagrid5 from './components/Datagrid5'
@@ -13,7 +14,7 @@ import SidebarAnimation from './components/SidebarAnimation'
 const App = () => {
   return (
     <>
-    <Datagrid7/>
+    <Datagrid2/>
     </>
   )
 }
