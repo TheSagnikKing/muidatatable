@@ -198,7 +198,6 @@ const Datagrid2 = () => {
                     <div>
                         <label>Showing of </label>
                         <select
-                            value={`${startIndex + 1} - ${endIndex}`}
                             onChange={(e) => setPage(Math.ceil(Number(e.target.value.split(" - ")[0]) / pageSize))}
                         >
                             {
