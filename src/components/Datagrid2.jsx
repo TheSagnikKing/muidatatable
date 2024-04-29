@@ -79,6 +79,11 @@ const Datagrid2 = () => {
 
     console.log("start - end Index ", startIndex, endIndex)
 
+    const rowsperpageHandler = (e) => {
+        parseInt(setRowsPerPage(e.target.value))
+        setPage(1)
+    }
+
     return (
         <Box sx={{ height: 400, width: '80%', margin: 'auto', marginTop: '30px' }}>
             <DataGrid
@@ -107,7 +112,7 @@ const Datagrid2 = () => {
                         <label style={{ marginRight: "30px" }}>Rows Per Page</label>
                         <select
                             value={rowsPerPage}
-                            onChange={(e) => parseInt(setRowsPerPage(e.target.value))}
+                            onChange={rowsperpageHandler}
                         >
 
                             <option value="5" style={{ backgroundColor: pageSize == 5 ? 'limegreen' : 'initial' }}>5</option>
