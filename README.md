@@ -32,3 +32,10 @@ Currently, two official plugins are available:
 3. in the currentPage one there i am downloading the data that i am seeing right now and its value is base on the rows i have selected. and on the second one i am downloading the entire dataset coming from the api.
 
 These are the main Logic of this code summary. There are many other small logics present . See the code for those logic
+
+
+minWidth:
+                                    showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" :
+                                        !showBumpYield && showDieReceipt && !showBumpDuration ? "100%" :
+                                            !showBumpYield && !showDieReceipt && showBumpDuration ? "100%" :
+                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px"
