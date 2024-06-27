@@ -285,7 +285,21 @@ const Datagrid7 = () => {
 
     // These Functions are for show/Hide Columns
     const DatesCheckClicked = (e) => {
-        setDatesCheck((prev) => (!prev))
+        setDatesCheck((prev) => {
+            if (prev) {
+                setDurationCheck(false)
+                setShowReceiptBumpDuration(false)
+                setShowBumpDuration(false)
+                setShowBumpProbeDuration(false)
+                setShowProbeDuration(false)
+                setShowProbeAssemblyDuration(false)
+                setShowAssemblyDuration(false)
+                setShowAssemblyTestDuration(false)
+                setShowTestDuration(false)
+                setShowTestShipDuration(false)
+            }
+            return !prev
+        })
         setShowDieReceipt((prev) => !prev)
         setShowBumpIn((prev) => !prev)
         setShowBumpOut((prev) => !prev)
@@ -803,7 +817,13 @@ const Datagrid7 = () => {
             className: "data7_content_head_same",
             show: showLotNumber,
             render: (column) => (
-                <div style={{ borderRight: "1px solid black" }}>
+                <div 
+                // style={{ borderRight: "1px solid black" }}
+                style={{
+                    maxWidth: !showBumpYield && !showDieReceipt && !showBumpDuration && "135px",
+                    borderRight: !showBumpYield && !showDieReceipt && !showBumpDuration && "1px solid black"
+                }}
+                >
                     <p>{column.title}</p>
                     {sortBy === column.key &&
                         (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
@@ -1497,17 +1517,17 @@ const Datagrid7 = () => {
 
     useEffect(() => {
         let handler = (e) => {
-            if(!columnRef.current.contains(e.target)){
+            if (!columnRef.current.contains(e.target)) {
                 setShowColumn(false)
             }
         }
 
-        document.addEventListener('mousedown',handler)
+        document.addEventListener('mousedown', handler)
 
         return () => {
-            document.removeEventListener('mousedown',handler)
+            document.removeEventListener('mousedown', handler)
         }
-    },[])
+    }, [])
 
 
     let calenderRef = useRef()
@@ -1518,19 +1538,19 @@ const Datagrid7 = () => {
 
     useEffect(() => {
         let calenderhandler = (e) => {
-            if(!calenderRef.current.contains(e.target)){
+            if (!calenderRef.current.contains(e.target)) {
                 setOpenRangeCalender(false)
             }
         }
 
-        document.addEventListener('mousedown',calenderhandler)
+        document.addEventListener('mousedown', calenderhandler)
 
         return () => {
-            document.removeEventListener('mousedown',calenderhandler)
+            document.removeEventListener('mousedown', calenderhandler)
         }
-    },[])
+    }, [])
 
-    console.log("openCalender ",openRangeCalender)
+    console.log("openCalender ", openRangeCalender)
 
     return (
         <main className='data7_container' >
@@ -1668,8 +1688,8 @@ const Datagrid7 = () => {
                                     ))
                                 }
 
-                                <button 
-                                onClick={() => setOpenRangeCalender(false)}>OK</button>
+                                <button
+                                    onClick={() => setOpenRangeCalender(false)}>OK</button>
                             </div>
                         </main>
 
@@ -1902,37 +1922,13 @@ const Datagrid7 = () => {
                     <div className='data7_content'
                         style={{ background: darkTheme ? "black" : "white" }}
                     >
-                        {/* <div className='data7_content_head'
-                            style={{
-                                width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`
-                            }}
-                        >
-                            <div className='data7_content_tophead'>
-                                <div style={{
-                                    width: showDieReceipt === false ? "calc(1935px - 1350px)"  : showDieReceipt === false && showBumpDuration === false ? "calc(2880px - 1800px)" : "1935px",
-                                    // width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showBumpDuration === false ? 'calc(2880px - 1800px)' : "2880px"}`,
-                                    display: showDieReceipt === false && showBumpDuration === false || showDieReceipt === false ? "none" : "flex"
-                                }}><p>Duration / Dates</p></div>
-                                <div
-                                style={{
-                                    // marginLeft: showDieReceipt === false && "135px"
-                                    display: showBumpYield ? "flex" : "none"
-                                }}
-                                ><p>Yield / Quantity</p></div>
-                            </div>
-                        </div> */}
                         <div className='data7_content_head'
                             style={{
-                                width:
-                                    showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
-                                        !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
-                                            !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
-                                                showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
-                                                    showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
-
-                                                        showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
-                                                            !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
-                                                                !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
+                                minWidth:
+                                    showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" :
+                                        !showBumpYield && showDieReceipt && !showBumpDuration ? "100%" :
+                                            !showBumpYield && !showDieReceipt && showBumpDuration ? "100%" :
+                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px"
                             }}
                         >
                             {
@@ -1942,12 +1938,7 @@ const Datagrid7 = () => {
                                             key={column.key}
                                             style={{
                                                 borderRight: i >= 20 && i < 26 && "1px solid #000",
-                                                borderLeft: i === 20 && "3px solid var(--bg-primary-color)",
-                                                marginRight: !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                    showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                        !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
-                                                            showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
-                                                // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                                // borderLeft: i === 20 && "3px solid var(--bg-primary-color)",
 
                                             }}
                                         >
@@ -1965,9 +1956,6 @@ const Datagrid7 = () => {
                                             style={{
                                                 borderLeft: i === 0 && "3px solid var(--bg-primary-color)",
                                                 borderRight: "1px solid #000"
-                                                // marginRight:"0px"
-                                                // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
-
                                             }}
                                         >
                                             {column.render(column)}
@@ -1982,9 +1970,6 @@ const Datagrid7 = () => {
                                             key={column.key}
                                             style={{
                                                 borderRight: i === columnConfigs3.length - 1 ? "none" : "1px solid #000"
-                                                // marginRight:"0px"
-                                                // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
-
                                             }}
                                         >
                                             {column.render(column)}
@@ -1996,31 +1981,41 @@ const Datagrid7 = () => {
                         {
                             filterBy && filterBy !== '' || startDate && endDate && startDate !== '' && endDate !== '' ? (
                                 (currentPageFilteredData.map((data, i) => (
-                                    <div className='data7_content_body' key={i} style={{
-                                        borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        // width: `${showBumpYield === false ? 'calc(2880px - 945px)' : showDieReceipt === false && showDieReceipt === false ? 'calc(2880px - 1800px)' : "2880px"}`
-                                        width:
-                                            showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
-                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
-                                                    !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
-                                                        showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
-                                                            showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
+                                    <div className='data7_content_body' key={i}
+                                        style={{
+                                            borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
+                                            minWidth:
+                                                showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" :
+                                                    !showBumpYield && showDieReceipt && !showBumpDuration ? "100%" :
+                                                        !showBumpYield && !showDieReceipt && showBumpDuration ? "100%" :
+                                                            !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px"
+                                            // width:
+                                            //     showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
+                                            //         !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
+                                            //             !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
+                                            //                 showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
+                                            //                     showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
 
-                                                                showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
-                                                                    !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
-                                                                        !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
-                                    }}>
+                                            //                         showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
+                                            //                             !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
+                                            //                                 !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
+                                        }}
+                                    >
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{
                                                 background: `${column.background}`,
-                                                marginRight:
-                                                    // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
-                                                    !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                        showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                            !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
-                                                                showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
+                                                // marginRight:
+                                                //     !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
+                                                //         showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
+                                                //             !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
+                                                //                 showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
                                             }}>
-                                                <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
+                                                <div
+                                                    // style={{ borderRight: j === 0 ? "1px solid black" : "none" }}
+                                                    style={{
+                                                        borderRight: !showBumpYield && !showDieReceipt && !showBumpDuration && "1px solid black"
+                                                    }}
+                                                >
                                                     {column.className === "data7_content_body_diff" && <div />}
                                                     {column.show && column.render(data[column.key])}
                                                 </div>
@@ -2055,28 +2050,32 @@ const Datagrid7 = () => {
                                 (currentPageData.map((data, i) => (
                                     <div className='data7_content_body' key={i} style={{
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        width:
-                                            showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
-                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
-                                                    !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
-                                                        showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
-                                                            showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
+                                        // width:
+                                        //     showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
+                                        //         !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
+                                        //             !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
+                                        //                 showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
+                                        //                     showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
 
-                                                                showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
-                                                                    !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
-                                                                        !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
+                                        //                         showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
+                                        //                             !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
+                                        //                                 !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
                                     }}>
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{
                                                 background: `${column.background}`,
-                                                marginRight:
-                                                    // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
-                                                    !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                        showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                            !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
-                                                                showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
+                                                // marginRight:
+                                                //     // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
+                                                //     !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
+                                                //         showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
+                                                //             !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
+                                                //                 showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
                                             }}>
-                                                <div style={{ borderRight: j === 0 ? "1px solid black" : "none" }}>
+                                                <div
+                                                // style={{ 
+                                                //     borderRight: j === 0 ? "1px solid black" : "none" 
+                                                // }}
+                                                >
                                                     {column.className === "data7_content_body_diff" && <div />}
                                                     {column.render(data[column.key])}
                                                 </div>
