@@ -114,9 +114,11 @@ const Datagrid7 = () => {
         setSortOrder((prevOrder) => {
             if (prevOrder === 'asc') {
                 return 'desc';
-            } else if (prevOrder === 'desc') {
-                return 'initial';
-            } else {
+            }
+            // else if (prevOrder === 'desc') {
+            //     return 'initial';
+            // } 
+            else {
                 return 'asc';
             }
         });
@@ -127,7 +129,8 @@ const Datagrid7 = () => {
         if (columnName === '') {
             // No sorting if no column is specified
             return dataArray;
-        } else if (sortOrder === "initial") {
+        }
+        else if (sortOrder === "initial") {
             return dataArray
         }
         else if (sortOrder === 'asc') {
@@ -817,16 +820,17 @@ const Datagrid7 = () => {
             className: "data7_content_head_same",
             show: showLotNumber,
             render: (column) => (
-                <div 
-                // style={{ borderRight: "1px solid black" }}
-                style={{
-                    maxWidth: !showBumpYield && !showDieReceipt && !showBumpDuration && "135px",
-                    borderRight: !showBumpYield && !showDieReceipt && !showBumpDuration && "1px solid black"
-                }}
+                <div
+                    style={{
+                        minWidth: !showBumpYield && !showDieReceipt && !showBumpDuration && "100%",
+                        maxWidth: !showBumpYield && !showDieReceipt && !showBumpDuration && "100%",
+                        // borderRight: !showBumpYield && !showDieReceipt && !showBumpDuration && "1px solid black"
+                    }}
                 >
                     <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    {sortBy === column.key ?
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' && <span className='data7_arrow'><FaArrowDown /></span>)) :
+                        <div className='defaulticon'><span><FaSortDown /></span></div>
                     }
                 </div>
             )
@@ -839,8 +843,11 @@ const Datagrid7 = () => {
             render: (column) => (
                 <div>
                     <p>{column.title}</p>
-                    {sortBy === column.key &&
-                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    {sortBy === column.key ?
+                        (sortOrder === 'asc' ?
+                            <span className='data7_arrow'><FaArrowUp /></span> :
+                            (sortOrder === 'desc' && <span className='data7_arrow'><FaArrowDown /></span>))
+                            : <div className='defaulticon'><span><FaSortDown /></span></div>
                     }
                 </div>
             )
@@ -1223,7 +1230,7 @@ const Datagrid7 = () => {
         {
             key: "BumpYield",
             title: "BumpIn",
-            className: "data7_content_head_same",
+            className: "data7_content_head_same_yield",
             show: showBumpYield,
             render: (column) => (
                 <div>
@@ -1240,7 +1247,7 @@ const Datagrid7 = () => {
         {
             key: "ProbeYield",
             title: "ProbeIn",
-            className: "data7_content_head_same",
+            className: "data7_content_head_same_yield",
             show: showProbeYield,
             render: (column) => (
                 <div>
@@ -1257,7 +1264,7 @@ const Datagrid7 = () => {
         {
             key: "AssemblyYield",
             title: "AssemblyIn",
-            className: "data7_content_head_same",
+            className: "data7_content_head_same_yield",
             show: showAssemblyYield,
             render: (column) => (
                 <div>
@@ -1274,7 +1281,7 @@ const Datagrid7 = () => {
         {
             key: "TestYield",
             title: "TestIn",
-            className: "data7_content_head_same",
+            className: "data7_content_head_same_yield",
             show: showTestYield,
             render: (column) => (
                 <div>
@@ -1293,16 +1300,14 @@ const Datagrid7 = () => {
         {
             key: "TestOutDieM",
             title: "MCM Taka D",
-            className: "data7_content_head_same",
+            className: "data7_content_head_same_taka",
             show: showMCMTakaD,
             render: (column) => (
                 <div>
-
                     <p>{column.title}</p>
                     {sortBy === column.key &&
                         (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
                     }
-
                 </div>
             )
         },
@@ -1310,16 +1315,14 @@ const Datagrid7 = () => {
         {
             key: "TestOutDieN",
             title: "MCM Taka",
-            className: "data7_content_head_same",
+            className: "data7_content_head_same_taka",
             show: showMCMTaka,
             render: (column) => (
                 <div>
-
                     <p>{column.title}</p>
                     {sortBy === column.key &&
                         (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
                     }
-
                 </div>
             )
         },
@@ -1327,16 +1330,14 @@ const Datagrid7 = () => {
         {
             key: "TakaDRatio",
             title: "Taka Ratio",
-            className: "data7_content_head_same",
+            className: "data7_content_head_same_taka",
             show: showTakaDRatio,
             render: (column) => (
                 <div>
-
                     <p>{column.title}</p>
                     {sortBy === column.key &&
                         (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
                     }
-
                 </div>
             )
         },
@@ -1928,7 +1929,9 @@ const Datagrid7 = () => {
                                     showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" :
                                         !showBumpYield && showDieReceipt && !showBumpDuration ? "100%" :
                                             !showBumpYield && !showDieReceipt && showBumpDuration ? "100%" :
-                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px"
+                                                !showBumpYield && showDieReceipt && showBumpDuration ? "1935px" :
+                                                    !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px",
+                                borderBottom: "1px solid black"
                             }}
                         >
                             {
@@ -1936,14 +1939,11 @@ const Datagrid7 = () => {
                                     column.show && (
                                         <div className={column.className} onClick={column.show ? () => toggleSortOrder(column.key) : null}
                                             key={column.key}
-                                            style={{
-                                                borderRight: i >= 20 && i < 26 && "1px solid #000",
-                                                // borderLeft: i === 20 && "3px solid var(--bg-primary-color)",
-
-                                            }}
                                         >
                                             {column.render(column)}
-                                        </div>)
+                                        </div>
+
+                                    )
                                 ))
                             }
 
@@ -1988,32 +1988,19 @@ const Datagrid7 = () => {
                                                 showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" :
                                                     !showBumpYield && showDieReceipt && !showBumpDuration ? "100%" :
                                                         !showBumpYield && !showDieReceipt && showBumpDuration ? "100%" :
-                                                            !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px"
-                                            // width:
-                                            //     showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
-                                            //         !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
-                                            //             !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
-                                            //                 showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
-                                            //                     showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
-
-                                            //                         showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
-                                            //                             !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
-                                            //                                 !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
+                                                            !showBumpYield && showDieReceipt && showBumpDuration ? "1935px" :
+                                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px"
                                         }}
                                     >
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{
                                                 background: `${column.background}`,
-                                                // marginRight:
-                                                //     !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                //         showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                //             !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
-                                                //                 showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
                                             }}>
                                                 <div
-                                                    // style={{ borderRight: j === 0 ? "1px solid black" : "none" }}
                                                     style={{
-                                                        borderRight: !showBumpYield && !showDieReceipt && !showBumpDuration && "1px solid black"
+                                                        // borderRight: !showBumpYield && !showDieReceipt && !showBumpDuration && "1px solid black",
+                                                        minWidth: !showBumpYield && !showDieReceipt && !showBumpDuration && "100%",
+                                                        maxWidth: !showBumpYield && !showDieReceipt && !showBumpDuration && "100%"
                                                     }}
                                                 >
                                                     {column.className === "data7_content_body_diff" && <div />}
@@ -2050,32 +2037,12 @@ const Datagrid7 = () => {
                                 (currentPageData.map((data, i) => (
                                     <div className='data7_content_body' key={i} style={{
                                         borderBottom: (currentPageData.length - 1) === i ? "none" : "1px solid black",
-                                        // width:
-                                        //     showBumpYield && showDieReceipt && showBumpDuration ? "2880px" :
-                                        //         !showBumpYield && !showDieReceipt && !showBumpDuration ? `${lotnowidth}px` :
-                                        //             !showBumpYield && showDieReceipt && showBumpDuration ? `calc(2880px - ${yldwidth}px)` :
-                                        //                 showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${datewidth}px)` :
-                                        //                     showBumpYield && showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth}px)` :
-
-                                        //                         showBumpYield && !showDieReceipt && !showBumpDuration ? `calc(3030px - ${durationwidth + datewidth}px)` :
-                                        //                             !showBumpYield && !showDieReceipt && showBumpDuration ? `calc(3030px - ${yldwidth + datewidth}px)` :
-                                        //                                 !showBumpYield && showDieReceipt && !showBumpDuration && `calc(3030px - ${yldwidth + durationwidth}px)`
                                     }}>
                                         {columnConfigs.map((column, j) => (
                                             column.show && (<div className={column.className} key={j} style={{
                                                 background: `${column.background}`,
-                                                // marginRight:
-                                                //     // !showDieReceipt && column.key !== "LotNumber" && column.key !== "TestShipDuration" ? "15px" : null
-                                                //     !showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                //         showBumpYield && !showDieReceipt && !showBumpDuration ? "0px" :
-                                                //             !showBumpYield && !showDieReceipt && showBumpDuration ? "15px" :
-                                                //                 showBumpYield && !showDieReceipt && showBumpDuration ? "15px" : null
                                             }}>
-                                                <div
-                                                // style={{ 
-                                                //     borderRight: j === 0 ? "1px solid black" : "none" 
-                                                // }}
-                                                >
+                                                <div>
                                                     {column.className === "data7_content_body_diff" && <div />}
                                                     {column.render(data[column.key])}
                                                 </div>

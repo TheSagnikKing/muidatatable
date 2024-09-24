@@ -9,12 +9,16 @@ import Animation from './components/Animation'
 import SidebarAnimation from './components/SidebarAnimation'
 // import ReactTable from './components/ReactTable/ReactTable'
 // import ReactTable2 from './components/ReactTable/ReactTable2'
+import CheckBox from './components/CheckBox'
+import Carousel from './components/Carousel'
 
 
 const App = () => {
   return (
     <>
-    <Datagrid7/>
+    {/* <Datagrid7/> */}
+    {/* <CheckBox/> */}
+    <Carousel/>
     </>
   )
 }
