@@ -35,6 +35,17 @@ These are the main Logic of this code summary. There are many other small logics
 
 
 minWidth:
+                                    showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" :
+                                        !showBumpYield && showDieReceipt && !showBumpDuration ? "100%" :
+                                            !showBumpYield && !showDieReceipt && showBumpDuration ? "100%" :
+                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px"
+
+
+                                                maxWidth: !showBumpYield && !showDieReceipt && !showBumpDuration && "135px",
+                    borderRight: !showBumpYield && !showDieReceipt && !showBumpDuration && "1px solid black"
+
+
+minWidth:
                                                 showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" :
                                                     !showBumpYield && showDieReceipt && !showBumpDuration ? "100%" :
                                                         !showBumpYield && !showDieReceipt && showBumpDuration ? "100%" :
