@@ -30,6 +30,9 @@ const Otp = () => {
 
     }
 
+    // This is also correct 
+
+    // nested if condition is basically && operation
     // const handleKeyDown = (event, index) => {
     //     if (event.key === "Backspace") {
     //         if (index > 0) {
@@ -37,13 +40,15 @@ const Otp = () => {
     //                 setPhoneinputs((prev) => {
 
     //                     const updatedarray = prev.map((item, ind) => {
-    //                         return ind === index ? "" : item
+    //                         return ind === index - 1 ? "" : item
     //                     })
+
+    //                     inputRefs.current[index - 1].focus()
 
     //                     return updatedarray
     //                 })
 
-    //                 inputRefs.current[index - 1].focus()
+                    
     //             }
     //         }
     //     }
