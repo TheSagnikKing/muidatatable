@@ -34,15 +34,163 @@ Currently, two official plugins are available:
 These are the main Logic of this code summary. There are many other small logics present . See the code for those logic
 
 
-minWidth:
-                                    showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" :
-                                        !showBumpYield && showDieReceipt && !showBumpDuration ? "100%" :
-                                            !showBumpYield && !showDieReceipt && showBumpDuration ? "100%" :
-                                                !showBumpYield && !showDieReceipt && !showBumpDuration ? "100%" : "2910px"
+.data7_content_head_same_yield {
+    width: 135px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex: auto;
+    /* background-color: red; */
+}
+
+.data7_content_head_same_yield>div {
+    min-width: 135px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    /* background-color: rgba(0, 0, 255, 0.347); */
+    font-size: 12px;
+    font-weight: 500;
+}
 
 
-                                                maxWidth: !showBumpYield && !showDieReceipt && !showBumpDuration && "135px",
-                    borderRight: !showBumpYield && !showDieReceipt && !showBumpDuration && "1px solid black"
+
+
+
+const columnConfigshead2 = [
+        {
+            key: "BumpYield",
+            title: "BumpIn",
+            className: "data7_content_head_same_yield",
+            show: showBumpYield,
+            render: (column) => (
+                <div>
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
+                </div>
+            )
+        },
+
+        {
+            key: "ProbeYield",
+            title: "ProbeIn",
+            className: "data7_content_head_same_yield",
+            show: showProbeYield,
+            render: (column) => (
+                <div>
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
+                </div>
+            )
+        },
+
+        {
+            key: "AssemblyYield",
+            title: "AssemblyIn",
+            className: "data7_content_head_same_yield",
+            show: showAssemblyYield,
+            render: (column) => (
+                <div>
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
+                </div>
+            )
+        },
+
+        {
+            key: "TestYield",
+            title: "TestIn",
+            className: "data7_content_head_same_yield",
+            show: showTestYield,
+            render: (column) => (
+                <div>
+
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+
+                </div>
+            )
+        },
+    ]
+
+    const columnConfigshead3 = [
+        {
+            key: "TestOutDieM",
+            title: "MCM Taka D",
+            className: "data7_content_head_same_taka",
+            show: showMCMTakaD,
+            render: (column) => (
+                <div>
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+                </div>
+            )
+        },
+
+        {
+            key: "TestOutDieN",
+            title: "MCM Taka",
+            className: "data7_content_head_same_taka",
+            show: showMCMTaka,
+            render: (column) => (
+                <div>
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+                </div>
+            )
+        },
+
+        {
+            key: "TakaDRatio",
+            title: "Taka Ratio",
+            className: "data7_content_head_same_taka",
+            show: showTakaDRatio,
+            render: (column) => (
+                <div>
+                    <p>{column.title}</p>
+                    {sortBy === column.key &&
+                        (sortOrder === 'asc' ? <span className='data7_arrow'><FaArrowUp /></span> : (sortOrder === 'desc' ? <span className='data7_arrow'><FaArrowDown /></span> : sortOrder === 'initial' && <span></span>))
+                    }
+                </div>
+            )
+        },
+    ]
+
+
+.data7_content_head_same_taka{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex: auto;
+}
+
+.data7_content_head_same_taka>div{
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 135px;
+    display: flex;
+    gap: 4px;
+    padding-left: 20%;
+}
 
 
 minWidth:
