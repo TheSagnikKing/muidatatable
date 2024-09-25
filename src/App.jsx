@@ -11,14 +11,15 @@ import SidebarAnimation from './components/SidebarAnimation'
 // import ReactTable2 from './components/ReactTable/ReactTable2'
 import CheckBox from './components/CheckBox'
 import Carousel from './components/Carousel'
-
+import Otp from './components/Otp'
 
 const App = () => {
   return (
     <>
     {/* <Datagrid7/> */}
     {/* <CheckBox/> */}
-    <Carousel/>
+    {/* <Carousel/> */}
+    <Otp/>
     </>
   )
 }
