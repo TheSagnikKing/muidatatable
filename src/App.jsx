@@ -12,6 +12,7 @@ import SidebarAnimation from './components/SidebarAnimation'
 import CheckBox from './components/CheckBox'
 import Carousel from './components/Carousel'
 import Otp from './components/Otp'
+import InfiniteScrolling from './components/machinecoding/InfiniteScrolling'
 
 const App = () => {
   return (
@@ -19,7 +20,8 @@ const App = () => {
     {/* <Datagrid7/> */}
     {/* <CheckBox/> */}
     {/* <Carousel/> */}
-    <Otp/>
+    {/* <Otp/> */}
+    <InfiniteScrolling/>
     </>
   )
 }
