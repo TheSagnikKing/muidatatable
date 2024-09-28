@@ -13,6 +13,7 @@ import CheckBox from './components/CheckBox'
 import Carousel from './components/Carousel'
 import Otp from './components/Otp'
 import InfiniteScrolling from './components/machinecoding/InfiniteScrolling'
+import CustomTable from './components/machinecoding/CustomTable'
 
 const App = () => {
   return (
@@ -21,7 +22,8 @@ const App = () => {
     {/* <CheckBox/> */}
     {/* <Carousel/> */}
     {/* <Otp/> */}
-    <InfiniteScrolling/>
+    {/* <InfiniteScrolling/> */}
+    <CustomTable/>
     </>
   )
 }

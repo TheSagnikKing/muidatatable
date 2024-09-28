@@ -17,9 +17,13 @@ const InfiniteScrolling = () => {
 
         setLoader(true)
         const { data } = await axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
-        setPostData([...postData ,...data])
-        setLoader(false)
-        setPostId((prev) => prev + 1)
+
+        setTimeout(() => {
+            setPostData([...postData ,...data])
+            setLoader(false)
+            setPostId((prev) => prev + 1)
+        },2000)
+        
 
     }, [postId, loader])
 
