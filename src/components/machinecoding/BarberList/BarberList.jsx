@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import "./BarberList.css"
 
 const BarberList = () => {
-
     const apisalonservicesdata = [
         {
             id: 1,
@@ -42,16 +41,18 @@ const BarberList = () => {
         })
 
         delete serobj.check
-        
+
         setApiSendingArray([...apiSendingArray, serobj])
     }
 
     console.log(apiSendingArray)
 
     const deleteHandler = (serobj) => {
+        const currentobj = apisalonservicesdata.find((item) => item.id === serobj.id)
+
         setSalonservices((prev) => {
             const updatedarray = prev.map((item) => {
-                return (item.id === serobj.id ? { ...item, check: false } : item)
+                return (item.id === serobj.id ? { ...item, ewt: Number(currentobj.ewt), check: false } : item)
             })
             return updatedarray
         })
@@ -74,7 +75,7 @@ const BarberList = () => {
 
         setApiSendingArray((prev) => {
             const updatedarray = prev.map((item) => {
-                return (item.id === serobj.id ? {...item, ewt: Number(ewtvalue)} : item)
+                return (item.id === serobj.id ? { ...item, ewt: Number(ewtvalue) } : item)
             })
             return updatedarray
         })
