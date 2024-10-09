@@ -14,6 +14,9 @@ import Carousel from './components/Carousel'
 import Otp from './components/Otp'
 import InfiniteScrolling from './components/machinecoding/InfiniteScrolling'
 import CustomTable from './components/machinecoding/CustomTable'
+import UseCallback from './components/UseCallback'
+import Practise from './components/machinecoding/Practise'
+import BarberList from './components/machinecoding/BarberList/BarberList'
 
 const App = () => {
   return (
@@ -23,7 +26,10 @@ const App = () => {
     {/* <Carousel/> */}
     {/* <Otp/> */}
     {/* <InfiniteScrolling/> */}
-    <CustomTable/>
+    {/* <CustomTable/> */}
+    {/* <UseCallback/> */}
+    {/* <Practise/> */}
+    <BarberList/>
     </>
   )
 }
