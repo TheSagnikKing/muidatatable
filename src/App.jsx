@@ -17,6 +17,7 @@ import CustomTable from './components/machinecoding/CustomTable'
 import UseCallback from './components/UseCallback'
 import Practise from './components/machinecoding/Practise'
 import BarberList from './components/machinecoding/BarberList/BarberList'
+import Stepper from './components/machinecoding/stepper/Stepper'
 
 const App = () => {
   return (
@@ -29,7 +30,8 @@ const App = () => {
     {/* <CustomTable/> */}
     {/* <UseCallback/> */}
     {/* <Practise/> */}
-    <BarberList/>
+    {/* <BarberList/> */}
+    <Stepper/>
     </>
   )
 }
