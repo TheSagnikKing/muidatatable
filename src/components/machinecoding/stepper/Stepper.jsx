@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from './Stepper.module.css'
 
 const Stepper = () => {
@@ -16,6 +16,19 @@ const Stepper = () => {
     const stepupHandlerThree = () => {
         alert("Submited successfully !")
     }
+
+
+    const inputref = useRef(null)
+
+    const [focus, setFocus] = useState(false)
+
+    useEffect(() => {
+        if (inputref.current) {
+            console.log(inputref);
+        }
+
+    }, [])
+
 
     return (
         <main className={style.stepper_container}>
@@ -57,6 +70,30 @@ const Stepper = () => {
                         progress === 1 && (
                             <div>
                                 <h1>Form One</h1>
+
+                                <div className={style.input_box} >
+                                    <label
+                                        style={{
+                                            top: focus ? "-10px" : "50%",
+                                            transform: focus ? "translateY(0%)" : "translateY(-50%)",
+                                            fontSize: !focus && "17px",
+                                            fontWeight: !focus && "500",
+                                            color: !focus && "gray",
+                                            transition: "all 0.2s ease",
+                                        }}
+                                    >Outline</label>
+                                    <input
+                                        type="text"
+                                        ref={inputref}
+                                        onFocus={() => setFocus(true)}
+                                        onBlur={() => setFocus(false)}
+                                        
+                                        style={{
+                                            outline: focus ? "1px solid royalblue" : "none",
+                                            border: focus && "none"
+                                        }}
+                                    />
+                                </div>
                                 <button onClick={stepupHandlerOne}>Next One</button>
                             </div>
                         )

@@ -19,6 +19,10 @@ import Practise from './components/machinecoding/Practise'
 import BarberList from './components/machinecoding/BarberList/BarberList'
 import Stepper from './components/machinecoding/stepper/Stepper'
 
+
+import Lodash1 from './components/lodash/lodash1'
+import Dynamicfont from './components/machinecoding/dynamic_font/Dynamicfont'
+
 const App = () => {
   return (
     <>
@@ -31,7 +35,9 @@ const App = () => {
     {/* <UseCallback/> */}
     {/* <Practise/> */}
     {/* <BarberList/> */}
-    <Stepper/>
+    {/* <Stepper/> */}
+    {/* <Lodash1/> */}
+    <Dynamicfont/>
     </>
   )
 }
